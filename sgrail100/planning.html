@@ -336,7 +336,7 @@ footer p{margin-bottom:6px}
 #risks .rbody p{margin:10px 0 0;font-size:14px;line-height:1.55;color:var(--ink)}
 #risks .rbody em{display:block;font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
 @media (max-width:640px){#risks .risk>summary{grid-template-columns:1fr 20px}#risks .risk>summary .rmit{grid-column:1;color:var(--muted);font-size:13.5px}#risks .risk>summary::after{grid-column:2;grid-row:1}#risks .rbody{grid-template-columns:1fr}}
-body.race #pacing,body.race #kit,body.race #week,body.race #risks,body.race #open,body.race footer{display:none}
+body.race #pacing,body.race #kit,body.race #risks,body.race #open,body.race footer{display:none}
 body.race .rm-hide{display:none}
 .rmbtn{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);color:var(--muted);cursor:pointer;white-space:nowrap}
 .rmbtn.on{background:var(--flag);border-color:var(--flag);color:var(--on-flag)}
@@ -528,7 +528,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 }
 @media print{
  .wrap{display:block;max-width:none;padding:0}nav,.statusbar,.plan-controls,.phasectl,.phasestrip{display:none!important}
- body.race #pacing,body.race #kit,body.race #week,body.race #risks,body.race #open,body.race footer,body.race .rm-hide{display:block}
+ body.race #pacing,body.race #kit,body.race #risks,body.race #open,body.race footer,body.race .rm-hide{display:block}
  [data-plan][hidden]{display:block!important}body[data-plan] #fuel .cmp tr>*{display:table-cell!important}
  #course #abwrap .lane-a,#course #abwrap .lane-b{display:initial!important}
  header{padding-top:0}h1{font-size:48px}section{margin-top:28px}.profile svg{min-width:0}.race-metrics{break-inside:avoid}
@@ -735,7 +735,6 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
   <a href="#fuel">Fuel</a>
   <a href="#pacing">Pacing</a>
   <a href="#kit">Bike & kit</a>
-  <a href="#week">Race week</a>
   <a href="#risks">Risks</a>
   <a href="#open">Open items</a>
 </div><button type="button" class="rmbtn" id="navprog" data-prog>Program · Fri–Sun ↗</button><button type="button" class="rmbtn" id="thbtn" aria-label="Colour theme">Theme · auto</button><button type="button" class="rmbtn" id="rmbtn">Race mode</button></nav>
@@ -1231,24 +1230,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 </section>
 
 <!-- ============ RACE WEEK ============ -->
-<section id="week">
-  <h2>Race week — 12–18 Oct</h2>
-  <div class="tblwrap" tabindex="0" role="region" aria-label="Scrollable data table"><table role="table" data-mobile="cards">
-    <tr role="row"><th role="columnheader">Day</th><th role="columnheader">Session</th><th role="columnheader">Logistics</th></tr>
-    <tr role="row"><td role="cell" data-label="Day" class="m">Mon 12</td><td role="cell" data-label="Session">45' spin + 3×2' openers (Zwift)</td><td role="cell" data-label="Logistics">—</td></tr>
-    <tr role="row"><td role="cell" data-label="Day" class="m">Tue 13</td><td role="cell" data-label="Session">30' swim + 20' run</td><td role="cell" data-label="Logistics">Pack; charge devices</td></tr>
-    <tr role="row" class="hl"><td role="cell" data-label="Day" class="m">Wed 14</td><td role="cell" data-label="Session"><b>45' easy gravel — Cadaqués.</b> The entire outdoor skills budget + full equipment shakedown</td><td role="cell" data-label="Logistics">Pick up rental Crux · verify 45 mm + set pressure, gearing, mount, shoes, capsules + the chosen fuel plan (A/B) end-to-end. Conservative lines — nothing to prove today</td></tr>
-    <tr role="row"><td role="cell" data-label="Day" class="m">Thu 15</td><td role="cell" data-label="Session">Rest</td><td role="cell" data-label="Logistics">Travel/logistics; prep mounts & chargers</td></tr>
-    <tr role="row" class="hl"><td role="cell" data-label="Day" class="m">Fri 16</td><td role="cell" data-label="Session">20' spin + <b>10' swim recon at Platja Gran</b></td><td role="cell" data-label="Logistics"><b>GPX DAY.</b> Load head unit + phone, verify the track renders · check the official elevation against the 1,017 m measured here · ride the first 25 km in your head. Anything in this dossier drawn from the 2025 route is superseded today</td></tr>
-    <tr role="row" class="hl"><td role="cell" data-label="Day" class="m">Sat 17</td><td role="cell" data-label="Session">15' spin</td><td role="cell" data-label="Logistics"><b>13:00–16:00 at GEiEG de Sant Ponç, Girona — planning overlap; confirm the black-bag window at check-in.</b> Drop the bike for transport AND the black T2 bag. Canyon mech point there: have the rental checked. Gravel bib goes under the saddle today · race pack + wristbands · carb load · early night</td></tr>
-    <tr role="row" class="hl"><td role="cell" data-label="Day" class="m">Sun 18</td><td role="cell" data-label="Session"><b>RACE — 09:00</b></td><td role="cell" data-label="Logistics">Buses 06:15–06:45, La Copa · take an early departure</td></tr>
-  </table></div>
-  
-</section>
-
-<p class="small" style="margin-top:16px"><b>Official event program, Fri 16 → Sun 18.</b> Check-in, warm-ups, the bike and bag drop window, buses and collection times — <button type="button" class="progbtn" data-prog>Open the program</button></p>
-
-  <!-- ============ RISKS ============ -->
+<!-- ============ RISKS ============ -->
 <section id="risks">
   <h2>Risks & mitigations</h2>
   <div class="risklist">
