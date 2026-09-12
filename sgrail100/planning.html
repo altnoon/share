@@ -578,7 +578,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
  body{font-size:16px;-webkit-text-size-adjust:100%}
  .wrap{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
  header{padding-top:24px}h1{font-size:clamp(48px,13vw,72px)}.sub{font-size:15px}
- .profile{margin:8px 0 16px;overflow:visible}.profile svg{min-width:0;width:100%}.profile svg text{display:none}
+ .profile{margin:8px 0 16px;overflow:visible}.profile svg{min-width:0;width:100%}.profile svg text{display:none}.profile svg text.m{display:block;font-size:21px}.profile svg .brk{display:none}
  .mobile-chart-caption{display:block;margin:22px 0 0;font-size:14px;color:var(--muted)}
  .race-metrics{grid-template-columns:1fr;gap:0;margin:0 0 16px}
  .metric{display:grid;grid-template-columns:1fr auto;column-gap:12px;padding:14px 0;border-top-width:1px;align-items:center}
@@ -714,7 +714,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
       <text x="40" y="166" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10.5" fill="#0E6272">1.5k</text>
       <!-- T1 tick -->
       <line x1="70" y1="118" x2="70" y2="150" stroke="#1B2A32" stroke-width="1.6"/>
-      <text x="70" y="112" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#1B2A32">T1</text>
+      <text class="m" x="70" y="112" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#1B2A32">T1</text>
       <!-- BIKE 70–640 · Cap de Creus double peak (max 441m) then Empordà plain -->
       <path d="M70 150 L84 118 L96 96 L104 108 L118 66 L132 52 L146 88 L160 74 L178 104 L206 128
                L240 136 L280 132 L320 138 L360 133 L400 139 L440 134 L480 140 L520 135 L560 141 L600 136 L640 142"
@@ -723,21 +723,21 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
                L240 136 L280 132 L320 138 L360 133 L400 139 L440 134 L480 140 L520 135 L560 141 L600 136 L640 142 L640 150 L70 150 Z"
             fill="#8A5A2B" opacity="0.10"/>
       <!-- Cap de Creus bracket -->
-      <line x1="70" y1="36" x2="222" y2="36" stroke="#8A5A2B" stroke-width="1.4"/>
-      <line x1="70" y1="36" x2="70" y2="42" stroke="#8A5A2B" stroke-width="1.4"/>
-      <line x1="222" y1="36" x2="222" y2="42" stroke="#8A5A2B" stroke-width="1.4"/>
+      <line class="brk" x1="70" y1="36" x2="222" y2="36" stroke="#8A5A2B" stroke-width="1.4"/>
+      <line class="brk" x1="70" y1="36" x2="70" y2="42" stroke="#8A5A2B" stroke-width="1.4"/>
+      <line class="brk" x1="222" y1="36" x2="222" y2="42" stroke="#8A5A2B" stroke-width="1.4"/>
       <text x="146" y="28" text-anchor="middle" font-family="'Avenir Next Condensed','Arial Narrow',sans-serif" font-size="14" font-weight="700" fill="#8A5A2B" letter-spacing=".05em">KM 0–25 · ~67% OF CLIMBING</text>
       <text x="430" y="120" text-anchor="middle" font-family="'Avenir Next Condensed','Arial Narrow',sans-serif" font-size="14" font-weight="700" fill="#8A5A2B" letter-spacing=".05em">EMPORDÀ PLAIN · DRAFT</text>
       <!-- aid stations -->
       <line x1="296" y1="150" x2="296" y2="126" stroke="#B3341F" stroke-width="1.6"/>
       <circle cx="296" cy="123" r="3.2" fill="#B3341F"/>
-      <text x="296" y="166" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#B3341F">34.2</text>
+      <text class="m" x="296" y="166" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#B3341F">34.2</text>
       <line x1="518" y1="150" x2="518" y2="126" stroke="#B3341F" stroke-width="1.6"/>
       <circle cx="518" cy="123" r="3.2" fill="#B3341F"/>
-      <text x="518" y="166" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#B3341F">68</text>
+      <text class="m" x="518" y="166" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#B3341F">68</text>
       <!-- T2 tick -->
       <line x1="640" y1="118" x2="640" y2="150" stroke="#1B2A32" stroke-width="1.6"/>
-      <text x="640" y="112" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#1B2A32">T2</text>
+      <text class="m" x="640" y="112" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#1B2A32">T2</text>
       <!-- RUN 640–750 · Gavarres, 250 of 320m in first 4.5km, max 360m -->
       <path d="M640 150 L654 122 L666 104 L676 96 L686 100 L700 112 L716 126 L734 140 L750 149"
             fill="none" stroke="#4A6741" stroke-width="2.6" stroke-linejoin="round"/>
@@ -749,7 +749,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
       <text x="695" y="176" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10.5" fill="#4A6741">hike ↑ · descend ↓</text>
       <!-- finish -->
       <line x1="750" y1="118" x2="750" y2="150" stroke="#1B2A32" stroke-width="2.2"/>
-      <text x="750" y="112" text-anchor="end" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#1B2A32">GIRONA</text>
+      <text class="m" x="750" y="112" text-anchor="end" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#1B2A32">GIRONA</text>
     </svg>
   </div>
   <div class="race-metrics" aria-label="Race distances">
