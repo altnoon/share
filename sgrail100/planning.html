@@ -336,11 +336,12 @@ footer p{margin-bottom:6px}
 #risks .rbody p{margin:10px 0 0;font-size:14px;line-height:1.55;color:var(--ink)}
 #risks .rbody em{display:block;font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
 @media (max-width:640px){#risks .risk>summary{grid-template-columns:1fr 20px}#risks .risk>summary .rmit{grid-column:1;color:var(--muted);font-size:13.5px}#risks .risk>summary::after{grid-column:2;grid-row:1}#risks .rbody{grid-template-columns:1fr}}
-body.race #pacing,body.race #kit,body.race #risks,body.race #open,body.race footer{display:none}
+body.race #pacing,body.race #kit,body.race #risks,body.race footer{display:none}
 body.race .rm-hide{display:none}
 .rmbtn{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);color:var(--muted);cursor:pointer;white-space:nowrap}
 .rmbtn.on{background:var(--flag);border-color:var(--flag);color:var(--on-flag)}
-#navprog{border-color:var(--ink);color:var(--ink)}
+#navprog,#navopen{border-color:var(--ink);color:var(--ink)}
+.linkbtn{font:inherit;background:none;border:0;padding:0;color:inherit;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
 body.race nav a{opacity:.3;pointer-events:none}
 body.race nav a[href="#course"],body.race nav a[href="#fuel"]{opacity:1;pointer-events:auto}
 #fuel .cmp th{background:var(--card);color:var(--ink);text-align:left;vertical-align:bottom;padding:9px 12px;border-bottom:3px solid var(--line)}
@@ -394,7 +395,7 @@ body.race nav a[href="#course"],body.race nav a[href="#fuel"]{opacity:1;pointer-
 #course details.p-run>summary.plan-head::before{background:var(--trail)}
 .progbtn{font-family:var(--mono);font-size:12.5px;padding:4px 12px;border-radius:14px;border:1.5px solid var(--ink);background:var(--card);color:var(--ink);cursor:pointer;white-space:nowrap}
 .progbtn:hover{background:var(--paper)}
-.modal{border:none;border-radius:10px;padding:0;max-width:720px;width:calc(100% - 32px);background:var(--card);color:var(--ink);box-shadow:0 18px 50px rgba(27,42,50,.28)}
+.modal{margin:auto;border:none;border-radius:10px;padding:0;max-width:720px;width:calc(100% - 32px);background:var(--card);color:var(--ink);box-shadow:0 18px 50px rgba(27,42,50,.28)}
 .modal::backdrop{background:rgba(27,42,50,.45)}
 .mhead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--card);z-index:2}
 .mhead b{font-family:var(--disp);font-size:16px;text-transform:uppercase;letter-spacing:.04em}
@@ -528,7 +529,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 }
 @media print{
  .wrap{display:block;max-width:none;padding:0}nav,.statusbar,.plan-controls,.phasectl,.phasestrip{display:none!important}
- body.race #pacing,body.race #kit,body.race #risks,body.race #open,body.race footer,body.race .rm-hide{display:block}
+ body.race #pacing,body.race #kit,body.race #risks,body.race footer,body.race .rm-hide{display:block}
  [data-plan][hidden]{display:block!important}body[data-plan] #fuel .cmp tr>*{display:table-cell!important}
  #course #abwrap .lane-a,#course #abwrap .lane-b{display:initial!important}
  header{padding-top:0}h1{font-size:48px}section{margin-top:28px}.profile svg{min-width:0}.race-metrics{break-inside:avoid}
@@ -549,7 +550,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
  .metric>span{font-size:14px;letter-spacing:.04em}.metric strong{grid-column:2;grid-row:1/3;font-size:36px;margin:0}.metric small{font-size:18px}
  .metric p{font-size:14px;grid-column:1}.race-facts{font-size:14px}.legend{gap:18px}.leg{font-size:16px}
  nav{top:0;padding:8px 0;flex-wrap:nowrap;gap:8px}
- .mobile-ready nav .row{display:none}.mobile-ready nav #navprog{display:none}#course .phasestrip{scroll-margin-top:84px}.mobile-ready .mobile-nav{display:block;flex:1;min-width:0}
+ .mobile-ready nav .row{display:none}.mobile-ready nav #navprog,.mobile-ready nav #navopen{display:none}#course .phasestrip{scroll-margin-top:84px}.mobile-ready .mobile-nav{display:block;flex:1;min-width:0}
  .mobile-nav select{width:100%;min-height:48px;font:600 16px var(--body);color:var(--ink);border:1px solid var(--line);border-radius:6px;background:var(--card);padding:10px 12px}
  nav .rmbtn{min-height:48px;flex:none;font-size:14px;padding:10px}
  section{scroll-margin-top:80px}#course details.planblock{scroll-margin-top:80px}
@@ -736,8 +737,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
   <a href="#pacing">Pacing</a>
   <a href="#kit">Bike & kit</a>
   <a href="#risks">Risks</a>
-  <a href="#open">Open items</a>
-</div><button type="button" class="rmbtn" id="navprog" data-prog>Program · Fri–Sun ↗</button><button type="button" class="rmbtn" id="thbtn" aria-label="Colour theme">Theme · auto</button><button type="button" class="rmbtn" id="rmbtn">Race mode</button></nav>
+</div><button type="button" class="rmbtn" id="navprog" data-prog>Program · Fri–Sun ↗</button><button type="button" class="rmbtn" id="navopen" data-open>Open items ↗</button><button type="button" class="rmbtn" id="thbtn" aria-label="Colour theme">Theme · auto</button><button type="button" class="rmbtn" id="rmbtn">Race mode</button></nav>
 
 <aside class="essentials" aria-labelledby="essentials-title">
  <div class="essentials-head"><h2 id="essentials-title">Race essentials</h2><span class="small">16–18 October 2026 · local time</span></div>
@@ -760,8 +760,8 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
  <div class="race-decision"><label for="race-plan-choice">My race fuel plan</label><div class="decision-actions"><select id="race-plan-choice"><option value="">Undecided</option><option value="a">Plan A · Bottle</option><option value="b">Plan B · Pocket</option></select><button type="button" id="save-race-plan">Save decision</button><button type="button" id="view-race-plan">View saved plan</button></div><p id="race-plan-status" role="status">Undecided · comparing charts does not commit a plan.</p></div>
 </aside>
 <aside class="statusbar rm-hide" aria-label="Race preparation">
-  <div class="prep-head"><div><span class="eyebrow">Before the start line</span><a href="#open" id="prep-count">15 open items</a></div><button type="button" class="progbtn" data-prog>Event program ↗</button></div>
-  <div class="prep-grid"><a href="#open" class="prep-item"><span class="prep-status">September · training</span><b>Choose fuel. Test pedals. Swim outdoors.</b><span id="prep-training">3 priority rehearsals to close.</span></a><a href="#open" class="prep-item blocker" id="insurance-alert"><span class="prep-status">Before check-in · required</span><b>Verify medical insurance</b><span>Required to start. Confirm event coverage.</span></a></div>
+  <div class="prep-head"><div><span class="eyebrow">Before the start line</span><button type="button" class="linkbtn" id="prep-count" data-open>15 open items</button></div><button type="button" class="progbtn" data-prog>Event program ↗</button></div>
+  <div class="prep-grid"><a href="#" class="prep-item" data-open><span class="prep-status">September · training</span><b>Choose fuel. Test pedals. Swim outdoors.</b><span id="prep-training">3 priority rehearsals to close.</span></a><a href="#" class="prep-item blocker" id="insurance-alert" data-open><span class="prep-status">Before check-in · required</span><b>Verify medical insurance</b><span>Required to start. Confirm event coverage.</span></a></div>
   <div class="prep-progress"><progress id="prep-progress" value="0" max="12" aria-label="Preparation checklist completion"></progress><span id="prep-done" aria-live="polite">0 of 12 completed</span></div>
 </aside>
 
@@ -1245,28 +1245,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 </section>
 
 <!-- ============ OPEN ITEMS ============ -->
-<section id="open">
-  <h2>Open items <span class="tag">close before Sat 17 Oct</span></h2>
-  <div class="card">
-    <ul class="check">
-      <li><input type="checkbox" data-k="open-3"><span><b>3 · Fuel plan decided — A or B</b> — whichever rehearses cleanly on the September gravel Saturdays races; 4/h capsule cadence on ≥2 of them; chosen plan end-to-end on Wed 14. Nothing debuts race day.</span></li>
-      <li><input type="checkbox" data-k="open-4"><span><b>4 · Race carb number set</b> — from the last two 3:00+ Saturday rides (current band 45–52 g/h; both plans carry 205–210 g).</span></li>
-      <li><input type="checkbox" data-k="open-5"><span><b>5 · One open-water session before race week</b> — currently 1 OW swim in 12 months; Friday's 10' recon is the only OW planned. One September session de-risks the 18 °C sea start.</span></li>
-      <li><input type="checkbox" data-k="open-6"><span><b>6 · Elevation — reopened</b> — the course page still says +1,200 m, the briefing says +900, the organiser's own route measures 1,017. Plan for ~1,000 and take the final figure from the 2026 GPX on Friday. Do not treat either published number as settled.</span></li>
-      <li><input type="checkbox" data-k="open-7"><span><b>7 · Bag logistics — reopened</b> — briefing: drop 13:00–17:00, collect at GEiEG. Timetable: drop 12:00–16:00, collect bags at Plaça dels Jurats. <b>Use the 13:00–16:00 overlap for the drop</b>; confirm the collection point at check-in on Friday.</span></li>
-      <li><input type="checkbox" data-k="open-8"><span><b>8 · Course drink mix identified</b> — "Maurten drink" at the stations is likely pre-mixed DM160; confirm product + concentration (briefing or info@sgrail100.com). It is the emergency fallback's carb math.</span></li>
-      <li><input type="checkbox" data-k="open-9"><span><b>9 · Jugs vs handed bottles</b> at km 34.2 / 68 — determines refill speed and whether the mandatory water stops are rolling or standing.</span></li>
-      <li><input type="checkbox" data-k="open-10"><span><b>10 · Seat roll: repair kit or food?</b> — the Silca is 0.6 L with 4 pockets spec'd for tube + levers + CO2 + multi-tool, and it <b>unrolls flat</b>, so it is a stop-the-bike container. It cannot hold the SGrail repair kit <i>and</i> the ride food. The standing rule below is the default until you say otherwise.</span></li>
-      <li><input type="checkbox" data-k="open-11"><span><b>11 · Race-morning breakfast specified</b> — timing is set (~04:45–05:15); write the contents into bike_fuelling_card.md.</span></li>
-      <li><input type="checkbox" data-k="open-12"><span><b>12 · Medical insurance</b> — <b>no insurance, no start.</b> Private or the Klassmark policy. Verify yours covers the event before Saturday; this is the one item that stops you at check-in.</span></li>
-      <li><input type="checkbox" data-k="open-13"><span><b>13 · SkyFlask concentration tested</b> — the handheld is old ground (ultras, UTMB, 100-milers), so this is re-familiarisation after ~6 years, not a debut. What is untested is <b>1 scoop in 350 ml</b>: 2.9 g/L is strong. One September trail run at race concentration settles the gut question.</span></li>
-      <li><input type="checkbox" data-k="open-14"><span><b>14 · Flat pedals rehearsed</b> — riding and running in the same Vivobarefoots is decided, and it is now the least-tested thing in the plan. <b>3 h on the trainer with flat pedals, in the Vivos</b>, before the block ends. Confirm the rental fits pinned platforms, not bare resin.</span></li>
-      <li><input type="checkbox" data-k="open-15"><span><b>15 · Capsule handling</b> — PF&H ships blister-packed, not in a tube. Decant into a pill vial and prove you can take one riding on gravel.</span></li>
-      <li><input type="checkbox" data-k="open-16"><span><b>16 · Bottle retention over rough ground</b> — cages confirmed 25 Aug; <b>grip is not</b>. Prove it on the September gravel rides, then again Wed 14. This reverses the card's one-bottle exception, so it has to be earned.</span></li>
-      <li><input type="checkbox" data-k="open-17"><span><b>17 · Which cut-off binds — 16:59 or 17:59</b> — the timetable lists a <b>16:59 trail limit</b> alongside the <b>17:59</b> overall. Nothing in the file resolves which is enforced at the finish. The gap is the whole margin: scenario C has <b>23 minutes</b> against 16:59 and 1h23 against 17:59. <b>Ask at check-in, Friday 17:30–19:30</b>, and correct the strip, the clock row and the pacing bar in one pass. Until then every plan in this file assumes 16:59.</span></li>
-    </ul>
-  <details class="closedlist"><summary>Closed — 2 items</summary><ul class="cl"><li><b>1</b> Wetsuit — expected; the briefing says where to put it on</li><li><b>2</b> Rental spec — 45 mm on tubes, GRX 1×12 40T · 10–45, two cages, flat pedals</li></ul></details>
-  </div>
+<section id="finale" class="rm-hide">
   <div class="card rail-ink" style="margin-top:18px;border-left-width:5px">
     <h3>The whole race in one line</h3>
     <p style="font-size:15px;line-height:1.6"><b>Ride sector 1 like it can end your day. Draft the plain like it is free time. Hike the climb, commit the descent.</b></p>
@@ -1303,6 +1282,31 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
   </table></div>
   <p class="small"><b>Check in on Friday, not Saturday.</b> Check-in is what hands you the T1 and T2 bags and the bibs — so you <i>cannot</i> drop the T2 bag or fix the gravel bib under the saddle until you have been. Doing it Friday leaves Saturday as one calm errand at GEiEG instead of a two-stop scramble against a four-hour window. Leave the Friday burgers-and-live-music at 19:30; it runs to 21:00 and you are two nights out.</p>
   </div>
+</dialog>
+<dialog id="opendlg" class="modal" aria-label="Open items">
+  <div class="mhead"><b>Open items · close before Sat 17</b><button type="button" class="mclose" aria-label="Close">×</button></div>
+  <div class="mbody"><div id="open">
+  <div class="card" style="margin:0;border:0;padding:0;background:transparent">
+    <ul class="check">
+      <li><input type="checkbox" data-k="open-3"><span><b>3 · Fuel plan decided — A or B</b> — whichever rehearses cleanly on the September gravel Saturdays races; 4/h capsule cadence on ≥2 of them; chosen plan end-to-end on Wed 14. Nothing debuts race day.</span></li>
+      <li><input type="checkbox" data-k="open-4"><span><b>4 · Race carb number set</b> — from the last two 3:00+ Saturday rides (current band 45–52 g/h; both plans carry 205–210 g).</span></li>
+      <li><input type="checkbox" data-k="open-5"><span><b>5 · One open-water session before race week</b> — currently 1 OW swim in 12 months; Friday's 10' recon is the only OW planned. One September session de-risks the 18 °C sea start.</span></li>
+      <li><input type="checkbox" data-k="open-6"><span><b>6 · Elevation — reopened</b> — the course page still says +1,200 m, the briefing says +900, the organiser's own route measures 1,017. Plan for ~1,000 and take the final figure from the 2026 GPX on Friday. Do not treat either published number as settled.</span></li>
+      <li><input type="checkbox" data-k="open-7"><span><b>7 · Bag logistics — reopened</b> — briefing: drop 13:00–17:00, collect at GEiEG. Timetable: drop 12:00–16:00, collect bags at Plaça dels Jurats. <b>Use the 13:00–16:00 overlap for the drop</b>; confirm the collection point at check-in on Friday.</span></li>
+      <li><input type="checkbox" data-k="open-8"><span><b>8 · Course drink mix identified</b> — "Maurten drink" at the stations is likely pre-mixed DM160; confirm product + concentration (briefing or info@sgrail100.com). It is the emergency fallback's carb math.</span></li>
+      <li><input type="checkbox" data-k="open-9"><span><b>9 · Jugs vs handed bottles</b> at km 34.2 / 68 — determines refill speed and whether the mandatory water stops are rolling or standing.</span></li>
+      <li><input type="checkbox" data-k="open-10"><span><b>10 · Seat roll: repair kit or food?</b> — the Silca is 0.6 L with 4 pockets spec'd for tube + levers + CO2 + multi-tool, and it <b>unrolls flat</b>, so it is a stop-the-bike container. It cannot hold the SGrail repair kit <i>and</i> the ride food. The standing rule below is the default until you say otherwise.</span></li>
+      <li><input type="checkbox" data-k="open-11"><span><b>11 · Race-morning breakfast specified</b> — timing is set (~04:45–05:15); write the contents into bike_fuelling_card.md.</span></li>
+      <li><input type="checkbox" data-k="open-12"><span><b>12 · Medical insurance</b> — <b>no insurance, no start.</b> Private or the Klassmark policy. Verify yours covers the event before Saturday; this is the one item that stops you at check-in.</span></li>
+      <li><input type="checkbox" data-k="open-13"><span><b>13 · SkyFlask concentration tested</b> — the handheld is old ground (ultras, UTMB, 100-milers), so this is re-familiarisation after ~6 years, not a debut. What is untested is <b>1 scoop in 350 ml</b>: 2.9 g/L is strong. One September trail run at race concentration settles the gut question.</span></li>
+      <li><input type="checkbox" data-k="open-14"><span><b>14 · Flat pedals rehearsed</b> — riding and running in the same Vivobarefoots is decided, and it is now the least-tested thing in the plan. <b>3 h on the trainer with flat pedals, in the Vivos</b>, before the block ends. Confirm the rental fits pinned platforms, not bare resin.</span></li>
+      <li><input type="checkbox" data-k="open-15"><span><b>15 · Capsule handling</b> — PF&H ships blister-packed, not in a tube. Decant into a pill vial and prove you can take one riding on gravel.</span></li>
+      <li><input type="checkbox" data-k="open-16"><span><b>16 · Bottle retention over rough ground</b> — cages confirmed 25 Aug; <b>grip is not</b>. Prove it on the September gravel rides, then again Wed 14. This reverses the card's one-bottle exception, so it has to be earned.</span></li>
+      <li><input type="checkbox" data-k="open-17"><span><b>17 · Which cut-off binds — 16:59 or 17:59</b> — the timetable lists a <b>16:59 trail limit</b> alongside the <b>17:59</b> overall. Nothing in the file resolves which is enforced at the finish. The gap is the whole margin: scenario C has <b>23 minutes</b> against 16:59 and 1h23 against 17:59. <b>Ask at check-in, Friday 17:30–19:30</b>, and correct the strip, the clock row and the pacing bar in one pass. Until then every plan in this file assumes 16:59.</span></li>
+    </ul>
+  <details class="closedlist"><summary>Closed — 2 items</summary><ul class="cl"><li><b>1</b> Wetsuit — expected; the briefing says where to put it on</li><li><b>2</b> Rental spec — 45 mm on tubes, GRX 1×12 40T · 10–45, two cages, flat pedals</li></ul></details>
+  </div>
+  </div></div>
 </dialog>
 
 <section id="essentials-card" hidden aria-labelledby="card-title"><div class="card-actions"><button type="button" id="print-card">Print / save PDF</button><button type="button" id="close-card">Close preview</button></div><h1 id="card-title">SGRAIL 100 · race essentials</h1><p>18 October 2026 · local time · prepared from the dossier</p><div id="card-content"></div></section>
@@ -1478,12 +1482,14 @@ document.querySelectorAll('nav a[href^="#"]').forEach(function(a){
 
 // event program in a dialog, so it costs no vertical space
 function initProgDialog(){
-  var d=document.getElementById('progdlg'); if(!d) return;
-  function open(){ d.showModal ? d.showModal() : d.setAttribute('open',''); }
-  function shut(){ d.close ? d.close() : d.removeAttribute('open'); }
-  document.querySelectorAll('[data-prog]').forEach(function(b){ b.addEventListener('click',open); });
-  d.querySelector('.mclose').addEventListener('click',shut);
-  d.addEventListener('click',function(e){ if(e.target===d) shut(); });
+  [['progdlg','[data-prog]'],['opendlg','[data-open]']].forEach(function(pair){
+    var d=document.getElementById(pair[0]); if(!d) return;
+    function open(e){ if(e) e.preventDefault(); d.showModal ? d.showModal() : d.setAttribute('open',''); }
+    function shut(){ d.close ? d.close() : d.removeAttribute('open'); }
+    document.querySelectorAll(pair[1]).forEach(function(b){ b.addEventListener('click',open); });
+    d.querySelector('.mclose').addEventListener('click',shut);
+    d.addEventListener('click',function(e){ if(e.target===d) shut(); });
+  });
 }
 if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',initProgDialog); } else { initProgDialog(); }
 
@@ -1524,8 +1530,8 @@ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded
   var links=Array.from(document.querySelectorAll('nav a'));
   var picker=document.getElementById('mobile-section');
   links.forEach(function(a){var option=document.createElement('option');option.value=a.hash;option.textContent=a.textContent;picker.appendChild(option);});
-  var progOpt=document.createElement('option');progOpt.value='#program';progOpt.textContent='Program · Fri–Sun ↗';picker.appendChild(progOpt);
-  picker.addEventListener('change',function(){if(picker.value==='#program'){var b=document.querySelector('[data-prog]');if(b)b.click();update();return;}window.location.hash=picker.value;});
+  [['#program','Program · Fri–Sun ↗','[data-prog]'],['#openitems','Open items ↗','[data-open]']].forEach(function(o){var op=document.createElement('option');op.value=o[0];op.textContent=o[1];op.dataset.trigger=o[2];picker.appendChild(op);});
+  picker.addEventListener('change',function(){var op=picker.selectedOptions[0];if(op&&op.dataset.trigger){var b=document.querySelector(op.dataset.trigger);if(b)b.click();update();return;}window.location.hash=picker.value;});
   document.body.classList.add('mobile-ready');
   var pending=false;
   function update(){
@@ -1535,7 +1541,7 @@ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded
     var active=visible[0];
     visible.forEach(function(a){if(document.querySelector(a.hash).getBoundingClientRect().top<=threshold)active=a;});
     links.forEach(function(a){if(a===active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});
-    Array.from(picker.options).forEach(function(option){if(option.value==='#program')return;var shown=visible.some(function(a){return a.hash===option.value;});option.hidden=!shown;option.disabled=!shown;});
+    Array.from(picker.options).forEach(function(option){if(option.dataset.trigger)return;var shown=visible.some(function(a){return a.hash===option.value;});option.hidden=!shown;option.disabled=!shown;});
     if(active)picker.value=active.hash;
   }
   function schedule(){if(!pending){pending=true;requestAnimationFrame(update);}}
