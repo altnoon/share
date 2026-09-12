@@ -319,8 +319,14 @@ h3{font-size:1rem;font-weight:600;letter-spacing:-.01em;margin:32px 0 10px}
 .scr em{font-style:normal;color:var(--lime-ink);font-weight:600}
 .phone-cap{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dimmer);margin:10px 0 0;line-height:1.5;text-align:center}
 .phone-cap b{color:var(--ink);font-weight:600;display:block;font-family:var(--sans);font-size:.86rem;letter-spacing:-.01em;text-transform:none;margin-bottom:2px}
-@media (max-width:900px){.phones{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:460px){.phones{grid-template-columns:1fr;max-width:280px}}
+@media (min-width:641px) and (max-width:900px){.phones{grid-template-columns:repeat(2,1fr)}}
+/* phone: the four screens become a horizontal slider, one screen per swipe, the next one peeking in */
+@media (max-width:640px){
+  .phones{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-20px;padding:4px 20px 10px;
+    scroll-padding-inline:20px;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  .phones::-webkit-scrollbar{display:none}
+  .phones>div{flex:0 0 min(76vw,290px);scroll-snap-align:start}
+  .phones .phone-cap{text-align:left}}
 .lb{margin:16px 0 0;display:flex;flex-direction:column;gap:7px}
 .lb div{display:grid;grid-template-columns:8.2em 1fr 5.2em;gap:10px;white-space:nowrap;align-items:center;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:var(--dim)}
 .lb .rk{color:var(--dimmer)}
