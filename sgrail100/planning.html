@@ -92,7 +92,7 @@ p{margin-bottom:10px}
   border:1px solid var(--line);border-radius:8px;background:var(--card)}
 table{border-collapse:collapse;width:100%;font-size:14px;min-width:480px}
 th{font-family:var(--disp);text-transform:uppercase;letter-spacing:.08em;font-size:12.5px;
-  text-align:left;padding:9px 12px;background:var(--strong);color:var(--paper);white-space:nowrap}
+  text-align:left;padding:9px 12px;background:var(--strong);color:var(--on-strong);white-space:nowrap}
 td{padding:8px 12px;border-top:1px solid var(--line-soft);vertical-align:top}
 td.m,th.m{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
 tr.hl td{background:var(--track-soft);font-weight:600}
@@ -685,6 +685,11 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
   :root[data-theme="dark"] [stroke="#E8E9E3"]{stroke:var(--line)}
   :root[data-theme="dark"] [stroke="#B9BFB4"]{stroke:var(--line)}
 }
+
+.plan-indicator{display:block;margin-top:5px;font-size:13px;font-weight:400;color:var(--muted)}
+#open .task-group{margin:24px 0 8px;font-size:17px;text-transform:none;letter-spacing:0}
+@media screen and (max-width:600px){.dock button{width:44px;height:44px}.dock .menu{font-size:18px}.dock .prog{right:96px}}
+@media(prefers-reduced-motion:reduce){.dock .prog i{transition:none}}
 </style>
 <script>
 /* Theme resolves before paint so a dark start does not flash white. auto = follow the device. */
@@ -775,7 +780,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 </div><button type="button" class="rmbtn" id="navprog" data-prog>Program · Fri–Sun ↗</button><button type="button" class="rmbtn" id="navopen" data-open>Open items ↗</button><button type="button" class="rmbtn" id="thbtn" aria-label="Colour theme">Theme · auto</button><button type="button" class="rmbtn" id="rmbtn">Race mode</button></nav>
 <div class="dock" aria-label="Section navigation" hidden>
   <button class="prev" type="button" aria-label="Previous section"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3 5 8l5 5"/></svg></button>
-  <div class="pager" aria-controls="dock-sheet" aria-expanded="false"></div>
+  <div class="pager"></div><button class="menu" type="button" aria-label="Open section menu" aria-controls="dock-sheet" aria-expanded="false">☰</button>
   <button class="next" type="button" aria-label="Next section"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
   <div class="prog" aria-hidden="true"><i></i></div>
 </div>
@@ -806,8 +811,8 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 </aside>
 <aside class="statusbar rm-hide" aria-label="Race preparation">
   <div class="prep-head"><div><span class="eyebrow">Before the start line</span><button type="button" class="linkbtn" id="prep-count" data-open>15 open items</button></div><button type="button" class="progbtn" data-prog>Event program ↗</button></div>
-  <div class="prep-grid"><a href="#" class="prep-item" data-open><span class="prep-status">September · training</span><b>Choose fuel. Test pedals. Swim outdoors.</b><span id="prep-training">3 priority rehearsals to close.</span></a><a href="#" class="prep-item blocker" id="insurance-alert" data-open><span class="prep-status">Before check-in · required</span><b>Verify medical insurance</b><span>Required to start. Confirm event coverage.</span></a></div>
-  <div class="prep-progress"><progress id="prep-progress" value="0" max="12" aria-label="Preparation checklist completion"></progress><span id="prep-done" aria-live="polite">0 of 12 completed</span></div>
+  <div class="prep-grid"><a href="#" class="prep-item" data-open><span class="prep-status">September · training</span><b>Choose fuel. Test pedals and cages. Swim outdoors.</b><span id="prep-training">4 priority rehearsals to close.</span></a><a href="#" class="prep-item blocker" id="insurance-alert" data-open><span class="prep-status">Before check-in · required</span><b>Verify medical insurance</b><span>Required to start. Confirm event coverage.</span></a></div>
+  <div class="prep-progress"><progress id="prep-progress" value="0" max="15" aria-label="Preparation checklist completion"></progress><span id="prep-done" aria-live="polite">0 of 15 completed</span></div>
 </aside>
 
 <!-- ============ CLOCK ============ -->
@@ -885,7 +890,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
       <p class="do">Hike the climb. Regroup at the castle aid, km 4.2. Commit the descent — it is not free.</p></div>
   </div>
 
-  <div class="plan-controls"><span>View fuel plan</span><div class="abtog" role="group" aria-label="Fuel plan view"><button type="button" data-m="a" aria-pressed="false">A · Bottle</button><button type="button" data-m="b" aria-pressed="false">B · Pocket</button><button type="button" class="on" data-m="both" aria-pressed="true">Both</button></div></div>
+  <div class="plan-controls"><span>View fuel plan<small class="plan-indicator" role="status">Race plan: undecided · viewing both plans</small></span><div class="abtog" role="group" aria-label="Fuel plan view"><button type="button" data-m="a" aria-pressed="false">A · Bottle</button><button type="button" data-m="b" aria-pressed="false">B · Pocket</button><button type="button" class="on" data-m="both" aria-pressed="true">Both</button></div></div>
   <details class="planblock p-bike" open><summary class="plan-head" style="margin-top:0"><span class="pn">Feeding chart · Plan A / B</span><span class="pd">same terrain, two feed lanes</span></summary>
     <p class="mobile-chart-help">Swipe to compare feed times. For a vertical chart, expand Plan A or Plan B below.</p>
     <div class="clock-scroll" tabindex="0" role="region" aria-label="Scrollable feed chart" id="abwrap"><div class="clock">
@@ -1332,23 +1337,27 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
   <div class="mhead"><b>Open items · close before Sat 17</b><button type="button" class="mclose" aria-label="Close">×</button></div>
   <div class="mbody"><div id="open">
   <div class="card" style="margin:0;border:0;padding:0;background:transparent">
-    <ul class="check">
-      <li><input type="checkbox" data-k="open-3"><span><b>3 · Fuel plan decided — A or B</b> — whichever rehearses cleanly on the September gravel Saturdays races; 4/h capsule cadence on ≥2 of them; chosen plan end-to-end on Wed 14. Nothing debuts race day.</span></li>
-      <li><input type="checkbox" data-k="open-4"><span><b>4 · Race carb number set</b> — from the last two 3:00+ Saturday rides (current band 45–52 g/h; both plans carry 205–210 g).</span></li>
-      <li><input type="checkbox" data-k="open-5"><span><b>5 · One open-water session before race week</b> — currently 1 OW swim in 12 months; Friday's 10' recon is the only OW planned. One September session de-risks the 18 °C sea start.</span></li>
-      <li><input type="checkbox" data-k="open-6"><span><b>6 · Elevation — reopened</b> — the course page still says +1,200 m, the briefing says +900, the organiser's own route measures 1,017. Plan for ~1,000 and take the final figure from the 2026 GPX on Friday. Do not treat either published number as settled.</span></li>
-      <li><input type="checkbox" data-k="open-7"><span><b>7 · Bag logistics — reopened</b> — briefing: drop 13:00–17:00, collect at GEiEG. Timetable: drop 12:00–16:00, collect bags at Plaça dels Jurats. <b>Use the 13:00–16:00 overlap for the drop</b>; confirm the collection point at check-in on Friday.</span></li>
-      <li><input type="checkbox" data-k="open-8"><span><b>8 · Course drink mix identified</b> — "Maurten drink" at the stations is likely pre-mixed DM160; confirm product + concentration (briefing or info@sgrail100.com). It is the emergency fallback's carb math.</span></li>
-      <li><input type="checkbox" data-k="open-9"><span><b>9 · Jugs vs handed bottles</b> at km 34.2 / 68 — determines refill speed and whether the mandatory water stops are rolling or standing.</span></li>
-      <li><input type="checkbox" data-k="open-10"><span><b>10 · Seat roll: repair kit or food?</b> — the Silca is 0.6 L with 4 pockets spec'd for tube + levers + CO2 + multi-tool, and it <b>unrolls flat</b>, so it is a stop-the-bike container. It cannot hold the SGrail repair kit <i>and</i> the ride food. The standing rule below is the default until you say otherwise.</span></li>
-      <li><input type="checkbox" data-k="open-11"><span><b>11 · Race-morning breakfast specified</b> — timing is set (~04:45–05:15); write the contents into bike_fuelling_card.md.</span></li>
-      <li><input type="checkbox" data-k="open-12"><span><b>12 · Medical insurance</b> — <b>no insurance, no start.</b> Private or the Klassmark policy. Verify yours covers the event before Saturday; this is the one item that stops you at check-in.</span></li>
-      <li><input type="checkbox" data-k="open-13"><span><b>13 · SkyFlask concentration tested</b> — the handheld is old ground (ultras, UTMB, 100-milers), so this is re-familiarisation after ~6 years, not a debut. What is untested is <b>1 scoop in 350 ml</b>: 2.9 g/L is strong. One September trail run at race concentration settles the gut question.</span></li>
-      <li><input type="checkbox" data-k="open-14"><span><b>14 · Flat pedals rehearsed</b> — riding and running in the same Vivobarefoots is decided, and it is now the least-tested thing in the plan. <b>3 h on the trainer with flat pedals, in the Vivos</b>, before the block ends. Confirm the rental fits pinned platforms, not bare resin.</span></li>
-      <li><input type="checkbox" data-k="open-15"><span><b>15 · Capsule handling</b> — PF&H ships blister-packed, not in a tube. Decant into a pill vial and prove you can take one riding on gravel.</span></li>
-      <li><input type="checkbox" data-k="open-16"><span><b>16 · Bottle retention over rough ground</b> — cages confirmed 25 Aug; <b>grip is not</b>. Prove it on the September gravel rides, then again Wed 14. This reverses the card's one-bottle exception, so it has to be earned.</span></li>
-      <li><input type="checkbox" data-k="open-17"><span><b>17 · Which cut-off binds — 16:59 or 17:59</b> — the timetable lists a <b>16:59 trail limit</b> alongside the <b>17:59</b> overall. Nothing in the file resolves which is enforced at the finish. The gap is the whole margin: scenario C has <b>23 minutes</b> against 16:59 and 1h23 against 17:59. <b>Ask at check-in, Friday 17:30–19:30</b>, and correct the strip, the clock row and the pacing bar in one pass. Until then every plan in this file assumes 16:59.</span></li>
-    </ul>
+    <h3 class="task-group">September · rehearse and decide</h3><ul class="check">
+<li><input type="checkbox" data-k="open-3"><span><b>3 · Fuel plan decided — A or B</b> — whichever rehearses cleanly on the September gravel Saturdays races; 4/h capsule cadence on ≥2 of them; chosen plan end-to-end on Wed 14. Nothing debuts race day.</span></li>
+<li><input type="checkbox" data-k="open-4"><span><b>4 · Race carb number set</b> — from the last two 3:00+ Saturday rides (current band 45–52 g/h; both plans carry 205–210 g).</span></li>
+<li><input type="checkbox" data-k="open-5"><span><b>5 · One open-water session before race week</b> — currently 1 OW swim in 12 months; Friday's 10' recon is the only OW planned. One September session de-risks the 18 °C sea start.</span></li>
+<li><input type="checkbox" data-k="open-13"><span><b>13 · SkyFlask concentration tested</b> — the handheld is old ground (ultras, UTMB, 100-milers), so this is re-familiarisation after ~6 years, not a debut. What is untested is <b>1 scoop in 350 ml</b>: 2.9 g/L is strong. One September trail run at race concentration settles the gut question.</span></li>
+<li><input type="checkbox" data-k="open-14"><span><b>14 · Flat pedals rehearsed</b> — riding and running in the same Vivobarefoots is decided, and it is now the least-tested thing in the plan. <b>3 h on the trainer with flat pedals, in the Vivos</b>, before the block ends. Confirm the rental fits pinned platforms, not bare resin.</span></li>
+<li><input type="checkbox" data-k="open-15"><span><b>15 · Capsule handling</b> — PF&H ships blister-packed, not in a tube. Decant into a pill vial and prove you can take one riding on gravel.</span></li>
+<li><input type="checkbox" data-k="open-16"><span><b>16 · Bottle retention over rough ground</b> — cages confirmed 25 Aug; <b>grip is not</b>. Prove it on the September gravel rides, then again Wed 14. This reverses the card's one-bottle exception, so it has to be earned.</span></li>
+</ul>
+<h3 class="task-group">Before travel · prepare and verify</h3><ul class="check">
+<li><input type="checkbox" data-k="open-6"><span><b>6 · Elevation — reopened</b> — the course page still says +1,200 m, the briefing says +900, the organiser's own route measures 1,017. Plan for ~1,000 and take the final figure from the 2026 GPX on Friday. Do not treat either published number as settled.</span></li>
+<li><input type="checkbox" data-k="open-10"><span><b>10 · Seat roll: repair kit or food?</b> — the Silca is 0.6 L with 4 pockets spec'd for tube + levers + CO2 + multi-tool, and it <b>unrolls flat</b>, so it is a stop-the-bike container. It cannot hold the SGrail repair kit <i>and</i> the ride food. The standing rule below is the default until you say otherwise.</span></li>
+<li><input type="checkbox" data-k="open-11"><span><b>11 · Race-morning breakfast specified</b> — timing is set (~04:45–05:15); write the contents into bike_fuelling_card.md.</span></li>
+<li><input type="checkbox" data-k="open-12"><span><b>12 · Medical insurance</b> — <b>no insurance, no start.</b> Private or the Klassmark policy. Verify yours covers the event before Saturday; this is the one item that stops you at check-in.</span></li>
+</ul>
+<h3 class="task-group">At check-in · confirm with the organiser</h3><ul class="check">
+<li><input type="checkbox" data-k="open-7"><span><b>7 · Bag logistics — reopened</b> — briefing: drop 13:00–17:00, collect at GEiEG. Timetable: drop 12:00–16:00, collect bags at Plaça dels Jurats. <b>Use the 13:00–16:00 overlap for the drop</b>; confirm the collection point at check-in on Friday.</span></li>
+<li><input type="checkbox" data-k="open-8"><span><b>8 · Course drink mix identified</b> — "Maurten drink" at the stations is likely pre-mixed DM160; confirm product + concentration (briefing or info@sgrail100.com). It is the emergency fallback's carb math.</span></li>
+<li><input type="checkbox" data-k="open-9"><span><b>9 · Jugs vs handed bottles</b> at km 34.2 / 68 — determines refill speed and whether the mandatory water stops are rolling or standing.</span></li>
+<li><input type="checkbox" data-k="open-17"><span><b>17 · Which cut-off binds — 16:59 or 17:59</b> — the timetable lists a <b>16:59 trail limit</b> alongside the <b>17:59</b> overall. Nothing in the file resolves which is enforced at the finish. The gap is the whole margin: scenario C has <b>23 minutes</b> against 16:59 and 1h23 against 17:59. <b>Ask at check-in, Friday 17:30–19:30</b>, and correct the strip, the clock row and the pacing bar in one pass. Until then every plan in this file assumes 16:59.</span></li>
+</ul>
   <details class="closedlist"><summary>Closed — 2 items</summary><ul class="cl"><li><b>1</b> Wetsuit — expected; the briefing says where to put it on</li><li><b>2</b> Rental spec — 45 mm on tubes, GRX 1×12 40T · 10–45, two cages, flat pedals</li></ul></details>
   </div>
   </div></div>
@@ -1380,7 +1389,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 document.querySelectorAll('nav a[href^="#"]').forEach(function(a){
   a.addEventListener('click', function(e){
     var t = document.getElementById(this.getAttribute('href').slice(1));
-    if(t){ e.preventDefault(); if(t.tagName==='DETAILS') t.open=true; t.scrollIntoView({behavior:'smooth', block:'start'}); }
+    if(t){ e.preventDefault(); if(t.tagName==='DETAILS') t.open=true; t.scrollIntoView({behavior:motionBehavior(), block:'start'}); }
   });
 });
 
@@ -1495,10 +1504,21 @@ document.querySelectorAll('nav a[href^="#"]').forEach(function(a){
   if(dirty) save();
 })();
 
+function motionBehavior(){return window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';}
+function updatePlanIndicators(){
+ var saved=document.getElementById('race-plan-status').dataset.savedPlan;
+ var view=document.body.dataset.plan||'both';
+ var label='Race plan: '+(saved?saved.toUpperCase():'undecided')+' · viewing '+(view==='both'?'both plans':view.toUpperCase());
+ document.querySelectorAll('.plan-indicator').forEach(function(el){el.textContent=label;});
+}
 // One view selection drives both controls, chart lanes, loadouts and comparison.
 (function(){
   var buttons=document.querySelectorAll('.abtog button');
   function select(mode){
+    var course=document.getElementById('course');
+    var bikeActive=course.dataset.phase==='bike';
+    var bikePanels=Array.from(document.querySelectorAll('details[data-plan]'));
+    var bikeWasOpen=bikePanels.some(function(p){return p.open&&!p.hidden;});
     document.body.dataset.plan=mode;
     document.querySelector('.phasestrip .p-bike').setAttribute('href',mode==='b'?'#ph-bike-b':'#ph-bike');
     buttons.forEach(function(b){ var on=b.dataset.m===mode; b.classList.toggle('on',on); b.setAttribute('aria-pressed',String(on)); });
@@ -1507,7 +1527,9 @@ document.querySelectorAll('nav a[href^="#"]').forEach(function(a){
     document.querySelectorAll('[data-plan]').forEach(function(panel){
       if(panel===document.body)return;
       panel.hidden=mode!=='both' && panel.dataset.plan!==mode;
+      if(bikeActive||bikeWasOpen)panel.open=!panel.hidden;
     });
+    updatePlanIndicators();
   }
   buttons.forEach(function(b){ b.addEventListener('click',function(){select(b.dataset.m);}); });
   select('both');
@@ -1548,24 +1570,26 @@ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded
     t.addEventListener('click',function(e){
       e.preventDefault();
       var id=t.getAttribute('href').slice(1);
-      var want=blocks.filter(function(d){ return d.id===id || (id==='ph-bike' && d.id==='ph-bike-b'); });
+      var bike=id==='ph-bike'||id==='ph-bike-b';
+      document.getElementById('course').dataset.phase=bike?'bike':id;
+      var want=blocks.filter(function(d){ return !d.hidden && (bike ? d.id==='ph-bike'||d.id==='ph-bike-b' : d.id===id); });
       if(!want.length) return;
       blocks.forEach(function(d){ d.open = want.indexOf(d)>=0; });
       clearTabs(); t.setAttribute('aria-current','true');
       document.getElementById('course').classList.add('tabbed');
-      strip.scrollIntoView({behavior:'smooth', block:'start'});
+      strip.scrollIntoView({behavior:motionBehavior(), block:'start'});
     });
   });
   document.querySelectorAll('#course .phasectl button').forEach(function(b){
     b.addEventListener('click',function(){
       var on=b.dataset.ph==='open';
       blocks.forEach(function(d){ d.open=on; });
-      clearTabs(); document.getElementById('course').classList.remove('tabbed');
+      clearTabs(); document.getElementById('course').dataset.phase=''; document.getElementById('course').classList.remove('tabbed');
     });
   });
   // folding the shown phase by hand leaves tab mode, so nothing can vanish
   blocks.forEach(function(d){ d.addEventListener('toggle',function(){
-    if(!blocks.some(function(x){ return x.open; })){ clearTabs(); document.getElementById('course').classList.remove('tabbed'); }
+    if(!blocks.some(function(x){ return x.open; })){ clearTabs(); document.getElementById('course').dataset.phase=''; document.getElementById('course').classList.remove('tabbed'); }
   }); });
 })();
 
@@ -1603,7 +1627,7 @@ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded
     document.getElementById('prep-done').textContent=done+' of '+checks.length+' completed';
     document.getElementById('prep-progress').value=done;
     document.getElementById('prep-progress').max=checks.length;
-    var remaining=checks.filter(function(cb){return /^(3|5|14) ·/.test(cb.getAttribute('aria-label'))&&!cb.checked;}).length;
+    var remaining=checks.filter(function(cb){return ['open-3','open-5','open-14','open-16'].includes(cb.dataset.k)&&!cb.checked;}).length;
     document.getElementById('prep-training').textContent=remaining?remaining+' priority rehearsals to close.':'Priority rehearsals completed.';
     var insurance=checks.find(function(cb){return /^12 ·/.test(cb.getAttribute('aria-label'));});
     var alert=document.getElementById('insurance-alert');
@@ -1619,7 +1643,7 @@ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded
  function valid(v){return v==='a'||v==='b'?v:'';}
  try{saved=valid(localStorage.getItem('sgrail26.racePlan'));}catch(e){}
  choice.value=saved;
- function render(persisted){status.dataset.savedPlan=saved;status.textContent=(saved?'Saved race plan: '+(saved==='a'?'A · Bottle':'B · Pocket')+'.':'Undecided.')+(persisted?' Stored on this browser.':'')+' Chart comparison stays independent.';document.getElementById('view-race-plan').disabled=!saved;}
+ function render(persisted){status.dataset.savedPlan=saved;updatePlanIndicators();status.textContent=(saved?'Saved race plan: '+(saved==='a'?'A · Bottle':'B · Pocket')+'.':'Undecided.')+(persisted?' Stored on this browser.':'')+' Chart comparison stays independent.';document.getElementById('view-race-plan').disabled=!saved;}
  render(false);
  document.getElementById('save-race-plan').addEventListener('click',function(){saved=valid(choice.value);try{localStorage.setItem('sgrail26.racePlan',saved);render(true);}catch(e){render(false);status.textContent+=' Storage unavailable; this decision lasts only for this page session.';}});
  document.getElementById('view-race-plan').addEventListener('click',function(){if(!saved)return;document.querySelector('.abtog button[data-m="'+saved+'"]').click();var panel=document.getElementById(saved==='a'?'ph-bike':'ph-bike-b');panel.open=true;window.location.hash=panel.id;});
@@ -1673,12 +1697,12 @@ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded
   }
   function goTo(i){
     i=Math.max(0,Math.min(pages.length-1,i));
-    if(i===0){window.scrollTo({top:0,behavior:'smooth'});return;}
-    var el=pairs[i-1]&&pairs[i-1].el; if(el) el.scrollIntoView({block:'start',behavior:'smooth'});
+    if(i===0){window.scrollTo({top:0,behavior:motionBehavior()});return;}
+    var el=pairs[i-1]&&pairs[i-1].el; if(el) el.scrollIntoView({block:'start',behavior:motionBehavior()});
   }
   function centre(i,instant){
     var left=i*pager.clientWidth; if(Math.abs(pager.scrollLeft-left)<2) return;
-    byUs=Date.now()+700; pager.scrollTo({left:left,behavior:instant?'auto':'smooth'});
+    byUs=Date.now()+700; pager.scrollTo({left:left,behavior:instant?'auto':motionBehavior()});
   }
   function dockTo(i,instant){ idx=i; prevB.disabled=i===0; nextB.disabled=i===pages.length-1; centre(i,instant); }
   var cur=-1;
@@ -1696,10 +1720,11 @@ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded
     clearTimeout(settling);
     settling=setTimeout(function(){ if(Date.now()<byUs) return; var i=Math.round(pager.scrollLeft/pager.clientWidth); if(i!==idx) goTo(i); },110);
   },{passive:true});
-  function setOpen(open){ document.body.classList.toggle('sheet-open',open); sheet.hidden=!open; pager.setAttribute('aria-expanded',open?'true':'false'); if(open) syncTools(); }
+  function setOpen(open){ document.body.classList.toggle('sheet-open',open); sheet.hidden=!open; dock.querySelector('.menu').setAttribute('aria-expanded',open?'true':'false'); if(open) syncTools(); }
   pager.addEventListener('click',function(e){ var a=e.target.closest('a'); if(!a) return; e.preventDefault(); e.stopPropagation(); var i=pages.indexOf(a); if(i===idx) setOpen(!document.body.classList.contains('sheet-open')); else goTo(i); });
+  dock.querySelector('.menu').addEventListener('click',function(){setOpen(!document.body.classList.contains('sheet-open'));});
   prevB.addEventListener('click',function(){goTo(idx-1);}); nextB.addEventListener('click',function(){goTo(idx+1);});
-  list.addEventListener('click',function(e){ var a=e.target.closest('a'); if(!a) return; e.preventDefault(); setOpen(false); var el=document.getElementById(a.hash.slice(1)); if(el) el.scrollIntoView({block:'start',behavior:'smooth'}); });
+  list.addEventListener('click',function(e){ var a=e.target.closest('a'); if(!a) return; e.preventDefault(); setOpen(false); var el=document.getElementById(a.hash.slice(1)); if(el) el.scrollIntoView({block:'start',behavior:motionBehavior()}); });
   document.addEventListener('click',function(e){ if(document.body.classList.contains('sheet-open')&&!sheet.contains(e.target)&&!dock.contains(e.target)) setOpen(false); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&document.body.classList.contains('sheet-open')) setOpen(false); });
   // tools mirror the sidebar buttons
