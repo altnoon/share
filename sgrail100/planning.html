@@ -201,8 +201,6 @@ footer p{margin-bottom:6px}
 #fuel .fkv .k{color:var(--muted)}
 #fuel .fkv .v{font-weight:600;text-align:right}
 #fuel .fkv2{display:grid;grid-template-columns:1fr 1fr;column-gap:36px;align-items:start}
-#fuel .ledger-head{justify-content:space-between;align-items:baseline}#fuel .ledger-head .pd{margin-left:auto;text-align:right;max-width:60%}
-@media (max-width:640px){#fuel .ledger-head .pd{margin-left:0;text-align:left;max-width:none}}
 @media (max-width:640px){#fuel .fkv2{grid-template-columns:1fr}#fuel .fkv2 ul:first-child li:last-child{border-bottom:1px solid var(--line-soft)}}
 #fuel .rules{list-style:none}
 #fuel .rules li{padding:9px 0 9px 26px;border-bottom:1px solid var(--line-soft);position:relative;font-size:14px}
@@ -1136,12 +1134,12 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
   <div class="sec-label" style="margin-top:26px">Day ledgers</div>
   <div class="two" style="grid-template-columns:1fr">
     <div class="card rail-ink" style="margin-bottom:0">
-      <div class="plan-head ledger-head" style="margin:0 0 4px"><span class="pn">Day ledgers</span><span class="pd">the deficit is glycogen + fat · the carb number is a gut rate, not a balance target</span></div>
+      <div class="plan-head" style="margin:0 0 4px"><span class="pn">Day ledgers</span><span class="pd">totals · the legs live in the feed clock</span></div>
       <div class="fkv2"><ul class="fkv">
         <li><span class="k">Carbs, bike + run</span><span class="v">~230–260 g</span></li>
         <li><span class="k">Energy in</span><span class="v">~950–1,050 kcal <small>carbs × 4</small></span></li>
         <li><span class="k">Energy out, estimate</span><span class="v">~3,800 kcal <small>swim ~300 · bike ~2,700 @ ~175 W · run ~800 · 74 kg</small></span></li>
-        <li><span class="k">Deficit</span><span class="v">~2,800 kcal</span></li>
+        <li><span class="k">Deficit</span><span class="v">~2,800 kcal <small>glycogen + fat — the carb number is a gut rate, not a balance target</small></span></li>
       </ul><ul class="fkv">
         <li><span class="k">Fluid</span><span class="v">1.5 L on board · ~650 ml/h</span></li>
         <li><span class="k">Sodium</span><span class="v">bike ~1,000 mg/h · run 800</span></li>
