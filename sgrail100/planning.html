@@ -283,6 +283,21 @@ footer p{margin-bottom:6px}
 #course .prof-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;border:1px solid var(--line);border-radius:8px;background:var(--card)}
 #course .prof-scroll svg{display:block;min-width:720px;width:100%;height:auto}
 #course .legrow{display:grid;gap:8px;margin:14px 0}
+#course .legs3{display:grid;gap:10px;margin:14px 0 18px}
+#course .lg{border:1px solid var(--line);border-left:4px solid var(--line);border-radius:6px;background:var(--card);padding:12px 16px 12px 16px}
+#course .lg.sea{border-left-color:var(--sea)}#course .lg.track{border-left-color:var(--track)}#course .lg.trail{border-left-color:var(--trail)}
+#course .lg .lh{display:flex;align-items:baseline;gap:8px 14px;flex-wrap:wrap;margin-bottom:6px}
+#course .lg .lh b{font-family:var(--disp);font-size:21px;letter-spacing:-.01em}
+#course .lg.sea .lh b{color:var(--sea)}#course .lg.track .lh b{color:var(--track)}#course .lg.trail .lh b{color:var(--trail)}
+#course .lg .chips{display:flex;flex-wrap:wrap;gap:6px}
+#course .lg .chips i{font-style:normal;font-family:var(--mono);font-size:11.5px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:2px 7px;white-space:nowrap}
+#course .lg p{margin:4px 0;font-size:14px;line-height:1.5}
+#course .lg .fact{color:var(--muted)}
+#course .lg .do{font-weight:700;color:var(--ink);font-size:14.5px}
+#course .lg .warn{color:var(--flag);font-weight:600}
+#course .lg .sec2{display:grid;grid-template-columns:1fr 1fr;gap:6px 22px;margin:8px 0 6px}
+#course .lg .sec2 em{font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--track)}
+@media (max-width:640px){#course .lg .sec2{grid-template-columns:1fr;gap:12px}}
 
 #pacing .cutoff{margin:14px 0 10px}
 #pacing .chead{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:6px}
@@ -813,19 +828,19 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 <figcaption>  <div class="mlegend" aria-label="Course chart key"><b class="chart-key-title">Chart key</b><span><i class="md must"></i>planned refill · don’t skip</span><span><i class="md rec"></i>recommended</span><span><i class="md opt"></i>optional</span><span><i class="md climb"></i>sector 1 · technical</span></div></figcaption>
   </figure>
 
-  <div class="sectors">
-    <div class="sec s1"><b>Sector 1 · Cap de Creus</b><span>km 0–25 · ~67% of the climbing · technical, hike-a-bike</span><i>Low-Z3 on the climbs. Conservative lines. Walk without ego.</i></div>
-    <div class="sec s2"><b>Sector 2 · Empordà plain</b><span>km 25–86 · fast, exposed, tramuntana wind</span><i>Drafting is legal. Find a group and use it.</i><u>Extreme caution on the road descent from the El Pení military base to Mas Fumats, near Roses — the briefing singles it out.</u></div>
-    <div class="sec s3"><b>Run · Les Gavarres</b><span>250 m up in 4.5 km · 3 km down · a 50 m kicker · 20 m sting 1 km out</span><i>Hike the climb, then commit — but the descent is not free.</i></div>
-  </div>
-
-
-  <p class="note" style="margin-top:10px"><b>Every point stocks water, Maurten and food.</b> The Maurten is Drink Mix hydrogel — low-sodium, so it changes nothing in the capsule plan — and it is the legal in-zone emergency fallback. Budget ~2 min across both bike stops.</p>
-
-  <div class="legrow rm-hide">
-    <div class="leg sea"><b>Swim · 1.5 km sea — composure, not speed</b>Rectangle anti-clockwise off Platja Gran · ~18.5 °C → wetsuit on · cutoff 09:59 = no risk at 28–33. Settle the first 300 m, sight every 6–8 strokes on the turns; cold-shock composure is the only job.</div>
-    <div class="leg track"><b>Bike · 86.4 km · +900 m briefing figure · disputed · 93% unpaved</b>Sector 1 is the only place the race can end — handling, not fitness; fuel = bottle sips only. Sector 2 is where time comes back: drafting is legal, the opposite of IM habits — eat and drink on schedule. A river crossing was reported in 2024.</div>
-    <div class="leg trail"><b>Run · 10.5 km · +320 m — cathedral finish</b>Hike the steep pitches, regroup at the castle aid at km 4.2, then commit the 3 km down to Font del Ferro. It is <span style="font-weight:700">not</span> a clean descent from there: a 50 m climb follows, and a 20 m sting about 1 km out. The finish is up 20 iron steps. Vivobarefoots stay on from the bike; dry Injinji socks come from the T2 bag.</div>
+  <div class="legs3">
+    <div class="lg sea"><div class="lh"><b>Swim</b><span class="chips"><i>1.5 km</i><i>28–33′</i><i>cut-off 09:59</i></span></div>
+      <p class="fact">Rectangle, anti-clockwise, off Platja Gran · ~18.5 °C · wetsuit on.</p>
+      <p class="do">Settle the first 300 m. Sight every 6–8 strokes on the turns. Composure, not speed.</p></div>
+    <div class="lg track"><div class="lh"><b>Bike</b><span class="chips"><i>86.4 km</i><i>~1,000 m · disputed</i><i>93% unpaved</i><i>4:00–4:45</i><i>cut-off 15:49</i></span></div>
+      <div class="sec2">
+        <div><em>Sector 1 · Cap de Creus</em><p class="fact">km 0–25 · ~67% of the climbing · technical, hike-a-bike</p><p class="do">Low-Z3. Conservative lines. Walk without ego. Bottle sips only — this is the only place the race can end.</p></div>
+        <div><em>Sector 2 · Empordà plain</em><p class="fact">km 25–86 · fast, exposed, tramuntana wind</p><p class="do">Find a group — drafting is legal. Eat and drink on schedule; this is where time comes back.</p><p class="warn">El Pení → Mas Fumats road descent, near Roses: extreme caution.</p></div>
+      </div>
+      <p class="fact">Every station: water · Maurten (low-sodium, changes nothing in the capsule plan) · food. Budget ~2 min across both bike stops.</p></div>
+    <div class="lg trail"><div class="lh"><b>Run</b><span class="chips"><i>10.5 km</i><i>+320 m</i><i>1:10–1:20</i><i>cut-off 16:59?</i></span></div>
+      <p class="fact">250 m up in 4.5 km → 3 km down to Font del Ferro → 50 m kicker → 20 m sting 1 km out → 20 iron steps.</p>
+      <p class="do">Hike the climb. Regroup at the castle aid, km 4.2. Commit the descent — it is not free.</p></div>
   </div>
 
   <div class="plan-controls"><span>View fuel plan</span><div class="abtog" role="group" aria-label="Fuel plan view"><button type="button" data-m="a" aria-pressed="false">A · Bottle</button><button type="button" data-m="b" aria-pressed="false">B · Pocket</button><button type="button" class="on" data-m="both" aria-pressed="true">Both</button></div></div>
