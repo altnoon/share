@@ -327,6 +327,30 @@ h3{font-size:1rem;font-weight:600;letter-spacing:-.01em;margin:32px 0 10px}
 .scr .bars div i{display:block;height:5px;border-radius:3px;background:var(--hair);position:relative;overflow:hidden}
 .scr .bars div i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--w);background:var(--hair-2);border-radius:3px}
 .scr .bars div.on i::after{background:var(--lime)}
+.scr .hero{background:var(--lime);border-radius:14px;padding:9px 12px 8px;color:var(--ink);display:flex;flex-direction:column;gap:3px}
+.scr .hero .lab{color:rgba(8,10,12,.62)}
+.scr .hero .big{font-size:2.35rem}
+.scr .hero .big small{color:var(--ink);background:rgba(8,10,12,.1);border-radius:6px;padding:2px 5px;font-size:.7rem;vertical-align:middle}
+.scr .hero .dl{color:var(--ink)}
+.scr .hero .spark{height:16px}
+.scr .hero .spark i{background:rgba(8,10,12,.14)}
+.scr .hero .spark i.on{background:var(--ink)}
+.scr .hero .bars div{color:rgba(8,10,12,.62)}
+.scr .hero .bars div i{background:rgba(8,10,12,.1)}
+.scr .hero .bars div i::after{background:rgba(8,10,12,.32)}
+.scr .hero .bars div.on i::after{background:var(--ink)}
+.scr .sec{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dimmer);margin-bottom:-3px}
+.scr .sec b{color:var(--ink);font-weight:600}
+.scr .sec span{letter-spacing:.06em;text-transform:none}
+.scr .day{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.scr .day div{background:var(--card);border:1px solid var(--hair);border-radius:10px;padding:6px 8px;font-family:var(--mono);font-size:.58rem;letter-spacing:.04em;color:var(--dimmer);line-height:1.4}
+.scr .day div b{display:block;color:var(--ink);font-weight:600;font-size:.7rem;letter-spacing:-.01em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.scr .agora{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--hair);border-radius:10px;padding:6px 9px;font-size:.64rem;color:var(--dim);line-height:1.35}
+.scr .agora b{color:var(--ink)}
+.scr .ava{display:flex;flex:0 0 auto}
+.scr .ava i{width:20px;height:20px;border-radius:50%;background:var(--hair-2);border:2px solid var(--card);margin-left:-7px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-style:normal;font-size:.5rem;font-weight:600;color:var(--ink);letter-spacing:0}
+.scr .ava i:first-child{margin-left:0}
+.scr .ava i.on{background:var(--lime)}
 .scr .hits{display:flex;gap:3px;align-items:center}
 .scr .hits i{flex:1;height:7px;border-radius:2px;background:var(--lime)}
 .scr .hits i.late{background:var(--hair-2)}
@@ -1098,20 +1122,25 @@ body{overscroll-behavior-y:none}
     <div class="phones">
       <div>
         <div class="phone"><div class="scr">
-          <div class="sb"><span>19:42</span><span>Thu 12 Sep <i></i></span></div>
+          <div class="sb"><span>07:48</span><span>Tue 10 Sep <i></i></span></div>
           <div class="top"><b>AGON</b><span>Madrid</span></div>
-          <div class="t">Your number · Session 14</div>
-          <div class="big">82<small>+3</small></div>
-          <div><div class="dl">Δ 19%</div><div class="lab">What your head gave up</div></div>
-          <div class="bars">
-            <div><span>Body</span><i style="--w:44%"></i><b>−8.7%</b></div>
-            <div class="on"><span>Head</span><i style="--w:96%"></i><b>−19.3%</b></div>
+          <div class="hero">
+            <div class="lab">Your number · Session 14</div>
+            <div class="big">82<small>+3</small></div>
+            <div class="row2" style="color:rgba(8,10,12,.62)"><span class="dl" style="font-size:.95rem">Δ 19%</span><span>Open 35+ · 87th pct</span></div>
+            <div class="bars">
+              <div><span>Body</span><i style="--w:44%"></i><b>−8.7%</b></div>
+              <div class="on"><span>Head</span><i style="--w:96%"></i><b>−19.3%</b></div>
+            </div>
+            <div class="spark"><i style="height:40%"></i><i style="height:52%"></i><i style="height:46%"></i><i style="height:64%"></i><i style="height:70%"></i><i class="on" style="height:82%"></i></div>
           </div>
-          <div class="spark"><i style="height:40%"></i><i style="height:52%"></i><i style="height:46%"></i><i style="height:64%"></i><i style="height:70%"></i><i class="on" style="height:82%"></i></div>
-          <div class="sparklab"><span>S9</span><span>S10</span><span>S11</span><span>S12</span><span>S13</span><span>S14</span></div>
-          <div class="row2"><span>Open 35+</span><b>87th percentile</b></div>
-          <div class="row2"><span>Best</span><b>84 · Mar</b></div>
-          <div class="card">Next test <b>Thu 19:00</b><br>Station rules change at 3.</div>
+          <div class="sec"><b>Today</b><span>Tue · test in 2 days</span></div>
+          <div class="day">
+            <div>Practice tonight<b>Rule 2 · 18 min</b></div>
+            <div>Next test<b>Thu 19:00</b></div>
+          </div>
+          <div class="sec"><b>Agora</b><span>3 tested yesterday</span></div>
+          <div class="agora"><div class="ava"><i class="on">M</i><i>J</i><i>A</i></div><div><b>Marta</b> moved Δ 23 → 21. Two points off you now, and she retests Thursday.</div></div>
           <div class="nav"><b>Number</b><span>Practice</span><span>Season</span><span>Agora</span></div>
         </div></div>
         <p class="phone-cap"><b>Your number</b>The first screen, and the whole app on one page</p>
@@ -1167,15 +1196,15 @@ body{overscroll-behavior-y:none}
           <div class="row2"><span>Test · Δ 23%</span><b>Retest · 24 Oct</b></div>
           <div class="cmp">
             <div><div class="lab">You</div><div class="dl">Δ 19%</div></div>
-            <div><div class="lab">Marta</div><div class="dl" style="color:var(--dim)">Δ 23%</div></div>
+            <div><div class="lab">Marta</div><div class="dl" style="color:var(--dim)">Δ 21%</div></div>
           </div>
           <div class="rank">
             <span>1</span><span>Jorge · Open 35+</span><b>Δ 14%</b>
             <span>2</span><span>Ana</span><b>Δ 17%</b>
             <span class="me">3</span><span class="me">You</span><b class="me">Δ 19%</b>
-            <span>4</span><span>Marta</span><b>Δ 23%</b>
+            <span>4</span><span>Marta</span><b>Δ 21%</b>
           </div>
-          <div class="card">Four points ahead since March. <b>She retests Thursday.</b></div>
+          <div class="card">Two points ahead, and closing. <b>She retests Thursday.</b></div>
           <div class="btn">Bring someone to compare</div>
           <div class="nav"><span>Number</span><span>Practice</span><b>Season</b><span>Agora</span></div>
         </div></div>
