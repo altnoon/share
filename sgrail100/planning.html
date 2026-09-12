@@ -440,6 +440,7 @@ h1{font-size:clamp(54px,8vw,92px);letter-spacing:-.035em;line-height:1.05;margin
 .metric>span{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
 .metric strong{display:block;font-family:var(--disp);font-size:48px;line-height:1.2;letter-spacing:-.03em;margin:6px 0}
 .metric small{font-size:22px;font-weight:500}.metric p{color:var(--muted);font-size:14px;margin:0}
+.metric .wx{margin-top:6px;padding-top:6px;border-top:1px dashed var(--line-soft);color:var(--ink);font-size:13.5px;line-height:1.45}
 .race-facts{display:flex;gap:12px 24px;flex-wrap:wrap;font-size:13px;color:var(--muted);padding:16px 0;border-top:1px solid var(--line)}
 .race-facts .count{display:inline-flex;margin:0;gap:0}
 .race-facts i{font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-right:7px;opacity:.85}
@@ -758,9 +759,9 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
     </svg>
   </div>
   <div class="race-metrics" aria-label="Race distances">
-    <div class="metric sea"><span>01 / Swim</span><strong>1.5 <small>km</small></strong><p>Open sea · Cadaqués</p></div>
-    <div class="metric track"><span>02 / Gravel</span><strong>86.4 <small>km</small></strong><p>Elevation provisional · 93% unpaved</p></div>
-    <div class="metric trail"><span>03 / Trail</span><strong>10.5 <small>km</small></strong><p>+320 m · Girona finish</p></div>
+    <div class="metric sea"><span>01 / Swim</span><strong>1.5 <small>km</small></strong><p>Open sea · Cadaqués</p><p class="wx">Sea ~18.5 °C (Oct range 16–21) · air ~14 °C at 09:00 · wetsuit on</p></div>
+    <div class="metric track"><span>02 / Gravel</span><strong>86.4 <small>km</small></strong><p>Elevation provisional · 93% unpaved</p><p class="wx">14 → 20 °C through the morning · wind from the N (tramuntana): exposed on the Cap de Creus headland and the open Empordà plain, km 25–86</p></div>
+    <div class="metric trail"><span>03 / Trail</span><strong>10.5 <small>km</small></strong><p>+320 m · Girona finish</p><p class="wx">~20–21 °C in Girona mid-afternoon · ~18% chance of a wet day in October</p></div>
   </div>
   <div class="race-facts"><span><i>Cut-off</i><b style="color:var(--flag)">16:59?</b> trail · <b>17:59</b> overall</span><span><i>Navigation</i>gravel GPS only · trail marked</span><span><i>Drafting</i>legal on the gravel</span><span class="count" id="count"><span><i>Countdown</i><b id="cd-d">—</b> days to go</span><span hidden><span id="cd-h">—</span><span id="cd-w">—</span></span></span></div>
   <div class="legend">
@@ -1305,6 +1306,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 
 <footer><details class="prov"><summary>Sources &amp; verification</summary>
   <p><b>Sources.</b> Race facts: sgrail100.com course/timetable/rules (re-verified 23 Aug 2026 — bus 06:30, swim cutoff 09:59, run limit 2h00, T2 Torre Desvern all confirmed from the current course page) + 2024 race briefing + 2024 finisher report (river crossing, gearing). Fuelling & salt: <span class="num">bike_fuelling_card.md</span> incl. the SGrail aid exception — revised to a <b>two-bottle</b> setup 25 Aug 2026 (Des); station stock + Plan A/B added and re-expressed as the feed-clock card 24 Aug 2026 (stations & products verified vs sgrail100.com/course). Course profile from the organiser's embedded RideWithGPS routes (GRAVEL 48660982 · TRAIL 48576854, 2025-edition course); official 2026 GPX supersedes on Friday. Plan of record & scenarios: SGrail block planning sessions (Zwift-first structure, Crux rental, Oct 14 skills ride, A/B/C bands). Splits within scenarios are working allocations, not predictions.</p>
+  <p><b>Conditions</b> are October climatology, not a forecast — Cadaqués sea 18.5 °C Oct mean (16–21) and 14.7/20.2 °C air low/high (seatemperature.org, climate-data.org); Girona ~11/21 °C around 18 Oct, wind predominantly N, ~18% wet-day chance (weatherspark.com). Replace with the real forecast on Fri 16.</p>
   <p><b>Still unverified:</b> aerobar rule (moot on the rental) · 2024/25 finisher-time distributions (results platform blocks fetching — target bands are inferred from the 2022 field) · course drink-mix product (DM160?) · jugs vs handed bottles at the bike stations.</p>
   <p>Files beat memory. Update this dossier after the final long rides and again when the GPX lands.</p>
 </details></footer>
