@@ -321,6 +321,7 @@ footer p{margin-bottom:6px}
 .statusbar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;font-size:12.5px;color:var(--muted);padding:8px 0 0;border-top:1px solid var(--line-soft);margin-top:8px}
 .statusbar a{color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1px solid var(--line)}
 .statusbar b{color:var(--flag)}
+#fuel .fkv .v small{display:block;font-weight:400;font-size:12px;color:var(--muted);margin-top:2px}
 #risks .risklist{border:1px solid var(--line);border-radius:8px;background:var(--card);overflow:hidden}
 #risks .risk{border:0;border-radius:0;margin:0;background:transparent;border-top:1px solid var(--line)}
 #risks .risk:first-child{border-top:0}
@@ -1111,10 +1112,13 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
       <div class="plan-head" style="margin:0 0 4px"><span class="pn">Day ledgers</span><span class="pd">totals · the legs live in the feed clock</span></div>
       <ul class="fkv">
         <li><span class="k">Carbs, bike + run</span><span class="v">~230–260 g</span></li>
+        <li><span class="k">Energy in</span><span class="v">~950–1,050 kcal <small>carbs × 4</small></span></li>
+        <li><span class="k">Energy out, estimate</span><span class="v">~3,800 kcal <small>swim ~300 · bike ~2,700 @ ~175 W · run ~800 · 74 kg</small></span></li>
+        <li><span class="k">Deficit</span><span class="v">~2,800 kcal <small>glycogen + fat — the carb number is a gut rate, not a balance target</small></span></li>
         <li><span class="k">Fluid</span><span class="v">1.5 L on board · ~650 ml/h</span></li>
         <li><span class="k">Sodium</span><span class="v">bike ~1,000 mg/h · run 800</span></li>
         <li><span class="k">Caffeine</span><span class="v">~180 mg · 280 with run swap</span></li>
-        <li><span class="k">Ceiling</span><span class="v">222–444 mg</span></li>
+        <li><span class="k">Caffeine ceiling</span><span class="v">222–444 mg <small>3–6 mg/kg</small></span></li>
       </ul>
     </div>
   </div>
