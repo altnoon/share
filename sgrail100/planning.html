@@ -321,6 +321,20 @@ footer p{margin-bottom:6px}
 .statusbar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;font-size:12.5px;color:var(--muted);padding:8px 0 0;border-top:1px solid var(--line-soft);margin-top:8px}
 .statusbar a{color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1px solid var(--line)}
 .statusbar b{color:var(--flag)}
+#risks .risklist{border:1px solid var(--line);border-radius:8px;background:var(--card);overflow:hidden}
+#risks .risk{border:0;border-radius:0;margin:0;background:transparent;border-top:1px solid var(--line)}
+#risks .risk:first-child{border-top:0}
+#risks .risk>summary{display:grid;grid-template-columns:180px 1fr 20px;gap:6px 16px;align-items:baseline;padding:13px 16px;cursor:pointer;list-style:none;font-family:var(--body);font-weight:400;font-size:14.5px;text-transform:none;letter-spacing:0;position:relative}
+#risks .risk>summary::-webkit-details-marker{display:none}
+#risks .risk>summary b{font-weight:700;color:var(--ink)}
+#risks .risk>summary .rmit{color:var(--ink)}
+#risks .risk>summary::after{content:"";width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);justify-self:end;margin-top:-4px;transition:transform .15s}
+#risks .risk[open]>summary::after{transform:rotate(-135deg);margin-top:2px}
+#risks .risk>summary:hover{background:var(--paper)}
+#risks .rbody{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;padding:2px 16px 16px 16px;border-top:1px dashed var(--line)}
+#risks .rbody p{margin:10px 0 0;font-size:14px;line-height:1.55;color:var(--ink)}
+#risks .rbody em{display:block;font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+@media (max-width:640px){#risks .risk>summary{grid-template-columns:1fr 20px}#risks .risk>summary .rmit{grid-column:1;color:var(--muted);font-size:13.5px}#risks .risk>summary::after{grid-column:2;grid-row:1}#risks .rbody{grid-template-columns:1fr}}
 body.race #pacing,body.race #kit,body.race #week,body.race #risks,body.race #open,body.race footer{display:none}
 body.race .rm-hide{display:none}
 .rmbtn{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);color:var(--muted);cursor:pointer;white-space:nowrap}
@@ -1177,6 +1191,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
     </ul>
   </div>
 
+  <div class="two">
   <div class="card">
     <h3>Repair — carried on the bike</h3>
     <ul class="check">
@@ -1196,6 +1211,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
       <li><input type="checkbox" data-k="kit-15"><span>Phone backup with the same GPX, offline map area downloaded, battery topped</span></li>
       <li><input type="checkbox" data-k="kit-16"><span>Study the track Fri/Sat — know the first 25 km turns and the two aid locations by feel</span></li>
     </ul>
+  </div>
   </div>
 
   <p class="small" style="margin:2px 0 10px"><b>Base, gun to tape: Roka tri suit.</b> The swim adds wetsuit + goggles ×2 + anti-chafe — all stay behind in T1. Everything else below, read head to toe.</p>
@@ -1254,13 +1270,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
     <tr role="row" class="hl"><td role="cell" data-label="Day" class="m">Sat 17</td><td role="cell" data-label="Session">15' spin</td><td role="cell" data-label="Logistics"><b>13:00–16:00 at GEiEG de Sant Ponç, Girona — planning overlap; confirm the black-bag window at check-in.</b> Drop the bike for transport AND the black T2 bag. Canyon mech point there: have the rental checked. Gravel bib goes under the saddle today · race pack + wristbands · carb load · early night</td></tr>
     <tr role="row" class="hl"><td role="cell" data-label="Day" class="m">Sun 18</td><td role="cell" data-label="Session"><b>RACE — 09:00</b></td><td role="cell" data-label="Logistics">Buses 06:15–06:45, La Copa · take an early departure</td></tr>
   </table></div>
-  <details>
-    <summary>The 8 weeks before race week</summary>
-    <div class="inner">
-      <p>Current block (plan of record): <b>Zwift-first</b> — MyProCoach weekday sessions carry intensity, Saturday long rides carry the aerobic engine, ERG files synced TP→Zwift. Outdoor riding is opportunistic; Wed 14 Oct is the only guaranteed terrain session, which is why every technical sector on race day gets ridden conservatively.</p>
-      <p class="small">Milestones: MyProCoach 36-wk plan starts <span class="num">6 Sep</span> (the IM Lanzarote '27 season opener — SGrail swaps layer on top) · peak Saturday long rides late Sep · deload ~28 Sep–4 Oct · sharpen 5–11 Oct · race week. Strength capped ≤1.5 h/wk throughout — the August strength spike is the standing trap.</p>
-    </div>
-  </details>
+  
 </section>
 
 <p class="small" style="margin-top:16px"><b>Official event program, Fri 16 → Sun 18.</b> Check-in, warm-ups, the bike and bag drop window, buses and collection times — <button type="button" class="progbtn" data-prog>Open the program</button></p>
@@ -1268,16 +1278,15 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
   <!-- ============ RISKS ============ -->
 <section id="risks">
   <h2>Risks & mitigations</h2>
-  <div class="tblwrap" tabindex="0" role="region" aria-label="Scrollable data table"><table role="table" data-mobile="cards">
-    <tr role="row"><th role="columnheader">Risk</th><th role="columnheader">Why it's real</th><th role="columnheader">Mitigation</th></tr>
-    <tr role="row"><td role="cell" data-label="Risk"><b>Gravel handling</b></td><td role="cell" data-label="Why it&#x27;s real">99%+ Zwift across five seasons; first-ever gravel race, on 93% unpaved terrain</td><td role="cell" data-label="Mitigation">IM effort, conservative lines, walk anything you would not ride at home. Two wet-surface sessions before October</td></tr>
-    <tr role="row"><td role="cell" data-label="Risk"><b>Navigation → DQ</b></td><td role="cell" data-label="Why it&#x27;s real">Gravel leg unsigned — GPS or nothing; 2024 riders got lost following each other</td><td role="cell" data-label="Mitigation">GPX on head unit + phone. <b>Follow the track, never the rider ahead.</b> Trail leg is marked</td></tr>
-    <tr role="row"><td role="cell" data-label="Risk"><b>Mechanical in Cap de Creus</b></td><td role="cell" data-label="Why it&#x27;s real">Rocky, technical, before the first aid at km 34.2 — the one sector where a mechanical costs the race</td><td role="cell" data-label="Mitigation"><b>Tubes, so nothing self-seals</b> — 2 correct tubes, boot, pump, one rehearsed change. Hold 2.2/2.4 bar, pick lines. Buffer absorbs one flat, not three</td></tr>
-    <tr role="row"><td role="cell" data-label="Risk"><b>Tramuntana wind</b></td><td role="cell" data-label="Why it&#x27;s real">Prevailing N wind across the exposed Empordà plain; October is the region's wettest month</td><td role="cell" data-label="Mitigation">Draft on the plain — it is legal and it is free. Sleeves on, bag down the front if cold-dry</td></tr>
-    <tr role="row"><td role="cell" data-label="Risk"><b>Penalty time</b></td><td role="cell" data-label="Why it&#x27;s real">+30 min erases any scenario-A day</td><td role="cell" data-label="Mitigation">Carry all fuel · take only what stations stock, in-zone · run alongside the bike in T1, dismount before T2</td></tr>
-    <tr role="row"><td role="cell" data-label="Risk"><b>Foot hot spots</b></td><td role="cell" data-label="Why it&#x27;s real">Flat pedals under a ~4 mm barefoot sole for ~19,000 revolutions, then a 10.5 km trail run on the same feet</td><td role="cell" data-label="Mitigation"><b>3 h flat-pedal ride in the Vivos before the block ends.</b> Pinned platforms, mid-foot, shift the foot on the plain</td></tr>
-    <tr role="row"><td role="cell" data-label="Risk"><b>Wet course</b></td><td role="cell" data-label="Why it&#x27;s real">Rain in the week = mud, slick rock, a live river crossing</td><td role="cell" data-label="Mitigation">Downgrade goals not the race · even more conservative sector 1 · dry socks in T2 · <b>45 mm leaves ~2 mm mud clearance</b> — if the 13–14 Oct forecast is wet, ask about 40s</td></tr>
-  </table></div>
+  <div class="risklist">
+    <details class="risk"><summary><b>Gravel handling</b><span class="rmit">Conservative lines. Walk what you would not ride at home.</span></summary><div class="rbody"><p><em>Why it's real</em>99%+ Zwift across five seasons; first-ever gravel race, on 93% unpaved terrain</p><p><em>Mitigation</em>IM effort, conservative lines, walk anything you would not ride at home. Two wet-surface sessions before October</p></div></details>
+    <details class="risk"><summary><b>Navigation → DQ</b><span class="rmit">Follow the track, never the rider ahead.</span></summary><div class="rbody"><p><em>Why it's real</em>Gravel leg unsigned — GPS or nothing; 2024 riders got lost following each other</p><p><em>Mitigation</em>GPX on head unit + phone. <b>Follow the track, never the rider ahead.</b> Trail leg is marked</p></div></details>
+    <details class="risk"><summary><b>Mechanical in Cap de Creus</b><span class="rmit">Two tubes, boot, pump — one rehearsed change.</span></summary><div class="rbody"><p><em>Why it's real</em>Rocky, technical, before the first aid at km 34.2 — the one sector where a mechanical costs the race</p><p><em>Mitigation</em><b>Tubes, so nothing self-seals</b> — 2 correct tubes, boot, pump, one rehearsed change. Hold 2.2/2.4 bar, pick lines. Buffer absorbs one flat, not three</p></div></details>
+    <details class="risk"><summary><b>Tramuntana wind</b><span class="rmit">Draft on the plain. Sleeves on.</span></summary><div class="rbody"><p><em>Why it's real</em>Prevailing N wind across the exposed Empordà plain; October is the region's wettest month</p><p><em>Mitigation</em>Draft on the plain — it is legal and it is free. Sleeves on, bag down the front if cold-dry</p></div></details>
+    <details class="risk"><summary><b>Penalty time</b><span class="rmit">Carry all fuel. Take only in-zone. Run the bike through T1.</span></summary><div class="rbody"><p><em>Why it's real</em>+30 min erases any scenario-A day</p><p><em>Mitigation</em>Carry all fuel · take only what stations stock, in-zone · run alongside the bike in T1, dismount before T2</p></div></details>
+    <details class="risk"><summary><b>Foot hot spots</b><span class="rmit">3 h flat-pedal rehearsal in the Vivos before the block ends.</span></summary><div class="rbody"><p><em>Why it's real</em>Flat pedals under a ~4 mm barefoot sole for ~19,000 revolutions, then a 10.5 km trail run on the same feet</p><p><em>Mitigation</em><b>3 h flat-pedal ride in the Vivos before the block ends.</b> Pinned platforms, mid-foot, shift the foot on the plain</p></div></details>
+    <details class="risk"><summary><b>Wet course</b><span class="rmit">Downgrade goals, not the race. Wet forecast → ask about 40s.</span></summary><div class="rbody"><p><em>Why it's real</em>Rain in the week = mud, slick rock, a live river crossing</p><p><em>Mitigation</em>Downgrade goals not the race · even more conservative sector 1 · dry socks in T2 · <b>45 mm leaves ~2 mm mud clearance</b> — if the 13–14 Oct forecast is wet, ask about 40s</p></div></details>
+  </div>
 </section>
 
 <!-- ============ OPEN ITEMS ============ -->
