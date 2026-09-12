@@ -331,7 +331,8 @@ h3{font-size:1rem;font-weight:600;letter-spacing:-.01em;margin:32px 0 10px}
 .prod .out{margin-top:auto;padding-top:14px;border-top:1px solid var(--hair);font-family:var(--mono);font-size:.7rem;letter-spacing:.07em;color:var(--dimmer);line-height:1.55}
 .prod .out b{color:var(--ink);font-weight:600;letter-spacing:.02em}
 @media (max-width:640px){.facts{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.facts .v{font-size:.82rem}
-  .tl-lab span{white-space:normal;overflow:visible;text-overflow:clip;font-size:.7rem}}
+  .tl-lab span{white-space:normal;overflow:visible;text-overflow:clip;font-size:.7rem;min-width:min-content}}
+
 .meta{font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;color:var(--dimmer);margin:0}
 .meta b{color:var(--lime-ink);font-weight:600}
 .cmt{background:var(--card);border:1px solid var(--hair-2);border-radius:var(--r);
@@ -432,6 +433,21 @@ th{text-align:left;font-family:var(--mono);font-weight:500;font-size:.7rem;lette
 td{padding:14px 16px 14px 0;border-bottom:1px solid var(--hair);color:var(--dim);vertical-align:top}
 td:first-child{color:var(--ink);font-weight:500}
 .word{font-family:var(--mono);font-size:.94rem;font-weight:500;color:var(--lime-ink);white-space:nowrap}
+@media (max-width:640px){
+  /* tables stack into rows on a phone instead of scrolling sideways */
+  .tbl-wrap{overflow:visible}
+  table{min-width:0}
+  table:not(.fit) thead{display:none}
+  table:not(.fit),table:not(.fit) tbody,table:not(.fit) tr{display:block}
+  table:not(.fit) tr{padding:14px 0;border-bottom:1px solid var(--hair)}
+  table:not(.fit) td{display:block;padding:0;border:0}
+  table:not(.fit) td:first-child,table:not(.fit) td:nth-child(2){display:inline}
+  table:not(.fit) td:nth-child(2){margin-left:8px}
+  table:not(.fit) td:nth-child(3){margin-top:6px}
+  table:not(.fit) td.word{white-space:normal}
+  table.fit{font-size:.84rem}
+  table.fit th,table.fit td{padding-right:10px}
+  table.fit td:last-child,table.fit th:last-child{padding-right:0}}
 
 .foot{background:var(--lime);color:var(--ink);margin-inline:-20px;padding-inline:20px;padding-block:64px 72px}
 .foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:34px}
@@ -561,7 +577,7 @@ body{overscroll-behavior-y:none}
     <p class="lede">Two measurements, and the delta is the distance between them. An athlete runs at a set pace with nothing to think about, then answers the signals standing still, and those are the baselines. Then both happen at once, and both scores fall, because attention is finite.</p>
 
     <div class="tbl-wrap">
-      <table>
+      <table class="fit">
         <thead><tr><th>System</th><th>Alone</th><th>Both at once</th><th>What it gave up</th></tr></thead>
         <tbody>
           <tr><td>Physical</td><td class="word">baseline</td><td class="word">86</td><td>8.7% of itself, to share the room</td></tr>
@@ -600,7 +616,7 @@ body{overscroll-behavior-y:none}
       <p>The original Games were built on one idea, that a complete person trains body and mind as a single thing, and the Greek word for it was <em>arete</em>. Modern sport split them and spent a century scoring the half it could time. A sport that scores both is a return to the original brief, and pointing it at the Games is ambitious and correct.</p>
       <p>A north star is a standard, and this one is demanding. It asks for a number comparable across countries before it is comparable across gyms, rules written down and enforced, a governing body before there is much to govern, and a format somebody would sit and watch. Each is a constraint worth welcoming, because each makes the sport more real.</p>
       <hr class="rule">
-      <p class="meta">A real athlete is both mind and body · <b>A standard, held daily</b> · Fourteen years, planned</p>
+      <p class="meta" style="font-size:.82rem">A real athlete is both mind and body · <b>A standard, held daily</b> · Fourteen years, planned</p>
     </article>
 
     <div class="note"><p><b>The discipline.</b> The belief carries the brand and the science carries the credibility, in that order, because leading with decline lowers the price and brings the wrong first hundred people.</p></div>
