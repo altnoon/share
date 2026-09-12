@@ -342,7 +342,7 @@ body.race .rm-hide{display:none}
 .rmbtn.on{background:var(--flag);border-color:var(--flag);color:var(--on-flag)}
 #navprog{border-color:var(--ink);color:var(--ink)}
 body.race nav a{opacity:.3;pointer-events:none}
-body.race nav a[href="#clock"],body.race nav a[href="#course"],body.race nav a[href="#fuel"]{opacity:1;pointer-events:auto}
+body.race nav a[href="#course"],body.race nav a[href="#fuel"]{opacity:1;pointer-events:auto}
 #fuel .cmp th{background:var(--card);color:var(--ink);text-align:left;vertical-align:bottom;padding:9px 12px;border-bottom:3px solid var(--line)}
 #fuel .cmp th.ha{color:var(--ink);border-bottom-color:var(--ink)}
 #fuel .cmp th.hb{color:var(--track);border-bottom-color:var(--track)}
@@ -453,7 +453,7 @@ nav a:hover{background:var(--sea-soft)}nav a[aria-current="location"]{background
 .nav-label{display:none}button{touch-action:manipulation}button:focus-visible,a:focus-visible,summary:focus-visible,[tabindex]:focus-visible,input:focus-visible{outline:3px solid var(--sea);outline-offset:4px}
 .rmbtn,.progbtn,#course .phasectl button,.abtog button,#course .abtog button{min-height:44px;font-family:var(--body);font-size:14px;letter-spacing:0;text-transform:none;padding:9px 14px;border-radius:6px;cursor:pointer}
 .rmbtn.on{background:var(--strong);border-color:var(--ink)}
-body.race nav a{display:none}body.race nav a[href="#clock"],body.race nav a[href="#course"],body.race nav a[href="#fuel"]{display:block}
+body.race nav a{display:none}body.race nav a[href="#course"],body.race nav a[href="#fuel"]{display:block}
 section{margin-top:60px;min-width:0;scroll-margin-top:90px}
 h2{font-size:30px;letter-spacing:-.01em;text-transform:none;flex-wrap:wrap;gap:4px 16px;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:24px;line-height:1.3}
 h2 .tag{display:block;flex-basis:100%;font-family:var(--body);font-size:13px;letter-spacing:0;font-weight:400}
@@ -731,7 +731,6 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 </header>
 
 <nav aria-label="Dossier contents"><label class="mobile-nav" for="mobile-section"><span class="sr-only">Jump to section</span><select id="mobile-section" aria-label="Jump to section"></select></label><span class="nav-label">Field notes / 2026</span><div class="row">
-  <a href="#clock">Clock</a>
   <a href="#course">Course</a>
   <a href="#fuel">Fuel</a>
   <a href="#pacing">Pacing</a>
@@ -768,22 +767,6 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 </aside>
 
 <!-- ============ CLOCK ============ -->
-<section id="clock">
-  <h2>Race-day clock <span class="tag">timetable checked 9 Sep 2026 · exceptions below</span></h2>
-  <div class="tblwrap" tabindex="0" role="region" aria-label="Scrollable data table"><table role="table" data-mobile="cards" class="tight" style="min-width:0">
-    <tr role="row"><th role="columnheader" class="m">Time</th><th role="columnheader">What</th><th role="columnheader">Where</th></tr>
-    <tr role="row"><td role="cell" data-label="Time" class="m">~04:45</td><td role="cell" data-label="What">Wake · breakfast (familiar, nothing novel) · espresso</td><td role="cell" data-label="Where">Girona</td></tr>
-    <tr role="row" class="hl"><td role="cell" data-label="Time" class="m">06:15–06:45</td><td role="cell" data-label="What"><b>Buses leave gradually</b> — first 06:15, last 06:45. Take an early one; the last bus leaves no margin</td><td role="cell" data-label="Where">La Copa, Girona</td></tr>
-    <tr role="row"><td role="cell" data-label="Time" class="m">08:00</td><td role="cell" data-label="What">Arrive Cadaqués · bike already racked (dropped Sat, transport included)</td><td role="cell" data-label="Where">Platja Gran</td></tr>
-    <tr role="row"><td role="cell" data-label="Time" class="m">08:00–08:45</td><td role="cell" data-label="What">Rack the bike · <b>fill both bottles now</b> · white T1 bag down · wetsuit on in the changing tent</td><td role="cell" data-label="Where">Platja Gran</td></tr>
-    <tr role="row" class="hl"><td role="cell" data-label="Time" class="m">09:00</td><td role="cell" data-label="What"><b>START</b></td><td role="cell" data-label="Where">Platja Gran</td></tr>
-    <tr role="row"><td role="cell" data-label="Time" class="m">09:59</td><td role="cell" data-label="What"><span class="penalty">Swim cutoff</span> (59 min) — plan exits ~09:28–09:33</td><td role="cell" data-label="Where">swim exit</td></tr>
-    <tr role="row"><td role="cell" data-label="Time" class="m">15:49</td><td role="cell" data-label="What"><span class="penalty">Gravel cut-off</span> — official, 10 min earlier than the figure this file used to carry. Plan reaches T2 13:38–14:48, so ~1 h of margin</td><td role="cell" data-label="Where">Torre Desvern, Celrà</td></tr>
-    <tr role="row"><td role="cell" data-label="Time" class="m">16:59?</td><td role="cell" data-label="What"><span class="penalty">Trail limit — unconfirmed</span> — the timetable lists 16:59 for the trail leg. Confirm at check-in Friday; until then plan against this one, not 17:59 (scenario C leaves 23 min, not 1h23)</td><td role="cell" data-label="Where">Girona old town</td></tr>
-    <tr role="row" class="hl"><td role="cell" data-label="Time" class="m">17:59</td><td role="cell" data-label="What"><span class="penalty">Overall cutoff — 8h59</span></td><td role="cell" data-label="Where">Girona old town</td></tr>
-  </table></div>
-  <p class="small">Bike transport Girona → Cadaqués and Celrà → Girona is included and handled by the organiser — drop the bike Saturday evening, it's racked and waiting Sunday morning. GPX arrives ~48 h out (expect Friday morning).</p>
-</section>
 
 <!-- ============ COURSE ============ -->
 <section id="course">
