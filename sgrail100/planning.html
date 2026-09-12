@@ -353,6 +353,9 @@ body.race nav a[href="#clock"],body.race nav a[href="#course"],body.race nav a[h
 #course .phasestrip .p-bike{border-top-color:var(--track)}
 #course .phasestrip .p-run{border-top-color:var(--trail)}
 #course .phasestrip .ph:hover{background:var(--paper)}
+#course .phasestrip .ph[aria-current]{background:var(--paper);border-color:var(--ink);border-top-width:4px;box-shadow:inset 0 0 0 1px var(--ink)}
+#course .phasestrip{scroll-margin-top:16px}
+#course.tabbed details.planblock:not([open]){display:none}
 #course details.p-pre>summary.plan-head::before{background:var(--muted)}
 #course details.p-swim>summary.plan-head::before{background:var(--sea)}
 #course details.p-t1>summary.plan-head::before,#course details.p-t2>summary.plan-head::before{background:var(--strong)}
@@ -516,7 +519,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
  .metric>span{font-size:14px;letter-spacing:.04em}.metric strong{grid-column:2;grid-row:1/3;font-size:36px;margin:0}.metric small{font-size:18px}
  .metric p{font-size:14px;grid-column:1}.race-facts{font-size:14px}.legend{gap:18px}.leg{font-size:16px}
  nav{top:0;padding:8px 0;flex-wrap:nowrap;gap:8px}
- .mobile-ready nav .row{display:none}.mobile-ready nav #navprog{display:none}.mobile-ready .mobile-nav{display:block;flex:1;min-width:0}
+ .mobile-ready nav .row{display:none}.mobile-ready nav #navprog{display:none}#course .phasestrip{scroll-margin-top:84px}.mobile-ready .mobile-nav{display:block;flex:1;min-width:0}
  .mobile-nav select{width:100%;min-height:48px;font:600 16px var(--body);color:var(--ink);border:1px solid var(--line);border-radius:6px;background:var(--card);padding:10px 12px}
  nav .rmbtn{min-height:48px;flex:none;font-size:14px;padding:10px}
  section{scroll-margin-top:80px}#course details.planblock{scroll-margin-top:80px}
@@ -1334,7 +1337,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 })();
 
 // nav pills: scroll directly (fragment navigation is blocked in sandboxed preview iframes)
-document.querySelectorAll('nav a[href^="#"], #course .phasestrip a[href^="#"]').forEach(function(a){
+document.querySelectorAll('nav a[href^="#"]').forEach(function(a){
   a.addEventListener('click', function(e){
     var t = document.getElementById(this.getAttribute('href').slice(1));
     if(t){ e.preventDefault(); if(t.tagName==='DETAILS') t.open=true; t.scrollIntoView({behavior:'smooth', block:'start'}); }
@@ -1493,14 +1496,35 @@ function initProgDialog(){
 }
 if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',initProgDialog); } else { initProgDialog(); }
 
-// expand / collapse every phase block
+// phase strip = tabs: the chosen phase opens directly under the strip, the rest fold, the strip stays in view
 (function(){
+  var strip=document.querySelector('#course .phasestrip'); if(!strip) return;
+  var tiles=Array.from(strip.querySelectorAll('a.ph'));
+  var blocks=Array.from(document.querySelectorAll('#course details.planblock'));
+  function clearTabs(){ tiles.forEach(function(t){ t.removeAttribute('aria-current'); }); }
+  tiles.forEach(function(t){
+    t.addEventListener('click',function(e){
+      e.preventDefault();
+      var id=t.getAttribute('href').slice(1);
+      var want=blocks.filter(function(d){ return d.id===id || (id==='ph-bike' && d.id==='ph-bike-b'); });
+      if(!want.length) return;
+      blocks.forEach(function(d){ d.open = want.indexOf(d)>=0; });
+      clearTabs(); t.setAttribute('aria-current','true');
+      document.getElementById('course').classList.add('tabbed');
+      strip.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
   document.querySelectorAll('#course .phasectl button').forEach(function(b){
     b.addEventListener('click',function(){
       var on=b.dataset.ph==='open';
-      document.querySelectorAll('#course details.planblock').forEach(function(d){ d.open=on; });
+      blocks.forEach(function(d){ d.open=on; });
+      clearTabs(); document.getElementById('course').classList.remove('tabbed');
     });
   });
+  // folding the shown phase by hand leaves tab mode, so nothing can vanish
+  blocks.forEach(function(d){ d.addEventListener('toggle',function(){
+    if(!blocks.some(function(x){ return x.open; })){ clearTabs(); document.getElementById('course').classList.remove('tabbed'); }
+  }); });
 })();
 
 
@@ -1526,12 +1550,6 @@ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded
   function schedule(){if(!pending){pending=true;requestAnimationFrame(update);}}
   window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule);
   document.getElementById('rmbtn').addEventListener('click',schedule);update();
-  // Phase links open the target disclosure before native anchor navigation.
-  document.querySelectorAll('.phasestrip a').forEach(function(a){a.addEventListener('click',function(){
-    var target=document.querySelector(a.hash);if(target){
-      target.open=true;
-    }
-  });});
 })();
 // Preparation status reflects the saved checklist, without changing its storage keys.
 (function(){
