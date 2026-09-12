@@ -539,6 +539,41 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 /* Phone reading: one navigation row, larger type, stacked schedule entries. */
 .mobile-nav,.mobile-chart-caption,.mobile-chart-help{display:none}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+
+/* ---- mobile: floating dock + section sheet (pattern shared with the AGON page) ---- */
+.dock,.sheet{display:none}
+@media screen and (max-width:600px){
+  .mobile-ready nav{display:none}
+  section,#course details.planblock{scroll-margin-top:16px}#course .phasestrip{scroll-margin-top:16px}
+  body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+  .dock{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:40;display:flex;align-items:center;width:min(calc(100% - 32px),380px);height:54px;padding:0 6px;box-sizing:border-box;background:var(--card);border:1px solid var(--line);border-radius:100px;box-shadow:0 16px 36px -14px rgba(27,42,50,.38),0 2px 6px rgba(27,42,50,.08);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+  .dock[hidden]{display:none}
+  .dock button{flex:none;width:40px;height:40px;margin:0;padding:0;border:0;background:none;border-radius:50%;cursor:pointer;color:var(--ink);display:grid;place-items:center;-webkit-tap-highlight-color:transparent}
+  .dock button:disabled{color:var(--line);cursor:default}
+  .dock button svg{width:15px;height:15px;display:block}
+  .dock .pager{flex:1;min-width:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;-webkit-tap-highlight-color:transparent}
+  .dock .pager::-webkit-scrollbar{display:none}
+  .dock .pager a{flex:none;width:100%;scroll-snap-align:center;scroll-snap-stop:always;display:flex;align-items:baseline;justify-content:center;gap:9px;height:40px;line-height:40px;color:var(--ink);font-weight:700;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dock .pager a b{color:var(--sea);font-weight:600}
+  .dock .pager a b:empty{display:none}
+  .dock .prog{position:absolute;left:52px;right:52px;bottom:8px;height:2px;border-radius:2px;background:var(--line-soft);overflow:hidden}
+  .dock .prog i{display:block;height:100%;width:0;background:var(--sea);transition:width .12s linear}
+  .sheet{position:fixed;left:14px;right:14px;bottom:calc(78px + env(safe-area-inset-bottom));z-index:39;background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 26px 54px -22px rgba(27,42,50,.45),0 2px 6px rgba(27,42,50,.06);padding:4px 18px 10px;max-height:min(62dvh,540px);overflow-y:auto;overscroll-behavior:contain;transform-origin:50% 100%}
+  .sheet[hidden]{display:none}
+  body.sheet-open .sheet{display:block;animation:sheet .22s cubic-bezier(.22,.61,.36,1)}
+  @keyframes sheet{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+  .sheet-list{display:grid;grid-template-columns:1fr 1fr;column-gap:22px}
+  .sheet-list a{display:flex;align-items:baseline;gap:12px;padding:14px 0;border-top:1px solid var(--line-soft);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+  .sheet-list a:nth-child(-n+2){border-top:0}
+  .sheet-list a::before{content:attr(data-n);color:var(--line);font-weight:600}
+  .sheet-list a.on{color:var(--ink)}.sheet-list a.on::before{color:var(--sea)}
+  .sheet-list a.off{display:none}
+  .sheet-tools{display:flex;flex-wrap:wrap;gap:8px;padding-top:12px;border-top:1px solid var(--line)}
+  .sheet-tools button{font:600 13px var(--body);min-height:40px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);cursor:pointer}
+  .sheet-tools button[data-prog],.sheet-tools button[data-open]{border-color:var(--ink)}
+  .sheet-tools button.on{background:var(--flag);border-color:var(--flag);color:var(--on-flag)}
+}
+@media print{.dock,.sheet{display:none!important}}
 @media screen and (max-width:600px){
  body{font-size:16px;-webkit-text-size-adjust:100%}
  .wrap{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
@@ -738,6 +773,16 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
   <a href="#kit">Bike & kit</a>
   <a href="#risks">Risks</a>
 </div><button type="button" class="rmbtn" id="navprog" data-prog>Program · Fri–Sun ↗</button><button type="button" class="rmbtn" id="navopen" data-open>Open items ↗</button><button type="button" class="rmbtn" id="thbtn" aria-label="Colour theme">Theme · auto</button><button type="button" class="rmbtn" id="rmbtn">Race mode</button></nav>
+<div class="dock" aria-label="Section navigation" hidden>
+  <button class="prev" type="button" aria-label="Previous section"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3 5 8l5 5"/></svg></button>
+  <div class="pager" aria-controls="dock-sheet" aria-expanded="false"></div>
+  <button class="next" type="button" aria-label="Next section"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
+  <div class="prog" aria-hidden="true"><i></i></div>
+</div>
+<div class="sheet" id="dock-sheet" hidden>
+  <div class="sheet-list"></div>
+  <div class="sheet-tools"><button type="button" data-prog>Program · Fri–Sun ↗</button><button type="button" data-open>Open items ↗</button><button type="button" id="sh-theme">Theme</button><button type="button" id="sh-race">Race mode</button></div>
+</div>
 
 <aside class="essentials" aria-labelledby="essentials-title">
  <div class="essentials-head"><h2 id="essentials-title">Race essentials</h2><span class="small">16–18 October 2026 · local time</span></div>
@@ -1610,6 +1655,63 @@ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded
  document.getElementById('close-card').addEventListener('click',function(){panel.hidden=true;document.getElementById('preview-card').focus();});
  document.getElementById('print-card').addEventListener('click',function(){build();document.body.classList.add('print-card');try{window.print();}catch(e){document.body.classList.remove('print-card');document.getElementById('utility-status').textContent='Printing is unavailable here. Use your browser’s print command.';}});
  window.addEventListener('afterprint',function(){document.body.classList.remove('print-card');});
+})();
+
+// mobile dock + sheet: built from the sidebar links; race mode narrows the pages to what is shown
+(function(){
+  var dock=document.querySelector('.dock'),sheet=document.getElementById('dock-sheet'); if(!dock||!sheet) return;
+  var pager=dock.querySelector('.pager'),list=sheet.querySelector('.sheet-list'),prevB=dock.querySelector('.prev'),nextB=dock.querySelector('.next'),progI=dock.querySelector('.prog i');
+  var links=Array.from(document.querySelectorAll('nav .row a[href^="#"]'));
+  var pages=[],pairs=[],idx=0,settling=null,byUs=0;
+  function pad(n){return (n<10?'0':'')+n}
+  function build(){
+    pairs=links.map(function(a){return {a:a,el:document.getElementById(a.hash.slice(1)),label:a.textContent};}).filter(function(p){return p.el&&p.el.getClientRects().length;});
+    pager.innerHTML='<a href="#top"><b></b>SGRAIL 100</a>'+pairs.map(function(p,i){return '<a href="#'+p.el.id+'"><b>'+pad(i+1)+'</b>'+p.label+'</a>';}).join('');
+    list.innerHTML=pairs.map(function(p,i){return '<a href="#'+p.el.id+'" data-n="'+pad(i+1)+'">'+p.label+'</a>';}).join('');
+    pages=Array.from(pager.querySelectorAll('a'));
+    idx=0; spy(true);
+  }
+  function goTo(i){
+    i=Math.max(0,Math.min(pages.length-1,i));
+    if(i===0){window.scrollTo({top:0,behavior:'smooth'});return;}
+    var el=pairs[i-1]&&pairs[i-1].el; if(el) el.scrollIntoView({block:'start',behavior:'smooth'});
+  }
+  function centre(i,instant){
+    var left=i*pager.clientWidth; if(Math.abs(pager.scrollLeft-left)<2) return;
+    byUs=Date.now()+700; pager.scrollTo({left:left,behavior:instant?'auto':'smooth'});
+  }
+  function dockTo(i,instant){ idx=i; prevB.disabled=i===0; nextB.disabled=i===pages.length-1; centre(i,instant); }
+  var cur=-1;
+  function spy(instant){
+    var y=window.scrollY+96,best=-1;
+    for(var i=0;i<pairs.length;i++){ if(pairs[i].el.offsetTop<=y) best=i; }
+    var rows=list.querySelectorAll('a'); rows.forEach(function(r,i){ r.classList.toggle('on',i===best); });
+    if(best!==cur||instant){ cur=best; dockTo(best+1,instant); }
+    var max=document.documentElement.scrollHeight-innerHeight;
+    progI.style.width=(max>0?Math.min(100,Math.max(0,window.scrollY/max*100)):0)+'%';
+  }
+  var q=false; function onScroll(){ if(!q){q=true;requestAnimationFrame(function(){q=false;spy(false);});} }
+  addEventListener('scroll',onScroll,{passive:true}); addEventListener('resize',function(){centre(idx,true);},{passive:true});
+  pager.addEventListener('scroll',function(){
+    clearTimeout(settling);
+    settling=setTimeout(function(){ if(Date.now()<byUs) return; var i=Math.round(pager.scrollLeft/pager.clientWidth); if(i!==idx) goTo(i); },110);
+  },{passive:true});
+  function setOpen(open){ document.body.classList.toggle('sheet-open',open); sheet.hidden=!open; pager.setAttribute('aria-expanded',open?'true':'false'); if(open) syncTools(); }
+  pager.addEventListener('click',function(e){ var a=e.target.closest('a'); if(!a) return; e.preventDefault(); e.stopPropagation(); var i=pages.indexOf(a); if(i===idx) setOpen(!document.body.classList.contains('sheet-open')); else goTo(i); });
+  prevB.addEventListener('click',function(){goTo(idx-1);}); nextB.addEventListener('click',function(){goTo(idx+1);});
+  list.addEventListener('click',function(e){ var a=e.target.closest('a'); if(!a) return; e.preventDefault(); setOpen(false); var el=document.getElementById(a.hash.slice(1)); if(el) el.scrollIntoView({block:'start',behavior:'smooth'}); });
+  document.addEventListener('click',function(e){ if(document.body.classList.contains('sheet-open')&&!sheet.contains(e.target)&&!dock.contains(e.target)) setOpen(false); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&document.body.classList.contains('sheet-open')) setOpen(false); });
+  // tools mirror the sidebar buttons
+  var th=document.getElementById('thbtn'),rm=document.getElementById('rmbtn'),shT=document.getElementById('sh-theme'),shR=document.getElementById('sh-race');
+  function syncTools(){ shT.textContent=th.textContent; shR.textContent=rm.textContent; shR.classList.toggle('on',rm.classList.contains('on')); }
+  shT.addEventListener('click',function(){ th.click(); syncTools(); });
+  shR.addEventListener('click',function(){ rm.click(); syncTools(); setTimeout(build,50); setOpen(false); });
+  sheet.querySelectorAll('[data-prog],[data-open]').forEach(function(b){ b.addEventListener('click',function(){ setOpen(false); }); });
+  rm.addEventListener('click',function(){ setTimeout(build,50); });
+  function show(){ var m=innerWidth<=600; dock.hidden=!m; if(!m) setOpen(false); }
+  addEventListener('resize',show,{passive:true});
+  build(); show(); syncTools();
 })();
 </script>
 </body>
