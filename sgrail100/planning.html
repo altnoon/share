@@ -556,12 +556,23 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 
 .essentials{margin-top:28px;padding:24px;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--sea);border-radius:8px;min-width:0}
 .essentials h2{margin:0;border:0;padding:0;font-size:27px}.essentials-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
-.essentials-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0}.essentials dt{font-size:13px;color:var(--muted)}.essentials dd{font-weight:600;font-size:19px;margin-top:4px}.essentials dd small{display:block;font-weight:400;color:var(--muted);font-size:14px}
+.essentials-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0}
+.etl{display:grid;grid-template-columns:repeat(5,1fr);gap:0;list-style:none;padding:0;margin:26px 0 8px}
+.etl li{position:relative;border-top:3px solid var(--line);padding:16px 14px 0 0;min-width:0}
+.etl li::before{content:"";position:absolute;left:0;top:-8px;width:13px;height:13px;border-radius:50%;background:var(--card);border:3px solid var(--muted);box-sizing:border-box}
+.etl .day{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.etl b{display:block;font-family:var(--disp);font-size:21px;line-height:1.15;letter-spacing:-.01em;color:var(--ink)}
+.etl .what{display:block;font-size:14px;font-weight:600;color:var(--ink);margin-top:5px}
+.etl small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.etl .d-sat::before{border-color:var(--ink)}.etl .d-sat .day{color:var(--ink)}
+.etl .d-sun::before{border-color:var(--sea)}.etl .d-sun .day{color:var(--sea)}
+.etl .start::before{background:var(--sea);width:15px;height:15px;top:-9px}.etl .start b{color:var(--sea);font-size:24px}
+.etl .cut::before{border-color:var(--flag)}.etl .cut b{color:var(--flag);font-size:17px;padding-top:3px}.essentials dt{font-size:13px;color:var(--muted)}.essentials dd{font-weight:600;font-size:19px;margin-top:4px}.essentials dd small{display:block;font-weight:400;color:var(--muted);font-size:14px}
 .execution-line{padding:16px 0;border-block:1px solid var(--line);font-weight:600;margin-bottom:16px}
 .verification{background:var(--paper);font-size:14px}.verification a{color:var(--sea)}
 .race-decision{margin-top:20px}.race-decision label{display:block;font-weight:600;margin-bottom:10px}.decision-actions{display:flex;flex-wrap:wrap;gap:8px}.decision-actions select,.decision-actions button{min-height:48px;font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink)}.decision-actions button{cursor:pointer}#save-race-plan{background:var(--strong);color:var(--on-strong)}#race-plan-status{font-size:14px;color:var(--muted);margin:12px 0 0}
 .transition-actions{padding:16px;background:var(--sea-soft);border-radius:6px;margin:16px 0}.transition-actions h3{margin:0 0 8px}.transition-actions label{display:flex;gap:12px;align-items:flex-start;cursor:pointer;width:100%}.transition-actions label:has(input:checked) span{text-decoration:line-through;color:var(--muted)}
-@media(max-width:600px){.essentials{padding:18px}.essentials-grid{grid-template-columns:1fr;gap:16px}.decision-actions select{width:100%}.decision-actions button{flex:1}}
+@media(max-width:600px){.essentials{padding:18px}.essentials-grid{grid-template-columns:1fr;gap:16px}.etl{gap:0;margin:18px 0 4px}.etl li{border-top:0;border-left:3px solid var(--line);padding:0 0 18px 16px}.etl li:last-child{padding-bottom:4px}.etl li::before{left:-8px;top:2px}.etl .start::before{left:-9px}.decision-actions select{width:100%}.decision-actions button{flex:1}}
 @media print{.essentials{break-inside:avoid}.decision-actions{display:none}}
 
 .location-links,.emergency-info{margin-top:16px}.location-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.location-grid>a{display:block;min-height:48px;padding:12px;border:1px solid var(--line);border-radius:6px;text-decoration:none;color:var(--ink)}.location-grid b,.location-grid span{display:block}.location-grid span{font-size:14px;color:var(--sea)}
@@ -701,13 +712,14 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 </div><button type="button" class="rmbtn" id="navprog" data-prog>Program · Fri–Sun ↗</button><button type="button" class="rmbtn" id="thbtn" aria-label="Colour theme">Theme · auto</button><button type="button" class="rmbtn" id="rmbtn">Race mode</button></nav>
 
 <aside class="essentials" aria-labelledby="essentials-title">
- <div class="essentials-head"><h2 id="essentials-title">Race essentials</h2><span class="small">18 October 2026 · local time</span></div>
- <dl class="essentials-grid">
-  <div><dt>Start · Sunday</dt><dd>09:00 <small>Platja Gran, Cadaqués</small></dd></div>
-  <div><dt>Bus · Sunday</dt><dd>06:15–06:45 <small>La Copa, Girona · take an early one</small></dd></div>
-  <div><dt>Bike + black bag · Saturday</dt><dd>Plan for 13:00–16:00 <small>GEiEG · confirm bag window at check-in</small></dd></div>
-  <div><dt>Cutoffs</dt><dd>09:59 / 15:49 / 17:59 <small>Swim / bike / overall · run limit needs clarification</small></dd></div>
- </dl>
+ <div class="essentials-head"><h2 id="essentials-title">Race essentials</h2><span class="small">16–18 October 2026 · local time</span></div>
+ <ol class="essentials-grid etl">
+  <li class="d-fri"><span class="day">Fri 16</span><b>17:30–19:30</b><span class="what">Check-in · bags, bibs, wristbands</span><small>Plaça dels Jurats, Girona</small></li>
+  <li class="d-sat"><span class="day">Sat 17</span><b>13:00–16:00</b><span class="what">Drop bike + black T2 bag</span><small>GEiEG de Sant Ponç · window to confirm Fri</small></li>
+  <li class="d-sun"><span class="day">Sun 18</span><b>06:15–06:45</b><span class="what">Bus to Cadaqués · take an early one</span><small>La Copa, Girona</small></li>
+  <li class="d-sun start"><span class="day">Sun 18</span><b>09:00</b><span class="what">Start</span><small>Platja Gran, Cadaqués</small></li>
+  <li class="d-sun cut"><span class="day">Sun 18</span><b>09:59 · 15:49 · 17:59</b><span class="what">Cut-offs · swim / gravel / overall</span><small>16:59 trail limit — unconfirmed</small></li>
+ </ol>
  <p class="execution-line">Ride the technical sector conservatively. Draft the plain. Hike the run climb, then commit to the descent.</p>
  <details class="verification"><summary>Verification &amp; unresolved details</summary><div class="inner">
  <p><b>Checked 9 September:</b> the <a href="https://sgrail100.com/timetable/">official timetable</a> lists buses 06:15–06:45, start 09:00, bike drop 12:00–16:00, bags collected 15:00–18:00 at Plaça dels Jurats, and bikes 15:00–18:30 at GEiEG. Times can change.</p>
