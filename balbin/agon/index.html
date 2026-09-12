@@ -284,7 +284,9 @@ h3{font-size:1rem;font-weight:600;letter-spacing:-.01em;margin:32px 0 10px}
 .wide figcaption b{color:var(--ink);font-weight:600}
 @media (max-width:640px){.wide .im{aspect-ratio:16/10}}
 /* app screens */
-.phones{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:26px 0 0}
+.phones{display:flex;gap:16px;margin:26px 0 0;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 0 12px;
+  scrollbar-width:thin;scrollbar-color:var(--hair-2) transparent;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.phones>div{flex:0 0 290px;scroll-snap-align:start}
 .phone{background:var(--ink);border-radius:30px;padding:9px;box-shadow:0 12px 30px -18px rgba(8,10,12,.45)}
 .scr{background:var(--paper);border-radius:22px;aspect-ratio:9/18.6;padding:16px 14px 12px;display:flex;flex-direction:column;gap:8px;overflow:hidden;font-size:.74rem;color:var(--dim);line-height:1.35}
 .scr > *{flex-shrink:0}
@@ -305,8 +307,8 @@ h3{font-size:1rem;font-weight:600;letter-spacing:-.01em;margin:32px 0 10px}
 .scr .row2 b{color:var(--ink);font-weight:600}
 .scr .card{background:var(--card);border:1px solid var(--hair);border-radius:12px;padding:10px 11px;box-shadow:none;display:block;font-size:.7rem}
 .scr .card b{color:var(--ink)}
-.scr .btn{margin-top:auto;background:var(--ink);color:var(--paper);border-radius:10px;padding:10px;text-align:center;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase}
-.scr .btn + .nav{margin-top:0}
+.scr .btn.push{margin-top:auto}
+.scr .btn{margin-top:0;background:var(--ink);color:var(--paper);border-radius:10px;padding:10px;text-align:center;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase}
 .scr .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--hair-2)}
 .scr .season{display:flex;gap:2px;align-items:center;height:10px}
 .scr .season i{flex:1;height:6px;background:var(--hair-2);border-radius:2px}
@@ -372,20 +374,19 @@ h3{font-size:1rem;font-weight:600;letter-spacing:-.01em;margin:32px 0 10px}
 .scr .week i.done{background:var(--dimmer)}
 .scr .week i.today{background:transparent;box-shadow:inset 0 0 0 1.5px var(--ink)}
 .scr .week i.test{background:var(--lime-mark)}
-.scr .rank{display:grid;grid-template-columns:1.4em 1fr auto;gap:6px;font-family:var(--mono);font-size:.6rem;color:var(--dimmer);letter-spacing:.04em;align-items:center}
-.scr .rank > *{padding:3px 0;border-bottom:1px solid var(--hair)}
+.scr .rank{display:grid;grid-template-columns:auto 1fr auto;gap:6px;font-family:var(--mono);font-size:.6rem;color:var(--dimmer);letter-spacing:.04em;align-items:center}
+.scr .rank > *{padding:3px 0;border-bottom:1px solid var(--hair);min-height:22px;display:flex;align-items:center}
+.scr .rank .ava i{margin-left:0}
 .scr .rank b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
 .scr .rank .me{color:var(--ink);font-weight:600}
 .scr .rank .me:nth-child(3){color:var(--lime-ink)}
 .phone-cap{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dimmer);margin:10px 0 0;line-height:1.5;text-align:center}
 .phone-cap b{color:var(--ink);font-weight:600;display:block;font-family:var(--sans);font-size:.86rem;letter-spacing:-.01em;text-transform:none;margin-bottom:2px}
-@media (min-width:641px) and (max-width:900px){.phones{grid-template-columns:repeat(2,1fr)}}
-/* phone: the four screens become a horizontal slider, one screen per swipe, the next one peeking in */
+/* phone: bleed to the screen edges, the next screen peeking in */
 @media (max-width:640px){
-  .phones{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-20px;padding:4px 20px 10px;
-    scroll-padding-inline:20px;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  .phones{gap:14px;margin-inline:-20px;padding:4px 20px 10px;scroll-padding-inline:20px;scrollbar-width:none}
   .phones::-webkit-scrollbar{display:none}
-  .phones>div{flex:0 0 min(76vw,290px);scroll-snap-align:start}
+  .phones>div{flex-basis:min(76vw,290px)}
   .phones .phone-cap{text-align:left}}
 .lb{margin:16px 0 0;display:flex;flex-direction:column;gap:7px}
 .lb div{display:grid;grid-template-columns:8.2em 1fr 5.2em;gap:10px;white-space:nowrap;align-items:center;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:var(--dim)}
@@ -1117,7 +1118,7 @@ body{overscroll-behavior-y:none}
 
 
     <h3>The app, on screen</h3>
-    <p class="lede">Four screens, and every one of them is the score card in a different state. The app has no other idea in it, which is what keeps it from looking like an app.</p>
+    <p class="lede">Five screens, and every one of them is the score card in a different state. The app has no other idea in it, which is what keeps it from looking like an app.</p>
 
     <div class="phones">
       <div>
@@ -1139,6 +1140,16 @@ body{overscroll-behavior-y:none}
             <div>Practice tonight<b>Rule 2 · 18 min</b></div>
             <div>Next test<b>Thu 19:00</b></div>
           </div>
+          <div class="sec"><b>Season</b><span>Week 7 of 12 · 33 days</span></div>
+          <div class="season"><i class="t"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i class="t"></i></div>
+          <div class="row2"><span>Test Δ 23% · target Δ 17%</span><b>Retest · 24 Oct</b></div>
+          <div class="sec"><b>Last test</b><span>Session 14 · Thu 5 Sep</span></div>
+          <div class="day">
+            <div>Cost you most<b>Rule 2 · 3 misses</b></div>
+            <div>Held best<b>Transit · 0.4s</b></div>
+          </div>
+          <div class="row2"><span>Best</span><b>84 · Mar · Session 9</b></div>
+          <div class="row2"><span>Sessions</span><b>14 since Feb · 11 practices</b></div>
           <div class="sec"><b>Agora</b><span>3 tested yesterday</span></div>
           <div class="agora"><div class="ava"><i class="on">M</i><i>J</i><i>A</i></div><div><b>Marta</b> moved Δ 23 → 21. Two points off you now, and she retests Thursday.</div></div>
           <div class="nav"><b>Number</b><span>Practice</span><span>Season</span><span>Agora</span></div>
@@ -1163,7 +1174,9 @@ body{overscroll-behavior-y:none}
             <div><span>Carry · 100m</span><span>—</span></div>
             <div><span>Run · 1km</span><span>—</span></div>
           </div>
+          <div class="row2"><span>Reaction · now</span><b>0.61s · seated 0.48s</b></div>
           <div class="row2"><span>Transit in</span><b>2:19</b></div>
+          <div class="card">Rule 3 from station 4. <b>Two pods. Tap the one that lit two turns ago.</b></div>
           <div class="nav"><span>Number</span><span>Practice</span><span>Season</span><span>Agora</span></div>
         </div></div>
         <p class="phone-cap"><b>The session</b>One pod, one rule, one timer, the prescribed zone</p>
@@ -1181,8 +1194,14 @@ body{overscroll-behavior-y:none}
             <div><i class="done"></i><span>M</span></div><div><i class="today"></i><span>T</span></div><div><i></i><span>W</span></div><div><i class="test"></i><span>T</span></div><div><i></i><span>F</span></div><div><i class="done"></i><span>S</span></div><div><i></i><span>S</span></div>
           </div>
           <div class="row2"><span>This week</span><b>2 of 4 · test Thu</b></div>
+          <div class="sec"><b>Last practices</b><span>zone held</span></div>
+          <div class="rank">
+            <span>Sun</span><span>Rule 2 · 21 min</span><b>88%</b>
+            <span>Thu</span><span>Rule 1 · 18 min</span><b>91%</b>
+            <span>Tue</span><span>Rule 2 · 22 min</span><b>84%</b>
+          </div>
           <div class="card">Practice moves your number.<br><b>Only a test records one.</b></div>
-          <div class="btn ghost">Start practice</div>
+          <div class="btn ghost push">Start practice</div>
           <div class="nav"><span>Number</span><b>Practice</b><span>Season</span><span>Agora</span></div>
         </div></div>
         <p class="phone-cap"><b>Practice</b>Lowercase on purpose. Home never records a number</p>
@@ -1204,11 +1223,38 @@ body{overscroll-behavior-y:none}
             <span class="me">3</span><span class="me">You</span><b class="me">Δ 19%</b>
             <span>4</span><span>Marta</span><b>Δ 21%</b>
           </div>
+          <div class="sec"><b>To the retest</b><span>24 Oct · 19:00</span></div>
+          <div class="day">
+            <div>Practices left<b>9 of 20</b></div>
+            <div>Target<b>Δ 17% · band up</b></div>
+          </div>
           <div class="card">Two points ahead, and closing. <b>She retests Thursday.</b></div>
-          <div class="btn">Bring someone to compare</div>
+          <div class="btn push">Bring someone to compare</div>
           <div class="nav"><span>Number</span><span>Practice</span><b>Season</b><span>Agora</span></div>
         </div></div>
         <p class="phone-cap"><b>The season</b>Twelve weeks, a retest date, and someone to compare with</p>
+      </div>
+      <div>
+        <div class="phone"><div class="scr">
+          <div class="sb"><span>20:12</span><span>Thu 12 Sep <i></i></span></div>
+          <div class="top"><b>AGON</b><span>Agora</span></div>
+          <div class="t">The hour after · Tonight</div>
+          <div class="card"><b>The long table, 20:15.</b><br>After the 19:00 test, downstairs. Nine going, two places left at the end.</div>
+          <div class="agora"><div class="ava"><i class="on">M</i><i>J</i><i>A</i><i>P</i><i>+5</i></div><div>Marta, Jorge, Ana, Pablo and five more</div></div>
+          <div class="btn ghost">I'm coming</div>
+          <div class="sec"><b>Tested today</b><span>4 numbers</span></div>
+          <div class="rank">
+            <span class="ava"><i class="on">M</i></span><span>Marta · retest</span><b>Δ 21%</b>
+            <span class="ava"><i>J</i></span><span>Jorge · best yet</span><b>Δ 14%</b>
+            <span class="ava"><i>A</i></span><span>Ana</span><b>Δ 17%</b>
+            <span class="ava"><i>P</i></span><span>Pablo · first test</span><b>Δ 26%</b>
+          </div>
+          <div class="sec"><b>Compare</b><span>1 waiting</span></div>
+          <div class="agora"><div class="ava"><i class="on">M</i></div><div><b>Marta</b> wants to run the season beside yours. Same retest date.</div></div>
+          <div class="btn push">Accept</div>
+          <div class="nav"><span>Number</span><span>Practice</span><span>Season</span><b>Agora</b></div>
+        </div></div>
+        <p class="phone-cap"><b>The agora</b>The hour after, and who tested today. No likes, no comments, only numbers and a table</p>
       </div>
     </div>
 
