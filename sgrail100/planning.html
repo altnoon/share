@@ -757,6 +757,39 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 body[data-plan="a"] [data-loadout="b"],body[data-plan="b"] [data-loadout="a"],body[data-plan="a"] .plan-or,body[data-plan="b"] .plan-or{display:none}
 body.focused-plan .vsverdict,body.focused-plan .phone-comparison{display:none}
 @media(max-width:600px){.bag-steps{grid-template-columns:1fr;gap:12px}.bag-steps li{border-left:2px solid var(--line)!important;padding-left:12px!important}}
+/* Editorial hierarchy: primary graphic, key numbers, supporting details. */
+section>h2{font-size:28px;line-height:1.25;margin-bottom:20px;padding-bottom:12px}
+section h3{font-size:19px;line-height:1.35}
+section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.reference-details{margin:20px 0;border:1px solid var(--line);border-radius:6px;background:var(--card)}
+.reference-details>summary{font:500 15px var(--body);min-height:48px;padding:12px 16px;text-transform:none;letter-spacing:0}
+.reference-details>.inner{padding:0 16px 16px}
+.fuel-targets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:0 0 24px}
+.fuel-targets>div{border-bottom:2px solid var(--line);padding:0 0 16px}
+.fuel-targets dt{font-size:13px;color:var(--muted);margin-bottom:8px}
+.fuel-targets dd{margin:0;font:600 30px var(--disp);font-variant-numeric:tabular-nums;line-height:1.2}
+.fuel-targets small{font:400 14px var(--body);color:var(--muted);white-space:nowrap}
+.fuel-rules{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;margin-top:24px}
+.fuel-rules p{font-size:14px;line-height:1.5;border-top:1px solid var(--line);padding:12px 0;margin:0}
+.fuel-rules b{display:block;font-weight:600;margin-bottom:4px}
+#pacing .crow{grid-template-columns:64px minmax(0,1fr) 110px;gap:12px;padding:12px 0;align-items:center}
+#pacing .ctrack{height:24px}
+#pacing .cfin{font-size:17px;font-variant-numeric:tabular-nums}
+#pacing .cfin small{font:400 12px var(--body);margin-top:3px}
+#pacing .base-scenario{border-block:1px solid var(--line)}
+#pacing .base-scenario .ck{font-weight:700}
+#pacing .limit-key::before{content:'';height:14px;border-left:2px dashed var(--flag)}
+#pacing .cutoff-note{font-size:14px;color:var(--muted);margin-top:14px}
+@media(max-width:600px){
+ section>h2{font-size:25px}
+ .fuel-targets{gap:10px}.fuel-targets dd{font-size:25px}.fuel-targets small{display:block;margin-top:4px}.fuel-targets dt{font-size:12px}
+ .fuel-rules{grid-template-columns:1fr}
+ #pacing .crow{grid-template-columns:1fr auto;gap:8px}
+ #pacing .ctrack{grid-column:1/-1;grid-row:2;height:24px}
+ #pacing .cfin{display:flex;gap:10px;align-items:baseline}
+ #pacing .chead{font-size:12px;gap:12px}
+ .reference-details>.inner{padding:0 12px 12px}
+}
 </style>
 <script>
 /* Theme resolves before paint so a dark start does not flash white. auto = follow the device. */
@@ -883,7 +916,7 @@ body.focused-plan .vsverdict,body.focused-plan .phone-comparison{display:none}
 
 <!-- ============ COURSE ============ -->
 <section id="course">
-  <h2>Course & execution <span class="tag">the race on one axis · map + feed clock</span></h2>
+  <h2>Course & execution</h2>
 
   <p class="maphint rm-hide">Tap the profile for km · altitude — tap a dot for station detail · scrolls sideways</p>
   
@@ -893,7 +926,7 @@ body.focused-plan .vsverdict,body.focused-plan .phone-comparison{display:none}
   <svg id="profsvg" viewBox="0 0 760 276" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SGrail 100 course profile: bike 86.4 km with approximately 1,000 m ascent; run 10.5 km with 320 m ascent. Technical bike sector km 0–25; draft and fuel on the plain. Hike the run climb, regroup at castle aid, then descend.">
     <text x="84" y="20" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#8A5A2B">KM 0–25 · LOW Z3 / WALK PITCHES</text>
     <text x="360" y="95" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#8A5A2B">KM 25–86 · DRAFT + FUEL</text>
-    <text x="360" y="112" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">93% UNPAVED · EXPOSED PLAIN</text>
+    <text x="360" y="112" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">EXPOSED PLAIN · WIND</text>
     <text x="744" y="20" text-anchor="end" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#4A6741">HIKE → REGROUP</text>
     <text x="744" y="36" text-anchor="end" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#4A6741">→ DESCEND</text>
     
@@ -1181,29 +1214,25 @@ body.focused-plan .vsverdict,body.focused-plan .phone-comparison{display:none}
 
 <!-- ============ FUEL ============ -->
 <section id="fuel">
-  <h2>Fuel & salt <span class="tag">per bike_fuelling_card · two-bottle setup · rev 25 Aug</span></h2>
+  <h2>Fuel & salt <span class="tag">Existing race plan · rehearse before race day</span></h2>
 
-  <div class="chips">
-    <span class="chip"><b>~45–52 g/h</b> carb — gut-ramp rate, not 80</span>
-    <span class="chip"><b>1.5 L on board</b> · ≈ 650 ml/h</span>
-    <span class="chip"><b>~1,000 mg Na/h</b> — bottle 2 from W1, caps before it</span>
-    <span class="chip flag"><b>30-min penalty</b> outside aid zones</span>
-  </div>
+  <dl class="fuel-targets" aria-label="Existing bike fuel targets">
+    <div><dt>Carbohydrate</dt><dd>45–52 <small>g/h</small></dd></div>
+    <div><dt>Fluid</dt><dd>~650 <small>ml/h</small></dd></div>
+    <div><dt>Sodium</dt><dd>~1,000 <small>mg/h</small></dd></div>
+  </dl>
 
-  <div class="sec-label rm-hide" style="margin-top:26px">A vs B — compare the plans</div>
+  <div class="sec-label rm-hide" style="margin-top:26px">Bike fuel plans</div>
   <div class="phone-comparison view-switch" role="group" aria-label="Compare fuel plans"><button type="button" data-phone-plan="a">A · Bottle</button><button type="button" data-phone-plan="b">B · Pocket</button></div><div class="tblwrap rm-hide" tabindex="0" role="region" aria-label="Fuel plan comparison"><table class="cmp" style="min-width:540px">
     <tr><th></th><th class="ha">Plan A · Bottle<span>bottle 2 = carb</span></th><th class="hb">Plan B · Pocket<span>bottle 2 = sodium</span></th></tr>
     <tr class="nums"><td>At a glance</td><td>210 g · 4 wrappers · ~6–8 caps</td><td>205 g · 7 wrappers · ~4–6 caps</td></tr>
-    <tr class="key"><td>Technical km 0–25<em>this is the decision</em></td><td>Sip the bottle. Zero unwrapping on the ground where hands matter most.</td><td>Gels at 0:20 and 0:50, climbs only, tabs pre-nicked.</td></tr>
-    <tr><td>Weak point</td><td>Bottle preparation and drinking on rough ground; mix before the swim, not during the T1 change.</td><td>Handling demands where your handling is scarcest.</td></tr>
-    <tr><td>September proves</td><td>Drinking on gravel · the T1 mix, 750 ml against Maurten's 500 ml spec.</td><td>Unwrapping <i>and</i> retrieving on gravel — the least-tested link in the plan.</td></tr>
+    <tr class="key"><td>First 25 km</td><td>Sip bottle 2 · no wrappers</td><td>Gels 0:20 + 0:50 · climbs only</td></tr>
+    <tr><td>Weak point</td><td>Mix before swim · practise rough-ground drinking</td><td>Open and retrieve gels on technical terrain</td></tr>
+    <tr><td>September proves</td><td>750 ml mix vs 500 ml product spec · rehearse</td><td>Gel handling on gravel · rehearse</td></tr>
   </table></div>
-  <p class="vsverdict rm-hide"><b>One decision, everything else follows.</b> Both run two cages and bottle 1 is clean water all day. The only real choice is <b>where the technical-sector fuel lives</b>: in a bottle you sip, or in a pocket you open. Wrapper count, capsule count and what September has to prove are consequences of that, not separate questions.</p>
 
-  <div class="sec-label" style="margin-top:26px">Day ledgers</div>
-  <div class="two" style="grid-template-columns:1fr">
-    <div class="card rail-ink" style="margin-bottom:0">
-      <div class="plan-head" style="margin:0 0 4px"><span class="pn">Day ledgers</span><span class="pd">totals · the legs live in the feed clock</span></div>
+
+  <details class="reference-details"><summary>Day totals &amp; estimates</summary><div class="inner">
       <div class="fkv2"><ul class="fkv">
         <li><span class="k">Carbs, bike + run</span><span class="v">~230–260 g</span></li>
         <li><span class="k">Energy in</span><span class="v">~950–1,050 kcal <small>carbs × 4</small></span></li>
@@ -1215,44 +1244,45 @@ body.focused-plan .vsverdict,body.focused-plan .phone-comparison{display:none}
         <li><span class="k">Caffeine</span><span class="v">~180 mg · 280 with run swap</span></li>
         <li><span class="k">Caffeine ceiling</span><span class="v">222–444 mg <small>3–6 mg/kg</small></span></li>
       </ul></div>
-    </div>
-  </div>
+  </div></details>
 
-  <div class="rm-hide"><div class="sec-label" style="margin-top:26px">Standing rules</div>
-  <div class="rgrid"><div class="rtile f"><svg class="rico" viewBox="-12 -12 24 24" width="28" height="28" aria-hidden="true"><g fill="none" stroke="#0E6272" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M0,-9 C5,-3 8,0 8,3.5 A8,8 0 0 1 -8,3.5 C-8,0 -5,-3 0,-9 Z"/></g></svg><div><b>Fill both at W1</b><span>Refill both at W1. At W2, refill bottle 1 and follow the selected plan for bottle 2.</span></div></div><div class="rtile f"><svg class="rico" viewBox="-12 -12 24 24" width="28" height="28" aria-hidden="true"><g fill="none" stroke="#B3341F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="0" cy="0" r="9"/><path d="M0,-5 L0,1.5 M0,5 L0,5.2"/></g></svg><div><b>Carry everything from T1</b><span>Supplies taken outside an aid zone cost 30 minutes.</span></div></div><div class="rtile"><svg class="rico" viewBox="-12 -12 24 24" width="28" height="28" aria-hidden="true"><g fill="none" stroke="#8A5A2B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M-10,7 L-2,-6 L2,0 L5,-4 L10,7 Z"/></g></svg><div><b>Feed on climbs, never descents</b><span>Solids in the first two thirds, gels late. Gastric emptying fades.</span></div></div><div class="rtile"><svg class="rico" viewBox="-12 -12 24 24" width="28" height="28" aria-hidden="true"><g fill="none" stroke="#1B2A32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="-2" y="-10" width="4" height="2.6" rx="1"/><rect x="-5.5" y="-7" width="11" height="17" rx="3"/><path d="M-5.5,-1 L5.5,-1"/></g></svg><div><b>Never salt a full Maurten bottle</b><span>Empty at W1, it becomes the sodium bottle — in both plans.</span></div></div><div class="rtile"><svg class="rico" viewBox="-12 -12 24 24" width="28" height="28" aria-hidden="true"><g fill="none" stroke="#8A5A2B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="0" cy="0" r="9"/><path d="M0,-5 L0,0 L4,3"/></g></svg><div><b>Load sodium at 07:30</b><span>2,000 mg standing still, so Cap de Creus runs on 3–4 caps, not 7.</span></div></div><div class="rtile"><svg class="rico" viewBox="-12 -12 24 24" width="28" height="28" aria-hidden="true"><g fill="none" stroke="#1B2A32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8,-2 A8,8 0 1 1 3,-7.4"/><path d="M8.5,-8 L8.5,-2 L2.5,-2"/></g></svg><div><b>Powder before water</b><span>Unscrew the cap; a drinking valve will not take powder. Vials, not baggies.</span></div></div><div class="rtile"><svg class="rico" viewBox="-12 -12 24 24" width="28" height="28" aria-hidden="true"><g fill="none" stroke="#1B2A32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="-9" y="-4" width="18" height="8" rx="4"/><path d="M0,-4 L0,4"/></g></svg><div><b>Capsules</b><span>250 mg each, 15 per box. Decant into a pill vial — foil blisters do not open one-handed.</span></div></div><div class="rtile f"><svg class="rico" viewBox="-12 -12 24 24" width="28" height="28" aria-hidden="true"><g fill="none" stroke="#1B2A32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="-5.5" cy="4" r="4.5"/><circle cx="5.5" cy="4" r="4.5"/><path d="M-5.5,4 L-1,-4 L5.5,4 M-1,-4 L2,-4"/></g></svg><div><b>Prove the cages hold</b><span>Two bottles on 80 km of gravel is untested. September, then Wed 14.</span></div></div><div class="rtile"><svg class="rico" viewBox="-12 -12 24 24" width="28" height="28" aria-hidden="true"><g fill="none" stroke="#1B2A32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="-9" y="-4" width="18" height="9" rx="4"/><path d="M-3,-4 L-3,5 M3,-4 L3,5"/></g></svg><div><b>The roll holds what you never need moving</b><span>It unrolls flat. Repair kit, not food. Allocation open — item 10.</span></div></div><div class="rtile"><svg class="rico" viewBox="-12 -12 24 24" width="28" height="28" aria-hidden="true"><g fill="none" stroke="#8A5A2B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="0" cy="0" r="9"/><circle cx="0" cy="0" r="4"/></g></svg><div><b>Nothing new on Saturday</b><span>Familiar, gut-tested carbs only. Race breakfast ~04:45, same as always.</span></div></div><div class="rtile"><svg class="rico" viewBox="-12 -12 24 24" width="28" height="28" aria-hidden="true"><g fill="none" stroke="#5C6B72" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M-7,-3 L7,-3 L8,9 L-8,9 Z"/><path d="M-3.5,-3 L-3.5,-7 A3.5,3.5 0 0 1 3.5,-7 L3.5,-3"/></g></svg><div><b>Every wrapper comes back</b><span>Unmarked course, open roads. Do not hand the jury anything.</span></div></div></div>
-  </div>
-
-  <div class="banner rm-hide">
-    <div class="t">Whichever plan rehearses cleanly in September races.</div>
-    <p>Run A, B, or one each on the September gravel Saturdays. Nothing debuts on 18 October — not the capsules, not the unwrapping, not the T1 mix, not the CAF swap.</p>
+  <div class="fuel-rules" aria-label="Fuel handling rules">
+    <p><b>Refills</b>W1: both bottles · W2: bottle 1 + selected plan</p>
+    <p><b>Mixing</b>Empty Maurten first → powder → water</p>
+    <p><b>Handling</b>Feed on climbs · keep wrappers · capsules in a vial</p>
+    <p><b>Aid zones only</b>Outside supplies: +30 min</p>
   </div>
 </section>
 
 <!-- ============ PACING ============ -->
 <section id="pacing">
-  <h2>Pacing & scenarios <span class="tag">bands from planning session · splits are working allocations</span></h2>
+  <h2>Pacing <span class="tag">Planning scenarios · not predictions</span></h2>
+  <div class="cutoff">
+    <div class="chead"><span>09:00 start</span><span>Finish / margin to 16:59</span></div>
+    <div class="crow "><span class="ck">Best</span><span class="ctrack" role="img" aria-label="Best: finish 14:53, 2h 06m before provisional 16:59 cutoff"><i class="lim" style="left:88.8683%"></i><i class="sg swim" style="width:5.1948%"></i><i class="sg t1" style="width:1.2987%"></i><i class="sg bike" style="width:44.1558%"></i><i class="sg t2" style="width:0.9276%"></i><i class="sg run" style="width:13.9147%"></i><i class="sg buf" style="width:34.5083%"></i></span><span class="cfin">14:53<small>2h 06m spare</small></span></div>
+    <div class="crow base-scenario"><span class="ck">Base</span><span class="ctrack" role="img" aria-label="Base: finish 15:30, 1h 29m before provisional 16:59 cutoff"><i class="lim" style="left:88.8683%"></i><i class="sg swim" style="width:5.5659%"></i><i class="sg t1" style="width:1.4842%"></i><i class="sg bike" style="width:48.2375%"></i><i class="sg t2" style="width:1.1132%"></i><i class="sg run" style="width:15.9555%"></i><i class="sg buf" style="width:27.6438%"></i></span><span class="cfin">15:30<small>1h 29m spare</small></span></div>
+    <div class="crow "><span class="ck">Slow</span><span class="ctrack" role="img" aria-label="Slow: finish 16:36, 23 min before provisional 16:59 cutoff"><i class="lim" style="left:88.8683%"></i><i class="sg swim" style="width:6.1224%"></i><i class="sg t1" style="width:1.8553%"></i><i class="sg bike" style="width:56.5863%"></i><i class="sg t2" style="width:1.4842%"></i><i class="sg run" style="width:18.5529%"></i><i class="sg buf" style="width:15.3989%"></i></span><span class="cfin">16:36<small>23 min spare</small></span></div>
+    <div class="clegend2"><span><i class="sg swim"></i>Swim</span><span><i class="sg bike"></i>Bike</span><span><i class="sg run"></i>Run</span><span><i class="sg t1"></i>Transitions</span><span><i class="sg buf"></i>Spare to 17:59</span><span class="limit-key">16:59 provisional limit</span></div>
+  </div>
+  <p class="cutoff-note">Plan against <b>16:59</b> until confirmed at check-in. Published overall limit: <b>17:59</b>.</p>
+  <details class="reference-details"><summary>Exact splits &amp; clock checks</summary><div class="inner">
   <div class="tblwrap" tabindex="0" role="region" aria-label="Scrollable data table"><table>
     <tr><th>Scenario</th><th class="m">Swim</th><th class="m">T1</th><th class="m">Bike</th><th class="m">T2</th><th class="m">Run</th><th class="m">Total</th></tr>
-    <tr><td><b>A · Best</b><span class="why" style="display:block;font-size:12px;color:var(--muted)">clean day, good group on the plain</span></td>
+    <tr><td><b>Best</b><span class="why" style="display:block;font-size:12px;color:var(--muted)">clean day, good group on the plain</span></td>
       <td class="m">0:28</td><td class="m">0:07</td><td class="m">3:58</td><td class="m">0:05</td><td class="m">1:15</td><td class="m"><b>~5:55–6:00</b></td></tr>
-    <tr class="hl"><td><b>B · Base</b><span class="why" style="display:block;font-size:12px;color:var(--muted)">the plan of record</span></td>
+    <tr class="hl"><td><b>Base</b><span class="why" style="display:block;font-size:12px;color:var(--muted)">working target</span></td>
       <td class="m">0:30</td><td class="m">0:08</td><td class="m">4:20</td><td class="m">0:06</td><td class="m">1:26</td><td class="m"><b>~6:30–6:45</b></td></tr>
-    <tr><td><b>C · Worst</b><span class="why" style="display:block;font-size:12px;color:var(--muted)">mechanical stop, wind, nav error</span></td>
+    <tr><td><b>Slow</b><span class="why" style="display:block;font-size:12px;color:var(--muted)">mechanical stop, wind, nav error</span></td>
       <td class="m">0:33</td><td class="m">0:10</td><td class="m">5:05</td><td class="m">0:08</td><td class="m">1:40</td><td class="m"><b>7:30+</b></td></tr>
   </table></div>
   <div class="tblwrap" tabindex="0" role="region" aria-label="Scrollable data table"><table class="tight" style="min-width:420px">
-    <tr><th>Clock check</th><th class="m">A</th><th class="m">B</th><th class="m">C</th><th class="m">Limit</th></tr>
+    <tr><th>Clock check</th><th class="m">Best</th><th class="m">Base</th><th class="m">Slow</th><th class="m">Limit</th></tr>
     <tr><td>Swim exit</td><td class="m">09:28</td><td class="m">09:30</td><td class="m">09:33</td><td class="m" style="color:var(--flag)">09:59</td></tr>
     <tr><td>T2 · run start</td><td class="m">13:38</td><td class="m">14:04</td><td class="m">14:56</td><td class="m" style="color:var(--flag)">15:49</td></tr>
     <tr><td>Finish</td><td class="m">14:53</td><td class="m">15:30</td><td class="m">16:36</td><td class="m" style="color:var(--flag)">16:59? / 17:59</td></tr>
   </table></div>
-  <div class="cutoff">
-    <div class="chead"><span>09:00 start</span><span><b style="color:var(--flag)">16:59 trail limit?</b> · 17:59 overall</span></div>
-    <div class="crow"><span class="ck">A · Best</span><span class="ctrack"><i class="lim" style="left:88.7%"></i><i class="sg swim" style="width:5.19%"></i><i class="sg t1" style="width:1.3%"></i><i class="sg bike" style="width:44.07%"></i><i class="sg t2" style="width:0.93%"></i><i class="sg run" style="width:13.89%"></i><i class="sg buf" style="width:34.44%"></i></span><span class="cfin">14:53<small>3h06 · <b>2h06 if 16:59</b></small></span></div><div class="crow"><span class="ck">B · Plan of record</span><span class="ctrack"><i class="lim" style="left:88.7%"></i><i class="sg swim" style="width:5.56%"></i><i class="sg t1" style="width:1.48%"></i><i class="sg bike" style="width:48.15%"></i><i class="sg t2" style="width:1.11%"></i><i class="sg run" style="width:15.93%"></i><i class="sg buf" style="width:27.59%"></i></span><span class="cfin">15:30<small>2h29 · <b>1h29 if 16:59</b></small></span></div><div class="crow"><span class="ck">C · Worst</span><span class="ctrack"><i class="lim" style="left:88.7%"></i><i class="sg swim" style="width:6.11%"></i><i class="sg t1" style="width:1.85%"></i><i class="sg bike" style="width:56.48%"></i><i class="sg t2" style="width:1.48%"></i><i class="sg run" style="width:18.52%"></i><i class="sg buf" style="width:15.37%"></i></span><span class="cfin">16:36<small>1h23 · <b style="color:var(--flag)">23′ if 16:59</b></small></span></div>
-    <div class="clegend2"><span><i class="sg swim"></i>swim</span><span><i class="sg bike"></i>bike</span><span><i class="sg run"></i>run</span><span><i class="sg t1"></i>transitions</span><span><i class="sg buf"></i>spare</span></div>
-  </div>
-  <p><b>The margin depends on which limit is real.</b> Against the 17:59 overall cut-off, even the worst case finishes 1h23 inside. But the timetable also lists a <b>16:59 trail limit</b> — if that is enforced at the finish, scenario C has <b>23 minutes</b>, not 83. Confirm at check-in on Friday. Until then, plan as if 16:59 is the one that counts: the buffer is for walking pitches and fixing a flat calmly, not for spending in sector 1.</p>
-  <p class="small">Effort anchors: swim = steady IM effort · bike = IM effort (FTP 250 W reference; cap climbs low Z3, no anaerobic spikes km 0–25; sit in the group on the plain) · run = hike ≥ steep grades, commit on the descent.</p>
+  <p class="small">Effort reference: FTP 250 W · cap bike climbs at low Z3.</p>
+  </div></details>
 </section>
 
 <!-- ============ KIT ============ -->
@@ -1263,14 +1293,14 @@ body.focused-plan .vsverdict,body.focused-plan .phone-comparison{display:none}
     <h3>Rental — Specialized Crux Comp</h3>
     <div class="tblwrap" tabindex="0" role="region" aria-label="Scrollable data table"><table class="spec" style="min-width:460px">
       <tr><th>Item</th><th>Spec</th><th style="text-align:right">Status</th></tr>
-      <tr><td>Tyres</td><td><b>45 mm, inner tubes</b> — no tubeless option. Right width: air volume is what resists pinch flats</td><td class="st"><span class="stag ok">Confirmed</span></td></tr>
-      <tr><td>Pressure</td><td><b>2.2 bar front · 2.4–2.5 rear</b> (32–36 psi) at 74 kg · <b>floor 2.0</b>. Tubed numbers — softer pinch-flats on sector 1</td><td class="st"><span class="stag rec">Set Wed 14</span></td></tr>
-      <tr><td>Gearing</td><td><b>GRX 1×12 · 40T · 10–45 = 0.89:1</b> — 7.1 km/h at 60 rpm, ~88% FTP on 12%. 1× means no front shift to drop a chain on; the clutch holds it on chatter</td><td class="st"><span class="stag ok">Confirmed</span></td></tr>
-      <tr><td>Pedals</td><td><b>Flats</b>, ridden in the Vivobarefoots. Ask for <b>pinned platforms</b> — bare resin does not grip a soft sole in the wet. Own pair (~€35) if not</td><td class="st"><span class="stag rec">Ask</span></td></tr>
+      <tr><td>Tyres</td><td><b>45 mm, inner tubes</b> · not tubeless</td><td class="st"><span class="stag ok">Confirmed</span></td></tr>
+      <tr><td>Pressure</td><td><b>2.2 bar front · 2.4–2.5 rear</b> · at 74 kg · <b>floor 2.0</b></td><td class="st"><span class="stag rec">Set Wed 14</span></td></tr>
+      <tr><td>Gearing</td><td><b>GRX 1×12 · 40T · 10–45 = 0.89:1</b></td><td class="st"><span class="stag ok">Confirmed</span></td></tr>
+      <tr><td>Pedals</td><td><b>Pinned flat pedals</b> · Vivobarefoot shoes · confirm at pickup</td><td class="st"><span class="stag rec">Ask</span></td></tr>
       <tr><td>Cages</td><td><b>Two</b>, bottle 1 water + bottle 2 DM320/NoordCode</td><td class="st"><span class="stag ok">Confirmed</span></td></tr>
       <tr><td>Seat roll</td><td>Silca rail-mount BOA — fits any railed saddle; check clearance</td><td class="st"><span class="stag rec">Pickup</span></td></tr>
       <tr><td>Repair kit</td><td>Comes with the bike. Needs <b>tubes 700×38–47</b>, valves long enough for their rims, two levers, a pump not a lone CO2</td><td class="st"><span class="stag rec">Check contents</span></td></tr>
-      <tr><td>GPS mount</td><td>Fits the head unit — navigation <i>is</i> the race</td><td class="st"><span class="stag rec">Test Wed 14</span></td></tr>
+      <tr><td>GPS mount</td><td>Fits head unit · test fit</td><td class="st"><span class="stag rec">Test Wed 14</span></td></tr>
     </table></div>
     <ul class="check" style="margin-top:8px">
       <li><input type="checkbox" data-k="kit-1"><span><b>Wed 14 shakedown</b> — set pressure, one rear-wheel tube change (thru-axle, disc, 1×), bottle retention on rough ground, GPS mount</span></li>
@@ -1373,13 +1403,7 @@ body.focused-plan .vsverdict,body.focused-plan .phone-comparison{display:none}
 </section>
 
 <!-- ============ OPEN ITEMS ============ -->
-<section id="finale" class="rm-hide">
-  <div class="card rail-ink" style="margin-top:18px;border-left-width:5px">
-    <h3>The whole race in one line</h3>
-    <p style="font-size:15px;line-height:1.6"><b>Ride sector 1 like it can end your day. Draft the plain like it is free time. Hike the climb, commit the descent.</b></p>
-    <p class="small" style="margin-top:6px">Everything above serves those three sentences. If the plan and the day disagree on race morning, the sentences win.</p>
-  </div>
-</section>
+
 
 <footer><details class="prov"><summary>Sources &amp; verification</summary>
   <p><b>Sources.</b> Race facts: sgrail100.com course/timetable/rules (re-verified 23 Aug 2026 — bus 06:30, swim cutoff 09:59, run limit 2h00, T2 Torre Desvern all confirmed from the current course page) + 2024 race briefing + 2024 finisher report (river crossing, gearing). Fuelling & salt: <span class="num">bike_fuelling_card.md</span> incl. the SGrail aid exception — revised to a <b>two-bottle</b> setup 25 Aug 2026 (Des); station stock + Plan A/B added and re-expressed as the feed-clock card 24 Aug 2026 (stations & products verified vs sgrail100.com/course). Course profile from the organiser's embedded RideWithGPS routes (GRAVEL 48660982 · TRAIL 48576854, 2025-edition course); official 2026 GPX supersedes on Friday. Plan of record & scenarios: SGrail block planning sessions (Zwift-first structure, Crux rental, Oct 14 skills ride, A/B/C bands). Splits within scenarios are working allocations, not predictions.</p>
