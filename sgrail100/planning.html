@@ -790,6 +790,9 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
  #pacing .chead{font-size:12px;gap:12px}
  .reference-details>.inner{padding:0 12px 12px}
 }
+#course .course-annotations text{font-family:var(--body);font-size:12px}#course .course-annotations{fill:var(--ink)}
+#course .course-annotations .annotation-title{font-family:var(--disp);font-size:18px;font-weight:700}
+#course .course-annotations .annotation-time{font-size:12px;font-weight:600}
 </style>
 <script>
 /* Theme resolves before paint so a dark start does not flash white. auto = follow the device. */
@@ -921,9 +924,11 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
   <p class="maphint rm-hide">Tap the profile for km · altitude — tap a dot for station detail · scrolls sideways</p>
   
   <p class="mobile-chart-help rm-hide">Swipe the detailed profile sideways. Tap a station for its instructions.</p>
-  <figure class="course-figure rm-hide" aria-label="Course profile and chart key">
+  <figure class="course-figure" aria-label="Course profile and chart key">
   <div class="prof-scroll" tabindex="0" role="region" aria-label="Detailed course profile"><div class="prof-inner">
-  <svg id="profsvg" viewBox="0 0 760 276" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SGrail 100 course profile: bike 86.4 km with approximately 1,000 m ascent; run 10.5 km with 320 m ascent. Technical bike sector km 0–25; draft and fuel on the plain. Hike the run climb, regroup at castle aid, then descend.">
+  <svg id="profsvg" viewBox="0 0 760 454" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="course-graph-title course-graph-desc">
+    <title id="course-graph-title">Course, timing and execution</title>
+    <desc id="course-graph-desc">Swim: 28–33 minutes, cutoff 09:59. Anti-clockwise rectangle at Platja Gran, approximately 18.5 degrees Celsius, wetsuit on. First 300 m easy; sight every 6–8 strokes. Bike: 86.4 km, approximately 1,000 m ascent, 4:00–4:45, cutoff 15:49. First 25 km contain about 67 percent of climbing; ride carefully, then draft and fuel on the plain. Budget about 2 minutes across both water stops. Station drink does not replace the capsule plan. Run: 10.5 km, 320 m ascent, 1:10–1:20. Climb 250 m in 4.5 km, descend for 3 km, then 50 m and 20 m rises and 20 finish steps. Regroup at castle aid, km 4.2. Cutoff unconfirmed: 16:59 trail versus 17:59 overall.</desc>
     <text x="84" y="20" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#8A5A2B">KM 0–25 · LOW Z3 / WALK PITCHES</text>
     <text x="360" y="95" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#8A5A2B">KM 25–86 · DRAFT + FUEL</text>
     <text x="360" y="112" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">EXPOSED PLAIN · WIND</text>
@@ -973,30 +978,41 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
     <circle class="hit" data-k="w2" data-cx="495.9" data-cy="167.5" cx="495.9" cy="167.5" r="22" fill="none" pointer-events="all"/>
     <circle class="hit" data-k="c45" data-cx="669.0" data-cy="76.0" cx="669.0" cy="76.0" r="22" fill="none" pointer-events="all"/>
     <circle class="hit" data-k="fin" data-cx="744" data-cy="146.0" cx="744" cy="146.0" r="22" fill="none" pointer-events="all"/>
+    
+    <g class="course-annotations" pointer-events="none">
+      <line x1="14" y1="282" x2="746" y2="282" stroke="var(--line)"/>
+      <g transform="translate(14,304)">
+        <text class="annotation-title" fill="var(--sea)">SWIM</text>
+        <text y="22" class="annotation-time">28–33 min · cutoff 09:59</text>
+        <path d="M4,58 V38 H29 V58 H4 l5,-4 M4,58 l5,4" fill="none" stroke="var(--sea)" stroke-width="1.5"/>
+        <text x="40" y="43">Anti-clockwise rectangle</text>
+        <text x="40" y="60">Platja Gran · ~18.5 °C</text>
+        <text y="82">Wetsuit on</text>
+        <text y="106">First 300 m easy</text>
+        <text y="126">Sight every 6–8 strokes</text>
+      </g>
+      <g transform="translate(270,304)">
+        <text class="annotation-title" fill="var(--track)">BIKE</text>
+        <text y="22" class="annotation-time">4:00–4:45 · cutoff 15:49</text>
+        <text y="48">km 0–25: ~67% of climbing</text>
+        <text y="68">Careful lines → draft &amp; fuel</text>
+        <text y="94">W1 + W2: ~2 min total stops</text>
+        <text y="116">Station drink ≠ replacement</text>
+        <text y="133">for the capsule plan</text>
+      </g>
+      <g transform="translate(526,304)">
+        <text class="annotation-title" fill="var(--trail)">RUN</text>
+        <text y="22" class="annotation-time">1:10–1:20 · cutoff to confirm</text>
+        <text y="43">16:59 trail / 17:59 overall</text>
+        <text y="69">↑ 250 m / 4.5 km → ↓ 3 km</text>
+        <text y="91">↑ 50 m → ↑ 20 m → 20 steps</text>
+        <text y="117">Regroup at castle aid · km 4.2</text>
+      </g>
+    </g>
     </svg>
   </div></div>
 <figcaption>  <div class="mlegend" aria-label="Course chart key"><b class="chart-key-title">Chart key</b><span><i class="md must"></i>planned refill · don’t skip</span><span><i class="md rec"></i>recommended</span><span><i class="md opt"></i>optional</span><span><i class="md climb"></i>sector 1 · technical</span></div></figcaption>
   </figure>
-
-  <div class="legs3" aria-label="Discipline timing and cues">
-    <div class="lg sea">
-      <div class="lh"><b>Swim</b><span class="leg-stats">28–33 min · cutoff 09:59</span></div>
-      <p>First 300 m easy · sight every 6–8 strokes.</p>
-    </div>
-    <div class="lg track">
-      <div class="lh"><b>Bike</b><span class="leg-stats">4:00–4:45 · cutoff 15:49</span></div>
-      <p>Ride carefully → draft &amp; fuel.</p>
-    </div>
-    <div class="lg trail">
-      <div class="lh"><b>Run</b><span class="leg-stats">1:10–1:20 · cutoff unconfirmed</span></div>
-      <p>Castle aid km 4.2 · late climbs + finish steps.</p>
-    </div>
-  </div>
-  <details class="course-notes"><summary>More course details</summary><div class="inner">
-    <p><b>Swim:</b> anti-clockwise rectangle off Platja Gran · ~18.5 °C · wetsuit on.</p>
-    <p><b>Bike:</b> ~67% of climbing in km 0–25. Budget ~2 min for both water stops; station drink does not replace the capsule plan.</p>
-    <p><b>Run:</b> 250 m up in 4.5 km → 3 km down → 50 m kicker → 20 m rise → 20 steps. Cutoff to confirm: 16:59 trail / 17:59 overall.</p>
-  </div></details>
 
   <button type="button" id="compare-plan">Compare plans</button><div class="phone-feed"><h3>Bike feed times</h3><p class="small">Elapsed bike time, from the existing feed chart. Water stops and capsule instructions remain in the phase plan.</p><div class="view-switch" role="group" aria-label="Mobile fuel comparison"><button type="button" data-phone-plan="a">A · Bottle</button><button type="button" data-phone-plan="b">B · Pocket</button></div><p class="phone-view-label" role="status"></p><ol class="feed-list" data-feed-plan="a"><li><time>0:20</time><span>Begin bottle window → W1</span></li><li><time>1:30</time><span>½ SOLID 160</span></li><li><time>1:55</time><span>½ SOLID 160</span></li><li><time>2:20</time><span>½ SOLID 160</span></li><li><time>2:45</time><span>½ SOLID 160</span></li><li><time>2:55</time><span>CAF 100</span></li><li><time>3:30</time><span>GEL 100</span></li></ol><ol class="feed-list" data-feed-plan="b"><li><time>0:20</time><span>GEL 100</span></li><li><time>0:50</time><span>GEL 100</span></li><li><time>1:15</time><span>½ SOLID 160</span></li><li><time>1:40</time><span>½ SOLID 160</span></li><li><time>2:05</time><span>½ SOLID 160</span></li><li><time>2:30</time><span>½ SOLID 160</span></li><li><time>2:55</time><span>CAF 100</span></li><li><time>3:30</time><span>GEL 100</span></li><li><time>4:00</time><span>GEL 100 · optional</span></li></ol><p class="small">For terrain and feed positions, open the chart below.</p></div>
   <div class="plan-controls"><span>View fuel plan<small class="plan-indicator" role="status">Race plan: undecided · viewing both plans</small></span><div class="abtog" role="group" aria-label="Fuel plan view"><button type="button" data-m="a" aria-pressed="false">A · Bottle</button><button type="button" data-m="b" aria-pressed="false">B · Pocket</button><button type="button" class="on" data-m="both" aria-pressed="true">Both</button></div></div>
