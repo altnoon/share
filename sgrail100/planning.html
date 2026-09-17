@@ -821,6 +821,38 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
 #course .course-annotations text{font-size:12px}
 #course .chart-axis-label{font-family:var(--mono);fill:var(--muted)}
 #course .scale-note{font-weight:600;color:var(--trail);flex-basis:100%}
+/* Overview first on phones; exact profile remains available. */
+.mobile-route{display:none}.full-course{border:0;background:none;margin:0;padding:0}.full-course>summary{display:none}
+.transition-matrix{width:100%;table-layout:fixed;min-width:0!important}.transition-matrix th:first-child{width:34%}.transition-matrix td,.transition-matrix tbody th{font-size:14px;padding:12px 10px;line-height:1.4}.transition-matrix tbody th{text-align:left;background:none;color:var(--ink);font-weight:500}
+.transition-matrix thead th:nth-child(2){background:var(--sea-soft);color:var(--ink)}.transition-matrix thead th:nth-child(3){background:var(--track-soft);color:var(--ink)}.transition-matrix thead th:nth-child(4){background:var(--trail-soft);color:var(--ink)}
+.kit-status{font-size:12px;font-weight:600;white-space:nowrap}.fuel-pack{margin:20px 0}.fuel-pack p{margin:6px 0;font-size:14px}
+@media(max-width:600px){
+ .mobile-route{display:grid;gap:16px;margin:16px 0 20px}.mobile-route>div{padding-left:12px;border-left:3px solid var(--line)}.mobile-route .route-swim{border-color:var(--sea)}.mobile-route .route-bike{border-color:var(--track)}.mobile-route .route-run{border-color:var(--trail)}
+ .mobile-route b{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:15px}.mobile-route b span{font-weight:400;color:var(--muted);font-size:14px}.mobile-route p{font-size:14px;margin:6px 0}.mobile-route small{font-size:12px;color:var(--muted)}
+ .route-sectors{display:grid;grid-template-columns:29fr 71fr;gap:3px;margin-top:8px}.route-sectors span{border-top:5px solid var(--track);font-size:13px;padding-top:6px}.route-sectors span+span{border-color:var(--line)}
+ .full-course>summary{display:flex;min-height:48px;font-size:14px;padding:12px 0}
+ #kit .transition-matrix td,#kit .transition-matrix th{font-size:12px;padding:10px 5px;overflow-wrap:break-word}
+}
+/* Final mobile hierarchy: visible essentials, readable stage comparisons. */
+#course>.course-timing{margin-top:16px;border-bottom:1px solid var(--line);border-radius:8px}
+.full-course{margin-top:12px}
+#course .course-figure .prof-scroll{border-radius:8px 8px 0 0}
+@media(max-width:600px){
+ #course>.course-timing{gap:12px;padding:14px}
+ .course-timing strong{font-size:16px;white-space:nowrap}
+ .course-timing small{font-size:13px}
+ #kit .transition-wrap{overflow:visible;border:0}
+ #kit .transition-matrix{display:block}
+ #kit .transition-matrix thead{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%)}
+ #kit .transition-matrix tbody{display:block}
+ #kit .transition-matrix tbody tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-bottom:1px solid var(--line);padding:12px 0;gap:8px}
+ #kit .transition-matrix tbody th{grid-column:1/-1;width:auto;padding:0 0 4px;font-size:15px;font-weight:600;border:0}
+ #kit .transition-matrix tbody td{padding:0;font-size:14px;line-height:1.5;border:0;min-width:0}
+ #kit .transition-matrix td::before{content:attr(data-stage);display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px}
+ #kit .transition-matrix td:nth-child(2)::before{color:var(--sea)}
+ #kit .transition-matrix td:nth-child(3)::before{color:var(--track)}
+ #kit .transition-matrix td:nth-child(4)::before{color:var(--trail)}
+}
 </style>
 <script>
 /* Theme resolves before paint so a dark start does not flash white. auto = follow the device. */
@@ -951,12 +983,19 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
   <p class="maphint rm-hide">Tap the profile for km · altitude — tap a dot for station detail · scrolls sideways</p>
   
   <p class="mobile-chart-help rm-hide">Swipe the detailed profile sideways. Tap a station for its instructions.</p>
-  <figure class="course-figure" aria-label="Course profile and chart key">
+  <div class="mobile-route" aria-label="Course overview, schematic">
+    <div class="route-swim"><b>Swim <span>1.5 km</span></b><p>Open sea → T1</p></div>
+    <div class="route-bike"><b>Bike <span>86.4 km · ~1,000 m ascent</span></b><div class="route-sectors"><span>0–25 km<br>Technical</span><span>25–86.4 km<br>Plain · draft &amp; fuel</span></div></div>
+    <div class="route-run"><b>Run <span>10.5 km · 320 m ascent</span></b><p>Climb → castle aid 4.2 km → descend → late rises</p></div>
+    <small>Route sequence · detailed altitude profile below</small>
+  </div>
   <div class="course-timing" aria-label="Discipline times and cutoffs">
     <div><b class="sea-label">Swim</b><strong>28–33 min</strong><small>Cutoff 09:59</small></div>
     <div><b class="bike-label">Bike</b><strong>4:00–4:45</strong><small>Cutoff 15:49</small></div>
     <div><b class="run-label">Run</b><strong>1:10–1:20</strong><small class="unconfirmed">Cutoff unconfirmed<br>16:59 trail / 17:59 overall</small></div>
   </div>
+  <details class="full-course" data-mobile-chart="true" open><summary>Detailed course profile</summary>
+  <figure class="course-figure" aria-label="Course profile and chart key">
   <div class="prof-scroll" tabindex="0" role="region" aria-label="Detailed course profile"><div class="prof-inner">
   <svg id="profsvg" viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="course-graph-title course-graph-desc">
     <text x="14" y="16" class="chart-axis-label">ALT. m</text><title id="course-graph-title">Course, timing and execution</title>
@@ -1013,13 +1052,13 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
     
     <g class="course-annotations" pointer-events="none">
       <path d="M40,178 V275 H14" fill="none" stroke="var(--sea)" opacity=".5"/>
-      <text x="14" y="293" fill="var(--sea)">First 300 m easy · sight every 6–8 strokes</text>
+      <text x="14" y="293" fill="var(--sea)">300 m easy · sight every 6–8 strokes</text>
       
       
-      <path d="M158,52 V35 H280" fill="none" stroke="var(--track)" opacity=".5"/>
+      <path d="M158,52 V39 H250" fill="none" stroke="var(--track)" opacity=".5"/>
       <text x="84" y="32" font-size="11">~67% of climbing</text>
       <path d="M286,176 V145 H496 V167" fill="none" stroke="var(--track)" opacity=".5"/>
-      <text x="300" y="132" fill="var(--track)">W1 + W2 · ~2 min stops total</text>
+      <text x="300" y="132" fill="var(--track)">W1 + W2 · ~2 min total</text>
       
       <path d="M669,76 V42" fill="none" stroke="var(--trail)" opacity=".5"/>
       <path d="M730,150 L754,165 V276 H526" fill="none" stroke="var(--trail)" opacity=".5"/>
@@ -1031,6 +1070,7 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
   </div></div>
 <figcaption>  <div class="mlegend" aria-label="Course chart key"><b class="chart-key-title">Chart key</b><span class="scale-note">Run distance shown at 2× bike scale</span><span><i class="md must"></i>planned refill · don’t skip</span><span><i class="md rec"></i>recommended</span><span><i class="md opt"></i>optional</span><span><i class="md climb"></i>sector 1 · technical</span></div></figcaption>
   </figure>
+  </details>
 
   <button type="button" id="compare-plan">Compare plans</button><div class="phone-feed"><h3>Bike feed times</h3><p class="small">Elapsed bike time, from the existing feed chart. Water stops and capsule instructions remain in the phase plan.</p><div class="view-switch" role="group" aria-label="Mobile fuel comparison"><button type="button" data-phone-plan="a">A · Bottle</button><button type="button" data-phone-plan="b">B · Pocket</button></div><p class="phone-view-label" role="status"></p><ol class="feed-list" data-feed-plan="a"><li><time>0:20</time><span>Begin bottle window → W1</span></li><li><time>1:30</time><span>½ SOLID 160</span></li><li><time>1:55</time><span>½ SOLID 160</span></li><li><time>2:20</time><span>½ SOLID 160</span></li><li><time>2:45</time><span>½ SOLID 160</span></li><li><time>2:55</time><span>CAF 100</span></li><li><time>3:30</time><span>GEL 100</span></li></ol><ol class="feed-list" data-feed-plan="b"><li><time>0:20</time><span>GEL 100</span></li><li><time>0:50</time><span>GEL 100</span></li><li><time>1:15</time><span>½ SOLID 160</span></li><li><time>1:40</time><span>½ SOLID 160</span></li><li><time>2:05</time><span>½ SOLID 160</span></li><li><time>2:30</time><span>½ SOLID 160</span></li><li><time>2:55</time><span>CAF 100</span></li><li><time>3:30</time><span>GEL 100</span></li><li><time>4:00</time><span>GEL 100 · optional</span></li></ol><p class="small">For terrain and feed positions, open the chart below.</p></div>
   <div class="plan-controls"><span>View fuel plan<small class="plan-indicator" role="status">Race plan: undecided · viewing both plans</small></span><div class="abtog" role="group" aria-label="Fuel plan view"><button type="button" data-m="a" aria-pressed="false">A · Bottle</button><button type="button" data-m="b" aria-pressed="false">B · Pocket</button><button type="button" class="on" data-m="both" aria-pressed="true">Both</button></div></div>
@@ -1293,21 +1333,21 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
   <h2>Pacing <span class="tag">Planning scenarios · not predictions</span></h2>
   <div class="cutoff">
     <div class="chead"><span>09:00 start</span><span>Finish / margin to 16:59</span></div>
-    <div class="crow "><span class="ck">Best</span><span class="ctrack" role="img" aria-label="Best: finish 14:53, 2h 06m before provisional 16:59 cutoff"><i class="lim" style="left:88.8683%"></i><i class="sg swim" style="width:5.1948%"></i><i class="sg t1" style="width:1.2987%"></i><i class="sg bike" style="width:44.1558%"></i><i class="sg t2" style="width:0.9276%"></i><i class="sg run" style="width:13.9147%"></i><i class="sg buf" style="width:34.5083%"></i></span><span class="cfin">14:53<small>2h 06m spare</small></span></div>
-    <div class="crow base-scenario"><span class="ck">Base</span><span class="ctrack" role="img" aria-label="Base: finish 15:30, 1h 29m before provisional 16:59 cutoff"><i class="lim" style="left:88.8683%"></i><i class="sg swim" style="width:5.5659%"></i><i class="sg t1" style="width:1.4842%"></i><i class="sg bike" style="width:48.2375%"></i><i class="sg t2" style="width:1.1132%"></i><i class="sg run" style="width:15.9555%"></i><i class="sg buf" style="width:27.6438%"></i></span><span class="cfin">15:30<small>1h 29m spare</small></span></div>
-    <div class="crow "><span class="ck">Slow</span><span class="ctrack" role="img" aria-label="Slow: finish 16:36, 23 min before provisional 16:59 cutoff"><i class="lim" style="left:88.8683%"></i><i class="sg swim" style="width:6.1224%"></i><i class="sg t1" style="width:1.8553%"></i><i class="sg bike" style="width:56.5863%"></i><i class="sg t2" style="width:1.4842%"></i><i class="sg run" style="width:18.5529%"></i><i class="sg buf" style="width:15.3989%"></i></span><span class="cfin">16:36<small>23 min spare</small></span></div>
-    <div class="clegend2"><span><i class="sg swim"></i>Swim</span><span><i class="sg bike"></i>Bike</span><span><i class="sg run"></i>Run</span><span><i class="sg t1"></i>Transitions</span><span><i class="sg buf"></i>Spare to 17:59</span><span class="limit-key">16:59 provisional limit</span></div>
+    <div class="crow "><span class="ck">Best</span><span class="ctrack" role="img" aria-label="Best: finish 14:53, 2h 06m before provisional 16:59 cutoff"><i class="sg swim" style="width:5.8455%"></i><i class="sg t1" style="width:1.4614%"></i><i class="sg bike" style="width:49.6868%"></i><i class="sg t2" style="width:1.0438%"></i><i class="sg run" style="width:15.6576%"></i><i class="sg buf" style="width:26.3048%"></i></span><span class="cfin">14:53<small>2h 06m spare</small></span></div>
+    <div class="crow base-scenario"><span class="ck">Base</span><span class="ctrack" role="img" aria-label="Base: finish 15:30, 1h 29m before provisional 16:59 cutoff"><i class="sg swim" style="width:6.2630%"></i><i class="sg t1" style="width:1.6701%"></i><i class="sg bike" style="width:54.2797%"></i><i class="sg t2" style="width:1.2526%"></i><i class="sg run" style="width:17.9541%"></i><i class="sg buf" style="width:18.5804%"></i></span><span class="cfin">15:30<small>1h 29m spare</small></span></div>
+    <div class="crow "><span class="ck">Slow</span><span class="ctrack" role="img" aria-label="Slow: finish 16:36, 23 min before provisional 16:59 cutoff"><i class="sg swim" style="width:6.8894%"></i><i class="sg t1" style="width:2.0877%"></i><i class="sg bike" style="width:63.6743%"></i><i class="sg t2" style="width:1.6701%"></i><i class="sg run" style="width:20.8768%"></i><i class="sg buf" style="width:4.8017%"></i></span><span class="cfin">16:36<small>23 min spare</small></span></div>
+    <div class="clegend2"><span><i class="sg swim"></i>Swim</span><span><i class="sg bike"></i>Bike</span><span><i class="sg run"></i>Run</span><span><i class="sg t1"></i>Transitions</span><span><i class="sg buf"></i>Spare to 16:59</span></div>
   </div>
   <p class="cutoff-note">Plan against <b>16:59</b> until confirmed at check-in. Published overall limit: <b>17:59</b>.</p>
   <details class="reference-details"><summary>Exact splits &amp; clock checks</summary><div class="inner">
   <div class="tblwrap" tabindex="0" role="region" aria-label="Scrollable data table"><table>
-    <tr><th>Scenario</th><th class="m">Swim</th><th class="m">T1</th><th class="m">Bike</th><th class="m">T2</th><th class="m">Run</th><th class="m">Total</th></tr>
+    <tr><th>Scenario</th><th class="m">Swim</th><th class="m">T1</th><th class="m">Bike</th><th class="m">T2</th><th class="m">Run</th><th class="m">Split total</th></tr>
     <tr><td><b>Best</b><span class="why" style="display:block;font-size:12px;color:var(--muted)">clean day, good group on the plain</span></td>
-      <td class="m">0:28</td><td class="m">0:07</td><td class="m">3:58</td><td class="m">0:05</td><td class="m">1:15</td><td class="m"><b>~5:55–6:00</b></td></tr>
+      <td class="m">0:28</td><td class="m">0:07</td><td class="m">3:58</td><td class="m">0:05</td><td class="m">1:15</td><td class="m"><b>5:53</b></td></tr>
     <tr class="hl"><td><b>Base</b><span class="why" style="display:block;font-size:12px;color:var(--muted)">working target</span></td>
-      <td class="m">0:30</td><td class="m">0:08</td><td class="m">4:20</td><td class="m">0:06</td><td class="m">1:26</td><td class="m"><b>~6:30–6:45</b></td></tr>
+      <td class="m">0:30</td><td class="m">0:08</td><td class="m">4:20</td><td class="m">0:06</td><td class="m">1:26</td><td class="m"><b>6:30</b></td></tr>
     <tr><td><b>Slow</b><span class="why" style="display:block;font-size:12px;color:var(--muted)">mechanical stop, wind, nav error</span></td>
-      <td class="m">0:33</td><td class="m">0:10</td><td class="m">5:05</td><td class="m">0:08</td><td class="m">1:40</td><td class="m"><b>7:30+</b></td></tr>
+      <td class="m">0:33</td><td class="m">0:10</td><td class="m">5:05</td><td class="m">0:08</td><td class="m">1:40</td><td class="m"><b>7:36</b></td></tr>
   </table></div>
   <div class="tblwrap" tabindex="0" role="region" aria-label="Scrollable data table"><table class="tight" style="min-width:420px">
     <tr><th>Clock check</th><th class="m">Best</th><th class="m">Base</th><th class="m">Slow</th><th class="m">Limit</th></tr>
@@ -1326,15 +1366,15 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
   <div class="card rail-track">
     <h3>Rental — Specialized Crux Comp</h3>
     <div class="tblwrap" tabindex="0" role="region" aria-label="Scrollable data table"><table class="spec" style="min-width:460px">
-      <tr><th>Item</th><th>Spec</th><th style="text-align:right">Status</th></tr>
-      <tr><td>Tyres</td><td><b>45 mm, inner tubes</b> · not tubeless</td><td class="st"><span class="stag ok">Confirmed</span></td></tr>
-      <tr><td>Pressure</td><td><b>2.2 bar front · 2.4–2.5 rear</b> · at 74 kg · <b>floor 2.0</b></td><td class="st"><span class="stag rec">Set Wed 14</span></td></tr>
-      <tr><td>Gearing</td><td><b>GRX 1×12 · 40T · 10–45 = 0.89:1</b></td><td class="st"><span class="stag ok">Confirmed</span></td></tr>
-      <tr><td>Pedals</td><td><b>Pinned flat pedals</b> · Vivobarefoot shoes · confirm at pickup</td><td class="st"><span class="stag rec">Ask</span></td></tr>
-      <tr><td>Cages</td><td><b>Two</b>, bottle 1 water + bottle 2 DM320/NoordCode</td><td class="st"><span class="stag ok">Confirmed</span></td></tr>
-      <tr><td>Seat roll</td><td>Silca rail-mount BOA — fits any railed saddle; check clearance</td><td class="st"><span class="stag rec">Pickup</span></td></tr>
-      <tr><td>Repair kit</td><td>Comes with the bike. Needs <b>tubes 700×38–47</b>, valves long enough for their rims, two levers, a pump not a lone CO2</td><td class="st"><span class="stag rec">Check contents</span></td></tr>
-      <tr><td>GPS mount</td><td>Fits head unit · test fit</td><td class="st"><span class="stag rec">Test Wed 14</span></td></tr>
+      <tr><th>Item</th><th>Spec</th><th style="text-align:right">Status</th><th>Action</th></tr>
+      <tr><td>Tyres</td><td><b>45 mm, inner tubes</b> · not tubeless</td><td class="st"><span class="stag ok">Confirmed</span></td><td>—</td></tr>
+      <tr><td>Pressure</td><td><b>2.2 bar front · 2.4–2.5 rear</b> · at 74 kg · <b>floor 2.0</b></td><td class="st"><span class="stag rec">Check</span></td><td>Set Wed 14</td></tr>
+      <tr><td>Gearing</td><td><b>GRX 1×12 · 40T · 10–45 = 0.89:1</b></td><td class="st"><span class="stag ok">Confirmed</span></td><td>—</td></tr>
+      <tr><td>Pedals</td><td><b>Pinned flat pedals</b> · Vivobarefoot shoes · confirm at pickup</td><td class="st"><span class="stag rec">Check</span></td><td>Confirm at pickup</td></tr>
+      <tr><td>Cages</td><td><b>Two</b>, bottle 1 water + bottle 2 DM320/NoordCode</td><td class="st"><span class="stag ok">Confirmed</span></td><td>—</td></tr>
+      <tr><td>Seat roll</td><td>Silca rail-mount BOA — fits any railed saddle; check clearance</td><td class="st"><span class="stag rec">Check</span></td><td>Check clearance at pickup</td></tr>
+      <tr><td>Repair kit</td><td>Comes with the bike. Needs <b>tubes 700×38–47</b>, valves long enough for their rims, two levers, a pump not a lone CO2</td><td class="st"><span class="stag rec">Check</span></td><td>Check contents</td></tr>
+      <tr><td>GPS mount</td><td>Fits head unit · test fit</td><td class="st"><span class="stag rec">Check</span></td><td>Test Wed 14</td></tr>
     </table></div>
     <ul class="check" style="margin-top:8px">
       <li><input type="checkbox" data-k="kit-1"><span><b>Wed 14 shakedown</b> — set pressure, one rear-wheel tube change (thru-axle, disc, 1×), bottle retention on rough ground, GPS mount</span></li>
@@ -1343,12 +1383,12 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
   </div>
 
   <div class="card rail-flag">
-    <h3>Bags · pack → drop → collect</h3>
+    <h3>Bags · pack → drop → use</h3>
     <p class="small">Collect white and black bags at check-in. Sunday bus: white bag + personal bag.</p>
     <ul class="check bag-journeys">
-      <li><input type="checkbox" data-k="kit-3" aria-label="Black T2 bag packed"><div><b>Black · T2</b><ol class="bag-steps"><li><b>Pack</b><span>Dry socks, trail bib, run gels, spare capsules, SkyFlask + dry scoop. Add water at T2.</span></li><li><b>Drop</b><span>Saturday 13:00–16:00 · GEiEG, Girona, with the bike. Confirm window at check-in.</span></li><li><b>Collect</b><span>Use at T2 · Torre Desvern, Celrà. After-race collection: confirm at check-in.</span></li></ol></div></li>
-      <li><input type="checkbox" data-k="kit-4" aria-label="White T1 bag packed"><div><b>White · T1</b><ol class="bag-steps"><li><b>Pack</b><span>Helmet, glasses, gloves, sleeves, pocket fuel and capsules.</span></li><li><b>Drop</b><span>Sunday 08:00–08:45 · T1, Cadaqués. Take it on the bus.</span></li><li><b>Collect</b><span>Use after the swim; put wetsuit inside. Transported to Girona.</span></li></ol></div></li>
-      <li><input type="checkbox" data-k="kit-5" aria-label="Personal bag packed"><div><b>Personal · cloakroom</b><ol class="bag-steps"><li><b>Pack</b><span>Warm clothes, pre-load scoops, phone and wallet. Attach race-number sticker.</span></li><li><b>Drop</b><span>Sunday 08:00–08:45 · Cadaqués cloakroom, before putting on the wetsuit.</span></li><li><b>Collect</b><span>Sunday in Girona. Bag location and time: confirm at check-in.</span></li></ol></div></li>
+      <li><input type="checkbox" data-k="kit-3" aria-label="Black T2 bag packed"><div><b>Black · T2</b><ol class="bag-steps"><li><b>Pack</b><span>Dry socks, trail bib, run gels, spare capsules, SkyFlask + dry scoop. Add water at T2.</span></li><li><b>Drop</b><span>Saturday 13:00–16:00 · GEiEG, Girona, with the bike. Confirm window at check-in.</span></li><li><b>Use</b><span>T2 · Torre Desvern, Celrà. Fill the flask with water.</span></li></ol></div></li>
+      <li><input type="checkbox" data-k="kit-4" aria-label="White T1 bag packed"><div><b>White · T1</b><ol class="bag-steps"><li><b>Pack</b><span>Helmet, glasses, gloves, sleeves, pocket fuel and capsules.</span></li><li><b>Drop</b><span>Sunday 08:00–08:45 · T1, Cadaqués. Take it on the bus.</span></li><li><b>Use</b><span>After the swim: change into bike kit; put wetsuit inside.</span></li></ol></div></li>
+      <li><input type="checkbox" data-k="kit-5" aria-label="Personal bag packed"><div><b>Personal · cloakroom</b><ol class="bag-steps"><li><b>Pack</b><span>Warm clothes, pre-load scoops, phone and wallet. Attach race-number sticker.</span></li><li><b>Drop</b><span>Sunday 08:00–08:45 · Cadaqués cloakroom, before putting on the wetsuit.</span></li><li><b>Use</b><span>Before the swim: warm clothes and pre-load supplies. After race: phone and wallet.</span></li></ol></div></li>
       <li><input type="checkbox" data-k="kit-6"><span><b>Gravel bib under the saddle, the day before</b><span class="why">Plus the stem label they give you with profile, distance and feed zones. Trail bib on your front from T2.</span></span></li>
       <li><input type="checkbox" data-k="kit-7"><span><b>Collect bike and bags Sunday · confirm locations at check-in</b><span class="why">Current timetable: bags 15:00–18:00 at Plaça dels Jurats; bike 15:00–18:30 at GEiEG. Older briefing notes conflict on the bags. Chip goes back at the finish.</span></span></li>
     </ul>
@@ -1377,48 +1417,11 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
   </div>
   </div>
 
-  <p class="small" style="margin:2px 0 10px"><b>Base, gun to tape: Roka tri suit.</b> The swim adds wetsuit + goggles ×2 + anti-chafe — all stay behind in T1. Everything else below, read head to toe.</p>
-
-  <div class="two">
-    <div class="card rail-track" style="margin-bottom:0">
-      <h3>Bike loadout · Cadaqués → Celrà</h3>
-      <ul class="gear">
-        <li class="sub">Worn — head to toe</li>
-        <li><span class="g">Helmet + glasses<small>clear or light tint — October cloud</small></span><span class="stag ok">Owned</span></li>
-        <li><span class="g">Assos Summer Arm UV P1 sleeves<small>dual-use buy — SGrail + Lanzarote</small></span><span class="stag ok">Owned</span></li>
-        <li><span class="g">Full-finger gloves<small>cold hands + crash protection on Cap de Creus</small></span><span class="stag must">Buy</span></li>
-        <li><span class="g">Roka tri suit<small>rear pockets = Plan-B fuel fallback</small></span><span class="stag ok">Owned</span></li>
-        <li><span class="g">Plastic bag down the front<small>zero-cost gilet stand-in — Cadaqués can be 7 °C at 08:00</small></span><span class="stag opt">Cold-dry</span></li>
-        <li><span class="g">Packable waterproof shell<small>rain branch only — confirm you own one</small></span><span class="stag rec">Verify</span></li>
-        <li><span class="g">Vivobarefoot Primus Trail III AW FG<small>bike <i>and</i> run — flat pedals, no T2 shoe change · hot spots are the risk, not grip</small></span><span class="stag rec">Test 3 h</span></li>
-        <li class="sub">On the bike</li>
-        <li><span class="g">2 × 750 ml — clean water + <span data-loadout="a">DM320 (A)</span><span class="plan-or"> or </span><span data-loadout="b">NoordCode (B)</span><small>cages confirmed · both at W1, bottle 1 at W2 · retention still untested</small></span><span class="stag rec">Test grip</span></li>
-        <li><span class="g">Silca Seat Roll Asymmetrico under the saddle<small>owned, IM-proven · 0.6 L, BOA, fits a 700×45 tube · prepared at home and strapped on</small></span><span class="stag ok">Owned</span></li>
-        <li><span class="g">Repair kit + GPS with course GPX<small>see Repair &amp; Navigation cards</small></span></li>
-        <li class="sub">In the pockets</li>
-        <li><span class="g"><span data-loadout="a">Plan A · 2 solids + 2 gels; DM320 in bottle 2</span><span class="plan-or"><br></span><span data-loadout="b">Plan B · 2 solids + 5 gels</span><small>Follow the selected plan’s feed times and capsule schedule.</small></span></li>
-        <li><span class="g">PF&H caps — 2 boxes = 30<small>decant into a pill vial · 4/h with water</small></span><span class="stag rec">Decant</span></li>
-      </ul>
-    </div>
-    <div class="card rail-trail" style="margin-bottom:0">
-      <h3>Run loadout · Celrà → Girona</h3>
-      <ul class="gear">
-        <li class="sub">T2 swaps — from the bag</li>
-        <li><span class="g">Shoes already on<small>ridden in them — helmet and gloves stay with the bike</small></span><span class="stag ok">No swap</span></li>
-        <li><span class="g">Injinji Trail Midweight Crew — dry pair<small>wet-course insurance</small></span><span class="stag opt">T2 bag</span></li>
-        <li><span class="g">HydraPak SkyFlask + 1 dry NoordCode scoop<small>fill with water at T2 · covers fluid <i>and</i> sodium for the whole run</small></span><span class="stag must">Buy + test</span></li>
-        <li class="sub">Worn</li>
-        <li><span class="g">Tri suit + glasses continue</span></li>
-        <li><span class="g">Sleeves — push down as it warms<small>Girona ~20 °C by the finish</small></span></li>
-        <li><span class="g">Trail bib — worn visibly on the front<small>from T2 onward · a race belt is the fast way to do this</small></span><span class="stag ok">Rule known</span></li>
-        <li><span class="g">Timing chip<small>in the Sat race pack</small></span><span class="stag opt">Sat pickup</span></li>
-        <li class="sub">Carried</li>
-        <li><span class="g">1 GEL 100 plain at T2 + 1 spare<small>see the run fuel card</small></span></li>
-        <li><span class="g">2 caps — flask insurance only<small>the flask carries the sodium now</small></span></li>
-        <li><span class="g">Suunto 5 Peak — run GPX loaded<small>alongside the bike course · verified Fri</small></span><span class="stag rec">Load GPX</span></li>
-      </ul>
-    </div>
-  </div>
+  <h3>What changes at each transition</h3>
+  <div class="tblwrap transition-wrap" tabindex="0" role="region" aria-label="Equipment by race discipline"><table class="transition-matrix"><thead><tr><th>Equipment</th><th>Swim</th><th>Bike</th><th>Run</th></tr></thead><tbody><tr><th scope="row">Tri suit</th><td data-stage="Swim">Wear</td><td data-stage="Bike">Keep</td><td data-stage="Run">Keep</td></tr><tr><th scope="row">Wetsuit + goggles</th><td data-stage="Swim">Wear</td><td data-stage="Bike">Off → T1 bag</td><td data-stage="Run">—</td></tr><tr><th scope="row">Helmet + gloves</th><td data-stage="Swim">—</td><td data-stage="Bike">On at T1</td><td data-stage="Run">Off at T2</td></tr><tr><th scope="row">Glasses + sleeves</th><td data-stage="Swim">—</td><td data-stage="Bike">On at T1</td><td data-stage="Run">Keep</td></tr><tr><th scope="row">Vivobarefoot shoes</th><td data-stage="Swim">—</td><td data-stage="Bike">On at T1</td><td data-stage="Run">Keep</td></tr><tr><th scope="row">Dry Injinji socks</th><td data-stage="Swim">—</td><td data-stage="Bike">—</td><td data-stage="Run">Optional · T2</td></tr><tr><th scope="row">Bib</th><td data-stage="Swim">—</td><td data-stage="Bike">Under saddle</td><td data-stage="Run">Front · T2</td></tr><tr><th scope="row">2 × 750 ml bottles</th><td data-stage="Swim">—</td><td data-stage="Bike">On bike</td><td data-stage="Run">Leave at T2</td></tr><tr><th scope="row">SkyFlask</th><td data-stage="Swim">—</td><td data-stage="Bike">Dry scoop · T2 bag</td><td data-stage="Run">Fill at T2</td></tr><tr><th scope="row">Repair kit + head unit</th><td data-stage="Swim">—</td><td data-stage="Bike">On bike</td><td data-stage="Run">Leave at T2</td></tr></tbody></table></div>
+  <p class="small">Cold or rain: add the appropriate layer. Same shoes for bike and run.</p>
+  <div class="fuel-pack"><b>Fuel to pack</b><p><span data-loadout="a">Bike A: DM320 + 2 solids + 2 gels.</span><span class="plan-or"> / </span><span data-loadout="b">Bike B: 2 solids + 5 gels.</span></p><p>Run: 1 GEL 100 + 1 spare · flask + dry scoop · 2 spare capsules.</p><p class="small">Capsules: bring 2 boxes (30); carry and take the quantities in your saved phase plan.</p></div>
+  <details class="reference-details"><summary>Equipment status &amp; preparation</summary><div class="inner"><div class="tblwrap" tabindex="0" role="region" aria-label="Equipment preparation"><table><thead><tr><th>Item</th><th>Status</th><th>Action / location</th></tr></thead><tbody><tr><th scope="row">Helmet, glasses, Roka tri suit, Assos sleeves</th><td><span class="kit-status">Owned</span></td><td>Pack white T1 bag; suit worn from start</td></tr><tr><th scope="row">Full-finger gloves</th><td><span class="kit-status">Needed</span></td><td>Buy; white T1 bag</td></tr><tr><th scope="row">Vivobarefoot Primus Trail III AW FG</th><td><span class="kit-status">Check</span></td><td>Rehearse 3 h on pinned flat pedals</td></tr><tr><th scope="row">Waterproof shell</th><td><span class="kit-status">Check</span></td><td>Confirm ownership; pack if rain</td></tr><tr><th scope="row">Plastic bag / dry socks</th><td><span class="kit-status">Optional</span></td><td>Cold-dry layer / wet-course T2 socks</td></tr><tr><th scope="row">HydraPak SkyFlask</th><td><span class="kit-status">Needed</span></td><td>Buy + test; dry scoop in black T2 bag</td></tr><tr><th scope="row">Silca Seat Roll Asymmetrico</th><td><span class="kit-status">Owned</span></td><td>0.6 L; pack repair kit, check clearance</td></tr><tr><th scope="row">Bottles + cages</th><td><span class="kit-status">Check</span></td><td>Test retention with both bottles full</td></tr><tr><th scope="row">PF&amp;H capsules</th><td><span class="kit-status">Check</span></td><td>Decant into vial; follow saved plan</td></tr><tr><th scope="row">Suunto 5 Peak</th><td><span class="kit-status">Check</span></td><td>Load run GPX and verify Friday</td></tr><tr><th scope="row">Timing chip</th><td><span class="kit-status">Check</span></td><td>Collect race pack Saturday; return at finish</td></tr></tbody></table></div><p class="small">Swim extras: spare goggles and anti-chafe. Trail bib visible on the front; sleeves can be pushed down on the run.</p></div></details>
 </section>
 
 <!-- ============ RACE WEEK ============ -->
@@ -1426,13 +1429,13 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
 <section id="risks">
   <h2>Risks & mitigations</h2>
   <div class="risklist">
-    <details class="risk"><summary><b>Gravel handling</b><span class="rmit">Conservative lines. Walk what you would not ride at home.</span></summary><div class="rbody"><p><em>Why it's real</em>99%+ Zwift across five seasons; first-ever gravel race, on 93% unpaved terrain</p><p><em>Mitigation</em>IM effort, conservative lines, walk anything you would not ride at home. Two wet-surface sessions before October</p></div></details>
-    <details class="risk"><summary><b>Navigation → DQ</b><span class="rmit">Follow the track, never the rider ahead.</span></summary><div class="rbody"><p><em>Why it's real</em>Gravel leg unsigned — GPS or nothing; 2024 riders got lost following each other</p><p><em>Mitigation</em>GPX on head unit + phone. <b>Follow the track, never the rider ahead.</b> Trail leg is marked</p></div></details>
-    <details class="risk"><summary><b>Mechanical in Cap de Creus</b><span class="rmit">Two tubes, boot, pump — one rehearsed change.</span></summary><div class="rbody"><p><em>Why it's real</em>Rocky, technical, before the first aid at km 34.2 — the one sector where a mechanical costs the race</p><p><em>Mitigation</em><b>Tubes, so nothing self-seals</b> — 2 correct tubes, boot, pump, one rehearsed change. Hold 2.2/2.4 bar, pick lines. Buffer absorbs one flat, not three</p></div></details>
-    <details class="risk"><summary><b>Tramuntana wind</b><span class="rmit">Draft on the plain. Sleeves on.</span></summary><div class="rbody"><p><em>Why it's real</em>Prevailing N wind across the exposed Empordà plain; October is the region's wettest month</p><p><em>Mitigation</em>Draft on the plain — it is legal and it is free. Sleeves on, bag down the front if cold-dry</p></div></details>
-    <details class="risk"><summary><b>Penalty time</b><span class="rmit">Carry all fuel. Take only in-zone. Run the bike through T1.</span></summary><div class="rbody"><p><em>Why it's real</em>+30 min erases any scenario-A day</p><p><em>Mitigation</em>Carry all fuel · take only what stations stock, in-zone · run alongside the bike in T1, dismount before T2</p></div></details>
-    <details class="risk"><summary><b>Foot hot spots</b><span class="rmit">3 h flat-pedal rehearsal in the Vivos before the block ends.</span></summary><div class="rbody"><p><em>Why it's real</em>Flat pedals under a ~4 mm barefoot sole for ~19,000 revolutions, then a 10.5 km trail run on the same feet</p><p><em>Mitigation</em><b>3 h flat-pedal ride in the Vivos before the block ends.</b> Pinned platforms, mid-foot, shift the foot on the plain</p></div></details>
-    <details class="risk"><summary><b>Wet course</b><span class="rmit">Downgrade goals, not the race. Wet forecast → ask about 40s.</span></summary><div class="rbody"><p><em>Why it's real</em>Rain in the week = mud, slick rock, a live river crossing</p><p><em>Mitigation</em>Downgrade goals not the race · even more conservative sector 1 · dry socks in T2 · <b>45 mm leaves ~2 mm mud clearance</b> — if the 13–14 Oct forecast is wet, ask about 40s</p></div></details>
+    <details class="risk"><summary><b>Gravel handling</b><span class="rmit">Conservative lines. Walk what you would not ride at home.</span></summary><div class="rbody"><p><em>Why it's real</em>99%+ Zwift across five seasons; first-ever gravel race, on 93% unpaved terrain</p><p><em>Preparation</em>Two wet-surface rehearsals before October.</p></div></details>
+    <details class="risk"><summary><b>Navigation → DQ</b><span class="rmit">Follow the track, never the rider ahead.</span></summary><div class="rbody"><p><em>Why it's real</em>Gravel leg unsigned — GPS or nothing; 2024 riders got lost following each other</p><p><em>Preparation</em>Head unit + offline phone backup. Trail is marked.</p></div></details>
+    <details class="risk"><summary><b>Mechanical in Cap de Creus</b><span class="rmit">Two tubes, boot, pump — one rehearsed change.</span></summary><div class="rbody"><p><em>Why it's real</em>Rocky, technical, before the first aid at km 34.2 — the one sector where a mechanical costs the race</p><p><em>Preparation</em>Tubed tyres do not self-seal. Use the pressure plan in Bike setup.</p></div></details>
+    <details class="risk"><summary><b>Tramuntana wind</b><span class="rmit">Draft on the plain. Sleeves on.</span></summary><div class="rbody"><p><em>Why it's real</em>Prevailing N wind across the exposed Empordà plain; October is the region's wettest month</p><p><em>Preparation</em>Cold and dry: add the front layer.</p></div></details>
+    <details class="risk"><summary><b>Penalty time</b><span class="rmit">Carry all fuel. Take only in-zone. Run the bike through T1.</span></summary><div class="rbody"><p><em>Why it's real</em>+30 min erases any scenario-A day</p><p><em>Preparation</em>Dismount before T2.</p></div></details>
+    <details class="risk"><summary><b>Foot hot spots</b><span class="rmit">3 h flat-pedal rehearsal in the Vivos before the block ends.</span></summary><div class="rbody"><p><em>Why it's real</em>Flat pedals under a ~4 mm barefoot sole for ~19,000 revolutions, then a 10.5 km trail run on the same feet</p><p><em>Preparation</em>Pinned platforms; shift foot position on the plain.</p></div></details>
+    <details class="risk"><summary><b>Wet course</b><span class="rmit">Downgrade goals, not the race. Wet forecast → ask about 40s.</span></summary><div class="rbody"><p><em>Why it's real</em>Rain in the week = mud, slick rock, a live river crossing</p><p><em>Preparation</em>Dry socks in T2. Confirm mud clearance if the 13–14 October forecast is wet.</p></div></details>
   </div>
 </section>
 
