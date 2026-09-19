@@ -702,9 +702,9 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 .sos li>b{display:block;font-family:var(--disp);font-size:17px;line-height:1.2;color:var(--ink)}.sos li span{display:block;font-size:13px;line-height:1.5;color:var(--muted);margin-top:4px}.sos li span b{color:var(--flag)}
 @media(max-width:760px){.sos ul{grid-template-columns:1fr 1fr}}@media(max-width:480px){.sos ul{grid-template-columns:1fr}}.location-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.location-grid>a{display:block;min-height:48px;padding:12px;border:1px solid var(--line);border-radius:6px;text-decoration:none;color:var(--ink)}.location-grid b,.location-grid span{display:block}.location-grid span{font-size:14px;color:var(--sea)}
 .utility-actions,.card-actions{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.utility-actions button,.card-actions button{font:inherit;padding:10px 14px;min-height:48px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer}
-#essentials-card{max-width:760px;margin:32px auto;padding:24px;background:var(--card);color:var(--ink);border:1px solid var(--line)}#essentials-card h1{font-size:32px}#essentials-card h2{font-size:20px;margin:16px 0 8px;padding:0;border:0}#essentials-card li{margin:4px 0}#essentials-card ol{padding-left:22px}.card-transitions{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+#essentials-card{margin:0;padding:4px 0 0;background:var(--card);color:var(--ink)}#carddlg .mhead span{display:flex;gap:8px;align-items:center}#carddlg .mhead .rmbtn{margin:0}#essentials-card h1{font-size:32px}#essentials-card h2{font-size:20px;margin:16px 0 8px;padding:0;border:0}#essentials-card li{margin:4px 0}#essentials-card ol{padding-left:22px}.card-transitions{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 @media(max-width:600px){.location-grid,.card-transitions{grid-template-columns:1fr}#essentials-card{margin:16px;padding:18px}}
-@media print{body.print-card .wrap,body.print-card .modal{display:none!important}body.print-card #essentials-card{display:block!important;border:0;margin:0;padding:0;max-width:none;font-size:11pt;line-height:1.4}body.print-card .card-actions{display:none}body.print-card #essentials-card .essentials-grid{margin:12px 0;gap:12px}body.print-card #essentials-card dd{font-size:13pt}body.print-card #essentials-card dd small{font-size:10pt}body:not(.print-card) #essentials-card{display:none!important}}
+@media print{body.print-card .wrap,body.print-card .modal{display:none!important}body.print-card #carddlg{display:block!important;position:static;width:auto;max-width:none;max-height:none;border:0;box-shadow:none;padding:0}body.print-card #carddlg .mhead{display:none}body.print-card #carddlg .mbody{padding:0;max-height:none;overflow:visible}body.print-card #essentials-card{display:block!important;border:0;margin:0;padding:0;max-width:none;font-size:11pt;line-height:1.4}body.print-card .card-actions{display:none}body.print-card #essentials-card .essentials-grid{margin:12px 0;gap:12px}body.print-card #essentials-card dd{font-size:13pt}body.print-card #essentials-card dd small{font-size:10pt}body:not(.print-card) #essentials-card{display:none!important}}
 
 /* ---------- dark scheme: 04:45 is a dark room ---------- */
 /* Driven by data-theme on <html>, which the early script below resolves from the
@@ -1607,7 +1607,7 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
   </div>
 </dialog>
 
-<section id="essentials-card" hidden aria-labelledby="card-title"><div class="card-actions"><button type="button" id="print-card">Print / save PDF</button><button type="button" id="close-card">Close preview</button></div><h1 id="card-title">SGRAIL 100 · race essentials</h1><p>18 October 2026 · local time · prepared from the dossier</p><div id="card-content"></div></section>
+<dialog id="carddlg" class="modal" aria-label="Essentials card preview"><div class="mhead"><b>Essentials card</b><span><button type="button" id="print-card" class="rmbtn">Print / save PDF</button><button type="button" class="mclose" id="close-card" aria-label="Close">×</button></span></div><div class="mbody"><section id="essentials-card" aria-labelledby="card-title"><h1 id="card-title">SGRAIL 100 · race essentials</h1><p>18 October 2026 · local time · prepared from the dossier</p><div id="card-content"></div></section></div></dialog>
 
 <script>
 // nav pills: scroll directly (fragment navigation is blocked in sandboxed preview iframes)
@@ -1928,8 +1928,10 @@ document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener
   content.appendChild(paragraph('Run cutoff: timetable lists 16:59 trail and 17:59 overall. Confirm which applies. Confirm black-bag drop and collection. Final 2026 route and elevation remain provisional. Race control phone and incident procedure still pending.'));
   content.appendChild(paragraph('Timetable checked 9 Sep 2026 · sgrail100.com/timetable/ · general enquiries: info@sgrail100.com'));
  }
- document.getElementById('preview-card').addEventListener('click',function(){build();panel.hidden=false;panel.scrollIntoView({block:'start'});document.getElementById('print-card').focus({preventScroll:true});});
- document.getElementById('close-card').addEventListener('click',function(){panel.hidden=true;document.getElementById('preview-card').focus();});
+ var carddlg=document.getElementById('carddlg');
+ document.getElementById('preview-card').addEventListener('click',function(){build();carddlg.showModal?carddlg.showModal():carddlg.setAttribute('open','');});
+ carddlg.addEventListener('click',function(e){if(e.target===carddlg)carddlg.close();});
+ document.getElementById('close-card').addEventListener('click',function(){carddlg.close?carddlg.close():carddlg.removeAttribute('open');document.getElementById('preview-card').focus();});
  document.getElementById('print-card').addEventListener('click',function(){build();document.body.classList.add('print-card');try{window.print();}catch(e){document.body.classList.remove('print-card');document.getElementById('utility-status').textContent='Printing is unavailable here. Use your browser’s print command.';}});
  window.addEventListener('afterprint',function(){document.body.classList.remove('print-card');});
 })();
