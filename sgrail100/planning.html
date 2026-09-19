@@ -514,6 +514,8 @@ body[data-plan="a"] #fuel .cmp,body[data-plan="b"] #fuel .cmp{min-width:0!import
 #fuel .rtile{padding:18px;border-color:var(--line-soft)}#fuel .rtile b{font-family:var(--body);font-size:15px;text-transform:none;letter-spacing:0}
 #fuel .rtile span,#fuel .fkv,#kit .gear{font-size:15px}
 #fuel .rtile.f{background:var(--card);border-color:var(--line)}#fuel .rtile.f:nth-child(2){background:var(--flag-soft);border-color:var(--flag)}
+#kit .packgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 20px}#kit .pk em{display:block;font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid var(--line)}#kit .pk .check li{padding:5px 0}#kit .pk .check span{font-size:14px}#kit .pk small{color:var(--muted);font-size:12px}
+@media(max-width:800px){#kit .packgrid{grid-template-columns:1fr 1fr}}@media(max-width:480px){#kit .packgrid{grid-template-columns:1fr}}
 #fuel .shoplist td{font-size:14px;line-height:1.4}#fuel .shoplist td.m{white-space:normal}@media(max-width:600px){#fuel .shoplist{min-width:0!important}#fuel .shoplist td,#fuel .shoplist th{padding:9px 8px;font-size:13.5px}}
 #fuel .stag,#kit .stag,#kit .gear .g small,.check .why,.closedlist>summary,.prov>summary,.cl li{font-size:13px}
 #kit .stag.rec{background:var(--paper);color:var(--ink);border-color:var(--line)}
@@ -1406,19 +1408,7 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
     <div><dt>Sodium</dt><dd>~1,000 <small>mg/h</small></dd></div>
   </dl>
 
-  <div class="sec-label rm-hide" style="margin-top:26px">Plan A · shopping list</div>
-  <div class="tblwrap rm-hide" tabindex="0" role="region" aria-label="Shopping list"><table role="table" class="tight shoplist" style="min-width:0">
-    <tr role="row"><th role="columnheader">Item</th><th role="columnheader">Buy</th><th role="columnheader">Goes in</th></tr>
-    <tr role="row"><td role="cell" data-label="Item"><b>Maurten DM320</b></td><td role="cell" data-label="Buy" class="m">1 sachet</td><td role="cell" data-label="Goes in">Bottle 2 · mixed 08:15</td></tr>
-    <tr role="row"><td role="cell" data-label="Item"><b>Maurten Solid 160</b></td><td role="cell" data-label="Buy" class="m">2</td><td role="cell" data-label="Goes in">Trisuit pocket</td></tr>
-    <tr role="row"><td role="cell" data-label="Item"><b>Maurten GEL 100</b></td><td role="cell" data-label="Buy" class="m">3</td><td role="cell" data-label="Goes in">1 pocket · 2 black bag</td></tr>
-    <tr role="row"><td role="cell" data-label="Item"><b>Maurten CAF 100</b></td><td role="cell" data-label="Buy" class="m">1</td><td role="cell" data-label="Goes in">Trisuit pocket</td></tr>
-    <tr role="row"><td role="cell" data-label="Item"><b>PF&amp;H 250 mg capsules</b></td><td role="cell" data-label="Buy" class="m">2 boxes of 15</td><td role="cell" data-label="Goes in">8 in a pill vial · 2 black bag</td></tr>
-    <tr role="row"><td role="cell" data-label="Item"><b>NoordCode electrolyte</b></td><td role="cell" data-label="Buy" class="m">5 scoops</td><td role="cell" data-label="Goes in">2 pre-load · 1 W1 · 1 W2 · 1 run</td></tr>
-    <tr role="row"><td role="cell" data-label="Item"><b>Screw-top vials</b></td><td role="cell" data-label="Buy" class="m">2 + pill vial</td><td role="cell" data-label="Goes in">W1 / W2 scoops · capsules</td></tr>
-    <tr role="row"><td role="cell" data-label="Item"><b>SkyFlask 350</b></td><td role="cell" data-label="Buy" class="m">have</td><td role="cell" data-label="Goes in">Black bag · dry scoop taped to it</td></tr>
-  </table></div>
-  <details class="prov notes rm-hide"><summary>Why A, and what B was</summary><p><b>A · Bottle</b> — 210 g, 4 wrappers, ~6–8 caps; sip bottle 2 through the first 25 km, no wrappers on technical ground. Weak point: mixing before the swim and drinking on rough ground. <b>B · Pocket</b> — 205 g, 7 wrappers, ~4–6 caps; gels at 0:20 and 0:50 on the climbs, bottle 2 = sodium from the start. Weak point: opening and retrieving gels on Cap de Creus. Decided 18 Sep: A. B stays on the feed chart toggle.</p></details>
+    <details class="prov notes rm-hide"><summary>Why A, and what B was</summary><p><b>A · Bottle</b> — 210 g, 4 wrappers, ~6–8 caps; sip bottle 2 through the first 25 km, no wrappers on technical ground. Weak point: mixing before the swim and drinking on rough ground. <b>B · Pocket</b> — 205 g, 7 wrappers, ~4–6 caps; gels at 0:20 and 0:50 on the climbs, bottle 2 = sodium from the start. Weak point: opening and retrieving gels on Cap de Creus. Decided 18 Sep: A. B stays on the feed chart toggle.</p></details>
 
 
   <details class="reference-details"><summary>Day totals &amp; estimates</summary><div class="inner">
@@ -1483,13 +1473,13 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
     <div class="tblwrap" tabindex="0" role="region" aria-label="Scrollable data table"><table class="spec" style="min-width:460px">
       <tr><th>Item</th><th>Spec</th><th style="text-align:right">Status</th><th>Action</th></tr>
       <tr><td>Tyres</td><td><b>45 mm, inner tubes</b> · not tubeless</td><td class="st"><span class="stag ok">Confirmed</span></td><td>—</td></tr>
-      <tr><td>Pressure</td><td><b>2.2 bar front · 2.4–2.5 rear</b> · at 74 kg · <b>floor 2.0</b></td><td class="st"><span class="stag rec">Check</span></td><td>Set Wed 14</td></tr>
+      <tr><td>Pressure</td><td><b>2.2 bar front · 2.4–2.5 rear</b> · at 74 kg · <b>floor 2.0</b></td><td class="st"><span class="stag rec">Check</span></td><td>Set at pickup</td></tr>
       <tr><td>Gearing</td><td><b>GRX 1×12 · 40T · 10–45 = 0.89:1</b></td><td class="st"><span class="stag ok">Confirmed</span></td><td>—</td></tr>
       <tr><td>Pedals</td><td><b>Pinned flat pedals</b> · Vivobarefoot shoes · confirm at pickup</td><td class="st"><span class="stag rec">Check</span></td><td>Confirm at pickup</td></tr>
       <tr><td>Cages</td><td><b>Two</b>, bottle 1 water + bottle 2 DM320/NoordCode</td><td class="st"><span class="stag ok">Confirmed</span></td><td>—</td></tr>
       <tr><td>Seat roll</td><td>Silca rail-mount BOA — fits any railed saddle; check clearance</td><td class="st"><span class="stag rec">Check</span></td><td>Check clearance at pickup</td></tr>
       <tr><td>Repair kit</td><td>Comes with the bike. Needs <b>tubes 700×38–47</b>, valves long enough for their rims, two levers, a pump not a lone CO2</td><td class="st"><span class="stag rec">Check</span></td><td>Check contents</td></tr>
-      <tr><td>GPS mount</td><td>Fits head unit · test fit</td><td class="st"><span class="stag rec">Check</span></td><td>Test Wed 14</td></tr>
+      <tr><td>GPS mount</td><td>Fits head unit · test fit</td><td class="st"><span class="stag rec">Check</span></td><td>Test at pickup</td></tr>
     </table></div>
     <p class="small">If the repair kit has its own bag, the Silca roll is free to carry food — closes open item 10.</p>
   </div>
@@ -1506,15 +1496,14 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
 </ul>
   </div>
 
-  <div class="two">
   <div class="card">
-    <h3>Repair — carried on the bike</h3>
-    <ul class="check">
-      <li><input type="checkbox" data-k="kit-8"><span><b>2 × tubes, 700×38–47</b> + 2 tyre levers</span></li>
-      <li><input type="checkbox" data-k="kit-9"><span><b>Mini-pump</b>, not just CO2</span></li>
-      <li><input type="checkbox" data-k="kit-10"><span><b>Tyre boot</b> + patch kit</span></li>
-      <li><input type="checkbox" data-k="kit-11"><span>Multitool + quick link</span></li>
-    </ul>
+    <h3>Pack for Girona</h3>
+    <div class="packgrid">
+    <div class="pk"><em>Wear &amp; bags</em><ul class="check"><li><input type="checkbox" data-k="kit-20"><span>Roka tri suit</span></li><li><input type="checkbox" data-k="kit-21"><span>Helmet + glasses</span></li><li><input type="checkbox" data-k="kit-22"><span>Assos sleeves</span></li><li><input type="checkbox" data-k="kit-23"><span>Full-finger gloves <small>buy</small></span></li><li><input type="checkbox" data-k="kit-24"><span>Vivobarefoot Primus Trail III</span></li><li><input type="checkbox" data-k="kit-25"><span>Waterproof shell</span></li><li><input type="checkbox" data-k="kit-26"><span>Dry socks ×2</span></li><li><input type="checkbox" data-k="kit-27"><span>Wetsuit + goggles</span></li><li><input type="checkbox" data-k="kit-28"><span>Warm layer for the morning</span></li></ul></div>
+    <div class="pk"><em>Fuel</em><ul class="check"><li><input type="checkbox" data-k="kit-29"><span>DM320 sachet ×1</span></li><li><input type="checkbox" data-k="kit-30"><span>Solid 160 ×2</span></li><li><input type="checkbox" data-k="kit-31"><span>GEL 100 ×3</span></li><li><input type="checkbox" data-k="kit-32"><span>CAF 100 ×1</span></li><li><input type="checkbox" data-k="kit-33"><span>PF&amp;H capsules · 2 boxes of 15</span></li><li><input type="checkbox" data-k="kit-34"><span>NoordCode · 5 scoops</span></li><li><input type="checkbox" data-k="kit-35"><span>2 screw-top vials + pill vial</span></li><li><input type="checkbox" data-k="kit-36"><span>SkyFlask 350</span></li><li><input type="checkbox" data-k="kit-37"><span>500 ml bottle · pre-load</span></li><li><input type="checkbox" data-k="kit-38"><span>2 bike bottles</span></li></ul></div>
+    <div class="pk"><em>Repair · on the bike</em><ul class="check"><li><input type="checkbox" data-k="kit-39"><span>2 tubes 700×38–47</span></li><li><input type="checkbox" data-k="kit-40"><span>2 tyre levers</span></li><li><input type="checkbox" data-k="kit-41"><span>Mini-pump</span></li><li><input type="checkbox" data-k="kit-42"><span>Tyre boot + patch kit</span></li><li><input type="checkbox" data-k="kit-43"><span>Multitool + quick link</span></li><li><input type="checkbox" data-k="kit-44"><span>Silca seat roll</span></li></ul></div>
+    <div class="pk"><em>Tech &amp; papers</em><ul class="check"><li><input type="checkbox" data-k="kit-45"><span>Head unit + mount + cable</span></li><li><input type="checkbox" data-k="kit-46"><span>Phone + cable + power bank</span></li><li><input type="checkbox" data-k="kit-47"><span>Suunto 5 Peak + charger</span></li><li><input type="checkbox" data-k="kit-48"><span>Insurance proof</span></li><li><input type="checkbox" data-k="kit-49"><span>ID</span></li><li><input type="checkbox" data-k="kit-50"><span>Registration e-mail</span></li><li><input type="checkbox" data-k="kit-51"><span>Cash for the bus / coffee</span></li></ul></div>
+    </div>
     <p class="small">Canyon mechanics at km 68 only (AV2), plus roving mechanics on bikes. The backstop, not the plan.</p>
 <details class="prov notes"><summary>Why each item</summary><p><b>2 × tubes, 700×38–47</b> — Not plugs. Plugs need sealant; there is none. Wrong-size tubes are their own flat.</p><p><b>Mini-pump, not just CO2</b> — Two flats means two inflations. A cartridge you have already spent is nothing.</p><p><b>Tyre boot</b> — New requirement with tubes: sealant used to handle a small sidewall cut. Now a cut herniates the tube and the boot is the only fix. A folded gel wrapper works.</p></details>
   </div>
@@ -1527,13 +1516,10 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
       <li><input type="checkbox" data-k="kit-16"><span>Study the track Fri/Sat — know the first 25 km turns and the two aid locations by feel</span></li>
     </ul>
   </div>
-  </div>
 
   <h3>What changes at each transition</h3>
   <div class="tblwrap transition-wrap" tabindex="0" role="region" aria-label="Equipment by race discipline"><table class="transition-matrix"><thead><tr><th>Equipment</th><th>Swim</th><th>Bike</th><th>Run</th></tr></thead><tbody><tr><th scope="row">Tri suit</th><td data-stage="Swim">Wear</td><td data-stage="Bike">Keep</td><td data-stage="Run">Keep</td></tr><tr><th scope="row">Wetsuit + goggles</th><td data-stage="Swim">Wear</td><td data-stage="Bike">Off → T1 bag</td><td data-stage="Run">—</td></tr><tr><th scope="row">Helmet + gloves</th><td data-stage="Swim">—</td><td data-stage="Bike">On at T1</td><td data-stage="Run">Off at T2</td></tr><tr><th scope="row">Glasses + sleeves</th><td data-stage="Swim">—</td><td data-stage="Bike">On at T1</td><td data-stage="Run">Keep</td></tr><tr><th scope="row">Vivobarefoot shoes</th><td data-stage="Swim">—</td><td data-stage="Bike">On at T1</td><td data-stage="Run">Keep</td></tr><tr><th scope="row">Dry Injinji socks</th><td data-stage="Swim">—</td><td data-stage="Bike">—</td><td data-stage="Run">Optional · T2</td></tr><tr><th scope="row">Bib</th><td data-stage="Swim">—</td><td data-stage="Bike">Under saddle</td><td data-stage="Run">Front · T2</td></tr><tr><th scope="row">2 × 750 ml bottles</th><td data-stage="Swim">—</td><td data-stage="Bike">On bike</td><td data-stage="Run">Leave at T2</td></tr><tr><th scope="row">SkyFlask</th><td data-stage="Swim">—</td><td data-stage="Bike">Dry scoop · T2 bag</td><td data-stage="Run">Fill at T2</td></tr><tr><th scope="row">Repair kit + head unit</th><td data-stage="Swim">—</td><td data-stage="Bike">On bike</td><td data-stage="Run">Leave at T2</td></tr></tbody></table></div>
   <p class="small">Cold or rain: add the appropriate layer. Same shoes for bike and run.</p>
-  <div class="fuel-pack"><b>Fuel to pack</b><p><span data-loadout="a">Bike A: DM320 + 2 solids + 2 gels.</span><span class="plan-or"> / </span><span data-loadout="b">Bike B: 2 solids + 5 gels.</span></p><p>Run: 1 GEL 100 + 1 spare · flask + dry scoop · 2 spare capsules.</p><p class="small">Capsules: bring 2 boxes (30); carry and take the quantities in your saved phase plan.</p></div>
-  <details class="reference-details"><summary>Equipment status &amp; preparation</summary><div class="inner"><div class="tblwrap" tabindex="0" role="region" aria-label="Equipment preparation"><table><thead><tr><th>Item</th><th>Status</th><th>Action / location</th></tr></thead><tbody><tr><th scope="row">Helmet, glasses, Roka tri suit, Assos sleeves</th><td><span class="kit-status">Owned</span></td><td>Pack white T1 bag; suit worn from start</td></tr><tr><th scope="row">Full-finger gloves</th><td><span class="kit-status">Needed</span></td><td>Buy; white T1 bag</td></tr><tr><th scope="row">Vivobarefoot Primus Trail III AW FG</th><td><span class="kit-status">Check</span></td><td>Gun to tape · ask for pinned flat pedals</td></tr><tr><th scope="row">Waterproof shell</th><td><span class="kit-status">Check</span></td><td>Confirm ownership; pack if rain</td></tr><tr><th scope="row">Plastic bag / dry socks</th><td><span class="kit-status">Optional</span></td><td>Cold-dry layer / wet-course T2 socks</td></tr><tr><th scope="row">HydraPak SkyFlask</th><td><span class="kit-status">Needed</span></td><td>Buy + test; dry scoop in black T2 bag</td></tr><tr><th scope="row">Silca Seat Roll Asymmetrico</th><td><span class="kit-status">Owned</span></td><td>0.6 L; pack repair kit, check clearance</td></tr><tr><th scope="row">Bottles + cages</th><td><span class="kit-status">Check</span></td><td>Test retention with both bottles full</td></tr><tr><th scope="row">PF&amp;H capsules</th><td><span class="kit-status">Check</span></td><td>Decant into vial; follow saved plan</td></tr><tr><th scope="row">Suunto 5 Peak</th><td><span class="kit-status">Check</span></td><td>Load run GPX and verify Friday</td></tr><tr><th scope="row">Timing chip</th><td><span class="kit-status">Check</span></td><td>Collect race pack Saturday; return at finish</td></tr></tbody></table></div><p class="small">Swim extras: spare goggles and anti-chafe. Trail bib visible on the front; sleeves can be pushed down on the run.</p></div></details>
 </section>
 
 <!-- ============ RACE WEEK ============ -->
