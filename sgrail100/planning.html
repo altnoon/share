@@ -326,7 +326,7 @@ footer p{margin-bottom:6px}
 #fuel .fkv .v small{display:block;font-weight:400;font-size:12px;color:var(--muted);margin-top:2px}
 #risks .risktbl td:first-child{white-space:nowrap}#risks .risktbl td{line-height:1.5}#risks .risktbl td:last-child{font-weight:600;color:var(--ink)}
 body.race #kit,body.race #risks,body.race #openitems,body.race footer{display:none}
-body:not(.race) #course,body:not(.race) #pacing,body:not(.race) nav a[href="#course"],body:not(.race) nav a[href="#pacing"]{display:none}
+body:not(.race) #course,body:not(.race) #pacing,body:not(.race) #fuel,body:not(.race) nav a[href="#course"],body:not(.race) nav a[href="#pacing"],body:not(.race) nav a[href="#fuel"]{display:none}
 #rmbtn,.essentials>.view-switch,.phone-home .view-switch,#view-description,#navopen,.prep-grid{display:none!important}
 .modebar{position:sticky;top:0;z-index:40;background:var(--paper);padding:10px 0 8px;margin:0;border-bottom:1px solid var(--line)}
 .modeseg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card);max-width:520px}
@@ -549,7 +549,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 }
 @media print{
  .wrap{display:block;max-width:none;padding:0}nav,.statusbar,.plan-controls,.phasectl,.phasestrip{display:none!important}
- body.race #kit,body.race #risks,body.race footer,body.race .rm-hide,body:not(.race) #pacing,body:not(.race) #course{display:block}
+ body.race #kit,body.race #risks,body.race footer,body.race .rm-hide,body:not(.race) #pacing,body:not(.race) #course,body:not(.race) #fuel{display:block}
  [data-plan][hidden]{display:block!important}body[data-plan] #fuel .cmp tr>*{display:table-cell!important}
  #course #abwrap .lane-a,#course #abwrap .lane-b{display:initial!important}
  header{padding-top:0}h1{font-size:48px}section{margin-top:28px}.profile svg{min-width:0}.race-metrics{break-inside:avoid}
