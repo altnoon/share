@@ -334,7 +334,7 @@ body:not(.race) #course,body:not(.race) #pacing,body:not(.race) #fuel,body:not(.
 .modeseg button b{font-family:var(--disp);font-size:16px;color:inherit}.modeseg button span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
 .modeseg button[aria-pressed="true"]{background:var(--ink);color:var(--card)}
 .modeseg button[data-view="race"][aria-pressed="true"]{background:var(--flag);color:#fff}
-#openitems .card{margin:0;border:0;padding:0;background:transparent}#openitems .card{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;align-items:start}#openitems .card>.closedlist{grid-column:1/-1}#hide-completed{display:none}#openitems .pk-head{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin:22px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--ink)}#openitems .packgrid{margin-bottom:6px}#openitems .packgrid+p.small{margin:10px 0 0}@media(max-width:700px){#openitems .card{grid-template-columns:1fr}}
+#open .card{margin:0;border:0;padding:0;background:transparent;display:grid;grid-template-columns:1fr 1fr;gap:0 24px;align-items:start}#open .card>.closedlist{grid-column:1/-1}#hide-completed{display:none}#openitems .pk-head{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin:22px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--ink)}#openitems .packgrid{margin-bottom:6px}#openitems .packgrid+p.small{margin:10px 0 0}@media(max-width:700px){#open .card{grid-template-columns:1fr}}
 .modeside{display:none}
 @media(min-width:1050px){
  .modebar{display:none}
@@ -472,8 +472,9 @@ nav a:hover{background:var(--sea-soft)}nav a[aria-current="location"]{background
 .rmbtn,.progbtn,#course .phasectl button,.abtog button,#course .abtog button{min-height:44px;font-family:var(--body);font-size:14px;letter-spacing:0;text-transform:none;padding:9px 14px;border-radius:6px;cursor:pointer}
 .rmbtn.on{background:var(--strong);border-color:var(--ink)}
 body.race nav a{display:none}body.race nav a[href="#course"],body.race nav a[href="#fuel"],body.race nav a[href="#pacing"]{display:block}
-section{margin-top:60px;min-width:0;scroll-margin-top:90px}
-h2{font-size:30px;letter-spacing:-.01em;text-transform:none;flex-wrap:wrap;gap:4px 16px;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:24px;line-height:1.3}
+section{margin-top:72px;min-width:0;scroll-margin-top:90px;padding-top:26px;border-top:3px solid var(--ink)}
+h2{font-size:30px;letter-spacing:-.01em;text-transform:none;flex-wrap:wrap;gap:4px 16px;border-bottom:0;padding-bottom:0;margin-bottom:26px;line-height:1.3}
+#openitems .bagscard{margin:0 0 6px;padding:0;border:0;background:transparent}#openitems .pk-head{margin-top:30px}#openitems .pk-head:first-of-type{margin-top:0}
 h2 .tag{display:block;flex-basis:100%;font-family:var(--body);font-size:13px;letter-spacing:0;font-weight:400}
 h3{font-size:19px;letter-spacing:0;text-transform:none;margin:20px 0 12px}
 p{margin-bottom:16px}.card{padding:22px 24px;margin-bottom:20px;border-radius:8px}
@@ -989,7 +990,7 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
 </header>
 
 <nav aria-label="Dossier contents"><label class="mobile-nav" for="mobile-section"><span class="sr-only">Jump to section</span><select id="mobile-section" aria-label="Jump to section"></select></label><span class="nav-label">Field notes / 2026</span><div class="modeside" role="group" aria-label="Dossier mode"><button type="button" data-view="prepare"><b>Prepare</b><span>until Sat 17</span></button><button type="button" data-view="race"><b>Race day</b><span>Sun 18</span></button></div><div class="row">
-  <a href="#openitems">Open tasks</a>
+  <a href="#openitems">Before Girona</a>
   <a href="#course">Course</a>
   <a href="#fuel">Fuel</a>
   <a href="#pacing">Pacing</a>
@@ -1045,6 +1046,17 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
 
 <section id="openitems">
   <h2>Before Girona <span class="tag">pack · sort out · ask at check-in</span></h2>
+  <div class="pk-head">Bags · pack → drop → use</div>
+  <div class="card rail-flag bagscard">
+    <p class="small">Bags come from Friday check-in · Saturday: black with the bike · Sunday bus: white + personal.</p>
+    <ul class="check bag-journeys">
+<li class="bagrow b-black"><input type="checkbox" data-k="kit-3" aria-label="Black · T2 packed"><div class="bagflow"><b class="bagname">Black · T2</b><div class="stage"><em>Pack</em><div class="chiprow"><i>Dry socks</i><i>Trail bib</i><i>2 × GEL 100</i><i>2 × PF&amp;H cap</i><i>SkyFlask + dry scoop</i></div></div><div class="stage"><em>Drop</em><strong>Sat 13:00–16:00</strong><span>GEiEG, Girona · with the bike</span></div><div class="stage"><em>Use</em><span>T2 Celrà · water into the flask</span></div></div></li>
+<li class="bagrow b-white"><input type="checkbox" data-k="kit-4" aria-label="White · T1 packed"><div class="bagflow"><b class="bagname">White · T1</b><div class="stage"><em>Pack</em><div class="chiprow"><i>Helmet + glasses</i><i>Gloves</i><i>Sleeves</i><i>Pocket fuel</i><i>Capsules</i></div></div><div class="stage"><em>Drop</em><strong>Sun 08:00–08:45</strong><span>T1, Cadaqués · on the bus with you</span></div><div class="stage"><em>Use</em><span>After the swim · bike kit on, wetsuit in</span></div></div></li>
+<li class="bagrow b-pers"><input type="checkbox" data-k="kit-5" aria-label="Personal · cloakroom packed"><div class="bagflow"><b class="bagname">Personal · cloakroom</b><div class="stage"><em>Pack</em><div class="chiprow"><i>Warm clothes</i><i>Pre-load scoops</i><i>Phone + wallet</i><i>Race-number sticker</i></div></div><div class="stage"><em>Drop</em><strong>Sun 08:00–08:45</strong><span>Cadaqués cloakroom · before the wetsuit</span></div><div class="stage"><em>Use</em><span>Warm until 09:00 · phone + wallet after</span></div></div></li>
+<li><input type="checkbox" data-k="kit-6"><span><b>Gravel bib under the saddle, the day before</b><span class="why">Plus the stem label they give you with profile, distance and feed zones. Trail bib on your front from T2.</span></span></li>
+<li><input type="checkbox" data-k="kit-7"><span><b>Collect bike and bags Sunday · confirm locations at check-in</b><span class="why">Current timetable: bags 15:00–18:00 at Plaça dels Jurats; bike 15:00–18:30 at GEiEG. Older briefing notes conflict on the bags. Chip goes back at the finish.</span></span></li>
+</ul>
+  </div>
   <div class="pk-head">Pack</div>
     <div class="packgrid">
     <div class="pk"><em>Wear &amp; bags</em><ul class="check"><li><input type="checkbox" data-k="kit-20"><span>Roka tri suit</span></li><li><input type="checkbox" data-k="kit-21"><span>Helmet + glasses</span></li><li><input type="checkbox" data-k="kit-22"><span>Assos sleeves</span></li><li><input type="checkbox" data-k="kit-23"><span>Full-finger gloves <small>buy</small></span></li><li><input type="checkbox" data-k="kit-24"><span>Vivobarefoot Primus Trail III</span></li><li><input type="checkbox" data-k="kit-25"><span>Waterproof shell</span></li><li><input type="checkbox" data-k="kit-26"><span>Dry socks ×2</span></li><li><input type="checkbox" data-k="kit-27"><span>Wetsuit + goggles</span></li><li><input type="checkbox" data-k="kit-28"><span>Warm layer for the morning</span></li></ul></div>
@@ -1494,17 +1506,6 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
     <p class="small">If the repair kit has its own bag, the Silca roll is free to carry food — closes open item 10.</p>
   </div>
 
-  <div class="card rail-flag">
-    <h3>Bags · pack → drop → use</h3>
-    <p class="small">Bags come from Friday check-in · Saturday: black with the bike · Sunday bus: white + personal.</p>
-    <ul class="check bag-journeys">
-<li class="bagrow b-black"><input type="checkbox" data-k="kit-3" aria-label="Black · T2 packed"><div class="bagflow"><b class="bagname">Black · T2</b><div class="stage"><em>Pack</em><div class="chiprow"><i>Dry socks</i><i>Trail bib</i><i>2 × GEL 100</i><i>2 × PF&amp;H cap</i><i>SkyFlask + dry scoop</i></div></div><div class="stage"><em>Drop</em><strong>Sat 13:00–16:00</strong><span>GEiEG, Girona · with the bike</span></div><div class="stage"><em>Use</em><span>T2 Celrà · water into the flask</span></div></div></li>
-<li class="bagrow b-white"><input type="checkbox" data-k="kit-4" aria-label="White · T1 packed"><div class="bagflow"><b class="bagname">White · T1</b><div class="stage"><em>Pack</em><div class="chiprow"><i>Helmet + glasses</i><i>Gloves</i><i>Sleeves</i><i>Pocket fuel</i><i>Capsules</i></div></div><div class="stage"><em>Drop</em><strong>Sun 08:00–08:45</strong><span>T1, Cadaqués · on the bus with you</span></div><div class="stage"><em>Use</em><span>After the swim · bike kit on, wetsuit in</span></div></div></li>
-<li class="bagrow b-pers"><input type="checkbox" data-k="kit-5" aria-label="Personal · cloakroom packed"><div class="bagflow"><b class="bagname">Personal · cloakroom</b><div class="stage"><em>Pack</em><div class="chiprow"><i>Warm clothes</i><i>Pre-load scoops</i><i>Phone + wallet</i><i>Race-number sticker</i></div></div><div class="stage"><em>Drop</em><strong>Sun 08:00–08:45</strong><span>Cadaqués cloakroom · before the wetsuit</span></div><div class="stage"><em>Use</em><span>Warm until 09:00 · phone + wallet after</span></div></div></li>
-<li><input type="checkbox" data-k="kit-6"><span><b>Gravel bib under the saddle, the day before</b><span class="why">Plus the stem label they give you with profile, distance and feed zones. Trail bib on your front from T2.</span></span></li>
-<li><input type="checkbox" data-k="kit-7"><span><b>Collect bike and bags Sunday · confirm locations at check-in</b><span class="why">Current timetable: bags 15:00–18:00 at Plaça dels Jurats; bike 15:00–18:30 at GEiEG. Older briefing notes conflict on the bags. Chip goes back at the finish.</span></span></li>
-</ul>
-  </div>
 
   <div class="card">
     <h3>Navigation</h3>
