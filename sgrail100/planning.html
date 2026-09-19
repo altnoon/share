@@ -514,11 +514,7 @@ body[data-plan="a"] #fuel .cmp,body[data-plan="b"] #fuel .cmp{min-width:0!import
 #fuel .rtile{padding:18px;border-color:var(--line-soft)}#fuel .rtile b{font-family:var(--body);font-size:15px;text-transform:none;letter-spacing:0}
 #fuel .rtile span,#fuel .fkv,#kit .gear{font-size:15px}
 #fuel .rtile.f{background:var(--card);border-color:var(--line)}#fuel .rtile.f:nth-child(2){background:var(--flag-soft);border-color:var(--flag)}
-#fuel .buyboard{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;margin-top:10px}
-#fuel .bb em{display:block;font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-#fuel .bb.total{grid-column:1/-1;padding-top:12px;border-top:1px solid var(--line)}#fuel .bb.total em{color:var(--ink)}
-#fuel .chiprow{display:flex;flex-wrap:wrap;gap:6px}#fuel .chiprow i{font-style:normal;font-size:13px;line-height:1.3;padding:5px 9px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink)}
-@media(max-width:560px){#fuel .buyboard{grid-template-columns:1fr}}
+#fuel .shoplist td{font-size:14px;line-height:1.4}#fuel .shoplist td.m{white-space:normal}@media(max-width:600px){#fuel .shoplist{min-width:0!important}#fuel .shoplist td,#fuel .shoplist th{padding:9px 8px;font-size:13.5px}}
 #fuel .stag,#kit .stag,#kit .gear .g small,.check .why,.closedlist>summary,.prov>summary,.cl li{font-size:13px}
 #kit .stag.rec{background:var(--paper);color:var(--ink);border-color:var(--line)}
 #kit .gear li{padding:12px 0;gap:16px}#kit .gear li.sub{font-family:var(--body);font-size:14px;letter-spacing:0;text-transform:none;padding-top:22px}
@@ -1410,15 +1406,18 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
     <div><dt>Sodium</dt><dd>~1,000 <small>mg/h</small></dd></div>
   </dl>
 
-  <div class="sec-label rm-hide" style="margin-top:26px">Plan A · buy &amp; pack</div>
-  <div class="buyboard rm-hide" aria-label="Fuel to buy and where it goes">
-    <div class="bb"><em>Bottle 2 · mixed 08:15</em><div class="chiprow"><i>DM320 sachet ×1</i><i>750 ml water</i></div></div>
-    <div class="bb"><em>Trisuit pockets · bike</em><div class="chiprow"><i>Solid 160 ×2</i><i>GEL 100 ×1</i><i>CAF 100 ×1</i><i>Vial · 8 caps</i></div></div>
-    <div class="bb"><em>Vials · W1 / W2</em><div class="chiprow"><i>NoordCode scoop ×2</i></div></div>
-    <div class="bb"><em>Black bag · run</em><div class="chiprow"><i>GEL 100 ×2</i><i>Caps ×2</i><i>NoordCode scoop ×1</i><i>SkyFlask 350</i></div></div>
-    <div class="bb"><em>Cloakroom · 07:30</em><div class="chiprow"><i>NoordCode scoop ×2</i><i>500 ml bottle</i></div></div>
-    <div class="bb total"><em>Shopping list</em><div class="chiprow"><i>DM320 ×1</i><i>Solid 160 ×2</i><i>GEL 100 ×3</i><i>CAF 100 ×1</i><i>PF&amp;H 250 mg · box of 15 ×2</i><i>NoordCode · 5 scoops</i><i>2 screw-top vials + pill vial</i></div></div>
-  </div>
+  <div class="sec-label rm-hide" style="margin-top:26px">Plan A · shopping list</div>
+  <div class="tblwrap rm-hide" tabindex="0" role="region" aria-label="Shopping list"><table role="table" class="tight shoplist" style="min-width:0">
+    <tr role="row"><th role="columnheader">Item</th><th role="columnheader">Buy</th><th role="columnheader">Goes in</th></tr>
+    <tr role="row"><td role="cell" data-label="Item"><b>Maurten DM320</b></td><td role="cell" data-label="Buy" class="m">1 sachet</td><td role="cell" data-label="Goes in">Bottle 2 · mixed 08:15</td></tr>
+    <tr role="row"><td role="cell" data-label="Item"><b>Maurten Solid 160</b></td><td role="cell" data-label="Buy" class="m">2</td><td role="cell" data-label="Goes in">Trisuit pocket</td></tr>
+    <tr role="row"><td role="cell" data-label="Item"><b>Maurten GEL 100</b></td><td role="cell" data-label="Buy" class="m">3</td><td role="cell" data-label="Goes in">1 pocket · 2 black bag</td></tr>
+    <tr role="row"><td role="cell" data-label="Item"><b>Maurten CAF 100</b></td><td role="cell" data-label="Buy" class="m">1</td><td role="cell" data-label="Goes in">Trisuit pocket</td></tr>
+    <tr role="row"><td role="cell" data-label="Item"><b>PF&amp;H 250 mg capsules</b></td><td role="cell" data-label="Buy" class="m">2 boxes of 15</td><td role="cell" data-label="Goes in">8 in a pill vial · 2 black bag</td></tr>
+    <tr role="row"><td role="cell" data-label="Item"><b>NoordCode electrolyte</b></td><td role="cell" data-label="Buy" class="m">5 scoops</td><td role="cell" data-label="Goes in">2 pre-load · 1 W1 · 1 W2 · 1 run</td></tr>
+    <tr role="row"><td role="cell" data-label="Item"><b>Screw-top vials</b></td><td role="cell" data-label="Buy" class="m">2 + pill vial</td><td role="cell" data-label="Goes in">W1 / W2 scoops · capsules</td></tr>
+    <tr role="row"><td role="cell" data-label="Item"><b>SkyFlask 350</b></td><td role="cell" data-label="Buy" class="m">have</td><td role="cell" data-label="Goes in">Black bag · dry scoop taped to it</td></tr>
+  </table></div>
   <details class="prov notes rm-hide"><summary>Why A, and what B was</summary><p><b>A · Bottle</b> — 210 g, 4 wrappers, ~6–8 caps; sip bottle 2 through the first 25 km, no wrappers on technical ground. Weak point: mixing before the swim and drinking on rough ground. <b>B · Pocket</b> — 205 g, 7 wrappers, ~4–6 caps; gels at 0:20 and 0:50 on the climbs, bottle 2 = sodium from the start. Weak point: opening and retrieving gels on Cap de Creus. Decided 18 Sep: A. B stays on the feed chart toggle.</p></details>
 
 
