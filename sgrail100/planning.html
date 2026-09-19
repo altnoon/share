@@ -145,8 +145,7 @@ footer p{margin-bottom:6px}
 #course .vprof{display:block;width:100%;max-width:360px;margin:0 auto;height:auto}
 #course .prof-scroll,#course .clock-scroll{position:relative}
 @media (max-width:700px){
-  #course .landscape{display:none}
-  #course .portrait{display:block}
+  #course .portrait{display:none}
   #course .scroll-hint{display:none}
 }
 
@@ -765,8 +764,8 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 @media screen and (max-width:600px){
  .phone-home{display:block;padding:24px 0 16px}.phone-home h1{font-size:36px}.phone-home p{margin:10px 0}.phone-home .utility-actions{gap:8px}.phone-home .utility-actions button{font-size:14px;flex:1 1 42%}
  body.mobile-compact header,body.mobile-compact .essentials,body.mobile-compact .statusbar{display:none}
- body.race .dock{display:none!important}body.race .phone-phases{display:flex;position:fixed;z-index:45;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);padding:8px 8px calc(8px + env(safe-area-inset-bottom));gap:4px}
- .phone-phases button{flex:1;min-height:48px;font:600 14px var(--body);border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink)}.phone-phases button[aria-pressed="true"]{background:var(--strong);color:var(--on-strong)}
+ body.race .dock{display:none!important}body.race #course .phasestrip,body.race #course .phasectl{display:none}body.race .phone-phases{display:flex;position:fixed;z-index:45;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);padding:8px 8px calc(8px + env(safe-area-inset-bottom));gap:4px}
+ .phone-phases button{flex:1;min-height:48px;padding:6px 2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font:600 13px var(--body);}.phone-phases button small{font:500 10px var(--mono);letter-spacing:0;color:var(--muted);white-space:nowrap}.phone-phases button[aria-pressed="true"] small{color:inherit;opacity:.85}.phone-phases button{border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink)}.phone-phases button[aria-pressed="true"]{background:var(--strong);color:var(--on-strong)}
  .phone-feed{display:block;margin:20px 0;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:8px}.feed-list{list-style:none}.feed-list li{display:grid;grid-template-columns:64px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line-soft)}.feed-list time{font-family:var(--mono);font-weight:600}.phone-view-label{font-size:14px;color:var(--muted)}
  .phone-comparison{display:flex}.phone-comparison button{flex:1}body[data-phone-plan="a"] #fuel .cmp tr>*:nth-child(3),body[data-phone-plan="b"] #fuel .cmp tr>*:nth-child(2){display:none}#fuel .cmp{min-width:0!important}
  body[data-phone-plan="a"] #fuel .cmp tr>*:nth-child(2),body[data-phone-plan="b"] #fuel .cmp tr>*:nth-child(3){display:table-cell}
@@ -998,7 +997,7 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
   <a href="#pacing">Pacing</a>
   <a href="#risks">Risks</a>
 </div><button type="button" class="rmbtn" id="navprog" data-prog>Program · Fri–Sun ↗</button><button type="button" class="rmbtn" id="navopen" data-open>Open tasks ↗</button><button type="button" class="rmbtn" id="thbtn" aria-label="Colour theme">Theme · auto</button><button type="button" class="rmbtn" id="rmbtn">Race day</button></nav>
-<div class="phone-phases" role="group" aria-label="Race phase"><button type="button" data-phone-phase="ph-swim" aria-pressed="false">Swim</button><button type="button" data-phone-phase="ph-t1" aria-pressed="false">T1</button><button type="button" data-phone-phase="ph-bike" aria-pressed="false">Bike</button><button type="button" data-phone-phase="ph-t2" aria-pressed="false">T2</button><button type="button" data-phone-phase="ph-run" aria-pressed="false">Run</button></div>
+<div class="phone-phases" role="group" aria-label="Race phase"><button type="button" data-phone-phase="ph-pre" aria-pressed="false">Pre<small>07:30</small></button><button type="button" data-phone-phase="ph-swim" aria-pressed="false">Swim<small>28–33′</small></button><button type="button" data-phone-phase="ph-t1" aria-pressed="false">T1<small>6–8′</small></button><button type="button" data-phone-phase="ph-bike" aria-pressed="false">Bike<small>4:00–4:45</small></button><button type="button" data-phone-phase="ph-t2" aria-pressed="false">T2<small>5–6′</small></button><button type="button" data-phone-phase="ph-run" aria-pressed="false">Run<small>1:10–1:20</small></button></div>
 <div class="dock" aria-label="Section navigation" hidden>
   <button class="prev" type="button" aria-label="Previous section"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3 5 8l5 5"/></svg></button>
   <div class="pager"></div><button class="menu" type="button" aria-label="Open section menu" aria-controls="dock-sheet" aria-expanded="false">☰</button>
@@ -1284,16 +1283,16 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
 <div class="zone"><div class="zh">08:00–08:45 · in order</div><ol class="rail"><li>Rack the bike</li><li><b>Fill both bottles</b> — bottle 2 per plan (A DM320 · B NoordCode), bottle 1 water</li><li>Gravel bib — already under the saddle</li><li>White T1 bag → T1 area</li><li>Personal bag → cloakroom, sticker on</li><li>Wetsuit on — in the changing tents</li></ol></div>
 <details class="prov notes"><summary>Notes</summary><p>Pre-load scoops travel in the cloakroom bag, not the T1 bag. Nothing novel within 48 h of the start.</p><p>Everything fiddly happens here, with warm dry hands and 45 minutes. Breakfast: familiar only; espresso ~80 mg. Coffee by Sailfish and a Ryzon donut are on site at Cadaqués.</p></details></details>
 
-  <details class="planblock transblock p-swim" id="ph-swim"><summary class="plan-head"><span class="pn">Swim · 1,500 m</span><span class="pd">Platja Gran · rectangular, counterclockwise · ~18.5 °C</span><span class="phase-brief"><span><b>Watch for</b> Keep the effort steady; save energy for the bike.</span></span><span class="detail-cue">More detail</span></summary><div class="carry" style="grid-template-columns:1fr 1fr"><div class="zone"><div class="zh">The course</div><svg class="swimmap" viewBox="0 0 420 152" role="img" aria-label="Swim course: 700 m out, 100 m across, 700 m back, anti-clockwise">
-<rect x="10" y="122" width="400" height="22" fill="#D9C9A8" opacity=".55"/><text x="20" y="138" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#8A5A2B">PLATJA GRAN · start + exit</text>
-<path d="M60 100 V32" stroke="#0E6272" stroke-width="2.4" fill="none" stroke-dasharray="none"/><path d="M60 32 H360" stroke="#0E6272" stroke-width="2.4" fill="none"/><path d="M360 32 V100" stroke="#0E6272" stroke-width="2.4" fill="none"/>
-<path d="M360 70 l-5 8 h10z" fill="#0E6272"/><path d="M210 32 l8 -5 v10z" fill="#0E6272"/><path d="M60 70 l-5 -8 h10z" fill="#0E6272"/>
-<g fill="#E0B400"><circle cx="60" cy="88" r="4"/><circle cx="60" cy="60" r="4"/><circle cx="135" cy="32" r="4"/><circle cx="210" cy="32" r="4"/><circle cx="285" cy="32" r="4"/><circle cx="360" cy="60" r="4"/><circle cx="360" cy="88" r="4"/></g>
-<g fill="#B3341F"><circle cx="60" cy="32" r="5"/><circle cx="360" cy="32" r="5"/></g>
-<text x="52" y="72" text-anchor="end" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#1B2A32">700 m</text>
-<text x="210" y="20" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#1B2A32">100 m turn</text>
-<text x="368" y="72" text-anchor="start" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#1B2A32">700 m</text>
-<text x="210" y="115" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">anti-clockwise · yellow buoys every 250 m · red at the turns</text>
+  <details class="planblock transblock p-swim" id="ph-swim"><summary class="plan-head"><span class="pn">Swim · 1,500 m</span><span class="pd">Platja Gran · rectangular, counterclockwise · ~18.5 °C</span><span class="phase-brief"><span><b>Watch for</b> Keep the effort steady; save energy for the bike.</span></span><span class="detail-cue">More detail</span></summary><div class="carry" style="grid-template-columns:1fr 1fr"><div class="zone"><div class="zh">The course</div><svg class="swimmap" viewBox="0 0 420 152" role="img" aria-label="Swim course: 700 m out, 100 m across, 700 m back, anti-clockwise, to scale">
+<rect x="10" y="20" width="22" height="112" fill="#D9C9A8" opacity=".55"/><text x="24" y="130" transform="rotate(-90 24 130)" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#8A5A2B">PLATJA GRAN · start + exit</text>
+<path d="M40 48 H390" stroke="#0E6272" stroke-width="2.4" fill="none"/><path d="M390 48 V98" stroke="#0E6272" stroke-width="2.4" fill="none"/><path d="M390 98 H40" stroke="#0E6272" stroke-width="2.4" fill="none"/>
+<path d="M215 48 l-8 -5 v10z" fill="#0E6272"/><path d="M390 73 l-5 -8 h10z" fill="#0E6272"/><path d="M215 98 l8 -5 v10z" fill="#0E6272"/>
+<g fill="#E0B400"><circle cx="128" cy="48" r="4"/><circle cx="215" cy="48" r="4"/><circle cx="303" cy="48" r="4"/><circle cx="303" cy="98" r="4"/><circle cx="215" cy="98" r="4"/><circle cx="128" cy="98" r="4"/></g>
+<g fill="#B3341F"><circle cx="390" cy="48" r="5"/><circle cx="390" cy="98" r="5"/></g>
+<text x="215" y="36" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#0E6272">700 m out</text>
+<text x="404" y="77" font-family="ui-monospace,Menlo,monospace" font-size="9" fill="#0E6272" transform="rotate(90 404 77)" text-anchor="middle">100 m</text>
+<text x="215" y="115" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#0E6272">700 m back</text>
+<text x="40" y="140" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5C6B72">anti-clockwise · red = turn buoys · to scale</text>
 </svg></div><div class="zone"><div class="zh">Execution</div><ol class="rail"><li>Settle the first 300 m</li><li>Sight every 6–8 strokes — the turns</li><li>Take feet if a pair comes past</li><li>Steady IM effort</li><li>Out, up the beach, into T1</li></ol></div></div>
 <details class="prov notes"><summary>Notes</summary><p>Cold-shock composure is the only job; 86 km and a trail run come after this. Cut-off 09:59 — at 28–33 min there is no risk.</p><p>Nothing is taken in the water — the first carb is on the bike at 0:20. Wetsuit on where the briefing says. Friday's 10-minute recon at this beach removes the unknowns.</p></details></details>
 
@@ -1304,7 +1303,7 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
 <div class="zone"><div class="zh">In the white bag</div><div class="chiprow"><i>Helmet + glasses</i><i>Full-finger gloves</i><i>Arm sleeves</i><i>Plastic bag / shell</i><i>PF&amp;H vial · 15</i><i>2 × NoordCode vial</i></div></div>
 <details class="prov notes"><summary>Notes</summary><p><b>Both bottles are filled and on the bike by 08:15</b>, before you swim — bottle 2 per plan (A DM320 · B NoordCode), water in bottle 1. Nothing gets mixed with cold wet hands.</p><p>The 2 capsules at the bike are the first dose of the bike's sodium clock, not extra pre-race loading — taken here so there is no fishing in a pocket on Cap de Creus.</p><p>Glasses clear or light tint (October cloud). Gloves for cold hands and crash protection. Shell vs plastic bag: call it off Friday's forecast. The wetsuit goes into this bag and travels to Girona. Riding inside T1 is +30 min. Target 6–8 min; scenario B allows 8.</p></details></details>
 
-  <details class="planblock p-bike" id="ph-bike" data-plan="a"><summary class="plan-head"><span class="pn a-color">Plan A · Bottle</span><span class="pd">DM320 sachet + 2 solids + 2 gels · 210 g</span><span class="phase-brief"><span><b>Watch for</b> Keep hands available on descents; follow the GPS.</span></span><span class="detail-cue">More detail</span></summary>
+  <details class="planblock p-bike" id="ph-bike" data-plan="a"><summary class="plan-head"><span class="pn a-color">Bike</span><span class="pd">DM320 sachet + 2 solids + 2 gels · 210 g</span><span class="phase-brief"><span><b>Watch for</b> Keep hands available on descents; follow the GPS.</span></span><span class="detail-cue">More detail</span></summary>
   <div class="portrait">
       <svg class="vprof" viewBox="0 0 340 820" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CAP DE CREUS KM 0–25 · ~67% OF CLIMBING">
       <line x1="40" y1="50.0" x2="40" y2="261.2" stroke="var(--track)" stroke-width="3" stroke-linecap="round"/>
@@ -1950,7 +1949,7 @@ document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener
  document.querySelectorAll('.phasestrip a,.phasectl button').forEach(function(b){b.addEventListener('click',refresh);});
  document.getElementById('save-race-plan').addEventListener('click',function(){view(saved()||'a');refresh();});
  document.getElementById('rmbtn').addEventListener('click',function(){if(saved())view(saved());refresh();});
- function layout(){showOverview(overview);document.querySelectorAll('.deadline-group,[data-mobile-chart]').forEach(function(g){g.open=!mq.matches;});}
+ function layout(){showOverview(overview);document.querySelectorAll('.deadline-group').forEach(function(g){g.open=!mq.matches;});}
  mq.addEventListener('change',layout);layout();view(saved()||'a');refresh();
 })();
 </script>
