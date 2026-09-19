@@ -335,6 +335,16 @@ body:not(.race) #course,body:not(.race) nav a[href="#course"]{display:none}
 .modeseg button[aria-pressed="true"]{background:var(--ink);color:var(--card)}
 .modeseg button[data-view="race"][aria-pressed="true"]{background:var(--flag);color:#fff}
 #openitems .card{margin:0;border:0;padding:0;background:transparent}
+.modeside{display:none}
+@media(min-width:1050px){
+ .modebar{display:none}
+ .modeside{display:flex;flex-direction:column;gap:2px;margin:0 0 18px;padding:0 0 16px;border-bottom:1px solid var(--line)}
+ .modeside button{font:inherit;display:flex;align-items:baseline;gap:8px;padding:8px 12px;border:0;border-left:3px solid transparent;border-radius:0 5px 5px 0;background:transparent;color:var(--muted);cursor:pointer;text-align:left;min-height:40px}
+ .modeside button b{font-family:var(--body);font-weight:600;font-size:14px;color:inherit}.modeside button span{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+ .modeside button:hover{background:var(--sea-soft)}
+ .modeside button[aria-pressed="true"]{color:var(--ink);border-left-color:var(--ink);background:var(--card)}
+ .modeside button[data-view="race"][aria-pressed="true"]{color:var(--flag);border-left-color:var(--flag)}
+}
 body.race .rm-hide{display:none}
 body.race #navopen,body.race .sheet-tools [data-open]{display:none}
 .rmbtn{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);color:var(--muted);cursor:pointer;white-space:nowrap}
@@ -521,9 +531,9 @@ details .inner{padding:0 20px 20px}.mclose{width:44px;height:44px}
 progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-progress-value{background:var(--trail)}progress::-moz-progress-bar{background:var(--trail)}#prep-done{white-space:nowrap}
 @media(min-width:1050px){
  .wrap{display:grid;grid-template-columns:176px minmax(0,1fr);column-gap:44px;align-items:start}
- header,.wrap>.modebar{grid-column:1/-1}nav{grid-column:1;grid-row:3/40;position:sticky;top:76px;display:block;margin-top:28px;padding:0}
+ header,.wrap>.modebar{grid-column:1/-1}nav{grid-column:1;grid-row:2/40;position:sticky;top:24px;display:block;margin-top:28px;padding:0}
  nav .row{display:flex;flex-direction:column;overflow:visible;gap:3px}nav .nav-label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);padding:0 12px;margin-bottom:16px}
- nav .rmbtn{margin:20px 0 0 12px}.wrap>section,.wrap>.statusbar,.wrap>.essentials,.wrap>footer,.wrap>p{grid-column:2}
+ nav .rmbtn{margin:20px 0 0 12px}.wrap>section,.wrap>.statusbar,.wrap>.essentials,.wrap>.sos,.wrap>footer,.wrap>p{grid-column:2}
  section{scroll-margin-top:24px}
 }
 @media(max-width:800px){#course .carry{grid-template-columns:1fr}.legend{grid-template-columns:1fr}.race-metrics{gap:14px}.metric strong{font-size:38px}}
@@ -975,7 +985,7 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
   </div>
 </header>
 
-<nav aria-label="Dossier contents"><label class="mobile-nav" for="mobile-section"><span class="sr-only">Jump to section</span><select id="mobile-section" aria-label="Jump to section"></select></label><span class="nav-label">Field notes / 2026</span><div class="row">
+<nav aria-label="Dossier contents"><label class="mobile-nav" for="mobile-section"><span class="sr-only">Jump to section</span><select id="mobile-section" aria-label="Jump to section"></select></label><span class="nav-label">Field notes / 2026</span><div class="modeside" role="group" aria-label="Dossier mode"><button type="button" data-view="prepare"><b>Prepare</b><span>until Sat 17</span></button><button type="button" data-view="race"><b>Race day</b><span>Sun 18</span></button></div><div class="row">
   <a href="#openitems">Open tasks</a>
   <a href="#course">Course</a>
   <a href="#fuel">Fuel</a>
