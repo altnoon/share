@@ -327,10 +327,10 @@ footer p{margin-bottom:6px}
 body.race #kit,body.race #risks,body.race #openitems,body.race footer{display:none}
 body:not(.race) #course,body:not(.race) #pacing,body:not(.race) #fuel,body:not(.race) nav a[href="#course"],body:not(.race) nav a[href="#pacing"],body:not(.race) nav a[href="#fuel"]{display:none}
 #rmbtn,.essentials>.view-switch,.phone-home .view-switch,#view-description,#navopen,.prep-grid{display:none!important}
-.modebar{position:sticky;top:0;z-index:40;background:var(--paper);padding:10px 0 8px;margin:0;border-bottom:1px solid var(--line)}
-.modeseg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card);max-width:520px}
-.modeseg button{font:inherit;padding:8px 14px;border:0;background:transparent;color:var(--muted);cursor:pointer;text-align:left;display:flex;align-items:baseline;gap:8px;min-height:48px;flex-wrap:wrap}
-.modeseg button b{font-family:var(--disp);font-size:16px;color:inherit}.modeseg button span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.modebar{position:fixed;right:14px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:46;padding:0;margin:0;border:0;background:none}
+.modeseg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card);box-shadow:0 10px 26px -12px rgba(27,42,50,.5),0 1px 3px rgba(27,42,50,.08)}
+.modeseg button{font:600 12.5px var(--body);padding:0 14px;min-height:38px;border:0;background:transparent;color:var(--muted);cursor:pointer;display:flex;align-items:center;white-space:nowrap}
+.modeseg button b{font-family:var(--body);font-weight:600;font-size:12.5px;color:inherit}.modeseg button span{display:none}
 .modeseg button[aria-pressed="true"]{background:var(--ink);color:var(--card)}
 .modeseg button[data-view="race"][aria-pressed="true"]{background:var(--flag);color:#fff}
 #open .card{margin:0;border:0;padding:0;background:transparent;display:grid;grid-template-columns:1fr 1fr;gap:0 24px;align-items:start}#open .card>.closedlist{grid-column:1/-1}#hide-completed{display:none}#openitems .pk-head{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin:22px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--ink)}#openitems .packgrid{margin-bottom:6px}#openitems .packgrid+p.small{margin:10px 0 0}@media(max-width:700px){#open .card{grid-template-columns:1fr}}
@@ -609,6 +609,8 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
   .dock .pager a b:empty{display:none}
   .dock .prog{position:absolute;left:52px;right:52px;bottom:8px;height:2px;border-radius:2px;background:var(--line-soft);overflow:hidden}
   .dock .prog i{display:block;height:100%;width:0;background:var(--sea);transition:width .12s linear}
+  body.sheet-open .modebar{display:none}
+  .modebar{bottom:calc(80px + env(safe-area-inset-bottom))}
   .sheet{position:fixed;left:14px;right:14px;bottom:calc(78px + env(safe-area-inset-bottom));z-index:39;background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 26px 54px -22px rgba(27,42,50,.45),0 2px 6px rgba(27,42,50,.06);padding:4px 18px 10px;max-height:min(62dvh,540px);overflow-y:auto;overscroll-behavior:contain;transform-origin:50% 100%}
   .sheet[hidden]{display:none}
   body.sheet-open .sheet{display:block;animation:sheet .22s cubic-bezier(.22,.61,.36,1)}
@@ -624,7 +626,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
   .sheet-tools button[data-prog],.sheet-tools button[data-open]{border-color:var(--ink)}
   .sheet-tools button.on{background:var(--flag);border-color:var(--flag);color:var(--on-flag)}
 }
-@media print{.dock,.sheet{display:none!important}}
+@media print{.dock,.sheet,.modebar{display:none!important}}
 @media screen and (max-width:600px){
  body{font-size:16px;-webkit-text-size-adjust:100%}
  .wrap{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
@@ -931,7 +933,7 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
 <div class="modebar"><div class="modeseg" role="group" aria-label="Dossier mode"><button type="button" data-view="prepare"><b>Prepare</b><span>until Sat 17</span></button><button type="button" data-view="race"><b>Race day</b><span>Sun 18</span></button></div></div>
 <aside class="phone-home" aria-label="Quick start"><h1>SGRAIL 100</h1><div class="view-switch" role="group" aria-label="Quick view"><button type="button" data-view="prepare">Prepare</button><button type="button" data-view="race">Race day</button></div><p id="phone-plan" role="status"></p><p id="phone-next"></p><div class="utility-actions"><button type="button" id="phone-phases">Go to race phases</button><button type="button" data-open>Open tasks</button><button type="button" id="phone-overview" aria-expanded="false">Show full overview</button><button type="button" id="phone-edit-plan" hidden>Change race plan</button></div></aside>
 <header>
-  <div class="eyebrow">Race dossier · Des · rev 2026-09-19</div>
+  <div class="eyebrow">Race dossier · Des · rev 2026-09-20</div>
   <h1>SGRAIL&nbsp;100 <span class="yr">'26</span></h1>
   <div class="sub"><b>Sunday 18 October 2026 · 09:00</b><span class="sub2">Platja Gran, Cadaqués → Girona old town</span></div>
   <p class="mobile-chart-caption">Course shape · climb early on the bike, then again at the start of the run.</p>
