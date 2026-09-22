@@ -914,7 +914,9 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
 }
 /* Compact phone packing and pickup; desktop comparison tables stay intact. */
 @media(max-width:600px){
- .packtbl tbody tr:not(.grp){grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 12px;padding:12px 0}
+ .packtbl tbody tr:not(.grp){grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 16px;padding:16px;box-sizing:border-box}
+ .packtbl tbody tr.grp{padding:16px 16px 6px}
+ .packtbl tbody th label>span{min-width:0;overflow-wrap:anywhere}
  .packtbl tbody td.empty-stage{display:none}
  .pickup .tblwrap{overflow:visible}
  .pickup table.spec{display:block;min-width:0!important;width:100%}
@@ -1944,7 +1946,7 @@ document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener
 
 // Mobile quick start and manual phase navigation.
 (function(){
- var mq=window.matchMedia('(max-width:600px)'),overview=false;
+ var mq=window.matchMedia('(max-width:600px)'),overview=true;
  function saved(){return document.getElementById('race-plan-status').dataset.savedPlan||'';}
  function showOverview(on){overview=on;document.body.classList.toggle('mobile-compact',mq.matches&&!on);var b=document.getElementById('phone-overview');b.textContent=on?'Hide full overview':'Show full overview';b.setAttribute('aria-expanded',String(on));}
  function view(mode){
