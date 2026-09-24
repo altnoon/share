@@ -1045,6 +1045,57 @@ body.race #setup{display:none}
 #course .zone ul.plain li{display:block;grid-template-columns:none;gap:0}
 #course .zone ul.plain li b{display:inline;font-weight:700}
 #course .reset-tr{background:var(--card);color:var(--ink);border:1px solid var(--line);cursor:pointer}
+/* ===== survey gate: paginated modal, one question per page ===== */
+body.gate-open{overflow:hidden}
+body.gated .wrap{display:none}
+.gate{position:fixed;inset:0;z-index:200;overflow-y:auto;-webkit-overflow-scrolling:touch;background:rgba(14,20,23,.55);display:flex;justify-content:center;align-items:flex-start;padding:48px 16px}
+body.gated .gate{background:var(--paper)}
+.gate[hidden]{display:none}
+.gate-card{width:min(600px,100%);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px 28px 26px;box-shadow:0 10px 40px rgba(0,0,0,.12);box-sizing:border-box}
+.gate-top{display:flex;align-items:center;gap:12px;min-height:32px}
+.gate-brand{font:700 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);flex:1}
+.gate-prog{font:600 12.5px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.gate .gate-x{width:40px;height:40px;min-height:40px;padding:0;border-radius:50%;font:400 22px/1 var(--body);color:var(--muted);background:var(--card);border:1px solid var(--line);cursor:pointer}
+.gate .gate-x[hidden]{display:none}
+.gate-bar{height:4px;border-radius:2px;background:var(--line-soft);margin:12px 0 26px;overflow:hidden}
+.gate-bar i{display:block;height:100%;width:0;background:var(--ink);transition:width .25s ease}
+@media (prefers-reduced-motion:reduce){.gate-bar i{transition:none}}
+.gate .g-kicker{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.gate h2#gate-title{display:block;font-family:var(--disp);font-weight:700;font-size:27px;line-height:1.2;letter-spacing:-.005em;text-transform:none;border:0;padding:0;margin:0 0 10px;color:var(--ink)}
+.gate h2#gate-title:focus{outline:none}
+.gate h2#gate-title small{font:500 13px var(--mono);color:var(--muted);letter-spacing:.04em;margin-left:6px;vertical-align:4px}
+.gate .g-lede{font-size:16px;line-height:1.55;color:var(--ink);margin:0 0 16px}
+.gate .g-note,.gate .g-hint{font-size:14px;color:var(--muted);margin:10px 0 0}
+.gate .g-hint{text-align:center;margin-top:14px}
+.gate .qhelp{font-size:15px;line-height:1.5;color:var(--muted);margin:0 0 16px}
+.gate .opts{display:flex;flex-direction:column;gap:8px}
+.gate .opt{position:relative;display:flex;align-items:center;min-height:52px;padding:12px 16px;border:1px solid var(--line);border-radius:8px;background:var(--card);cursor:pointer;font-size:16px;line-height:1.35;color:var(--ink)}
+.gate .opt:hover{border-color:var(--muted)}
+.gate .opt input{position:absolute;opacity:0;width:1px;height:1px}
+.gate .opt span::before{content:"";flex:none;display:inline-block;width:16px;height:16px;border:1.5px solid var(--muted);border-radius:50%;margin-right:12px;vertical-align:-3px;box-sizing:border-box}
+.gate .opts.multi .opt span::before{border-radius:4px}
+.gate .opt.on{border-color:var(--ink);background:var(--ink);color:var(--paper);font-weight:600}
+.gate .opt.on span::before{border-color:var(--paper);background:var(--paper);box-shadow:inset 0 0 0 3px var(--ink)}
+.gate .opt:focus-within{outline:2px solid var(--sea);outline-offset:2px}
+.gate select,.gate input[type=number],.gate input[type=text]{font:500 18px var(--body);min-height:52px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);box-sizing:border-box}
+.gate select,.gate input[type=text]{width:100%}
+.gate input[type=number]{width:140px}
+.gate .numrow{display:flex;align-items:center;gap:10px;font-size:16px;color:var(--muted)}
+.gate .g-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:26px}
+.gate .g-nav button{font:600 15px var(--body);letter-spacing:0;text-transform:none;min-height:48px;padding:10px 20px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.gate .g-nav button.primary{background:var(--ink);border-color:var(--ink);color:var(--paper);min-width:140px}
+.gate button:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
+.gate .g-parts{list-style:none;margin:18px 0;padding:0;border-top:1px solid var(--line-soft)}
+.gate .g-parts li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line-soft);font-size:15px}
+.gate .g-parts span{color:var(--muted);font-size:14px}
+@media (max-width:600px){
+  .gate{padding:0}
+  .gate-card{min-height:100%;border:0;border-radius:0;box-shadow:none;padding:calc(14px + env(safe-area-inset-top)) 18px calc(24px + env(safe-area-inset-bottom))}
+  .gate h2#gate-title{font-size:24px}
+  .gate .g-nav{position:sticky;bottom:0;background:var(--card);padding:12px 0 calc(4px + env(safe-area-inset-bottom));margin-top:20px;border-top:1px solid var(--line-soft)}
+  .gate .g-nav button.primary{flex:1}
+}
+@media print{.gate{display:none!important}}
 
 </style>
 <script>
@@ -1142,7 +1193,7 @@ body.race #setup{display:none}
 
 <section id="setup">
   <h2>Your plan <span class="tag">two short surveys · answers stay on this device</span></h2>
-  <p class="setup-lede">Answer <b>01</b> to build your bags, pack list, bike checks and to-dos. Answer <b>02</b> to build your race-day feed clock, sodium and pacing. Change an answer any time and everything below is rebuilt.</p>
+  <p class="setup-lede">Everything on this page is built from these answers: <b>01</b> drives your bags, pack list, bike checks and to-dos; <b>02</b> drives your race-day feed clock, sodium and pacing. Edit either and the plan rebuilds.</p>
   <div id="surveys"></div>
   <div class="plan-tools" id="plan-tools" hidden><button type="button" id="share-plan">Copy link with my answers</button><button type="button" id="reset-plan">Start over</button><p id="tool-status" class="small" role="status"></p></div>
   <div id="plan-warn" class="card rail-flag" role="status" hidden></div>
@@ -1366,6 +1417,7 @@ body.race #setup{display:none}
 
 </div>
 
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" hidden><div class="gate-card"><div class="gate-top"><span class="gate-brand">SGRAIL 100 · race planner</span><span class="gate-prog" id="gate-prog"></span><button type="button" class="gate-x" id="gate-close" data-g="close" aria-label="Close without finishing">×</button></div><div class="gate-bar" aria-hidden="true"><i id="gate-bar"></i></div><div id="gate-body"></div></div></div>
 <dialog id="progdlg" class="modal" aria-label="Event program, Friday to Sunday">
   <div class="mhead"><b>Event program · Fri 16 → Sun 18</b><button type="button" class="mclose" aria-label="Close">×</button></div>
   <div class="mbody">
@@ -1883,22 +1935,25 @@ function renderFeedChart(P){
   return s;
 }
 
-// ---------------- survey UI ----------------
-var ui={open:null, step:0};
-function visibleQs(step,a){ return step.qs.filter(function(q){ return !q.when||q.when(a); }); }
+// ---------------- survey UI: paginated modal gate ----------------
+// First visit: the planner is hidden behind the survey; one question per page. Once both surveys are
+// done the gate lifts and the page shows the plan built from the answers. "Edit answers" reopens it.
+var gate={mode:null, key:null, pos:null};
 function qHtml(q,a){
-  var v=a[q.id], id='q-'+q.id, h='<div class="q" data-q="'+q.id+'"><div class="qlabel" id="'+id+'-l">'+q.label+'</div>'+(q.help?'<p class="qhelp">'+q.help+'</p>':'');
+  var v=a[q.id], id='q-'+q.id, h='<div class="q" data-q="'+q.id+'">';
+  if(q.help) h+='<p class="qhelp" id="'+id+'-h">'+q.help+'</p>';
+  var desc=q.help?' aria-describedby="'+id+'-h"':'';
   if(q.type==='choice'||q.type==='multi'){
-    h+='<div class="opts" role="'+(q.type==='choice'?'radiogroup':'group')+'" aria-labelledby="'+id+'-l">';
+    h+='<div class="opts'+(q.type==='multi'?' multi':'')+'" role="'+(q.type==='choice'?'radiogroup':'group')+'" aria-labelledby="gate-title"'+desc+'>';
     q.options.forEach(function(o){ var on=q.type==='multi'?(v||[]).indexOf(o[0])>=0:String(v)===o[0];
       h+='<label class="opt'+(on?' on':'')+'"><input type="'+(q.type==='choice'?'radio':'checkbox')+'" name="'+id+'" value="'+o[0]+'"'+(on?' checked':'')+'><span>'+o[1]+'</span></label>'; });
     h+='</div>';
   } else if(q.type==='select'){
-    h+='<select name="'+id+'" aria-labelledby="'+id+'-l">'+q.options.map(function(o){ return '<option value="'+o[0]+'"'+(String(v)===o[0]?' selected':'')+'>'+o[1]+'</option>'; }).join('')+'</select>';
+    h+='<select name="'+id+'" aria-labelledby="gate-title"'+desc+'>'+q.options.map(function(o){ return '<option value="'+o[0]+'"'+(String(v)===o[0]?' selected':'')+'>'+o[1]+'</option>'; }).join('')+'</select>';
   } else if(q.type==='number'){
-    h+='<div class="numrow"><input type="number" inputmode="decimal" name="'+id+'" min="'+q.min+'" max="'+q.max+'" step="'+q.step+'" value="'+esc(v)+'" aria-labelledby="'+id+'-l"><span>'+q.unit+'</span></div>';
+    h+='<div class="numrow"><input type="number" inputmode="decimal" name="'+id+'" min="'+q.min+'" max="'+q.max+'" step="'+q.step+'" value="'+esc(v)+'" aria-labelledby="gate-title"'+desc+'><span>'+q.unit+'</span></div>';
   } else {
-    h+='<input type="text" name="'+id+'" value="'+esc(v)+'" aria-labelledby="'+id+'-l" autocomplete="name" maxlength="40">';
+    h+='<input type="text" name="'+id+'" value="'+esc(v)+'" aria-labelledby="gate-title"'+desc+' autocomplete="given-name" maxlength="40" placeholder="Your name">';
   }
   return h+'</div>';
 }
@@ -1906,64 +1961,113 @@ function summaryLine(key,a){
   if(key==='kit'){ return [{own:'Own gravel bike',rental:'Rental bike',mtb:'MTB'}[a.bike], {tubeless:'tubeless',tubes:'tubes',unsure:'tyres tbc'}[a.tyres], {clip:'clipless',flat:'flat pedals'}[a.pedals], a.cages+' cage'+(a.cages!=='1'?'s':''), 'check-in '+(a.checkin==='fri'?'Fri':'Sat')]; }
   var P=compute(a); return ['Swim '+Math.round(P.swim)+' min','bike '+hm(P.B),'run '+hm(P.R),a.carbrate+' g/h', {light:'light',avg:'average',heavy:'heavy'}[a.sweat]+' sweat'];
 }
+// cards in "Your plan": summary + edit, no inline forms
 function renderSurveys(){
   var a=answers(), host=document.getElementById('surveys'); if(!host) return;
+  host.innerHTML=['kit','fuel'].map(function(key){
+    var S=SURVEYS[key], done=state.done[key];
+    return '<article class="survey'+(done?' done':'')+'" id="survey-'+key+'"><div class="sv-head"><span class="sv-n">'+S.n+'</span><div><h3>'+S.title+'</h3><p class="small">'+S.builds+'</p></div><button type="button" class="sv-go'+(done?'':' primary')+'" data-sv-open="'+key+'">'+(done?'Edit answers':'Answer')+'</button></div>'+
+      (done?'<div class="sv-sum">'+summaryLine(key,a).map(function(x){ return '<i>'+esc(x)+'</i>'; }).join('')+'</div>':'')+'</article>';
+  }).join('');
+  document.getElementById('plan-tools').hidden=!(state.done.kit||state.done.fuel);
+}
+// page list for the current gate mode; question pages are keyed by id so hidden questions drop out cleanly
+function gatePages(){
+  var a=answers(), pages=[];
+  var keys=gate.mode==='edit'?[gate.key]:['kit','fuel'];
+  if(gate.mode==='onboard') pages.push({id:'intro',kind:'intro'});
+  keys.forEach(function(key,ki){
+    if(gate.mode==='onboard' && ki>0) pages.push({id:'mid-'+key,kind:'mid',key:key});
+    SURVEYS[key].steps.forEach(function(st){ visibleQs(st,a).forEach(function(q){ pages.push({id:q.id,kind:'q',key:key,step:st,q:q}); }); });
+  });
+  pages.push({id:'end',kind:'end'});
+  return pages;
+}
+function visibleQs(step,a){ return step.qs.filter(function(q){ return !q.when||q.when(a); }); }
+function gateIndex(pages){ for(var i=0;i<pages.length;i++) if(pages[i].id===gate.pos) return i; return 0; }
+function setInert(on){ document.querySelectorAll('.wrap,dialog').forEach(function(el){ if(on) el.setAttribute('inert',''); else el.removeAttribute('inert'); }); }
+function openGate(mode,key){
+  gate.mode=mode; gate.key=key||null;
+  if(mode==='onboard'){ gate.pos=state.pos||'intro'; } else { gate.pos=gatePages()[0].id; }
+  var g=document.getElementById('gate'); g.hidden=false; document.body.classList.add('gate-open');
+  document.body.classList.toggle('gated',mode==='onboard');
+  setInert(true); renderGate(true);
+}
+function closeGate(){
+  var g=document.getElementById('gate'); g.hidden=true;
+  document.body.classList.remove('gate-open','gated'); setInert(false);
+  gate.mode=null; delete state.pos; save();
+}
+function nq(key){ var a=answers(), n=0; SURVEYS[key].steps.forEach(function(st){ n+=visibleQs(st,a).length; }); return n; }
+function renderGate(focus){
+  var pages=gatePages(), i=gateIndex(pages), pg=pages[i], a=answers(), body=document.getElementById('gate-body');
+  var qPages=pages.filter(function(p){ return p.kind==='q'; }), qi=qPages.indexOf(pg);
+  document.getElementById('gate-bar').style.width=(pg.kind==='end'?100:Math.max(0,qi)/qPages.length*100)+'%';
+  document.getElementById('gate-prog').textContent=pg.kind==='q'?(qi+1)+' / '+qPages.length:'';
+  document.getElementById('gate-close').hidden=gate.mode==='onboard';
   var h='';
-  ['kit','fuel'].forEach(function(key){
-    var S=SURVEYS[key], done=state.done[key], open=ui.open===key;
-    h+='<article class="survey'+(open?' open':'')+(done?' done':'')+'" id="survey-'+key+'"><div class="sv-head"><span class="sv-n">'+S.n+'</span><div><h3>'+S.title+'</h3><p class="small">'+S.builds+'</p></div>';
-    if(!open) h+='<button type="button" class="sv-go'+(done?'':' primary')+'" data-sv-open="'+key+'">'+(done?'Edit answers':(Object.keys(state.answers).length&&key==='fuel'&&!state.done.kit?'Start':'Start'))+'</button>';
-    h+='</div>';
-    if(!open && done) h+='<div class="sv-sum">'+summaryLine(key,a).map(function(x){ return '<i>'+esc(x)+'</i>'; }).join('')+'</div>';
-    if(open){
-      var steps=S.steps, st=steps[ui.step];
-      h+='<div class="sv-steps" aria-hidden="true">'+steps.map(function(s,i){ return '<span class="'+(i<ui.step?'past':i===ui.step?'now':'')+'">'+s.title+'</span>'; }).join('')+'</div>';
-      h+='<form class="sv-form" data-sv="'+key+'" novalidate><p class="sv-count">Step '+(ui.step+1)+' of '+steps.length+' · '+st.title+'</p>'+(st.note?'<p class="qhelp">'+st.note+'</p>':'');
-      visibleQs(st,a).forEach(function(q){ h+=qHtml(q,a); });
-      h+='<div class="sv-nav">'+(ui.step>0?'<button type="button" data-sv-back>Back</button>':'<button type="button" data-sv-close>Close</button>')+'<button type="submit" class="primary">'+(ui.step<steps.length-1?'Next':'Build my plan')+'</button></div></form>';
-    }
-    h+='</article>';
-  });
-  host.innerHTML=h;
-  var anyDone=state.done.kit||state.done.fuel;
-  document.getElementById('plan-tools').hidden=!anyDone;
+  if(pg.kind==='intro'){
+    h='<p class="g-kicker">Sunday 18 October 2026 · Cadaqués → Girona</p><h2 id="gate-title" tabindex="-1">Build your SGRAIL 100 plan</h2>'+
+      '<p class="g-lede">Two short surveys, about 4 minutes. Your answers build your bags, pack list, bike checks and to-dos, then your race-day feed clock, sodium and pacing against the cutoffs.</p>'+
+      '<ol class="g-parts"><li><b>01 · Kit &amp; logistics</b><span>'+nq('kit')+' questions</span></li><li><b>02 · Fuel &amp; pacing</b><span>'+nq('fuel')+' questions</span></li></ol>'+
+      '<p class="g-note">Answers stay on this device. Change them any time.</p>'+
+      '<div class="g-nav"><button type="button" class="primary" data-g="next">Start</button></div>';
+  } else if(pg.kind==='mid'){
+    h='<p class="g-kicker">01 · Kit &amp; logistics · done</p><h2 id="gate-title" tabindex="-1">Now fuel and pacing</h2><p class="g-lede">Your times, what you eat and drink, and how much you sweat. This builds your feed clock, sodium, fluid and finish-time scenarios.</p>'+
+      '<div class="g-nav"><button type="button" data-g="back">Back</button><button type="button" class="primary" data-g="next">Continue</button></div>';
+  } else if(pg.kind==='end'){
+    h='<p class="g-kicker">'+(gate.mode==='edit'?SURVEYS[gate.key].n+' · '+SURVEYS[gate.key].title:'All done')+'</p><h2 id="gate-title" tabindex="-1">'+(gate.mode==='edit'?'Answers updated':'Your plan is ready')+'</h2>'+
+      '<p class="g-lede">'+(gate.mode==='edit'?'Everything on the page has been rebuilt from your new answers.':'Prepare holds your bags, pack list, bike checks and to-dos. Race day holds your phases, feed clock and pacing. Edit your answers any time from “Your plan”.')+'</p>'+
+      '<div class="g-nav"><button type="button" data-g="back">Back</button><button type="button" class="primary" data-g="finish">'+(gate.mode==='edit'?'Back to my plan':'See my plan')+'</button></div>';
+  } else {
+    var S=SURVEYS[pg.key], q=pg.q, auto=q.type==='choice';
+    h='<p class="g-kicker">'+S.n+' · '+S.title+' · '+pg.step.title+'</p><h2 id="gate-title" tabindex="-1">'+q.label+'</h2>'+(pg.step.note&&pg.step.qs.filter(function(x){ return !x.when||x.when(a); })[0]===q?'<p class="g-note">'+pg.step.note+'</p>':'')+
+      '<form class="g-form" novalidate>'+qHtml(q,a)+
+      '<div class="g-nav">'+(i>0?'<button type="button" data-g="back">Back</button>':'')+'<button type="submit" class="primary">'+(q.id==='name'&&!a.name?'Skip':'Next')+'</button></div></form>'+
+      (auto?'<p class="g-hint">Tap an answer to continue.</p>':'');
+  }
+  body.innerHTML=h;
+  if(focus){ var t=document.getElementById('gate-title'); if(t) t.focus({preventScroll:true}); document.getElementById('gate').scrollTop=0; }
 }
-function readForm(form){
-  var key=form.dataset.sv; var a=answers(); var st=SURVEYS[key].steps[ui.step];
-  visibleQs(st,a).forEach(function(q){
-    var n='q-'+q.id;
-    if(q.type==='multi'){ state.answers[q.id]=Array.from(form.querySelectorAll('input[name="'+n+'"]:checked')).map(function(i){ return i.value; }); }
-    else if(q.type==='choice'){ var c=form.querySelector('input[name="'+n+'"]:checked'); if(c) state.answers[q.id]=c.value; }
-    else { var el=form.querySelector('[name="'+n+'"]'); if(el){ var v=el.value; if(q.type==='number'){ var num=parseFloat(v); if(isNaN(num)) num=q.def; num=Math.min(q.max,Math.max(q.min,num)); v=num; } state.answers[q.id]=v; } }
-  });
+function readQ(form){
+  var el=form.querySelector('.q'); if(!el) return; var id=el.dataset.q, q=null;
+  allQs().forEach(function(x){ if(x.id===id) q=x; }); if(!q) return;
+  var n='q-'+id;
+  if(q.type==='multi') state.answers[id]=Array.from(form.querySelectorAll('input[name="'+n+'"]:checked')).map(function(i){ return i.value; });
+  else if(q.type==='choice'){ var c=form.querySelector('input[name="'+n+'"]:checked'); if(c) state.answers[id]=c.value; }
+  else { var f=form.querySelector('[name="'+n+'"]'); if(f){ var v=f.value; if(q.type==='number'){ var num=parseFloat(v); if(isNaN(num)) num=q.def; v=Math.min(q.max,Math.max(q.min,num)); } state.answers[id]=v; } }
 }
-function bindSurveys(){
-  var host=document.getElementById('surveys');
-  host.addEventListener('click',function(e){
-    var o=e.target.closest('[data-sv-open]');
-    if(o){ ui.open=o.dataset.svOpen; ui.step=0; renderSurveys(); focusSurvey(); return; }
-    if(e.target.closest('[data-sv-back]')){ readForm(host.querySelector('form')); save(); ui.step--; renderSurveys(); focusSurvey(); return; }
-    if(e.target.closest('[data-sv-close]')){ readForm(host.querySelector('form')); save(); ui.open=null; renderSurveys(); return; }
-  });
-  host.addEventListener('change',function(e){
-    var inp=e.target; if(!inp.closest('.sv-form')) return;
-    if(inp.type==='radio'||inp.type==='checkbox'){ inp.closest('.opts').querySelectorAll('.opt').forEach(function(l){ l.classList.toggle('on',l.querySelector('input').checked); }); }
-    // re-render when an answer changes which questions show
-    var form=inp.closest('form'); readForm(form); save();
-    var qid=inp.closest('.q')&&inp.closest('.q').dataset.q;
-    if(qid==='pedals'||qid==='sources'||qid==='salt'){ var y=window.scrollY; renderSurveys(); window.scrollTo(0,y); }
-  });
-  host.addEventListener('submit',function(e){
-    e.preventDefault(); var form=e.target; readForm(form);
-    var S=SURVEYS[ui.open];
-    if(ui.step<S.steps.length-1){ ui.step++; save(); renderSurveys(); focusSurvey(); return; }
-    var key=ui.open; state.done[key]=true; save(); ui.open=null;
-    if(key==='kit'&&!state.done.fuel){ ui.open='fuel'; ui.step=0; }
-    renderSurveys(); renderAll();
-    if(ui.open){ focusSurvey(); } else { var t=document.getElementById(key==='kit'?'openitems':'plan-built'); if(t) t.scrollIntoView({block:'start',behavior:motionBehavior()}); }
-  });
+function gateMove(d){
+  var pages=gatePages(), i=gateIndex(pages), cur=pages[i];
+  var form=document.querySelector('#gate-body form'); if(form) readQ(form);
+  // leaving the last question of a survey marks it done
+  if(d>0 && cur.kind==='q'){ var nx=pages[i+1]; if(!nx||nx.key!==cur.key){ state.done[cur.key]=true; } }
+  pages=gatePages(); i=gateIndex(pages);
+  var j=Math.max(0,Math.min(pages.length-1,i+d));
+  gate.pos=pages[j].id; if(gate.mode==='onboard') state.pos=gate.pos;
+  save(); renderGate(true);
 }
-function focusSurvey(){ var el=document.querySelector('.survey.open'); if(!el) return; el.scrollIntoView({block:'start',behavior:motionBehavior()}); var f=el.querySelector('.sv-count'); if(f){ f.setAttribute('tabindex','-1'); f.focus({preventScroll:true}); } }
+function bindGate(){
+  var g=document.getElementById('gate'), timer=null;
+  g.addEventListener('click',function(e){
+    // any tap on a single-choice answer (including the one already selected) moves on
+    if(e.target.matches&&e.target.matches('#gate-body input[type=radio]')){ clearTimeout(timer); timer=setTimeout(function(){ gateMove(1); },220); return; }
+    var b=e.target.closest('[data-g]'); if(!b) return;
+    if(b.dataset.g==='next') gateMove(1);
+    else if(b.dataset.g==='back') gateMove(-1);
+    else if(b.dataset.g==='finish'){ var wasOnboard=gate.mode==='onboard'; closeGate(); renderSurveys(); renderAll(); window.scrollTo(0,0); if(!wasOnboard){ var s=document.getElementById('setup'); if(s) s.scrollIntoView({block:'start'}); } if(window.PLAN_AFTER) window.PLAN_AFTER(); }
+    else if(b.dataset.g==='close'){ var f=document.querySelector('#gate-body form'); if(f){ readQ(f); save(); } closeGate(); renderSurveys(); renderAll(); }
+  });
+  g.addEventListener('change',function(e){
+    var inp=e.target; var opts=inp.closest('.opts'); if(!opts) return;
+    opts.querySelectorAll('.opt').forEach(function(l){ l.classList.toggle('on',l.querySelector('input').checked); });
+    if(inp.type!=='radio'){ readQ(inp.closest('form')); save(); }
+  });
+  g.addEventListener('input',function(e){ if(e.target.name==='q-name'){ var s=g.querySelector('button[type=submit]'); if(s) s.textContent=e.target.value.trim()?'Next':'Skip'; } });
+  g.addEventListener('submit',function(e){ e.preventDefault(); gateMove(1); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && !g.hidden && gate.mode==='edit'){ closeGate(); renderSurveys(); renderAll(); } });
+  document.getElementById('surveys').addEventListener('click',function(e){ var o=e.target.closest('[data-sv-open]'); if(o) openGate(state.done.kit&&state.done.fuel?'edit':'onboard',o.dataset.svOpen); });
+}
 
 // ---------------- page render ----------------
 function setHTML(id,h){ var el=document.getElementById(id); if(el) el.innerHTML=h; }
@@ -2042,12 +2146,12 @@ function bindTools(){
   reset.addEventListener('click',function(){
     if(!armed){ armed=true; reset.textContent='Tap again to clear all answers and ticks'; reset.classList.add('armed'); setTimeout(function(){ armed=false; reset.textContent='Start over'; reset.classList.remove('armed'); },4000); return; }
     state={answers:{},done:{kit:false,fuel:false}}; save(); lsSet('checks',{}); armed=false; reset.textContent='Start over'; reset.classList.remove('armed');
-    ui.open='kit'; ui.step=0; renderSurveys(); renderAll(); focusSurvey();
+    renderSurveys(); renderAll(); openGate('onboard');
   });
   document.addEventListener('click',function(e){
     var j=e.target.closest('[data-sv-jump]'); if(!j) return; e.preventDefault();
     if(document.body.classList.contains('race')) document.getElementById('rmbtn').click();
-    ui.open=j.dataset.svJump; ui.step=0; renderSurveys(); setTimeout(focusSurvey,60);
+    openGate(state.done.kit&&state.done.fuel?'edit':'onboard',j.dataset.svJump);
   });
   var hide=document.getElementById('hide-completed');
   if(hide) hide.addEventListener('click',function(){ hide.setAttribute('aria-pressed',hide.getAttribute('aria-pressed')==='true'?'false':'true'); hide.textContent=hide.getAttribute('aria-pressed')==='true'?'Show completed':'Hide completed'; updateStatus(); });
@@ -2055,9 +2159,8 @@ function bindTools(){
   if(rt) rt.addEventListener('click',function(){ var s=lsGet('checks',{}); Object.keys(s).forEach(function(k){ if(k.indexOf('tr-')===0) delete s[k]; }); lsSet('checks',s); document.querySelectorAll('[data-transition]').forEach(function(c){ c.checked=false; }); });
 }
 
-// first visit: the page starts with survey 01 open
-if(!state.done.kit && !state.done.fuel){ ui.open='kit'; ui.step=0; }
-window.PLAN_INIT=function(){ renderSurveys(); bindSurveys(); renderAll(); bindTools(); };
+// first visit (or unfinished surveys): nothing but the survey until both are done
+window.PLAN_INIT=function(){ renderSurveys(); bindGate(); renderAll(); bindTools(); if(!(state.done.kit&&state.done.fuel)) openGate('onboard'); };
 window.PLAN_TEST={compute:compute,answers:answers,SURVEYS:SURVEYS,pressure:pressure};
 })();
 
@@ -2281,9 +2384,11 @@ document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener
   function show(){ var m=innerWidth<=600; dock.hidden=!m; if(!m) setOpen(false); }
   addEventListener('resize',show,{passive:true});
   build(); show(); syncTools();
+  window.DOCK_BUILD=build;
 })();
 
 
+window.PLAN_AFTER=function(){ if(window.DOCK_BUILD) window.DOCK_BUILD(); window.dispatchEvent(new Event('scroll')); window.dispatchEvent(new Event('resize')); };
 (function(){ var mq=window.matchMedia('(max-width:600px)');
  function layout(){ document.querySelectorAll('[data-mobile-chart]').forEach(function(g){ g.open=!mq.matches; }); }
  if(mq.addEventListener) mq.addEventListener('change',layout); layout(); })();
