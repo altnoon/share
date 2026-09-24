@@ -1095,6 +1095,10 @@ body.gated .gate{background:var(--paper)}
   .gate .g-nav{position:sticky;bottom:0;background:var(--card);padding:12px 0 calc(4px + env(safe-area-inset-bottom));margin-top:20px;border-top:1px solid var(--line-soft)}
   .gate .g-nav button.primary{flex:1}
 }
+#course .feedkey i.b-mix,#course .feedkey i.b-elec,#course .feedkey i.b-station,#course .feedkey i.b-water{border-radius:2px;width:14px;height:9px}
+#course .feedkey i.b-mix{background:var(--track)}#course .feedkey i.b-elec{background:var(--sea)}#course .feedkey i.b-station{background:var(--track-soft);border:1px solid var(--track)}#course .feedkey i.b-water{background:var(--card);border:1px solid var(--muted)}
+#course .feedkey i.cap{border-radius:3px;width:12px;height:6px;background:var(--sea)}
+#course .feedkey i.cafonly{background:var(--card);border:2px solid var(--flag);width:8px;height:8px}
 .gate .g-save{margin:18px 0 0;font-size:12px;text-align:center;color:var(--muted)}
 .gate .g-error{color:var(--flag);background:var(--flag-soft);padding:12px;border-radius:6px;margin-top:14px}
 .gate [aria-invalid="true"]{border-color:var(--flag)}
@@ -1372,7 +1376,7 @@ body.gated .gate{background:var(--paper)}
   <details class="planblock p-bike" id="feedblock" data-mobile-chart="true" open><summary class="plan-head" style="margin-top:0"><span class="pn">Feeding chart</span><span class="pd">graph · your feed times on the bike profile</span><span class="graph-cue">Show graph</span></summary>
     <div class="clock-scroll" tabindex="0" role="region" aria-label="Scrollable feed chart"><div class="clock" id="feedchart"></div></div>
     <p class="swipe-cue" aria-hidden="true">Swipe for the whole ride <b>→</b></p>
-    <div class="feedkey" aria-label="Feeding chart key"><span><i></i>gel</span><span><i class="caf"></i>gel with caffeine</span><span><i class="bar"></i>½ bar</span><span><i class="chew"></i>chews</span><span><i class="stop"></i>mandatory water stop</span></div>
+    <div class="feedkey" id="feedkey" aria-label="Feeding chart key"></div>
     <p class="small">Clock time is the instruction; the km is where that time is likely to fall at your pace.</p>
   </details>
 
@@ -1541,14 +1545,23 @@ var SURVEYS={
   {title:'Carbs', qs:[
    {id:'carbrate', type:'choice', label:'How much carbohydrate have you comfortably used per hour?', help:'Pick what your gut has handled on long rides. Race day is not the day to go higher.', def:'60', options:[['45','~45 g/h'],['60','~60 g/h'],['75','~75 g/h'],['90','~90 g/h']]},
    {id:'sources', type:'multi', label:'Which carbohydrate sources will you use?', help:'Select at least one source you have used in training. Next, we’ll ask for the amounts on your product labels.', def:['gels','bars'], options:[['mix','Drink mix in a bottle'],['gels','Gels'],['bars','Bars / solids'],['chews','Chews']]},
-   {id:'caffeine', type:'choice', label:'Will you use caffeine you have already tried in training?', def:'yes', options:[['yes','Yes, I use it'],['no','No']]}
+   {id:'barsplit', type:'choice', label:'How do you eat bars on the bike?', help:'Halves are easier to chew on rough ground and spread the carbs out.', def:'halves', options:[['halves','In halves'],['whole','A whole bar at a time']], when:function(a){ return has(a,'sources','bars'); }},
+   {id:'caffeine', type:'choice', label:'How much caffeine will you take?', help:'Only caffeine you have already used in training. Doses on the bike go after halfway.', def:'2', options:[['no','None'],['1','One dose on the bike'],['2','One on the bike, one on the run'],['3','Two on the bike, one on the run']]},
+   {id:'cafmg', type:'number', label:'How much caffeine is in one dose?', help:'Check the label. Caffeinated gels usually carry 40–100 mg.', unit:'mg', min:20, max:300, step:5, def:75, when:function(a){ return a.caffeine&&a.caffeine!=='no'; }}
   ]},
   {title:'Fluid & salt', qs:[
    {id:'sweat', type:'choice', label:'How much do you sweat?', help:'Think about your own long rides in similar weather. This is a rough estimate, not a measured sweat rate.', def:'avg', options:[['light','Light'],['avg','Average'],['heavy','Heavy']]},
    {id:'salty', type:'choice', label:'Have you noticed salt marks after training?', help:'Have you noticed white salt marks on clothing after training? Choose “Don’t know” if unsure.', def:'unsure', options:[['no','No'],['yes','Yes'],['unsure','Don’t know']]},
    {id:'salt', type:'multi', label:'How will you take sodium?', help:'Select all that apply — many riders combine capsules with an electrolyte bottle.', def:['caps'], options:[['caps','Capsules or tablets'],['mix','Electrolyte powder in a bottle'],['none','Nothing extra']]}
   ]},
+  {title:'Bottles & stops', qs:[
+   {id:'mixbottles', type:'choice', label:'How many bottles of drink mix at the start?', help:'The other bottles start with plain water.', def:'1', options:[['1','One'],['2','Two'],['3','Three']], when:function(a){ return has(a,'sources','mix')&&(+a.cages||2)>=2; }},
+   {id:'refill', type:'choice', label:'What goes into your bottles at W1 and W2?', help:'Water refills at km 34.2 and km 68 are mandatory stops. The station drink is legal there; taking supplies outside an aid zone is +30 min.', def:'powder', options:[['powder','Water + my own powder, carried in vials'],['station','Water + the station drink'],['water','Water only']], when:function(a){ return has(a,'sources','mix')||has(a,'salt','mix'); }}
+  ]},
   {title:'Products', note:'Suggested amounts are placeholders. Check the nutrition label for the portion you will actually carry.', qs:[
+   {id:'gelname', type:'text', label:'Which gel? (optional)', help:'Brand and product, as you want it on your plan and pack list.', placeholder:'e.g. brand and product', def:'', when:function(a){ return has(a,'sources','gels'); }},
+   {id:'barname', type:'text', label:'Which bar? (optional)', help:'Brand and product, as you want it on your plan and pack list.', placeholder:'e.g. brand and product', def:'', when:function(a){ return has(a,'sources','bars'); }},
+   {id:'mixname', type:'text', label:'Which drink mix? (optional)', help:'Brand and product, as you want it on your plan and pack list.', placeholder:'e.g. brand and product', def:'', when:function(a){ return has(a,'sources','mix'); }},
    {id:'gelg', type:'number', label:'Carbs per gel', unit:'g', min:10, max:60, step:1, def:25, when:function(a){ return has(a,'sources','gels'); }},
    {id:'barg', type:'number', label:'Carbs per bar', unit:'g', min:10, max:80, step:1, def:40, when:function(a){ return has(a,'sources','bars'); }},
    {id:'chewg', type:'number', label:'Carbs per chew pack', unit:'g', min:10, max:60, step:1, def:24, when:function(a){ return has(a,'sources','chews'); }},
@@ -1610,52 +1623,89 @@ function compute(a){
   var useMix=src.indexOf('mix')>=0, useGel=src.indexOf('gels')>=0, useBar=src.indexOf('bars')>=0, useChew=src.indexOf('chews')>=0;
   if(!src.length){ useGel=true; P.warn.push(['rec','No carb source chosen — the plan assumes gels. Change it in survey 02.']); }
   P.bikeCarbs=Math.round(rate*H);
-  // drink mix: one bottle mixed before the start, refills with pre-portioned powder at W1 and W2
-  P.mixPortions=0; P.mixCarbs=0;
-  if(useMix){ var n=3; while(n>1 && n*mixg>P.bikeCarbs) n--; P.mixPortions=n; P.mixCarbs=n*mixg; }
-  var rest=Math.max(0,P.bikeCarbs-P.mixCarbs);
+  var fr={light:500,avg:650,heavy:800}[a.sweat]||650;
+  // ---- bottles: what each cage holds on each leg (start→W1, W1→W2, W2→T2) ----
+  var legs=[[0,COURSE.fW1*B],[COURSE.fW1*B,COURSE.fW2*B],[COURSE.fW2*B,B]];
+  var elecOwn=has(a,'salt','mix')&&!useMix;
+  var nMixStart=useMix?Math.min(cages,Math.max(1,+a.mixbottles||1)):0;
+  var nElecStart=elecOwn&&nMixStart<cages?1:0;
+  var refill=(useMix||elecOwn)?(a.refill||'powder'):'water';
+  var stationG=Math.round(80*bml/1000); // assumption: ~80 g/L until the station drink is confirmed
+  function startKind(c){ return c<nMixStart?'mix':(c<nMixStart+nElecStart?'elec':'water'); }
+  function refillKind(c){ var k=startKind(c); if(k==='water'||refill==='water') return 'water'; if(refill==='station') return k==='mix'?'station':'water'; return k; }
+  // W2 → T2 is short: fill only what the last leg needs, flavoured bottles first
+  var need2=fr*(legs[2][1]-legs[2][0])/60, fill2=Math.min(cages,Math.max(1,Math.ceil(need2/bml)));
+  var rows=[]; for(var c=0;c<cages;c++) rows.push([startKind(c),refillKind(c),c<fill2?refillKind(c):null]);
+  var mixna=+a.mixna||0, legDrinkG=[0,0,0];
+  P.mixPortions=0; P.saltPortions=0; P.powderMix=0; P.powderElec=0; P.stationBottles=0; P.naFromMix=0;
+  // you only get the carbs and sodium you actually drink: flavoured bottles are drunk first, water after;
+  // if even those hold more than you drink before the next stop, count the share you drink
+  var legFrac=legs.map(function(L,li){ var flav=rows.filter(function(r){ return r[li]&&r[li]!=='water'; }).length; return flav?Math.min(1,fr*(L[1]-L[0])/60/(flav*bml)):1; });
+  rows.forEach(function(r){ r.forEach(function(k,li){
+    var f=legFrac[li];
+    if(k==='mix'){ legDrinkG[li]+=mixg*f; P.naFromMix+=mixna*f; P.mixPortions++; if(li) P.powderMix++; }
+    else if(k==='elec'){ P.naFromMix+=mixna*f; P.saltPortions++; if(li) P.powderElec++; }
+    else if(k==='station'){ legDrinkG[li]+=stationG*f; P.stationBottles++; }
+  }); });
+  legDrinkG=legDrinkG.map(Math.round); P.naFromMix=Math.round(P.naFromMix); P.legFrac=legFrac;
+  if(legFrac.some(function(f,li){ return f<0.8&&rows.some(function(r){ return r[li]==='mix'||r[li]==='station'; }); })) P.warn.push(['rec','At '+fr+' ml/h you will not finish every bottle before the next stop, so the plan only counts the share you drink. Fewer flavoured bottles, or a stronger mix you have trained with, gets the carbs in.']);
+  P.bottles=rows; P.legs=legs; P.legDrinkG=legDrinkG; P.stationG=stationG; P.refill=refill; P.fill2=fill2;
+  P.mixCarbs=legDrinkG[0]+legDrinkG[1]+legDrinkG[2];
+  var NAME={mix:'drink mix',elec:'electrolyte',water:'water',station:'station drink'};
+  function fillText(li){ var n={}; rows.forEach(function(r){ if(r[li]) n[r[li]]=(n[r[li]]||0)+1; }); var out=['mix','elec','station','water'].filter(function(k){ return n[k]; }).map(function(k){ return n[k]+' × '+NAME[k]; }).join(' + '); var empty=rows.filter(function(r){ return !r[li]; }).length; return out+(empty?' · '+empty+' left empty':''); }
+  P.fillText=fillText;
+  P.startText='Fill the bottles — '+fillText(0);
+  P.startText+=rows.some(function(r){ return r[0]&&r[0]!=='water'; })&&rows.some(function(r){ return r[0]==='water'; })?' · drink the flavoured bottle first':'';
+  P.stopText=[1,2].map(function(li){ var pw=rows.some(function(r){ return r[li]==='mix'||r[li]==='elec'; })&&li>0; var st=rows.some(function(r){ return r[li]==='station'; });
+    return fillText(li)+(pw?' · powder vial first, then water':'')+(st?' · station drink straight into the bottle':''); });
+  if(refill==='station') P.warn.push(['rec','The station drink is counted at ~'+stationG+' g per bottle. Confirm the product and strength at check-in — it is on your to-do list.']);
+
+  // ---- food: place a unit whenever the carbs owed (target minus what the bottles deliver) reach one portion ----
+  var halves=a.barsplit!=='whole', barUnit=halves?barg/2:barg;
   var kinds=[]; if(useGel) kinds.push('gel'); if(useBar) kinds.push('bar'); if(useChew) kinds.push('chew');
-  if(!kinds.length && rest>0){ P.warn.push(['rec','Drink mix alone covers '+P.mixCarbs+' g of the '+P.bikeCarbs+' g target. Add gels, or a stronger mix you have trained with.']); }
-  var share=kinds.length?rest/kinds.length:0;
-  var nBar=useBar?Math.round(share/barg):0, nChew=useChew?Math.round(share/chewg):0;
-  // solids stay out of the technical first 25 km and the last hour
-  var techT=timeAtKm(COURSE.techKm,B), barStart=Math.max(techT,20), barEnd=B-60;
-  var interval=rate>=75?20:25;
-  function slotsFor(iv){ var s=[]; for(var t=20;t<=B-15;t+=iv) s.push(Math.round(t)); return s; }
-  var slots=slotsFor(interval);
-  var eligible=slots.filter(function(t){ return t>=barStart && t<=barEnd; });
-  if(nBar*2>eligible.length) nBar=Math.floor(eligible.length/2);
-  var gelNeed=useGel?Math.max(0,Math.ceil((rest-nBar*barg-nChew*chewg)/gelg)):0;
-  if(!useGel && useChew){ nChew=Math.max(nChew,Math.ceil((rest-nBar*barg)/chewg)); }
-  if(!useGel && !useChew && useBar){ nBar=Math.max(nBar,Math.ceil(rest/barg)); }
-  var units=nBar*2+gelNeed+nChew;
-  while(units>slots.length && interval>12){ interval-=2; slots=slotsFor(interval); eligible=slots.filter(function(t){ return t>=barStart && t<=barEnd; }); }
-  // place bar halves evenly across eligible slots, then gels/chews evenly over the rest
-  var feeds={};
-  function pickEven(list,n){ var out=[]; if(n<=0) return out; if(n>=list.length) return list.slice(); for(var i=0;i<n;i++){ out.push(list[Math.round(i*(list.length-1)/Math.max(1,n-1))]); } return out; }
-  var halves=Math.min(nBar*2,eligible.length);
-  pickEven(eligible,halves).forEach(function(t){ feeds[t]={t:t,kind:'bar',g:barg/2}; });
-  var free=slots.filter(function(t){ return !feeds[t]; });
-  var others=[]; for(var i=0;i<Math.max(gelNeed,nChew);i++){ if(i<gelNeed) others.push('gel'); if(i<nChew) others.push('chew'); }
-  var placeAt=pickEven(free,others.length);
-  // extra units beyond free slots double up on the latest slots
-  others.forEach(function(k,i){ var t=placeAt[i%placeAt.length]; if(t==null) return; var g=k==='gel'?gelg:chewg; if(feeds[t]){ feeds[t].g+=g; feeds[t].extra=(feeds[t].extra||0)+1; feeds[t].label2=k; } else feeds[t]={t:t,kind:k,g:g}; });
-  P.feeds=Object.keys(feeds).map(function(t){ return feeds[t]; }).sort(function(x,y){ return x.t-y.t; });
-  // caffeine: the gel nearest 65% of bike time becomes caffeinated
-  P.caf=[];
-  if(a.caffeine==='yes'){
-    var cands=P.feeds.filter(function(f){ return f.kind==='gel'; });
-    if(cands.length){ var target=B*0.65, best=cands[0]; cands.forEach(function(f){ if(Math.abs(f.t-target)<Math.abs(best.t-target)) best=f; }); best.caf=true; P.caf.push('bike'); }
+  if(!kinds.length && P.mixCarbs<P.bikeCarbs*0.85){ P.warn.push(['rec','Drink mix alone covers '+P.mixCarbs+' g of the '+P.bikeCarbs+' g target. Add gels, or a stronger mix you have trained with.']); }
+  var techT=timeAtKm(COURSE.techKm,B), barStart=Math.max(techT,20), barEnd=B-60, minGap=rate>=75?15:20;
+  var feeds=[], owed=0, last=-99, turn=0;
+  function legOf(t){ return t<legs[0][1]?0:(t<legs[1][1]?1:2); }
+  for(var t=0;t<=B-10;t+=5){
+    var li=legOf(t); owed+=(rate/60-legDrinkG[li]/(legs[li][1]-legs[li][0]))*5;
+    if(t<20||t-last<minGap) continue;
+    var opts=[]; if(useBar&&t>=barStart&&t<=barEnd) opts.push('bar'); if(useGel) opts.push('gel'); if(useChew) opts.push('chew');
+    if(!opts.length) continue;
+    var kind=opts[turn%opts.length], g=kind==='bar'?barUnit:(kind==='gel'?gelg:chewg);
+    if(owed>=g*0.75){ feeds.push({t:t,kind:kind,g:g}); owed-=g; last=t; turn++; }
   }
-  P.nBar=nBar; P.nGelBike=gelNeed; P.nChew=nChew;
-  P.unitCarbs=P.feeds.reduce(function(s,f){ return s+f.g; },0);
+  var gelLike=useGel?'gel':(useChew?'chew':null);
+  if(gelLike && owed>=(gelLike==='gel'?gelg:chewg)*0.5 && B-10-last>=10){ feeds.push({t:Math.round((B-10)/5)*5,kind:gelLike,g:gelLike==='gel'?gelg:chewg}); }
+  // caffeine: after halfway on the bike, on a gel if there is one near the target time
+  var cafBike={no:0,yes:1,'1':1,'2':1,'3':2}[a.caffeine]||0;
+  P.caf=[];
+  (cafBike===2?[0.6,0.85]:cafBike===1?[0.7]:[]).forEach(function(fx){
+    var target=B*fx, best=null;
+    feeds.forEach(function(f){ if(f.kind==='gel'&&!f.caf&&f.t>=B*0.5&&(!best||Math.abs(f.t-target)<Math.abs(best.t-target))) best=f; });
+    if(best&&Math.abs(best.t-target)<=40){ best.caf=true; }
+    else { best={t:Math.round(target/5)*5,kind:'gel',g:useGel?gelg:0,caf:true,cafOnly:!useGel}; feeds.push(best); }
+    P.caf.push(best.t);
+  });
+  feeds.sort(function(x,y){ return x.t-y.t; });
+  P.feeds=feeds;
+  var barFeeds=feeds.filter(function(f){ return f.kind==='bar'; }).length;
+  P.nBar=halves?Math.ceil(barFeeds/2):barFeeds; P.barHalves=halves;
+  P.nGelBike=feeds.filter(function(f){ return f.kind==='gel'&&!f.cafOnly; }).length;
+  P.nCafOnly=feeds.filter(function(f){ return f.cafOnly; }).length;
+  P.nChew=feeds.filter(function(f){ return f.kind==='chew'; }).length;
+  P.unitCarbs=feeds.reduce(function(s,f){ return s+f.g; },0);
   P.bikeTotal=Math.round(P.unitCarbs+P.mixCarbs);
   P.bikeRate=Math.round(P.bikeTotal/H);
   if(P.bikeTotal<P.bikeCarbs*0.85 && kinds.length) P.warn.push(['rec','Your sources cover about '+P.bikeRate+' of the '+rate+' g/h target: solids stay out of the technical first 25 km and the last hour. Add gels or drink mix to close the gap.']);
   P.feeds.forEach(function(f){ f.km=kmAt(f.t,B); });
+  // running total for the chart: food at its feed time, bottle carbs spread over the leg they are drunk on
+  P.cum=[]; var fi=0, eaten=0;
+  for(t=0;t<=B;t+=5){ while(fi<feeds.length&&feeds[fi].t<=t){ eaten+=feeds[fi].g; fi++; }
+    var dr=0; legs.forEach(function(L,k){ dr+=legDrinkG[k]*Math.max(0,Math.min(1,(t-L[0])/(L[1]-L[0]))); });
+    P.cum.push([t,eaten+dr,rate*t/60]); }
 
   // fluid
-  var fr={light:500,avg:650,heavy:800}[a.sweat]||650;
   P.fluidRate=fr; P.capacity=cages*bml;
   P.seg=[{from:'T1',to:'W1 · km 34.2',min:COURSE.fW1*B},{from:'W1',to:'W2 · km 68',min:(COURSE.fW2-COURSE.fW1)*B},{from:'W2',to:'T2 · km 86.4',min:(1-COURSE.fW2)*B}];
   P.seg.forEach(function(s){ s.need=Math.round(fr*s.min/60/50)*50; s.short=s.need>P.capacity; });
@@ -1664,12 +1714,9 @@ function compute(a){
   // sodium
   var nr={light:400,avg:600,heavy:850}[a.sweat]||600; if(a.salty==='yes') nr+=200;
   P.naRate=nr; P.bikeNa=Math.round(nr*H);
-  var mixna=+a.mixna||0, capna=+a.capna||250;
-  P.naFromMix=0; P.saltPortions=0;
-  if(useMix) P.naFromMix+=P.mixPortions*mixna;
-  if(has(a,'salt','mix') && !useMix){ P.saltPortions=cages>=2?3:2; P.naFromMix+=P.saltPortions*mixna; }
-  P.caps=0; P.capEvery=0;
-  if(has(a,'salt','caps')){ var gap=Math.max(0,P.bikeNa-P.naFromMix); P.caps=Math.ceil(gap/capna); P.capEvery=P.caps?Math.max(15,Math.floor(B/P.caps/5)*5):0; }
+  var capna=+a.capna||250;
+  P.caps=0; P.capEvery=0; P.capTimes=[];
+  if(has(a,'salt','caps')){ var gap=Math.max(0,P.bikeNa-P.naFromMix); P.caps=Math.ceil(gap/capna); P.capEvery=P.caps?Math.max(15,Math.floor(B/P.caps/5)*5):0; for(var ci=0;ci<P.caps;ci++) P.capTimes.push(Math.min(B-5,ci*P.capEvery)); }
   if(!has(a,'salt','caps')&&!has(a,'salt','mix') && nr>=800 && P.naFromMix<P.bikeNa*0.5) P.warn.push(['rec','With '+(a.salty==='yes'?'salty ':'')+(a.sweat==='heavy'?'heavy ':'')+'sweat and no extra sodium, the bike leg covers under half of ~'+fmtNum(nr)+' mg/h. Consider capsules.']);
   P.naPlanned=P.naFromMix+P.caps*capna;
 
@@ -1678,17 +1725,21 @@ function compute(a){
   P.runCarbTarget=Math.round(runRate*R/60);
   P.runKind=useGel?'gel':(useChew?'chew':'gel'); var ug=P.runKind==='gel'?gelg:chewg;
   P.runUnits=Math.max(1,Math.round(P.runCarbTarget/ug)); P.runSpare=1;
-  P.runCaf=(a.caffeine==='yes' && R>=50 && (+a.weight||72)*3>=200);
+  P.runCaf=a.caffeine==='yes'?(R>=50&&(+a.weight||72)*3>=200):(a.caffeine==='2'||a.caffeine==='3');
   P.runCaps=has(a,'salt','caps')?Math.max(1,Math.round(nr*0.7*R/60/capna)):0;
   P.runCarry=a.runcarry;
 
   // caffeine
   var w=+a.weight||72; P.cafLo=Math.round(w*3); P.cafHi=Math.round(w*6);
-  P.cafPlan=(P.caf.length?100:0)+(P.runCaf?100:0);
+  P.cafMg=+a.cafmg||75; P.cafPlan=(P.caf.length+(P.runCaf?1:0))*P.cafMg;
+  if(P.cafPlan>P.cafHi) P.warn.push(['flag','Planned caffeine ('+P.cafPlan+' mg) is above 6 mg/kg for your weight. Use fewer or smaller doses.']);
+  else if(P.cafPlan>P.cafLo) P.warn.push(['rec','Planned caffeine ('+P.cafPlan+' mg) is above 3 mg/kg for your weight. Only race on amounts you have trained with.']);
 
   // morning
   P.breakfast=a.transport==='bus'?'05:00–05:30':'05:15–05:45';
   P.preload=(a.sweat==='heavy'||a.salty==='yes'||has(a,'salt','mix'));
+  var nmClean=function(v){ return String(v||'').trim(); };
+  P.names={gel:nmClean(a.gelname),bar:nmClean(a.barname),mix:nmClean(a.mixname)};
   return P;
 }
 
@@ -1730,14 +1781,16 @@ function packRows(a,P){
 
   R.push({g:'Fuel'});
   var tot=function(n,u){ return n+' × '+u; };
-  if(P.mixPortions){ R.push({k:'mix',l:'Drink mix · '+P.mixPortions+' portion'+(P.mixPortions>1?'s':''),c:['','1 mixed before the swim'+(P.mixPortions>1?' · '+(P.mixPortions-1)+' in vials for W1'+(P.mixPortions>2?' + W2':''):''),'']}); }
-  if(P.saltPortions){ R.push({k:'saltmix',l:'Electrolyte powder · '+P.saltPortions+' portions',c:['','1 mixed before the swim · rest in vials for the stops','']}); }
+  var nmTag=function(k){ return P.names&&P.names[k]?' <small>'+esc(P.names[k])+'</small>':''; };
+  if(P.mixPortions){ var ms=P.mixPortions-P.powderMix; R.push({k:'mix',l:'Drink mix · '+P.mixPortions+' portion'+(P.mixPortions>1?'s':'')+nmTag('mix'),c:['',ms+' mixed before the swim'+(P.powderMix?' · '+P.powderMix+' in vials for the stops':''),'']}); }
+  if(P.saltPortions){ var es=P.saltPortions-P.powderElec; R.push({k:'saltmix',l:'Electrolyte powder · '+P.saltPortions+' portion'+(P.saltPortions>1?'s':''),c:['',es+' mixed before the swim'+(P.powderElec?' · '+P.powderElec+' in vials for the stops':''),'']}); }
   var runG=P.runKind==='gel'?P.runUnits+P.runSpare:0, runC=P.runKind==='chew'?P.runUnits+P.runSpare:0;
-  if(P.nGelBike||runG){ var cafN=(P.caf.length?1:0)+(P.runCaf?1:0); R.push({k:'gels',l:'Gels · '+(P.nGelBike+runG)+(cafN?' <small>'+cafN+' with caffeine</small>':''),c:['',P.nGelBike?P.nGelBike+' · '+carryPlace:'',runG?runG+' · T2 bag':''],bag:runG?{t2:runG+' × gel'}:null}); }
-  if(P.nBar) R.push({k:'bars',l:'Bars · '+P.nBar,c:['',P.nBar+' · '+carryPlace+', halves pre-cut','']});
+  if(P.nCafOnly) R.push({k:'cafdose',l:'Caffeine dose · '+P.nCafOnly+' <small>'+P.cafMg+' mg each</small>',c:['',P.nCafOnly+' · pocket','']});
+  if(P.nGelBike||runG){ var cafN=P.caf.length-P.nCafOnly+(P.runCaf?1:0); R.push({k:'gels',l:'Gels · '+(P.nGelBike+runG)+(nmTag('gel')||'')+(cafN>0?' <small>'+cafN+' with caffeine</small>':''),c:['',P.nGelBike?P.nGelBike+' · '+carryPlace:'',runG?runG+' · T2 bag':''],bag:runG?{t2:runG+' × gel'}:null}); }
+  if(P.nBar) R.push({k:'bars',l:'Bars · '+P.nBar+nmTag('bar'),c:['',P.nBar+' · '+carryPlace+(P.barHalves?', halves pre-cut':''),'']});
   if(P.nChew||runC) R.push({k:'chews',l:'Chew packs · '+(P.nChew+runC),c:['',P.nChew?P.nChew+' · '+carryPlace:'',runC?runC+' · T2 bag':''],bag:runC?{t2:runC+' × chews'}:null});
   if(P.caps||P.runCaps){ var tc=P.caps+P.runCaps+2; R.push({k:'caps',l:'Sodium capsules · '+tc+' <small>incl. 2 spare</small>',c:['',P.caps?P.caps+' + 2 in a pill vial':'',P.runCaps?P.runCaps+' · T2 bag':''],bag:P.runCaps?{t2:P.runCaps+' × capsule'}:null}); }
-  if(P.mixPortions>1||P.saltPortions>1) R.push({k:'vials',l:'Screw-top vials for powder',c:['','Suit pocket · powder first, then water','']});
+  if(P.powderMix||P.powderElec) R.push({k:'vials',l:'Screw-top vials for powder',c:['','Suit pocket · powder first, then water','']});
   if(a.runcarry!=='none') R.push({k:'runcarry',l:{flask:'Soft flask',bottle:'Handheld bottle',belt:'Run belt or vest'}[a.runcarry],c:['','','T2 bag · fill with station water'],bag:{t2:{flask:'Soft flask',bottle:'Handheld bottle',belt:'Run belt or vest'}[a.runcarry]}});
   if(P.preload) R.push({k:'preload',l:'500 ml bottle for a pre-start drink',c:['Cloakroom','',''],bag:{cl:'500 ml bottle + electrolyte'}});
   R.push({k:'bottles',l:a.cages+' bike bottle'+(a.cages!=='1'?'s':'')+' · '+a.bottleml+' ml',c:['','On the bike','Leave at T2']});
@@ -1779,7 +1832,7 @@ function bagContents(rows,P,a){
   var b={t1:[],t2:[],cl:[]};
   rows.forEach(function(r){ if(r.bag) Object.keys(r.bag).forEach(function(k){ b[k].push(r.bag[k]); }); });
   if(P.caps) b.t1.push('Capsule vial · '+(P.caps+2));
-  if(P.mixPortions>1||P.saltPortions>1) b.t1.push('Powder vials for the stops');
+  if(P.powderMix||P.powderElec) b.t1.push('Powder vials for the stops');
   b.cl.push('Phone + wallet if not carried','Dry clothes for after');
   return b;
 }
@@ -1819,7 +1872,7 @@ function tasks(a,P){
   var miss=[['sleeves','arm sleeves'],['gloves','full-finger gloves'],['shell','a packable shell'],['socks','dry socks for T2']].filter(function(x){ return (a.extras||[]).indexOf(x[0])<0; }).map(function(x){ return x[1]; });
   if(miss.length) add(0,'extras','Decide on '+miss.join(', '),'Buy, borrow or decide against, from the forecast.','Friday forecast','Decided and packed, or consciously left.','Climatology, not a forecast: ~14 °C at 09:00 in Cadaqués, 20 °C later, north wind on the plain, ~18% wet-day odds.');
   add(0,'breakfast','Race breakfast written down','Write your familiar breakfast and time.','Before travel','Contents, quantities and time recorded ('+P.breakfast+').','Familiar food only. Nothing new within 48 h of the start.');
-  if(P.mixPortions>1||P.saltPortions>1||P.caps) add(0,'portion','Portion the fuel','Powder into screw-top vials; capsules decanted into a pill vial.','Two days out','Every portion labelled by where it is used.','Powder first, water second. You open these with cold, wet or gloved hands.');
+  if(P.powderMix||P.powderElec||P.caps) add(0,'portion','Portion the fuel','Powder into screw-top vials; capsules decanted into a pill vial.','Two days out','Every portion labelled by where it is used.','Powder first, water second. You open these with cold, wet or gloved hands.');
   add(1,'bags','Bag drop and collection','Confirm where bags are dropped and collected.','At check-in','Times and places recorded.','The organiser’s timetable and the race briefing disagree on the drop window (12:00–16:00 vs 13:00–17:00) and the bag collection point. Use the 13:00–16:00 overlap.');
   add(1,'drink','Station drink','Ask which drink is at the stations, and at what strength.','At check-in','Product and concentration recorded.','It is your fallback if a bottle is lost — the carb maths depends on it.');
   add(1,'refill','Water refills at W1 and W2','Ask whether refills are jugs or handed bottles.','At check-in','Refill method known.','Refills at km 34.2 and km 68 are mandatory stops. It decides how long they take.');
@@ -1851,7 +1904,7 @@ function chips(list){ return '<div class="chiprow">'+list.map(function(x){ retur
 function renderPhases(a,P,bags){
   var base=P.scen[1], clip=a.pedals==='clip', change=clip||a.shoes==='change';
   var out={};
-  var bottlesFill = P.mixPortions? 'Fill the bottles — 1 drink mix'+(+a.cages>1?', the rest water':'') : (P.saltPortions?'Fill the bottles — 1 electrolyte'+(+a.cages>1?', the rest water':''):'Fill every bottle with water');
+  var bottlesFill = P.startText;
   out.pre={pd:P.breakfast.split('–')[0]+' → 09:00 · Girona, then Cadaqués', brief:'Bottles filled and on the bike before the wetsuit goes on.',
     html:'<div class="tl4"><span><b>'+P.breakfast+'</b>breakfast · familiar only</span>'+(a.transport==='bus'?'<span><b>06:15–06:45</b>bus · La Copa · take an early one</span>':'<span><b>by 07:45</b>arrive in Cadaqués</span>')+(P.preload?'<span><b>07:30</b>500 ml with electrolyte</span>':'<span><b>07:30</b>sip water to thirst</span>')+'<span><b>08:00</b>Cadaqués · Platja Gran</span></div>'+
     '<div class="zone"><div class="zh">08:00–08:45 · in order</div><ol class="rail"><li>Rack the bike</li><li><b>'+bottlesFill+'</b></li><li>Food on the bike or in pockets as planned</li><li>Gravel bib — already under the saddle</li><li>White T1 bag → T1 area</li><li>Personal bag → cloakroom</li><li>Wetsuit on — in the changing tents</li></ol></div>'+
@@ -1862,23 +1915,24 @@ function renderPhases(a,P,bags){
   out.t1={pd:'white bag · you place it 08:00–08:45 · the wetsuit goes back into it', brief:'Mount only outside T1.',
     html:'<div class="zone"><div class="zh">On arrival · in order</div><ol class="rail"><li>Up the beach, past the aid station</li>'+t1steps.map(function(s,i){ return '<li>'+cb('tr-t1-'+i,s,' data-transition="1"')+'</li>'; }).join('')+'</ol></div><div class="zone"><div class="zh">In the white bag</div>'+chips(bags.t1)+'</div><details class="prov notes"><summary>Notes</summary><p>Riding inside T1 is +30 min. Target 6–8 min.</p></details>'};
   // bike
-  var fl=P.feeds.map(function(f){ var lab={gel:f.caf?'Gel · caffeine':'Gel',bar:'½ bar',chew:'Chews'}[f.kind]+(f.extra?' + '+f.extra+' '+(f.label2==='gel'?'gel':'chews'):''); return '<li><time>'+hm(f.t)+'</time><span>'+lab+'</span><small>km '+Math.round(f.km)+' · '+Math.round(f.g)+' g</small></li>'; });
-  var stops=[[hm(COURSE.fW1*P.B),'W1 · km 34.2 · <b>mandatory water</b>'+(P.mixPortions>1||P.saltPortions>1?' · powder vial into the empty bottle':'')],[hm(COURSE.fW2*P.B),'W2 · km 68 · <b>mandatory water</b>'+(P.mixPortions>2||P.saltPortions>2?' · last powder vial':'')]];
-  var bottleLine=P.mixPortions?'1 drink mix ('+(+a.mixg)+' g) + '+(+a.cages-1)+' water':(P.saltPortions?'1 electrolyte + '+(+a.cages-1)+' water':a.cages+' × water');
+  var nmOf=function(k){ return P.names&&P.names[k]?' · '+esc(P.names[k]):''; };
+  var fl=P.feeds.map(function(f){ var lab=f.cafOnly?'Caffeine · '+P.cafMg+' mg':({gel:(f.caf?'Gel · caffeine':'Gel')+nmOf('gel'),bar:(P.barHalves?'½ bar':'Bar')+nmOf('bar'),chew:'Chews'}[f.kind]); return '<li><time>'+hm(f.t)+'</time><span>'+lab+'</span><small>km '+Math.round(f.km)+' · '+Math.round(f.g)+' g</small></li>'; });
+  var stops=[[hm(COURSE.fW1*P.B),'W1 · km 34.2 · <b>mandatory water</b> · '+P.stopText[0]],[hm(COURSE.fW2*P.B),'W2 · km 68 · <b>mandatory water</b> · '+P.stopText[1]]];
+  var bottleLine=P.fillText(0)+(P.mixCarbs?' · '+P.mixCarbs+' g from bottles over the ride':'');
   out.bike={pd:P.bikeTotal+' g carbs over '+hm(P.B)+' · ≈'+P.bikeRate+' g/h', brief:'Eat on the clock, not on hunger; follow the GPS.',
     html:'<div class="carry"><div class="zone"><div class="zh">On the bike</div><ul class="plain"><li><b>'+a.cages+' × '+a.bottleml+' ml</b> · '+bottleLine+'</li><li>Refill at W1 and W2 — '+P.fluidRate+' ml/h</li></ul></div>'+
-    '<div class="zone"><div class="zh">Food</div><ul class="plain">'+(P.nGelBike?'<li><b>'+P.nGelBike+' × gel</b>'+(P.caf.length?' · 1 with caffeine':'')+'</li>':'')+(P.nBar?'<li><b>'+P.nBar+' × bar</b> · eaten in halves, after km 25, none in the last hour</li>':'')+(P.nChew?'<li><b>'+P.nChew+' × chews</b></li>':'')+(P.mixPortions?'<li><b>'+P.mixPortions+' × drink mix</b> · '+P.mixCarbs+' g</li>':'')+'</ul></div>'+
+    '<div class="zone"><div class="zh">Food</div><ul class="plain">'+(P.nGelBike?'<li><b>'+P.nGelBike+' × gel</b>'+nmOf('gel')+(P.caf.length-P.nCafOnly>0?' · '+(P.caf.length-P.nCafOnly)+' with caffeine':'')+'</li>':'')+(P.nCafOnly?'<li><b>'+P.nCafOnly+' × caffeine dose</b> · '+P.cafMg+' mg</li>':'')+(P.nBar?'<li><b>'+P.nBar+' × bar</b>'+nmOf('bar')+' · '+(P.barHalves?'eaten in halves, ':'')+'after km 25, none in the last hour</li>':'')+(P.nChew?'<li><b>'+P.nChew+' × chews</b></li>':'')+(P.mixPortions?'<li><b>'+P.mixPortions+' × drink mix</b>'+nmOf('mix')+'</li>':'')+(P.stationBottles?'<li><b>'+P.stationBottles+' × station drink</b> · ~'+P.stationG+' g each</li>':'')+'</ul></div>'+
     '<div class="zone"><div class="zh">Sodium</div><ul class="plain">'+(P.caps?'<li><b>'+P.caps+' capsules</b> · 1 every ~'+P.capEvery+' min</li>':'')+(P.naFromMix?'<li>'+fmtNum(P.naFromMix)+' mg from the bottles</li>':'')+'<li>Target ~'+fmtNum(P.naRate)+' mg/h</li></ul></div></div>'+
     '<div class="zone feedzone"><div class="zh">Feed clock · elapsed bike time</div><ol class="feedlist">'+fl.join('')+'</ol><ol class="feedlist stops">'+stops.map(function(s){ return '<li><time>'+s[0]+'</time><span>'+s[1]+'</span></li>'; }).join('')+'</ol></div>'+
     '<div class="sumbar"><span><b>'+P.bikeTotal+' g</b> · ≈'+P.bikeRate+' g/h</span><span>'+fmtNum(P.capacity)+' ml on board · ≈'+P.fluidRate+' ml/h</span><span>'+fmtNum(P.naPlanned)+' mg sodium planned</span></div>'+
-    '<details class="prov notes"><summary>Notes</summary><p>Carry all fuel. Taking supplies outside an aid zone is <b>+30 min</b>. Station drink is the fallback, not the plan.</p><p>Solids start after the technical first 25 km and stop in the last hour, when your hands are free and your gut is calm.</p><p>Gravel cutoff at T2 is 15:49. To make it, be through W1 by <b>'+clock(base.sw+base.t1+P.w1Check)+'</b> and W2 by <b>'+clock(base.sw+base.t1+P.w2Check)+'</b>.</p></details>'};
+    '<details class="prov notes"><summary>Notes</summary><p>Carry all fuel. Taking supplies outside an aid zone is <b>+30 min</b>. '+(P.refill==='station'?'Your plan uses the station drink at W1 and W2 — confirm what it is at check-in.':'Station drink is the fallback, not the plan.')+'</p><p>Solids start after the technical first 25 km and stop in the last hour, when your hands are free and your gut is calm.</p><p>Gravel cutoff at T2 is 15:49. To make it, be through W1 by <b>'+clock(base.sw+base.t1+P.w1Check)+'</b> and W2 by <b>'+clock(base.sw+base.t1+P.w2Check)+'</b>.</p></details>'};
   var t2steps=['<b>Dismount before the entrance</b> · rack the bike','Collect the black bag'+(change?' · <b>run shoes on</b>':' · same shoes')];
   if(a.runcarry!=='none') t2steps.push({flask:'Soft flask',bottle:'Handheld bottle',belt:'Belt bottles'}[a.runcarry]+': fill with station water');
   t2steps.push('Trail bib on the front'+(P.runUnits?' · run food in a pocket':''));
   t2steps.push('Black bag → deposit · helmet stays with the bike');
   out.t2={pd:'black bag · dropped in Girona Saturday 13:00–16:00', brief:'Dismount before entering.',
     html:'<div class="zone"><div class="zh">On arrival · in order</div><ol class="rail">'+t2steps.map(function(s,i){ return '<li>'+cb('tr-t2-'+i,s,' data-transition="1"')+'</li>'; }).join('')+'</ol></div><div class="zone"><div class="zh">In the black bag</div>'+chips(bags.t2.length?bags.t2:['Trail bib'])+'</div><details class="prov notes"><summary>Notes</summary><p>Nothing wet and nothing pre-mixed — the bag leaves your hands about 20 h before you open it.</p><p>Aid here: Maurten, water, fruit, food, coffee. Riding into T2 is a penalty. Target 5–6 min.</p></details>'};
-  var runFood=P.runUnits+' × '+(P.runKind==='gel'?'gel':'chews')+' + '+P.runSpare+' spare'+(P.runCaf?' · 1 with caffeine':'');
+  var runFood=P.runUnits+' × '+(P.runKind==='gel'?'gel':'chews')+' + '+P.runSpare+' spare'+(P.runCaf?' · 1 with caffeine ('+P.cafMg+' mg)':'');
   out.run={pd:runFood+' · ≈'+P.runCarbTarget+' g', brief:'There are climbs after the main descent.',
     html:'<div class="carry"><div class="zone"><div class="zh">Carry</div><ul class="plain"><li><b>'+runFood+'</b></li>'+(a.runcarry!=='none'?'<li>'+{flask:'Soft flask',bottle:'Handheld bottle',belt:'Belt bottles'}[a.runcarry]+' · refill at the castle aid, km 4.2</li>':'<li>Drink at T2, the castle aid at km 4.2 and the finish</li>')+(P.runCaps?'<li>'+P.runCaps+' capsule'+(P.runCaps>1?'s':'')+'</li>':'')+'</ul></div>'+
     '<div class="zone"><div class="zh">The course</div><ul class="plain"><li>250 m up in 4.5 km — hike the steep parts</li><li>Castle aid · km 4.2 · water, Maurten, fruit</li><li>3 km down to Font del Ferro, then a 50 m kicker</li><li>A 20 m sting 1 km out, then 20 finish steps</li></ul></div></div>'+
@@ -1897,7 +1951,7 @@ function renderFuel(a,P){
    '</ul><ul class="fkv">'+
    '<li><span class="k">Fluid</span><span class="v">'+fmtNum(P.capacity)+' ml on board · ≈'+P.fluidRate+' ml/h <small>refill at W1 and W2</small></span></li>'+
    '<li><span class="k">Sodium</span><span class="v">target ≈'+fmtNum(P.naRate)+' mg/h <small>planned '+fmtNum(P.naPlanned)+' mg on the bike'+(runNa?' · '+fmtNum(runNa)+' on the run':'')+'</small></span></li>'+
-   '<li><span class="k">Caffeine</span><span class="v">'+(P.cafPlan?'≈'+P.cafPlan+' mg planned':'none')+' <small>ceiling '+P.cafLo+'–'+P.cafHi+' mg · 3–6 mg/kg</small></span></li>'+
+   '<li><span class="k">Caffeine</span><span class="v">'+(P.cafPlan?'≈'+P.cafPlan+' mg planned <small>'+(P.caf.length+(P.runCaf?1:0))+' × '+P.cafMg+' mg</small>':'none')+' <small>ceiling '+P.cafLo+'–'+P.cafHi+' mg · 3–6 mg/kg</small></span></li>'+
    '<li><span class="k">Pre-start</span><span class="v">'+(P.preload?'500 ml with electrolyte at 07:30':'water to thirst')+'</span></li>'+
    '</ul></div>';
 }
@@ -1940,26 +1994,83 @@ function renderRisks(a,P){
 }
 function renderFeedChart(P){
   var bike=(window.PROF_PTS||[]).filter(function(p){ return p[0]<610; });
-  var X=function(km){ return 44+km/86.4*690; }, Y=function(e){ return 212-e*0.34; };
+  var X=function(km){ return 44+km/86.4*690; }, Y=function(e){ return 212-e*0.34; }, XT=function(t){ return X(kmAt(t,P.B)); };
+  var mono='font-family="ui-monospace,monospace"';
   var d=bike.map(function(p,i){ return (i?'L':'M')+X(p[1]).toFixed(1)+' '+Y(p[2]).toFixed(1); }).join(' ');
   var area=d+' L'+X(86.4)+' 212 L'+X(0)+' 212 Z';
-  var s='<svg viewBox="0 0 760 270" class="feedsvg" role="img" aria-label="Feed times on the bike profile">';
-  s+='<rect x="'+X(0)+'" y="226" width="'+(X(25)-X(0))+'" height="4" fill="#8A5A2B" opacity=".75"/><text x="'+X(0)+'" y="246" font-size="10" font-family="ui-monospace,monospace" fill="#8A5A2B" letter-spacing="1">KM 0–25 · TECHNICAL · NO SOLIDS</text>';
+  // lane geometry below the profile
+  var rows=P.bottles||[], bTop=286, rowH=15, rowGap=5;
+  var capY=bTop+rows.length*(rowH+rowGap)+22, hasCaps=P.capTimes&&P.capTimes.length;
+  var cTop=(hasCaps?capY+30:capY-4), cH=54, cBot=cTop+cH, H=cBot+30;
+  var s='<svg viewBox="0 0 760 '+H+'" class="feedsvg" role="img" aria-label="Feed times, bottles, capsules and running carbohydrate total on the bike profile">';
+  s+='<rect x="'+X(0)+'" y="226" width="'+(X(25)-X(0))+'" height="4" fill="#8A5A2B" opacity=".75"/><text x="'+X(0)+'" y="246" font-size="10" '+mono+' fill="#8A5A2B" letter-spacing="1">KM 0–25 · TECHNICAL · NO SOLIDS</text>';
   s+='<path d="'+area+'" fill="#F1EAE0"/><path d="'+d+'" fill="none" stroke="#8A5A2B" stroke-width="1.6"/>';
   s+='<line x1="44" y1="212" x2="734" y2="212" stroke="#5C6B72" stroke-width="1"/>';
-  [0,25,50,75].forEach(function(k){ s+='<text x="'+X(k)+'" y="262" font-size="10" font-family="ui-monospace,monospace" fill="#5C6B72" text-anchor="middle">'+k+'</text>'; });
-  s+='<text x="734" y="262" font-size="10" font-family="ui-monospace,monospace" fill="#5C6B72" text-anchor="end">86.4 · T2</text>';
-  [[COURSE.w1,'W1'],[COURSE.w2,'W2']].forEach(function(w){ s+='<line x1="'+X(w[0])+'" y1="40" x2="'+X(w[0])+'" y2="212" stroke="#B3341F" stroke-dasharray="2 3"/><circle cx="'+X(w[0])+'" cy="212" r="5" fill="#B3341F"/><text x="'+X(w[0])+'" y="228" font-size="10" font-weight="700" font-family="ui-monospace,monospace" fill="#B3341F" text-anchor="middle" dy="12">'+w[1]+' · '+w[0]+'</text>'; });
+  [0,25,50,75].forEach(function(k){ s+='<text x="'+X(k)+'" y="262" font-size="10" '+mono+' fill="#5C6B72" text-anchor="middle">'+k+'</text>'; });
+  s+='<text x="734" y="262" font-size="10" '+mono+' fill="#5C6B72" text-anchor="end">86.4 · T2</text>';
+  // water stops run through every lane
+  [[COURSE.w1,'W1'],[COURSE.w2,'W2']].forEach(function(w){ s+='<line x1="'+X(w[0])+'" y1="40" x2="'+X(w[0])+'" y2="'+cBot+'" stroke="#B3341F" stroke-dasharray="2 3"/><circle cx="'+X(w[0])+'" cy="212" r="5" fill="#B3341F"/><text x="'+X(w[0])+'" y="228" font-size="10" font-weight="700" '+mono+' fill="#B3341F" text-anchor="middle" dy="12">'+w[1]+' · '+w[0]+'</text>'; });
+  // bottles: one row per cage, one segment per leg
+  var style={mix:['#8A5A2B','#8A5A2B','#FFFFFF','MIX'],elec:['#0E6272','#0E6272','#FFFFFF','ELECTROLYTE'],station:['#F1EAE0','#8A5A2B','#8A5A2B','STATION'],water:['#FFFFFF','#B9BFB4','#5C6B72','WATER']};
+  var legKm=[[0,COURSE.w1],[COURSE.w1,COURSE.w2],[COURSE.w2,86.4]];
+  s+='<text x="44" y="'+(bTop-7)+'" font-size="9.5" font-weight="700" '+mono+' fill="#5C6B72" letter-spacing="1">BOTTLES · WHAT IS IN EACH CAGE, LEG BY LEG</text>';
+  rows.forEach(function(r,ci){
+    var y=bTop+ci*(rowH+rowGap);
+    s+='<text x="38" y="'+(y+11)+'" font-size="10" '+mono+' fill="#5C6B72" text-anchor="end">B'+(ci+1)+'</text>';
+    r.forEach(function(k,li){
+      var x1=X(legKm[li][0])+2, x2=X(legKm[li][1])-2, w=x2-x1;
+      if(!k){ s+='<rect x="'+x1.toFixed(1)+'" y="'+y+'" width="'+w.toFixed(1)+'" height="'+rowH+'" rx="3" fill="none" stroke="#B9BFB4" stroke-dasharray="3 3"/><text x="'+(x1+6).toFixed(1)+'" y="'+(y+11)+'" font-size="9" '+mono+' fill="#5C6B72">NOT FILLED</text>'; return; }
+      var st=style[k], g=k==='mix'?(+P.a.mixg||0):(k==='station'?P.stationG:0);
+      s+='<rect x="'+x1.toFixed(1)+'" y="'+y+'" width="'+w.toFixed(1)+'" height="'+rowH+'" rx="3" fill="'+st[0]+'" stroke="'+st[1]+'"/>';
+      var lab=st[3]+(g?' · '+g+' G':''); if(w>lab.length*6+10) s+='<text x="'+(x1+6).toFixed(1)+'" y="'+(y+11)+'" font-size="9" font-weight="700" '+mono+' fill="'+st[2]+'">'+lab+'</text>';
+    });
+  });
+  // capsules
+  if(hasCaps){
+    s+='<text x="38" y="'+(capY+4)+'" font-size="10" '+mono+' fill="#5C6B72" text-anchor="end">Na</text>';
+    P.capTimes.forEach(function(t){ var x=XT(t); s+='<rect x="'+(x-5).toFixed(1)+'" y="'+(capY-2)+'" width="10" height="6" rx="3" fill="#0E6272"/>'; });
+    s+='<text x="44" y="'+(capY-9)+'" font-size="9.5" font-weight="700" '+mono+' fill="#5C6B72" letter-spacing="1">SODIUM · '+P.capTimes.length+' CAPSULES · 1 EVERY ~'+P.capEvery+' MIN</text>';
+  }
+  // running carbohydrate total vs target
+  var maxG=Math.max(1,P.cum[P.cum.length-1][1],P.cum[P.cum.length-1][2]);
+  var CY=function(g){ return cBot-g/maxG*cH; };
+  var tgt='M'+XT(0)+' '+cBot+' L'+XT(P.B).toFixed(1)+' '+CY(P.cum[P.cum.length-1][2]).toFixed(1);
+  var pl=P.cum.map(function(c,i){ return (i?'L':'M')+XT(c[0]).toFixed(1)+' '+CY(c[1]).toFixed(1); }).join(' ');
+  s+='<text x="44" y="'+(cTop-8)+'" font-size="9.5" font-weight="700" '+mono+' fill="#5C6B72" letter-spacing="1">CARBS SO FAR</text>';
+  s+='<line x1="44" y1="'+cBot+'" x2="734" y2="'+cBot+'" stroke="#D9DDD5"/>';
+  s+='<path d="'+tgt+'" fill="none" stroke="#5C6B72" stroke-width="1.2" stroke-dasharray="4 4"/><path d="'+pl+'" fill="none" stroke="#1B2A32" stroke-width="2"/>';
+  var endP=P.cum[P.cum.length-1];
+  s+='<text x="44" y="'+(cBot+18)+'" font-size="9.5" '+mono+' fill="#5C6B72">PLANNED (SOLID) '+Math.round(endP[1])+' G · TARGET (DASHED) '+Math.round(endP[2])+' G BY T2</text>';
+  // feeds on top
   var lastX=-99, row=0;
   P.feeds.forEach(function(f){
-    var x=X(f.km); row=(x-lastX<34)?(row+1)%2:0; lastX=x; var ly=row?46:28;
+    var x=XT(f.t); row=(x-lastX<34)?(row+1)%2:0; lastX=x; var ly=row?46:28;
     var col=f.kind==='bar'?'#8A5A2B':(f.caf?'#B3341F':'#1B2A32');
     s+='<line x1="'+x.toFixed(1)+'" y1="'+(ly+10)+'" x2="'+x.toFixed(1)+'" y2="212" stroke="#D9DDD5" stroke-width="1"/>';
-    s+=(f.kind==='bar'?'<rect x="'+(x-5).toFixed(1)+'" y="'+(ly+5)+'" width="10" height="10" rx="2" fill="'+col+'"/>':'<circle cx="'+x.toFixed(1)+'" cy="'+(ly+10)+'" r="5" fill="'+(f.kind==='chew'?'#FFFFFF':col)+'" stroke="'+col+'" stroke-width="2"/>');
-    s+='<text x="'+x.toFixed(1)+'" y="'+ly+'" font-size="10" font-family="ui-monospace,monospace" fill="#1B2A32" text-anchor="middle">'+hm(f.t)+'</text>';
+    if(f.kind==='bar') s+='<rect x="'+(x-5).toFixed(1)+'" y="'+(ly+5)+'" width="10" height="10" rx="2" fill="'+col+'"/>';
+    else s+='<circle cx="'+x.toFixed(1)+'" cy="'+(ly+10)+'" r="5" fill="'+(f.kind==='chew'||f.cafOnly?'#FFFFFF':col)+'" stroke="'+col+'" stroke-width="2"/>';
+    s+='<text x="'+x.toFixed(1)+'" y="'+ly+'" font-size="10" '+mono+' fill="#1B2A32" text-anchor="middle">'+hm(f.t)+'</text>';
   });
   s+='</svg>';
   return s;
+}
+function renderFeedKey(P){
+  var n=P.names||{}, k=[], used={};
+  P.feeds.forEach(function(f){ used[f.cafOnly?'cafonly':f.kind+(f.caf?'caf':'')]=1; });
+  (P.bottles||[]).forEach(function(r){ r.forEach(function(x){ if(x) used['b-'+x]=1; }); });
+  var nm=function(key){ return n[key]?' · '+esc(n[key]):''; };
+  if(used.gel) k.push('<span><i></i>gel'+nm('gel')+'</span>');
+  if(used.gelcaf) k.push('<span><i class="caf"></i>gel with caffeine</span>');
+  if(used.cafonly) k.push('<span><i class="cafonly"></i>caffeine dose</span>');
+  if(used.bar) k.push('<span><i class="bar"></i>'+(P.barHalves?'½ bar':'bar')+nm('bar')+'</span>');
+  if(used.chew) k.push('<span><i class="chew"></i>chews</span>');
+  if(used['b-mix']) k.push('<span><i class="b-mix"></i>drink mix bottle'+nm('mix')+'</span>');
+  if(used['b-elec']) k.push('<span><i class="b-elec"></i>electrolyte bottle</span>');
+  if(used['b-station']) k.push('<span><i class="b-station"></i>station drink (~'+P.stationG+' g, unconfirmed)</span>');
+  if(used['b-water']) k.push('<span><i class="b-water"></i>water</span>');
+  if(P.capTimes&&P.capTimes.length) k.push('<span><i class="cap"></i>capsule</span>');
+  k.push('<span><i class="stop"></i>mandatory water stop</span>');
+  return k.join('');
 }
 
 // ---------------- survey UI: paginated modal gate ----------------
@@ -1979,7 +2090,7 @@ function qHtml(q,a){
   } else if(q.type==='number'){
     h+='<div class="numrow"><input type="number" inputmode="decimal" name="'+id+'" min="'+q.min+'" max="'+q.max+'" required step="'+q.step+'" value="'+esc(v)+'" aria-labelledby="gate-title"'+desc+'><span>'+q.unit+'</span></div>';
   } else {
-    h+='<input type="text" name="'+id+'" value="'+esc(v)+'" aria-labelledby="gate-title"'+desc+' autocomplete="given-name" maxlength="40" placeholder="Your name">';
+    h+='<input type="text" name="'+id+'" value="'+esc(v)+'" aria-labelledby="gate-title"'+desc+' autocomplete="'+(q.id==='name'?'given-name':'off')+'" maxlength="40" placeholder="'+esc(q.placeholder||'Your name')+'">';
   }
   if(state.answers[q.id]===undefined&&(q.type==='number'||q.type==='select')) h+='<p class="g-note">Suggested value · check this before continuing.</p>';
   return h+'</div>';
@@ -2177,7 +2288,7 @@ function renderAll(){
   var base=P.scen[1];
   setHTML('strip-swim',Math.round(base.sw)+'′'); setHTML('strip-bike',hm(P.B)); setHTML('strip-run',hm(P.R)); setHTML('strip-pre',P.breakfast.split('–')[0]+'–09:00');
   setHTML('ct-swim',Math.round(base.sw)+' min'); setHTML('ct-bike',hm(P.B)); setHTML('ct-run',hm(P.R));
-  setHTML('feedchart',renderFeedChart(P));
+  setHTML('feedchart',renderFeedChart(P)); setHTML('feedkey',renderFeedKey(P));
   setHTML('fuel-body',renderFuel(a,P));
   var pc=renderPacing(P); setHTML('pace-bars',pc.bars); setHTML('pace-splits',pc.splits); setHTML('pace-clock',pc.clock);
   setHTML('risk-body',renderRisks(a,P));
@@ -2186,8 +2297,8 @@ function renderAll(){
   setHTML('plan-warn',wh?'<ul>'+wh+'</ul>':''); document.getElementById('plan-warn').hidden=!wh||!f;
   // station texts for the course profile
   PLAN_ST.t1=['#5C6B72','T1 · PLATJA GRAN','Swim: anti-clockwise rectangle, ~18.5 °C, wetsuit on. T1: water, Maurten and food. Mount outside T1.'];
-  PLAN_ST.w1=['var(--track)','KM 34.2 · CASTELLÓ — MANDATORY','Water refill. '+(P.mixPortions>1||P.saltPortions>1?'Powder vial into the empty bottle, then water. ':'Fill every bottle. ')+'Be through by '+clock(base.sw+base.t1+P.w1Check)+' to make the 15:49 gravel cutoff.'];
-  PLAN_ST.w2=['var(--track)','KM 68 · JAFRE — MANDATORY','Water refill. '+(P.mixPortions>2||P.saltPortions>2?'Last powder vial. ':'')+'Be through by '+clock(base.sw+base.t1+P.w2Check)+' to make the 15:49 gravel cutoff.'];
+  PLAN_ST.w1=['var(--track)','KM 34.2 · CASTELLÓ — MANDATORY','Refill: '+P.stopText[0]+'. Be through by '+clock(base.sw+base.t1+P.w1Check)+' to make the 15:49 gravel cutoff.'];
+  PLAN_ST.w2=['var(--track)','KM 68 · JAFRE — MANDATORY','Refill: '+P.stopText[1]+'. Be through by '+clock(base.sw+base.t1+P.w2Check)+' to make the 15:49 gravel cutoff.'];
   PLAN_ST.pk=['#8A5A2B','KM 13.5 · 419 M — HIGH POINT','~67% of the climbing is in km 0–25. Conservative lines; walk difficult pitches. Gels or drink only here — solids after km 25.'];
   PLAN_ST.t2=['#5C6B72','T2 · CELRÀ','Dismount before the entrance. Helmet stays with the bike. See your T2 checklist.'];
   PLAN_ST.c45=['var(--trail)','RUN KM 4.2 · SANT MIQUEL — CASTLE AID','Water, Maurten and fruit. '+(a.runcarry!=='none'?'Refill here. ':'')+'Then 3 km down, a 50 m and a 20 m rise, and 20 finish steps.'];
