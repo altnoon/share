@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>SGRAIL 100 Planner</title>
-<meta name="description" content="Plan your SGRAIL 100: two short surveys build your bags, pack list, bike checks, to-dos, feed schedule and pacing.">
+<meta name="description" content="Plan your SGRAIL 100: two guided surveys build your bags, pack list, bike checks, to-dos, feed schedule and pacing.">
 <style>
 :root{
   --paper:#F2F3EE; --card:#FFFFFF; --ink:#1B2A32; --muted:#5C6B72;
@@ -1095,6 +1095,16 @@ body.gated .gate{background:var(--paper)}
   .gate .g-nav{position:sticky;bottom:0;background:var(--card);padding:12px 0 calc(4px + env(safe-area-inset-bottom));margin-top:20px;border-top:1px solid var(--line-soft)}
   .gate .g-nav button.primary{flex:1}
 }
+.gate .g-save{margin:18px 0 0;font-size:12px;text-align:center;color:var(--muted)}
+.gate .g-error{color:var(--flag);background:var(--flag-soft);padding:12px;border-radius:6px;margin-top:14px}
+.gate [aria-invalid="true"]{border-color:var(--flag)}
+.gate .g-review{margin-top:18px}
+.gate .g-review dl{padding:0 14px}
+.gate .g-review dl>div{position:relative;padding:12px 78px 12px 0;border-top:1px solid var(--line-soft)}
+.gate .g-review dt{font-size:13px;color:var(--muted)}
+.gate .g-review dd{font-size:15px;margin:3px 0 0;overflow-wrap:anywhere}
+.gate .g-review small{display:block;color:var(--track)}
+.gate .g-review button{position:absolute;right:0;top:12px;min-height:44px;padding:8px;background:var(--card);color:var(--sea);border:1px solid var(--line);border-radius:6px;cursor:pointer}
 @media print{.gate{display:none!important}}
 /* race-day graphs: open by default, and obvious when folded */
 #course .graph-label{display:inline-flex;align-items:center;gap:8px}
@@ -1207,7 +1217,7 @@ body.gated .gate{background:var(--paper)}
 
 
 <section id="setup">
-  <h2>Your plan <span class="tag">two short surveys · answers stay on this device</span></h2>
+  <h2>Your plan <span class="tag">two guided surveys · saved in this browser</span></h2>
   <p class="setup-lede">Everything on this page is built from these answers: <b>01</b> drives your bags, pack list, bike checks and to-dos; <b>02</b> drives your race-day feed clock, sodium and pacing. Edit either and the plan rebuilds.</p>
   <div id="surveys"></div>
   <div class="plan-tools" id="plan-tools" hidden><button type="button" id="share-plan">Copy link with my answers</button><button type="button" id="reset-plan">Start over</button><p id="tool-status" class="small" role="status"></p></div>
@@ -1237,7 +1247,7 @@ body.gated .gate{background:var(--paper)}
 
 <section id="openitems">
   <h2>Before Girona <span class="tag">bags · pack · bike · sort out</span></h2>
-  <div class="preview-note" data-needs="kit fuel" hidden><span>Preview with typical answers.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
+  <div class="preview-note" data-needs="kit fuel" hidden><span>Draft plan · unanswered questions use suggested values.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
   <div class="pk-head">Bags · pack → drop → use</div>
   <div class="card rail-flag bagscard">
     <p class="small">Bags come from check-in · Saturday: black with the bike · Sunday: white + personal travel with you.</p>
@@ -1358,7 +1368,7 @@ body.gated .gate{background:var(--paper)}
   </details>
 
   
-  <div class="preview-note" data-needs="fuel" hidden><span>Preview with typical answers.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
+  <div class="preview-note" data-needs="fuel" hidden><span>Draft plan · unanswered questions use suggested values.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
   <details class="planblock p-bike" id="feedblock" data-mobile-chart="true" open><summary class="plan-head" style="margin-top:0"><span class="pn">Feeding chart</span><span class="pd">graph · your feed times on the bike profile</span><span class="graph-cue">Show graph</span></summary>
     <div class="clock-scroll" tabindex="0" role="region" aria-label="Scrollable feed chart"><div class="clock" id="feedchart"></div></div>
     <p class="swipe-cue" aria-hidden="true">Swipe for the whole ride <b>→</b></p>
@@ -1403,14 +1413,14 @@ body.gated .gate{background:var(--paper)}
 
 <section id="fuel">
   <h2>Fuel &amp; salt <span class="tag">from survey 02</span></h2>
-  <div class="preview-note" data-needs="fuel" hidden><span>Preview with typical answers.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
+  <div class="preview-note" data-needs="fuel" hidden><span>Draft plan · unanswered questions use suggested values.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
   <details class="reference-details" open><summary>Day totals &amp; estimates</summary><div class="inner" id="fuel-body"></div></details>
   <p class="caveat">Rates come from common endurance-nutrition ranges scaled by your answers. They are starting points, not medical advice — your rehearsal rides decide.</p>
 </section>
 
 <section id="pacing">
   <h2>Pacing <span class="tag">Planning scenarios · not predictions</span></h2>
-  <div class="preview-note" data-needs="fuel" hidden><span>Preview with typical answers.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
+  <div class="preview-note" data-needs="fuel" hidden><span>Draft plan · unanswered questions use suggested values.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
   <div class="cutoff" id="pace-bars"></div>
   <p class="cutoff-note">Plan against <b>16:59</b> until the finish limit is confirmed at check-in. Published overall limit: <b>17:59</b>.</p>
   <details class="reference-details"><summary>Exact splits &amp; clock checks</summary><div class="inner">
@@ -1433,7 +1443,7 @@ body.gated .gate{background:var(--paper)}
 
 </div>
 
-<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" hidden><div class="gate-card"><div class="gate-top"><span class="gate-brand">SGRAIL 100 · race planner</span><span class="gate-prog" id="gate-prog"></span><button type="button" class="gate-x" id="gate-close" data-g="close" aria-label="Close without finishing">×</button></div><div class="gate-bar" aria-hidden="true"><i id="gate-bar"></i></div><div id="gate-body"></div></div></div>
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" hidden><div class="gate-card"><div class="gate-top"><span class="gate-brand">SGRAIL 100 · race planner</span><span class="gate-prog" id="gate-prog"></span><button type="button" class="gate-x" id="gate-close" data-g="close" aria-label="Save progress and close" title="Save progress and close">×</button></div><div class="gate-bar" aria-hidden="true"><i id="gate-bar"></i></div><div id="gate-body"></div></div></div>
 <dialog id="progdlg" class="modal" aria-label="Event program, Friday to Sunday">
   <div class="mhead"><b>Event program · Fri 16 → Sun 18</b><button type="button" class="mclose" aria-label="Close">×</button></div>
   <div class="mbody">
@@ -1474,7 +1484,8 @@ var PLAN_ST = {};
 (function(){
 var PFX='sgplan26.';
 function lsGet(k,d){ try{ var v=localStorage.getItem(PFX+k); return v==null?d:JSON.parse(v); }catch(e){ return d; } }
-function lsSet(k,v){ try{ localStorage.setItem(PFX+k,JSON.stringify(v)); }catch(e){} }
+var storageOK=true;
+function lsSet(k,v){ try{ localStorage.setItem(PFX+k,JSON.stringify(v)); storageOK=true; }catch(e){ storageOK=false; } }
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 function fmtNum(n){ return Math.round(n).toLocaleString('en-GB'); }
 function hm(min){ min=Math.round(min); var h=Math.floor(min/60), m=min%60; return h+':'+(m<10?'0':'')+m; }
@@ -1485,66 +1496,66 @@ function has(a,k,v){ return (a[k]||[]).indexOf(v)>=0; }
 // ---------------- survey definitions ----------------
 function range(from,to,step,fmt){ var o=[]; for(var v=from; v<=to; v+=step) o.push([String(v),fmt(v)]); return o; }
 var paceOpts=range(85,165,5,function(s){ return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')+' /100 m'; });
-var bikeOpts=range(210,345,15,function(m){ return hm(m); });
-var runOpts=range(55,120,5,function(m){ return hm(m); });
+var bikeOpts=range(210,345,15,function(m){ return dur(m); });
+var runOpts=range(55,120,5,function(m){ return dur(m); });
 
 var SURVEYS={
  kit:{ n:'01', title:'Kit & logistics', builds:'Builds your bags, pack list, bike checks and to-do list', steps:[
   {title:'You', qs:[
-   {id:'name', type:'text', label:'Name on the plan', help:'Optional. Shown at the top of the page.', def:''},
-   {id:'weight', type:'number', label:'Body weight', unit:'kg', min:40, max:140, step:1, def:72, help:'Sets the tyre-pressure starting point and the caffeine ceiling.'},
-   {id:'insurance', type:'choice', label:'Medical insurance that covers this event?', help:'No insurance, no start — it is checked at check-in.', def:'unsure',
+   {id:'name', type:'text', label:'What name would you like on your plan? (optional)', help:'Optional. Shown at the top of the page.', def:''},
+   {id:'weight', type:'number', label:'What is your body weight?', unit:'kg', min:40, max:140, step:1, def:72, help:'Sets the tyre-pressure starting point and the caffeine ceiling.'},
+   {id:'insurance', type:'choice', label:'Have you checked your event insurance cover?', help:'Choose “Not sure” if you still need to check your policy. We’ll add a reminder to your to-do list.', def:'unsure',
     options:[['yes','Yes, verified'],['unsure','Not sure'],['no','No']]}
   ]},
   {title:'Bike', qs:[
    {id:'bike', type:'choice', label:'Which bike are you racing?', def:'own', options:[['own','My own gravel bike'],['rental','A rental, collected in Girona'],['mtb','My own MTB / other']]},
-   {id:'tyres', type:'choice', label:'Tyre setup', def:'tubeless', options:[['tubeless','Tubeless'],['tubes','Inner tubes'],['unsure','Not sure yet']]},
-   {id:'width', type:'choice', label:'Tyre width', def:'45', options:[['40','38–40 mm'],['45','42–45 mm'],['50','47–50 mm'],['mtb','2.0″ or wider']]},
-   {id:'pedals', type:'choice', label:'Pedals', def:'clip', options:[['clip','Clipless'],['flat','Flat pedals']]},
-   {id:'cages', type:'choice', label:'Bottle cages', def:'2', options:[['1','One'],['2','Two'],['3','Three']]},
-   {id:'nav', type:'choice', label:'Navigation on the bike', help:'The gravel leg is unsigned: you follow the GPX or you are off course.', def:'unit', options:[['unit','Bike computer'],['watch','Watch only'],['phone','Phone on the bars']]},
-   {id:'storage', type:'multi', label:'Where can you carry food and spares?', help:'Tick all that apply.', def:['saddle'], options:[['saddle','Saddle bag'],['toptube','Top-tube bag'],['pockets','Suit pockets']]}
+   {id:'tyres', type:'choice', label:'How are your tyres set up?', def:'tubeless', options:[['tubeless','Tubeless'],['tubes','Inner tubes'],['unsure','Not sure yet']]},
+   {id:'width', type:'choice', label:'What width are your tyres?', help:'Look for the size on the tyre sidewall. Choose the closest range.', def:'45', options:[['40','38–40 mm'],['45','42–45 mm'],['50','47–50 mm'],['mtb','2.0″ or wider']]},
+   {id:'pedals', type:'choice', label:'Which pedals will you use?', def:'clip', options:[['clip','Clip-in pedals · cycling shoes attach to the pedal'],['flat','Flat pedals']]},
+   {id:'cages', type:'choice', label:'How many bottle cages can you use?', def:'2', options:[['1','One'],['2','Two'],['3','Three']]},
+   {id:'nav', type:'choice', label:'How will you follow the bike route?', help:'Choose the device you’ll use to follow the downloaded GPX route.', def:'unit', options:[['unit','Bike computer'],['watch','Watch only'],['phone','Phone on the bars']]},
+   {id:'storage', type:'multi', label:'Where can you carry food and spares?', help:'Select all that apply. Leave blank if you still need to arrange storage.', def:['saddle'], options:[['saddle','Saddle bag'],['toptube','Top-tube bag'],['pockets','Suit pockets']]}
   ]},
   {title:'Kit', qs:[
-   {id:'suit', type:'choice', label:'Race clothing', def:'tri', options:[['tri','Tri suit, all day'],['kit','Bike kit under the wetsuit']]},
-   {id:'shoes', type:'choice', label:'Shoes', when:function(a){ return a.pedals==='flat'; }, def:'same', options:[['same','Same shoes for bike and run'],['change','Change to run shoes at T2']]},
-   {id:'wetsuit', type:'choice', label:'Wetsuit', help:'Wetsuits are expected; sea around 18.5 °C in mid-October.', def:'own', options:[['own','I have one'],['rent','Renting or borrowing'],['need','Still to sort']]},
-   {id:'extras', type:'multi', label:'Which of these are you bringing?', help:'Cool start on Cap de Creus, tramuntana on the plain. Anything left unticked becomes a decision task.', def:['sleeves','glasses'],
+   {id:'suit', type:'choice', label:'What will you wear under your wetsuit?', def:'tri', options:[['tri','Tri suit, all day'],['kit','Bike kit under the wetsuit']]},
+   {id:'shoes', type:'choice', label:'Will you change shoes for the run?', when:function(a){ return a.pedals==='flat'; }, def:'same', options:[['same','Same shoes for bike and run'],['change','Change to run shoes at T2']]},
+   {id:'wetsuit', type:'choice', label:'Is your wetsuit arranged?', help:'Wetsuits are expected; sea around 18.5 °C in mid-October.', def:'own', options:[['own','I have one'],['rent','Renting or borrowing'],['need','Still to sort']]},
+   {id:'extras', type:'multi', label:'Which of these are you bringing?', help:'Select everything you plan to bring. Items left blank become reminders to decide later.', def:['sleeves','glasses'],
     options:[['sleeves','Arm sleeves'],['gloves','Full-finger gloves'],['shell','Packable shell'],['glasses','Glasses'],['socks','Dry socks for T2']]},
    {id:'runcarry', type:'choice', label:'What do you carry on the run?', def:'flask', options:[['flask','Soft flask'],['bottle','Handheld bottle'],['belt','Belt or vest'],['none','Nothing — aid stations only']]}
   ]},
   {title:'Weekend', qs:[
    {id:'checkin', type:'choice', label:'When will you check in?', help:'Check-in hands you the bags and bibs you need for Saturday’s bike drop.', def:'fri', options:[['fri','Friday 17:30–19:30'],['sat','Saturday, 12:00–17:00']]},
    {id:'transport', type:'choice', label:'How do you get to the start?', def:'bus', options:[['bus','Organiser bus from Girona'],['own','Own transport to Cadaqués']]},
-   {id:'openwater', type:'choice', label:'Open-water swim in your wetsuit this season?', def:'yes', options:[['yes','Yes, recently'],['no','Not recently']]},
-   {id:'gravel', type:'choice', label:'Gravel experience', def:'some', options:[['lots','I ride gravel regularly'],['some','A few rides'],['first','First gravel race']]},
+   {id:'openwater', type:'choice', label:'Have you swum in open water in this wetsuit recently?', def:'yes', options:[['yes','Yes, recently'],['no','Not recently']]},
+   {id:'gravel', type:'choice', label:'How often do you ride on gravel?', def:'some', options:[['lots','I ride gravel regularly'],['some','A few rides'],['first','First gravel race']]},
    {id:'flatfix', type:'choice', label:'Have you fixed a flat on the bike you will race?', def:'no', options:[['yes','Yes'],['no','Not yet']]}
   ]}
  ]},
  fuel:{ n:'02', title:'Fuel & pacing', builds:'Builds your feed schedule, sodium, fluid and finish-time scenarios', steps:[
   {title:'Times', qs:[
-   {id:'swimpace', type:'select', label:'Open-water pace in a wetsuit', def:'120', options:paceOpts},
-   {id:'biketime', type:'select', label:'Expected bike time · 86.4 km', help:'Most of the climbing is in the first 25 km and 93% is unpaved. Expect well above your road time for the distance. Unsure: 4:30.', def:'270', options:bikeOpts},
-   {id:'runtime', type:'select', label:'Expected run time · 10.5 km, +320 m', help:'A 250 m climb, a long descent, late rises and steps. Add 15–25 min to your flat 10 km time.', def:'85', options:runOpts}
+   {id:'swimpace', type:'select', label:'What is your usual open-water swim pace?', help:'Minutes and seconds per 100 m, wearing your wetsuit. Use a recent swim rather than your fastest pool pace.', def:'120', options:paceOpts},
+   {id:'biketime', type:'select', label:'Expected bike time · 86.4 km', help:'Most of the climbing is in the first 25 km and 93% is unpaved. Use a realistic time for similar terrain. The suggested 4 h 30 min is a placeholder you can change.', def:'270', options:bikeOpts},
+   {id:'runtime', type:'select', label:'Expected run time · 10.5 km, +320 m', help:'A 250 m climb, a long descent, late rises and steps. Use a recent hilly trail run to estimate your time, including walking on climbs.', def:'85', options:runOpts}
   ]},
   {title:'Carbs', qs:[
-   {id:'carbrate', type:'choice', label:'Carbs per hour on the bike', help:'Pick what your gut has handled on long rides. Race day is not the day to go higher.', def:'60', options:[['45','~45 g/h'],['60','~60 g/h'],['75','~75 g/h'],['90','~90 g/h']]},
-   {id:'sources', type:'multi', label:'What will you eat and drink it from?', help:'Tick all you have trained with.', def:['gels','bars'], options:[['mix','Drink mix in a bottle'],['gels','Gels'],['bars','Bars / solids'],['chews','Chews']]},
-   {id:'caffeine', type:'choice', label:'Caffeine during the race?', def:'yes', options:[['yes','Yes, I use it'],['no','No']]}
+   {id:'carbrate', type:'choice', label:'How much carbohydrate have you comfortably used per hour?', help:'Pick what your gut has handled on long rides. Race day is not the day to go higher.', def:'60', options:[['45','~45 g/h'],['60','~60 g/h'],['75','~75 g/h'],['90','~90 g/h']]},
+   {id:'sources', type:'multi', label:'Which carbohydrate sources will you use?', help:'Select at least one source you have used in training. Next, we’ll ask for the amounts on your product labels.', def:['gels','bars'], options:[['mix','Drink mix in a bottle'],['gels','Gels'],['bars','Bars / solids'],['chews','Chews']]},
+   {id:'caffeine', type:'choice', label:'Will you use caffeine you have already tried in training?', def:'yes', options:[['yes','Yes, I use it'],['no','No']]}
   ]},
   {title:'Fluid & salt', qs:[
-   {id:'sweat', type:'choice', label:'How much do you sweat?', help:'On a long, warm ride compared with other riders.', def:'avg', options:[['light','Light'],['avg','Average'],['heavy','Heavy']]},
-   {id:'salty', type:'choice', label:'Salty sweat?', help:'White marks on kit or stinging eyes.', def:'unsure', options:[['no','No'],['yes','Yes'],['unsure','Don’t know']]},
+   {id:'sweat', type:'choice', label:'How much do you sweat?', help:'Think about your own long rides in similar weather. This is a rough estimate, not a measured sweat rate.', def:'avg', options:[['light','Light'],['avg','Average'],['heavy','Heavy']]},
+   {id:'salty', type:'choice', label:'Have you noticed salt marks after training?', help:'Have you noticed white salt marks on clothing after training? Choose “Don’t know” if unsure.', def:'unsure', options:[['no','No'],['yes','Yes'],['unsure','Don’t know']]},
    {id:'salt', type:'choice', label:'How will you take sodium?', def:'caps', options:[['caps','Capsules or tablets'],['mix','Electrolyte powder in a bottle'],['none','Nothing extra']]}
   ]},
-  {title:'Products', note:'Typical values are filled in. Check your labels.', qs:[
+  {title:'Products', note:'Suggested amounts are placeholders. Check the nutrition label for the portion you will actually carry.', qs:[
    {id:'gelg', type:'number', label:'Carbs per gel', unit:'g', min:10, max:60, step:1, def:25, when:function(a){ return has(a,'sources','gels'); }},
    {id:'barg', type:'number', label:'Carbs per bar', unit:'g', min:10, max:80, step:1, def:40, when:function(a){ return has(a,'sources','bars'); }},
    {id:'chewg', type:'number', label:'Carbs per chew pack', unit:'g', min:10, max:60, step:1, def:24, when:function(a){ return has(a,'sources','chews'); }},
-   {id:'mixg', type:'number', label:'Carbs per bottle of drink mix', unit:'g', min:10, max:120, step:5, def:60, when:function(a){ return has(a,'sources','mix'); }},
-   {id:'mixna', type:'number', label:'Sodium per bottle of mix or electrolyte', unit:'mg', min:0, max:2000, step:50, def:400, when:function(a){ return has(a,'sources','mix')||a.salt==='mix'; }},
-   {id:'capna', type:'number', label:'Sodium per capsule or tablet', unit:'mg', min:50, max:1000, step:10, def:250, when:function(a){ return a.salt==='caps'; }},
-   {id:'bottleml', type:'choice', label:'Bottle size', def:'750', options:[['500','500 ml'],['620','600–620 ml'],['750','750 ml'],['950','950 ml']]}
+   {id:'mixg', type:'number', label:'How much carbohydrate is in one prepared bottle?', help:'Use the amount for the powder you add to one full bottle, not per 100 ml.', unit:'g', min:10, max:120, step:5, def:60, when:function(a){ return has(a,'sources','mix'); }},
+   {id:'mixna', type:'number', label:'How much sodium is in one prepared bottle?', help:'Enter sodium, not salt, for the amount of powder you use in a full bottle.', unit:'mg', min:0, max:2000, step:50, def:400, when:function(a){ return has(a,'sources','mix')||a.salt==='mix'; }},
+   {id:'capna', type:'number', label:'How much sodium is in one capsule or tablet?', help:'Check the amount per individual capsule, not per serving of several capsules. Enter sodium, not salt.', unit:'mg', min:50, max:1000, step:10, def:250, when:function(a){ return a.salt==='caps'; }},
+   {id:'bottleml', type:'choice', label:'How much does each bike bottle hold?', def:'750', options:[['500','500 ml'],['620','600–620 ml'],['750','750 ml'],['950','950 ml']]}
   ]}
  ]}
 };
@@ -1952,11 +1963,10 @@ function renderFeedChart(P){
 }
 
 // ---------------- survey UI: paginated modal gate ----------------
-// First visit: the planner is hidden behind the survey; one question per page. Once both surveys are
-// done the gate lifts and the page shows the plan built from the answers. "Edit answers" reopens it.
-var gate={mode:null, key:null, pos:null};
+// One question per page, with saved drafts and a review before completion.
+var gate={mode:null, key:null, pos:null, reviewing:false, opener:null};
 function qHtml(q,a){
-  var v=a[q.id], id='q-'+q.id, h='<div class="q" data-q="'+q.id+'">';
+  var v=state.answers[q.id]===undefined?(q.type==='multi'?[]:q.type==='choice'?null:a[q.id]):a[q.id], id='q-'+q.id, h='<div class="q" data-q="'+q.id+'">';
   if(q.help) h+='<p class="qhelp" id="'+id+'-h">'+q.help+'</p>';
   var desc=q.help?' aria-describedby="'+id+'-h"':'';
   if(q.type==='choice'||q.type==='multi'){
@@ -1967,10 +1977,11 @@ function qHtml(q,a){
   } else if(q.type==='select'){
     h+='<select name="'+id+'" aria-labelledby="gate-title"'+desc+'>'+q.options.map(function(o){ return '<option value="'+o[0]+'"'+(String(v)===o[0]?' selected':'')+'>'+o[1]+'</option>'; }).join('')+'</select>';
   } else if(q.type==='number'){
-    h+='<div class="numrow"><input type="number" inputmode="decimal" name="'+id+'" min="'+q.min+'" max="'+q.max+'" step="'+q.step+'" value="'+esc(v)+'" aria-labelledby="gate-title"'+desc+'><span>'+q.unit+'</span></div>';
+    h+='<div class="numrow"><input type="number" inputmode="decimal" name="'+id+'" min="'+q.min+'" max="'+q.max+'" required step="'+q.step+'" value="'+esc(v)+'" aria-labelledby="gate-title"'+desc+'><span>'+q.unit+'</span></div>';
   } else {
     h+='<input type="text" name="'+id+'" value="'+esc(v)+'" aria-labelledby="gate-title"'+desc+' autocomplete="given-name" maxlength="40" placeholder="Your name">';
   }
+  if(state.answers[q.id]===undefined&&(q.type==='number'||q.type==='select')) h+='<p class="g-note">Suggested value · check this before continuing.</p>';
   return h+'</div>';
 }
 function summaryLine(key,a){
@@ -1982,7 +1993,7 @@ function renderSurveys(){
   var a=answers(), host=document.getElementById('surveys'); if(!host) return;
   host.innerHTML=['kit','fuel'].map(function(key){
     var S=SURVEYS[key], done=state.done[key];
-    return '<article class="survey'+(done?' done':'')+'" id="survey-'+key+'"><div class="sv-head"><span class="sv-n">'+S.n+'</span><div><h3>'+S.title+'</h3><p class="small">'+S.builds+'</p></div><button type="button" class="sv-go'+(done?'':' primary')+'" data-sv-open="'+key+'">'+(done?'Edit answers':'Answer')+'</button></div>'+
+    return '<article class="survey'+(done?' done':'')+'" id="survey-'+key+'"><div class="sv-head"><span class="sv-n">'+S.n+'</span><div><h3>'+S.title+'</h3><p class="small">'+S.builds+'</p></div><button type="button" class="sv-go'+(done?'':' primary')+'" data-sv-open="'+key+'">'+(done?'Edit answers':state.pos?'Resume setup':'Start setup')+'</button></div>'+
       (done?'<div class="sv-sum">'+summaryLine(key,a).map(function(x){ return '<i>'+esc(x)+'</i>'; }).join('')+'</div>':'')+'</article>';
   }).join('');
   document.getElementById('plan-tools').hidden=!(state.done.kit||state.done.fuel);
@@ -2003,7 +2014,7 @@ function visibleQs(step,a){ return step.qs.filter(function(q){ return !q.when||q
 function gateIndex(pages){ for(var i=0;i<pages.length;i++) if(pages[i].id===gate.pos) return i; return 0; }
 function setInert(on){ document.querySelectorAll('.wrap,dialog').forEach(function(el){ if(on) el.setAttribute('inert',''); else el.removeAttribute('inert'); }); }
 function openGate(mode,key){
-  gate.mode=mode; gate.key=key||null;
+  gate.opener=document.activeElement; gate.reviewing=false; gate.mode=mode; gate.key=key||null;
   if(mode==='onboard'){ gate.pos=state.pos||'intro'; } else { gate.pos=gatePages()[0].id; }
   var g=document.getElementById('gate'); g.hidden=false; document.body.classList.add('gate-open');
   document.body.classList.toggle('gated',mode==='onboard');
@@ -2012,77 +2023,129 @@ function openGate(mode,key){
 function closeGate(){
   var g=document.getElementById('gate'); g.hidden=true;
   document.body.classList.remove('gate-open','gated'); setInert(false);
-  gate.mode=null; delete state.pos; save();
+  gate.mode=null; save();
+  if(gate.opener&&gate.opener.isConnected) gate.opener.focus();
 }
 function nq(key){ var a=answers(), n=0; SURVEYS[key].steps.forEach(function(st){ n+=visibleQs(st,a).length; }); return n; }
 function renderGate(focus){
   var pages=gatePages(), i=gateIndex(pages), pg=pages[i], a=answers(), body=document.getElementById('gate-body');
   var qPages=pages.filter(function(p){ return p.kind==='q'; }), qi=qPages.indexOf(pg);
-  document.getElementById('gate-bar').style.width=(pg.kind==='end'?100:Math.max(0,qi)/qPages.length*100)+'%';
+  document.getElementById('gate-bar').style.width=(pg.kind==='end'?100:pages.slice(0,i).filter(function(p){return p.kind==='q';}).length/qPages.length*100)+'%';
   document.getElementById('gate-prog').textContent=pg.kind==='q'?(qi+1)+' / '+qPages.length:'';
-  document.getElementById('gate-close').hidden=gate.mode==='onboard';
+  document.getElementById('gate-close').hidden=false;
   var h='';
   if(pg.kind==='intro'){
     h='<p class="g-kicker">Sunday 18 October 2026 · Cadaqués → Girona</p><h2 id="gate-title" tabindex="-1">Build your SGRAIL 100 plan</h2>'+
-      '<p class="g-lede">Two short surveys, about 4 minutes. Your answers build your bags, pack list, bike checks and to-dos, then your race-day feed clock, sodium and pacing against the cutoffs.</p>'+
+      '<p class="g-lede">Two guided surveys, about 6–8 minutes. Have your bike details and nutrition labels nearby. Your answers build your bags, pack list, bike checks and to-dos, then your race-day feed clock, sodium and pacing against the cutoffs.</p>'+
       '<ol class="g-parts"><li><b>01 · Kit &amp; logistics</b><span>'+nq('kit')+' questions</span></li><li><b>02 · Fuel &amp; pacing</b><span>'+nq('fuel')+' questions</span></li></ol>'+
-      '<p class="g-note">Answers stay on this device. Change them any time.</p>'+
-      '<div class="g-nav"><button type="button" class="primary" data-g="next">Start</button></div>';
+      '<p class="g-note">Your progress saves in this browser as you go. You can pause and return later. Sharing a plan link includes your answers.</p>'+
+      '<div class="g-nav"><button type="button" class="primary" data-g="next">Start my plan</button></div>';
   } else if(pg.kind==='mid'){
-    h='<p class="g-kicker">01 · Kit &amp; logistics · done</p><h2 id="gate-title" tabindex="-1">Now fuel and pacing</h2><p class="g-lede">Your times, what you eat and drink, and how much you sweat. This builds your feed clock, sodium, fluid and finish-time scenarios.</p>'+
+    h='<p class="g-kicker">01 · Kit &amp; logistics · saved</p><h2 id="gate-title" tabindex="-1">Now fuel and pacing</h2><p class="g-lede">Your times, what you eat and drink, and how much you sweat. This builds your feed clock, sodium, fluid and finish-time scenarios.</p>'+
       '<div class="g-nav"><button type="button" data-g="back">Back</button><button type="button" class="primary" data-g="next">Continue</button></div>';
   } else if(pg.kind==='end'){
-    h='<p class="g-kicker">'+(gate.mode==='edit'?SURVEYS[gate.key].n+' · '+SURVEYS[gate.key].title:'All done')+'</p><h2 id="gate-title" tabindex="-1">'+(gate.mode==='edit'?'Answers updated':'Your plan is ready')+'</h2>'+
-      '<p class="g-lede">'+(gate.mode==='edit'?'Everything on the page has been rebuilt from your new answers.':'Prepare holds your bags, pack list, bike checks and to-dos. Race day holds your phases, feed clock and pacing. Edit your answers any time from “Your plan”.')+'</p>'+
-      '<div class="g-nav"><button type="button" data-g="back">Back</button><button type="button" class="primary" data-g="finish">'+(gate.mode==='edit'?'Back to my plan':'See my plan')+'</button></div>';
+    h='<p class="g-kicker">Review your answers</p><h2 id="gate-title" tabindex="-1">One last check before your plan</h2><p class="g-lede">Check your kit, times and product amounts. You can change any answer here, or update it later from your plan.</p>'+reviewHtml(pages,a)+
+      '<div class="g-nav"><button type="button" data-g="back">Back</button><button type="button" class="primary" data-g="finish">'+(gate.mode==='edit'?'Update my plan':'Build my plan')+'</button></div>';
   } else {
-    var S=SURVEYS[pg.key], q=pg.q, auto=q.type==='choice';
+    var S=SURVEYS[pg.key], q=pg.q;
     h='<p class="g-kicker">'+S.n+' · '+S.title+' · '+pg.step.title+'</p><h2 id="gate-title" tabindex="-1">'+q.label+'</h2>'+(pg.step.note&&pg.step.qs.filter(function(x){ return !x.when||x.when(a); })[0]===q?'<p class="g-note">'+pg.step.note+'</p>':'')+
       '<form class="g-form" novalidate>'+qHtml(q,a)+
-      '<div class="g-nav">'+(i>0?'<button type="button" data-g="back">Back</button>':'')+'<button type="submit" class="primary">'+(q.id==='name'&&!a.name?'Skip':'Next')+'</button></div></form>'+
-      (auto?'<p class="g-hint">Tap an answer to continue.</p>':'');
+      '<p id="q-error" class="g-error" role="alert" hidden></p><div class="g-nav">'+(i>0?'<button type="button" data-g="back">Back</button>':'')+'<button type="submit" class="primary">'+(gate.reviewing?'Save and return to review':q.id==='name'&&!a.name?'Skip name':'Continue')+'</button></div></form>'+
+      '<p class="g-hint">'+(q.type==='multi'?'Select all that apply. ':q.type==='choice'?'Choose one answer. ':'')+'You can go back to change an answer.</p>';
   }
-  body.innerHTML=h;
+  body.innerHTML=h+'<p class="g-save" role="status">'+(storageOK?'Progress saves in this browser.':'This browser cannot save progress. Keep this tab open until you finish.')+'</p>';
   if(focus){ var t=document.getElementById('gate-title'); if(t) t.focus({preventScroll:true}); document.getElementById('gate').scrollTop=0; }
 }
-function readQ(form){
-  var el=form.querySelector('.q'); if(!el) return; var id=el.dataset.q, q=null;
-  allQs().forEach(function(x){ if(x.id===id) q=x; }); if(!q) return;
-  var n='q-'+id;
-  if(q.type==='multi') state.answers[id]=Array.from(form.querySelectorAll('input[name="'+n+'"]:checked')).map(function(i){ return i.value; });
-  else if(q.type==='choice'){ var c=form.querySelector('input[name="'+n+'"]:checked'); if(c) state.answers[id]=c.value; }
-  else { var f=form.querySelector('[name="'+n+'"]'); if(f){ var v=f.value; if(q.type==='number'){ var num=parseFloat(v); if(isNaN(num)) num=q.def; v=Math.min(q.max,Math.max(q.min,num)); } state.answers[id]=v; } }
+function reviewHtml(pages,a){
+  var h='', group='';
+  pages.filter(function(p){return p.kind==='q';}).forEach(function(p){
+    var title=SURVEYS[p.key].title+' · '+p.step.title;
+    if(title!==group){ if(group) h+='</dl></details>'; group=title; h+='<details class="g-review" open><summary>'+esc(title)+'</summary><dl>'; }
+    var q=p.q,v=a[q.id], label;
+    if(q.options){ var values=Array.isArray(v)?v:[String(v)]; label=q.options.filter(function(o){return values.indexOf(o[0])>=0;}).map(function(o){return o[1];}).join(', '); }
+    else label=String(v)+(q.unit?' '+q.unit:'');
+    h+='<div><dt>'+esc(q.label)+'</dt><dd>'+esc(label||(q.type==='text'?'Not provided':'None selected'))+(state.answers[q.id]===undefined?' <small>Suggested · not confirmed</small>':'')+'</dd><button type="button" data-review="'+q.id+'" aria-label="Change: '+esc(q.label)+'">Change</button></div>';
+  });
+  return h+(group?'</dl></details>':'');
+}
+function readQ(form,validate){
+  var el=form.querySelector('.q'); if(!el) return true;
+  var id=el.dataset.q, q=allQs().filter(function(x){return x.id===id;})[0], n='q-'+id;
+  var f=form.querySelector('[name="'+n+'"]'), v, error='';
+  if(q.type==='multi'){
+    v=Array.from(form.querySelectorAll('input:checked')).map(function(i){return i.value;});
+    if(id==='sources'&&!v.length) error='Select at least one carbohydrate source to build your feed schedule.';
+  } else if(q.type==='choice'){
+    var c=form.querySelector('input:checked'); if(c) v=c.value; else error='Choose an answer to continue.';
+  } else {
+    v=f.value;
+    if(q.type==='number'){
+      if(v===''||!Number.isFinite(Number(v))||Number(v)<q.min||Number(v)>q.max) error='Enter a number from '+q.min+' to '+q.max+' '+q.unit+'.';
+      else if(!f.validity.valid) error='Use increments of '+q.step+' '+q.unit+'.';
+      else v=Number(v);
+    }
+  }
+  if(error){
+    if(validate){ var msg=form.querySelector('#q-error'); msg.textContent=error; msg.hidden=false; f.setAttribute('aria-invalid','true'); f.setAttribute('aria-describedby','q-error'); f.focus(); }
+    return false;
+  }
+  if(f) f.removeAttribute('aria-invalid');
+  var msg=form.querySelector('#q-error'); if(msg) msg.hidden=true;
+  state.answers[id]=v; return true;
 }
 function gateMove(d){
-  var pages=gatePages(), i=gateIndex(pages), cur=pages[i];
-  var form=document.querySelector('#gate-body form'); if(form) readQ(form);
-  // leaving the last question of a survey marks it done
-  if(d>0 && cur.kind==='q'){ var nx=pages[i+1]; if(!nx||nx.key!==cur.key){ state.done[cur.key]=true; } }
-  pages=gatePages(); i=gateIndex(pages);
-  var j=Math.max(0,Math.min(pages.length-1,i+d));
-  gate.pos=pages[j].id; if(gate.mode==='onboard') state.pos=gate.pos;
+  var form=document.querySelector('#gate-body form');
+  if(form&&!readQ(form,d>0)&&d>0) return;
+  var pages=gatePages(), i=gateIndex(pages);
+  gate.pos=gate.reviewing?'end':pages[Math.max(0,Math.min(pages.length-1,i+d))].id;
+  gate.reviewing=false;
+  if(gate.mode==='onboard') state.pos=gate.pos;
   save(); renderGate(true);
 }
+function pauseGate(){
+  var f=document.querySelector('#gate-body form'); if(f) readQ(f,false);
+  var key=gate.key||'kit';
+  closeGate(); renderSurveys(); renderAll();
+  var resume=document.querySelector('#survey-'+key+' button'); if(resume) resume.focus({preventScroll:true});
+}
 function bindGate(){
-  var g=document.getElementById('gate'), timer=null;
+  var g=document.getElementById('gate');
   g.addEventListener('click',function(e){
-    // any tap on a single-choice answer (including the one already selected) moves on
-    if(e.target.matches&&e.target.matches('#gate-body input[type=radio]')){ clearTimeout(timer); timer=setTimeout(function(){ gateMove(1); },220); return; }
+    var edit=e.target.closest('[data-review]');
+    if(edit){gate.pos=edit.dataset.review; gate.reviewing=true; renderGate(true); return;}
     var b=e.target.closest('[data-g]'); if(!b) return;
     if(b.dataset.g==='next') gateMove(1);
     else if(b.dataset.g==='back') gateMove(-1);
-    else if(b.dataset.g==='finish'){ var wasOnboard=gate.mode==='onboard'; closeGate(); renderSurveys(); renderAll(); window.scrollTo(0,0); if(!wasOnboard){ var s=document.getElementById('setup'); if(s) s.scrollIntoView({block:'start'}); } if(window.PLAN_AFTER) window.PLAN_AFTER(); }
-    else if(b.dataset.g==='close'){ var f=document.querySelector('#gate-body form'); if(f){ readQ(f); save(); } closeGate(); renderSurveys(); renderAll(); }
+    else if(b.dataset.g==='finish'){
+      var missing=gatePages().find(function(p){return p.kind==='q'&&state.answers[p.q.id]===undefined&&p.q.type!=='text'&&p.q.type!=='multi';});
+      if(missing){gate.pos=missing.id; gate.reviewing=true; renderGate(true); return;}
+      (gate.mode==='edit'?[gate.key]:['kit','fuel']).forEach(function(k){state.done[k]=true;});
+      delete state.pos; closeGate(); renderSurveys(); renderAll(); window.scrollTo(0,0);
+      var s=document.querySelector('#survey-'+(gate.key||'kit')+' button'); if(s) s.focus({preventScroll:true});
+      if(window.PLAN_AFTER) window.PLAN_AFTER();
+    } else if(b.dataset.g==='close') pauseGate();
   });
-  g.addEventListener('change',function(e){
-    var inp=e.target; var opts=inp.closest('.opts'); if(!opts) return;
-    opts.querySelectorAll('.opt').forEach(function(l){ l.classList.toggle('on',l.querySelector('input').checked); });
-    if(inp.type!=='radio'){ readQ(inp.closest('form')); save(); }
+  function persist(e){
+    var f=e.target.closest('form'); if(!f) return;
+    var opts=e.target.closest('.opts');
+    if(opts) opts.querySelectorAll('.opt').forEach(function(l){l.classList.toggle('on',l.querySelector('input').checked);});
+    var valid=readQ(f,false); if(valid) save();
+    if(e.target.name==='q-name'&&!gate.reviewing) f.querySelector('button[type=submit]').textContent=e.target.value.trim()?'Continue':'Skip name';
+    var status=g.querySelector('.g-save'); if(status) status.textContent=!valid?'This answer is incomplete. Previous answers are saved.':storageOK?'Progress saved in this browser.':'This browser cannot save progress. Keep this tab open until you finish.';
+  }
+  g.addEventListener('change',persist); g.addEventListener('input',persist);
+  g.addEventListener('submit',function(e){e.preventDefault(); gateMove(1);});
+  document.addEventListener('keydown',function(e){
+    if(g.hidden) return;
+    if(e.key==='Escape'){e.preventDefault(); pauseGate();}
+    if(e.key==='Tab'){
+      var items=Array.from(g.querySelectorAll('button,input,select,summary,[tabindex="0"]')).filter(function(el){return !el.disabled&&el.getClientRects().length;});
+      var first=items[0],last=items[items.length-1];
+      if(e.shiftKey&&(document.activeElement===first||document.activeElement.id==='gate-title')){e.preventDefault();last.focus();}
+      else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+    }
   });
-  g.addEventListener('input',function(e){ if(e.target.name==='q-name'){ var s=g.querySelector('button[type=submit]'); if(s) s.textContent=e.target.value.trim()?'Next':'Skip'; } });
-  g.addEventListener('submit',function(e){ e.preventDefault(); gateMove(1); });
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && !g.hidden && gate.mode==='edit'){ closeGate(); renderSurveys(); renderAll(); } });
-  document.getElementById('surveys').addEventListener('click',function(e){ var o=e.target.closest('[data-sv-open]'); if(o) openGate(state.done.kit&&state.done.fuel?'edit':'onboard',o.dataset.svOpen); });
+  document.getElementById('surveys').addEventListener('click',function(e){var o=e.target.closest('[data-sv-open]');if(o) openGate(state.done.kit&&state.done.fuel?'edit':'onboard',o.dataset.svOpen);});
 }
 
 // ---------------- page render ----------------
@@ -2175,7 +2238,7 @@ function bindTools(){
   if(rt) rt.addEventListener('click',function(){ var s=lsGet('checks',{}); Object.keys(s).forEach(function(k){ if(k.indexOf('tr-')===0) delete s[k]; }); lsSet('checks',s); document.querySelectorAll('[data-transition]').forEach(function(c){ c.checked=false; }); });
 }
 
-// first visit (or unfinished surveys): nothing but the survey until both are done
+// Resume unfinished setup on reload; closing it reveals the clearly labelled draft plan.
 window.PLAN_INIT=function(){ renderSurveys(); bindGate(); renderAll(); bindTools(); if(!(state.done.kit&&state.done.fuel)) openGate('onboard'); };
 window.PLAN_TEST={compute:compute,answers:answers,SURVEYS:SURVEYS,pressure:pressure};
 })();
