@@ -1099,6 +1099,14 @@ body.gated .gate{background:var(--paper)}
 #course .feedkey i.b-mix{background:var(--track)}#course .feedkey i.b-elec{background:var(--sea)}#course .feedkey i.b-station{background:var(--track-soft);border:1px solid var(--track)}#course .feedkey i.b-water{background:var(--card);border:1px solid var(--muted)}
 #course .feedkey i.cap{border-radius:3px;width:12px;height:6px;background:var(--sea)}
 #course .feedkey i.cafonly{background:var(--card);border:2px solid var(--flag);width:8px;height:8px}
+.edit-inline{display:block;width:max-content;margin:10px 0 0;font:600 13px var(--body);letter-spacing:0;text-transform:none;min-height:36px;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;white-space:nowrap}
+.edit-inline:hover{border-color:var(--ink)}
+.edit-inline:focus-visible,.gate .g-link:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
+nav .rmbtn.edit-answers{color:var(--ink);border-color:var(--ink)}
+body.gated .edit-inline,body.gated .edit-answers{display:none}
+.gate .g-link{background:none;border:0;padding:0;font:600 14px var(--body);color:var(--sea);text-decoration:underline;cursor:pointer;min-height:auto}
+@media (max-width:600px){ h2 .edit-inline{font-size:12px;padding:5px 9px;min-height:32px} }
+@media print{ .edit-inline,.edit-answers{display:none!important} }
 .gate .g-save{margin:18px 0 0;font-size:12px;text-align:center;color:var(--muted)}
 .gate .g-error{color:var(--flag);background:var(--flag-soft);padding:12px;border-radius:6px;margin-top:14px}
 .gate [aria-invalid="true"]{border-color:var(--flag)}
@@ -1207,7 +1215,7 @@ body.gated .gate{background:var(--paper)}
   <a href="#fuel">Fuel</a>
   <a href="#pacing">Pacing</a>
   <a href="#risks">Risks</a>
-</div><button type="button" class="rmbtn" id="navprog" data-prog>Program · Fri–Sun ↗</button><button type="button" class="rmbtn" id="navopen" data-open>Open tasks ↗</button><button type="button" class="rmbtn" id="thbtn" aria-label="Colour theme">Theme · auto</button><button type="button" class="rmbtn" id="rmbtn">Race day</button></nav>
+</div><button type="button" class="rmbtn" id="navprog" data-prog>Program · Fri–Sun ↗</button><button type="button" class="rmbtn" id="navopen" data-open>Open tasks ↗</button><button type="button" class="rmbtn edit-answers" data-edit="all">Edit my answers ✎</button><button type="button" class="rmbtn" id="thbtn" aria-label="Colour theme">Theme · auto</button><button type="button" class="rmbtn" id="rmbtn">Race day</button></nav>
 <div class="dock" aria-label="Section navigation" hidden>
   <button class="prev" type="button" aria-label="Previous section"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3 5 8l5 5"/></svg></button>
   <div class="pager"></div><button class="menu" type="button" aria-label="Open section menu" aria-controls="dock-sheet" aria-expanded="false">☰</button>
@@ -1216,7 +1224,7 @@ body.gated .gate{background:var(--paper)}
 </div>
 <div class="sheet" id="dock-sheet" hidden>
   <div class="sheet-list"></div>
-  <div class="sheet-tools"><button type="button" data-prog>Program · Fri–Sun ↗</button><button type="button" data-open>Open tasks ↗</button><button type="button" id="sh-theme">Theme</button><button type="button" id="sh-race">Race day</button></div>
+  <div class="sheet-tools"><button type="button" data-edit="all">Edit my answers ✎</button><button type="button" data-prog>Program · Fri–Sun ↗</button><button type="button" data-open>Open tasks ↗</button><button type="button" id="sh-theme">Theme</button><button type="button" id="sh-race">Race day</button></div>
 </div>
 
 
@@ -1250,7 +1258,7 @@ body.gated .gate{background:var(--paper)}
 </aside>
 
 <section id="openitems">
-  <h2>Before Girona <span class="tag">bags · pack · bike · sort out</span></h2>
+  <h2>Before Girona <span class="tag">bags · pack · bike · sort out</span><button type="button" class="edit-inline" data-edit="kit">Edit kit answers ✎</button></h2>
   <div class="preview-note" data-needs="kit fuel" hidden><span>Draft plan · unanswered questions use suggested values.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
   <div class="pk-head">Bags · pack → drop → use</div>
   <div class="card rail-flag bagscard">
@@ -1276,7 +1284,7 @@ body.gated .gate{background:var(--paper)}
 </section>
 
 <section id="course">
-  <h2>Course & execution</h2>
+  <h2>Course & execution<button type="button" class="edit-inline" data-edit="fuel">Edit fuel &amp; pacing answers ✎</button></h2>
 
   <p class="maphint rm-hide">Tap the profile for km · altitude — tap a dot for station detail · scrolls sideways</p>
   
@@ -1416,14 +1424,14 @@ body.gated .gate{background:var(--paper)}
 </section>
 
 <section id="fuel">
-  <h2>Fuel &amp; salt <span class="tag">from survey 02</span></h2>
+  <h2>Fuel &amp; salt <span class="tag">from survey 02</span><button type="button" class="edit-inline" data-edit="fuel">Edit answers ✎</button></h2>
   <div class="preview-note" data-needs="fuel" hidden><span>Draft plan · unanswered questions use suggested values.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
   <details class="reference-details" open><summary>Day totals &amp; estimates</summary><div class="inner" id="fuel-body"></div></details>
   <p class="caveat">Rates come from common endurance-nutrition ranges scaled by your answers. They are starting points, not medical advice — your rehearsal rides decide.</p>
 </section>
 
 <section id="pacing">
-  <h2>Pacing <span class="tag">Planning scenarios · not predictions</span></h2>
+  <h2>Pacing <span class="tag">Planning scenarios · not predictions</span><button type="button" class="edit-inline" data-edit="fuel">Edit times ✎</button></h2>
   <div class="preview-note" data-needs="fuel" hidden><span>Draft plan · unanswered questions use suggested values.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
   <div class="cutoff" id="pace-bars"></div>
   <p class="cutoff-note">Plan against <b>16:59</b> until the finish limit is confirmed at check-in. Published overall limit: <b>17:59</b>.</p>
@@ -2112,7 +2120,7 @@ function renderSurveys(){
 // page list for the current gate mode; question pages are keyed by id so hidden questions drop out cleanly
 function gatePages(){
   var a=answers(), pages=[];
-  var keys=gate.mode==='edit'?[gate.key]:['kit','fuel'];
+  var keys=gate.mode==='edit'&&gate.key!=='all'?[gate.key]:['kit','fuel'];
   if(gate.mode==='onboard') pages.push({id:'intro',kind:'intro'});
   keys.forEach(function(key,ki){
     if(gate.mode==='onboard' && ki>0) pages.push({id:'mid-'+key,kind:'mid',key:key});
@@ -2126,7 +2134,7 @@ function gateIndex(pages){ for(var i=0;i<pages.length;i++) if(pages[i].id===gate
 function setInert(on){ document.querySelectorAll('.wrap,dialog').forEach(function(el){ if(on) el.setAttribute('inert',''); else el.removeAttribute('inert'); }); }
 function openGate(mode,key){
   gate.opener=document.activeElement; gate.reviewing=false; gate.mode=mode; gate.key=key||null;
-  if(mode==='onboard'){ gate.pos=state.pos||'intro'; } else { gate.pos=gatePages()[0].id; }
+  if(mode==='onboard'){ gate.pos=state.pos||'intro'; } else { gate.pos='end'; }
   var g=document.getElementById('gate'); g.hidden=false; document.body.classList.add('gate-open');
   document.body.classList.toggle('gated',mode==='onboard');
   setInert(true); renderGate(true);
@@ -2155,8 +2163,10 @@ function renderGate(focus){
     h='<p class="g-kicker">01 · Kit &amp; logistics · saved</p><h2 id="gate-title" tabindex="-1">Now fuel and pacing</h2><p class="g-lede">Your times, what you eat and drink, and how much you sweat. This builds your feed clock, sodium, fluid and finish-time scenarios.</p>'+
       '<div class="g-nav"><button type="button" data-g="back">Back</button><button type="button" class="primary" data-g="next">Continue</button></div>';
   } else if(pg.kind==='end'){
-    h='<p class="g-kicker">Review your answers</p><h2 id="gate-title" tabindex="-1">One last check before your plan</h2><p class="g-lede">Check your kit, times and product amounts. You can change any answer here, or update it later from your plan.</p>'+reviewHtml(pages,a)+
-      '<div class="g-nav"><button type="button" data-g="back">Back</button><button type="button" class="primary" data-g="finish">'+(gate.mode==='edit'?'Update my plan':'Build my plan')+'</button></div>';
+    var editing=gate.mode==='edit', scope=editing?(gate.key==='all'?'All answers':SURVEYS[gate.key].n+' · '+SURVEYS[gate.key].title):'Review your answers';
+    h='<p class="g-kicker">'+scope+'</p><h2 id="gate-title" tabindex="-1">'+(editing?'Edit your answers':'One last check before your plan')+'</h2><p class="g-lede">'+(editing?'Tap <b>Change</b> on any answer. Your checklists, feed chart and pacing rebuild when you save.':'Check your kit, times and product amounts. You can change any answer here, or update it later from your plan.')+'</p>'+
+      (editing&&gate.key!=='all'?'<p class="g-note"><button type="button" class="g-link" data-edit-scope="all">Show all answers from both surveys</button></p>':'')+reviewHtml(pages,a)+
+      '<div class="g-nav">'+(editing?'<button type="button" data-g="close">Close</button>':'<button type="button" data-g="back">Back</button>')+'<button type="button" class="primary" data-g="finish">'+(editing?'Save and update my plan':'Build my plan')+'</button></div>';
   } else {
     var S=SURVEYS[pg.key], q=pg.q;
     h='<p class="g-kicker">'+S.n+' · '+S.title+' · '+pg.step.title+'</p><h2 id="gate-title" tabindex="-1">'+q.label+'</h2>'+(pg.step.note&&pg.step.qs.filter(function(x){ return !x.when||x.when(a); })[0]===q?'<p class="g-note">'+pg.step.note+'</p>':'')+
@@ -2216,13 +2226,15 @@ function gateMove(d){
 }
 function pauseGate(){
   var f=document.querySelector('#gate-body form'); if(f) readQ(f,false);
-  var key=gate.key||'kit';
-  closeGate(); renderSurveys(); renderAll();
+  var key=gate.key&&gate.key!=='all'?gate.key:'kit';
+  closeGate(); renderSurveys(); renderAll(); if(window.PLAN_AFTER) window.PLAN_AFTER();
   var resume=document.querySelector('#survey-'+key+' button'); if(resume) resume.focus({preventScroll:true});
 }
 function bindGate(){
   var g=document.getElementById('gate');
   g.addEventListener('click',function(e){
+    var sc=e.target.closest('[data-edit-scope]');
+    if(sc){ gate.key=sc.dataset.editScope; gate.pos='end'; gate.reviewing=false; renderGate(true); return; }
     var edit=e.target.closest('[data-review]');
     if(edit){gate.pos=edit.dataset.review; gate.reviewing=true; renderGate(true); return;}
     var b=e.target.closest('[data-g]'); if(!b) return;
@@ -2231,7 +2243,7 @@ function bindGate(){
     else if(b.dataset.g==='finish'){
       var missing=gatePages().find(function(p){return p.kind==='q'&&state.answers[p.q.id]===undefined&&p.q.type!=='text'&&p.q.type!=='multi';});
       if(missing){gate.pos=missing.id; gate.reviewing=true; renderGate(true); return;}
-      (gate.mode==='edit'?[gate.key]:['kit','fuel']).forEach(function(k){state.done[k]=true;});
+      (gate.mode==='edit'&&gate.key!=='all'?[gate.key]:['kit','fuel']).forEach(function(k){state.done[k]=true;});
       delete state.pos; closeGate(); renderSurveys(); renderAll(); window.scrollTo(0,0);
       var s=document.querySelector('#survey-'+(gate.key||'kit')+' button'); if(s) s.focus({preventScroll:true});
       if(window.PLAN_AFTER) window.PLAN_AFTER();
@@ -2340,6 +2352,12 @@ function bindTools(){
     if(!armed){ armed=true; reset.textContent='Tap again to clear all answers and ticks'; reset.classList.add('armed'); setTimeout(function(){ armed=false; reset.textContent='Start over'; reset.classList.remove('armed'); },4000); return; }
     state={answers:{},done:{kit:false,fuel:false}}; save(); lsSet('checks',{}); armed=false; reset.textContent='Start over'; reset.classList.remove('armed');
     renderSurveys(); renderAll(); openGate('onboard');
+  });
+  document.addEventListener('click',function(e){
+    var ed=e.target.closest('[data-edit]'); if(!ed) return; e.preventDefault();
+    if(!(state.done.kit&&state.done.fuel)){ openGate('onboard'); return; }
+    var sh=document.getElementById('dock-sheet'); if(sh&&!sh.hidden){ document.body.classList.remove('sheet-open'); sh.hidden=true; }
+    openGate('edit',ed.dataset.edit||'all');
   });
   document.addEventListener('click',function(e){
     var j=e.target.closest('[data-sv-jump]'); if(!j) return; e.preventDefault();
