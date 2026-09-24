@@ -1096,6 +1096,21 @@ body.gated .gate{background:var(--paper)}
   .gate .g-nav button.primary{flex:1}
 }
 @media print{.gate{display:none!important}}
+/* race-day graphs: open by default, and obvious when folded */
+#course .graph-label{display:inline-flex;align-items:center;gap:8px}
+#course .gicon{width:16px;height:16px;flex:none;color:var(--track)}
+#course .graph-cue{display:none;margin-left:auto;font:600 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--on-strong);background:var(--strong);border-radius:4px;padding:4px 9px;white-space:nowrap}
+#course details:not([open])>summary .graph-cue{display:inline-block}
+#course details.full-course:not([open])>summary,#course #feedblock:not([open])>summary{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:12px 14px}
+#course #feedblock:not([open])>summary .graph-cue{margin-left:0}
+.swipe-cue{display:none}
+@media (max-width:600px){
+  .swipe-cue{display:flex;align-items:center;justify-content:flex-end;gap:6px;margin:6px 2px 0;font:600 12px var(--mono);letter-spacing:.04em;color:var(--muted);transition:opacity .3s}
+  .swipe-cue b{font-size:16px;color:var(--ink)}
+  .swipe-cue.seen{opacity:0}
+  #course .full-course>summary{display:flex}
+}
+@media (prefers-reduced-motion:reduce){.swipe-cue{transition:none}}
 
 </style>
 <script>
@@ -1263,7 +1278,7 @@ body.gated .gate{background:var(--paper)}
     <div><b class="bike-label">Bike</b><strong id="ct-bike">—</strong><small>Cutoff 15:49</small></div>
     <div><b class="run-label">Run</b><strong id="ct-run">—</strong><small class="unconfirmed">Cutoff unconfirmed<br>16:59 trail / 17:59 overall</small></div>
   </div>
-  <details class="full-course" data-mobile-chart="true" open><summary>Detailed course profile</summary>
+  <details class="full-course" data-mobile-chart="true" open><summary><span class="graph-label"><svg class="gicon" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 13 L5 6 L8 9 L11 3 L15 13 Z" fill="currentColor" opacity=".25"/><path d="M1 13 L5 6 L8 9 L11 3 L15 13" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Course profile · altitude and stations</span><span class="graph-cue">Show graph</span></summary>
   <figure class="course-figure" aria-label="Course profile and chart key">
   <div class="prof-scroll" tabindex="0" role="region" aria-label="Detailed course profile"><div class="prof-inner">
   <svg id="profsvg" viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" role="group" aria-labelledby="course-graph-title course-graph-desc">
@@ -1337,15 +1352,16 @@ body.gated .gate{background:var(--paper)}
     </g>
     </svg>
   </div></div>
+<p class="swipe-cue" aria-hidden="true">Swipe for the whole course <b>→</b></p>
 <figcaption>  <div class="mlegend" aria-label="Course chart key"><b class="chart-key-title">Chart key</b><span class="scale-note">Run distance shown at 2× bike scale</span><span><i class="md must"></i>planned refill · don’t skip</span><span><i class="md rec"></i>recommended</span><span><i class="md opt"></i>optional</span><span><i class="md climb"></i>sector 1 · technical</span></div></figcaption>
   </figure>
   </details>
 
   
   <div class="preview-note" data-needs="fuel" hidden><span>Preview with typical answers.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
-  <details class="planblock p-bike" id="feedblock" data-mobile-chart="true" open><summary class="plan-head" style="margin-top:0"><span class="pn">Feeding chart</span><span class="pd">your feed times on the bike profile</span></summary>
-    <p class="mobile-chart-help">Swipe sideways for the whole ride.</p>
+  <details class="planblock p-bike" id="feedblock" data-mobile-chart="true" open><summary class="plan-head" style="margin-top:0"><span class="pn">Feeding chart</span><span class="pd">graph · your feed times on the bike profile</span><span class="graph-cue">Show graph</span></summary>
     <div class="clock-scroll" tabindex="0" role="region" aria-label="Scrollable feed chart"><div class="clock" id="feedchart"></div></div>
+    <p class="swipe-cue" aria-hidden="true">Swipe for the whole ride <b>→</b></p>
     <div class="feedkey" aria-label="Feeding chart key"><span><i></i>gel</span><span><i class="caf"></i>gel with caffeine</span><span><i class="bar"></i>½ bar</span><span><i class="chew"></i>chews</span><span><i class="stop"></i>mandatory water stop</span></div>
     <p class="small">Clock time is the instruction; the km is where that time is likely to fall at your pace.</p>
   </details>
@@ -2389,9 +2405,9 @@ document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener
 
 
 window.PLAN_AFTER=function(){ if(window.DOCK_BUILD) window.DOCK_BUILD(); window.dispatchEvent(new Event('scroll')); window.dispatchEvent(new Event('resize')); };
-(function(){ var mq=window.matchMedia('(max-width:600px)');
- function layout(){ document.querySelectorAll('[data-mobile-chart]').forEach(function(g){ g.open=!mq.matches; }); }
- if(mq.addEventListener) mq.addEventListener('change',layout); layout(); })();
+// Race-day graphs stay open on every screen size; the swipe cue fades once a chart has been scrolled.
+document.querySelectorAll('.swipe-cue').forEach(function(c){ var sc=c.parentNode.querySelector('.prof-scroll,.clock-scroll'); if(!sc) return; sc.insertAdjacentElement('afterend',c);
+  sc.addEventListener('scroll',function(){ if(sc.scrollLeft>24) c.classList.add('seen'); },{passive:true}); });
 </script>
 </body>
 </html>
