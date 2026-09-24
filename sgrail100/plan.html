@@ -1546,15 +1546,15 @@ var SURVEYS={
   {title:'Fluid & salt', qs:[
    {id:'sweat', type:'choice', label:'How much do you sweat?', help:'Think about your own long rides in similar weather. This is a rough estimate, not a measured sweat rate.', def:'avg', options:[['light','Light'],['avg','Average'],['heavy','Heavy']]},
    {id:'salty', type:'choice', label:'Have you noticed salt marks after training?', help:'Have you noticed white salt marks on clothing after training? Choose “Don’t know” if unsure.', def:'unsure', options:[['no','No'],['yes','Yes'],['unsure','Don’t know']]},
-   {id:'salt', type:'choice', label:'How will you take sodium?', def:'caps', options:[['caps','Capsules or tablets'],['mix','Electrolyte powder in a bottle'],['none','Nothing extra']]}
+   {id:'salt', type:'multi', label:'How will you take sodium?', help:'Select all that apply — many riders combine capsules with an electrolyte bottle.', def:['caps'], options:[['caps','Capsules or tablets'],['mix','Electrolyte powder in a bottle'],['none','Nothing extra']]}
   ]},
   {title:'Products', note:'Suggested amounts are placeholders. Check the nutrition label for the portion you will actually carry.', qs:[
    {id:'gelg', type:'number', label:'Carbs per gel', unit:'g', min:10, max:60, step:1, def:25, when:function(a){ return has(a,'sources','gels'); }},
    {id:'barg', type:'number', label:'Carbs per bar', unit:'g', min:10, max:80, step:1, def:40, when:function(a){ return has(a,'sources','bars'); }},
    {id:'chewg', type:'number', label:'Carbs per chew pack', unit:'g', min:10, max:60, step:1, def:24, when:function(a){ return has(a,'sources','chews'); }},
    {id:'mixg', type:'number', label:'How much carbohydrate is in one prepared bottle?', help:'Use the amount for the powder you add to one full bottle, not per 100 ml.', unit:'g', min:10, max:120, step:5, def:60, when:function(a){ return has(a,'sources','mix'); }},
-   {id:'mixna', type:'number', label:'How much sodium is in one prepared bottle?', help:'Enter sodium, not salt, for the amount of powder you use in a full bottle.', unit:'mg', min:0, max:2000, step:50, def:400, when:function(a){ return has(a,'sources','mix')||a.salt==='mix'; }},
-   {id:'capna', type:'number', label:'How much sodium is in one capsule or tablet?', help:'Check the amount per individual capsule, not per serving of several capsules. Enter sodium, not salt.', unit:'mg', min:50, max:1000, step:10, def:250, when:function(a){ return a.salt==='caps'; }},
+   {id:'mixna', type:'number', label:'How much sodium is in one prepared bottle?', help:'Enter sodium, not salt, for the amount of powder you use in a full bottle.', unit:'mg', min:0, max:2000, step:50, def:400, when:function(a){ return has(a,'sources','mix')||has(a,'salt','mix'); }},
+   {id:'capna', type:'number', label:'How much sodium is in one capsule or tablet?', help:'Check the amount per individual capsule, not per serving of several capsules. Enter sodium, not salt.', unit:'mg', min:50, max:1000, step:10, def:250, when:function(a){ return has(a,'salt','caps'); }},
    {id:'bottleml', type:'choice', label:'How much does each bike bottle hold?', def:'750', options:[['500','500 ml'],['620','600–620 ml'],['750','750 ml'],['950','950 ml']]}
   ]}
  ]}
@@ -1572,7 +1572,7 @@ var state=lsGet('state',{answers:{},done:{kit:false,fuel:false}});
   }catch(e){}
 })();
 function allQs(){ var o=[]; Object.keys(SURVEYS).forEach(function(k){ SURVEYS[k].steps.forEach(function(s){ s.qs.forEach(function(q){ o.push(q); }); }); }); return o; }
-function answers(){ var a={}; allQs().forEach(function(q){ var v=state.answers[q.id]; a[q.id]=(v===undefined)?(Array.isArray(q.def)?q.def.slice():q.def):v; }); return a; }
+function answers(){ var a={}; allQs().forEach(function(q){ var v=state.answers[q.id]; if(q.type==='multi'&&typeof v==='string') v=[v]; a[q.id]=(v===undefined)?(Array.isArray(q.def)?q.def.slice():q.def):v; }); return a; }
 function save(){ lsSet('state',state); }
 
 // ---------------- computation ----------------
@@ -1667,10 +1667,10 @@ function compute(a){
   var mixna=+a.mixna||0, capna=+a.capna||250;
   P.naFromMix=0; P.saltPortions=0;
   if(useMix) P.naFromMix+=P.mixPortions*mixna;
-  if(a.salt==='mix' && !useMix){ P.saltPortions=cages>=2?3:2; P.naFromMix+=P.saltPortions*mixna; }
+  if(has(a,'salt','mix') && !useMix){ P.saltPortions=cages>=2?3:2; P.naFromMix+=P.saltPortions*mixna; }
   P.caps=0; P.capEvery=0;
-  if(a.salt==='caps'){ var gap=Math.max(0,P.bikeNa-P.naFromMix); P.caps=Math.ceil(gap/capna); P.capEvery=P.caps?Math.max(15,Math.floor(B/P.caps/5)*5):0; }
-  if(a.salt==='none' && nr>=800 && P.naFromMix<P.bikeNa*0.5) P.warn.push(['rec','With '+(a.salty==='yes'?'salty ':'')+(a.sweat==='heavy'?'heavy ':'')+'sweat and no extra sodium, the bike leg covers under half of ~'+fmtNum(nr)+' mg/h. Consider capsules.']);
+  if(has(a,'salt','caps')){ var gap=Math.max(0,P.bikeNa-P.naFromMix); P.caps=Math.ceil(gap/capna); P.capEvery=P.caps?Math.max(15,Math.floor(B/P.caps/5)*5):0; }
+  if(!has(a,'salt','caps')&&!has(a,'salt','mix') && nr>=800 && P.naFromMix<P.bikeNa*0.5) P.warn.push(['rec','With '+(a.salty==='yes'?'salty ':'')+(a.sweat==='heavy'?'heavy ':'')+'sweat and no extra sodium, the bike leg covers under half of ~'+fmtNum(nr)+' mg/h. Consider capsules.']);
   P.naPlanned=P.naFromMix+P.caps*capna;
 
   // run
@@ -1679,7 +1679,7 @@ function compute(a){
   P.runKind=useGel?'gel':(useChew?'chew':'gel'); var ug=P.runKind==='gel'?gelg:chewg;
   P.runUnits=Math.max(1,Math.round(P.runCarbTarget/ug)); P.runSpare=1;
   P.runCaf=(a.caffeine==='yes' && R>=50 && (+a.weight||72)*3>=200);
-  P.runCaps=a.salt==='caps'?Math.max(1,Math.round(nr*0.7*R/60/capna)):0;
+  P.runCaps=has(a,'salt','caps')?Math.max(1,Math.round(nr*0.7*R/60/capna)):0;
   P.runCarry=a.runcarry;
 
   // caffeine
@@ -1688,7 +1688,7 @@ function compute(a){
 
   // morning
   P.breakfast=a.transport==='bus'?'05:00–05:30':'05:15–05:45';
-  P.preload=(a.sweat==='heavy'||a.salty==='yes'||a.salt==='mix');
+  P.preload=(a.sweat==='heavy'||a.salty==='yes'||has(a,'salt','mix'));
   return P;
 }
 
@@ -2075,6 +2075,7 @@ function readQ(form,validate){
   if(q.type==='multi'){
     v=Array.from(form.querySelectorAll('input:checked')).map(function(i){return i.value;});
     if(id==='sources'&&!v.length) error='Select at least one carbohydrate source to build your feed schedule.';
+    if(id==='salt'&&!v.length) error='Select at least one option, or “Nothing extra”.';
   } else if(q.type==='choice'){
     var c=form.querySelector('input:checked'); if(c) v=c.value; else error='Choose an answer to continue.';
   } else {
@@ -2128,6 +2129,8 @@ function bindGate(){
   function persist(e){
     var f=e.target.closest('form'); if(!f) return;
     var opts=e.target.closest('.opts');
+    // sodium: "Nothing extra" excludes the other options, and vice versa
+    if(opts&&e.target.name==='q-salt'&&e.target.checked) opts.querySelectorAll('input').forEach(function(i){ if(i!==e.target&&((e.target.value==='none')!==(i.value==='none'))) i.checked=false; });
     if(opts) opts.querySelectorAll('.opt').forEach(function(l){l.classList.toggle('on',l.querySelector('input').checked);});
     var valid=readQ(f,false); if(valid) save();
     if(e.target.name==='q-name'&&!gate.reviewing) f.querySelector('button[type=submit]').textContent=e.target.value.trim()?'Continue':'Skip name';
