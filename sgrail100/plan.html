@@ -1134,6 +1134,66 @@ body.gated .edit-inline,body.gated .edit-answers{display:none}
 }
 @media (prefers-reduced-motion:reduce){.swipe-cue{transition:none}}
 
+
+/* Planning details use the dossier's typography and discipline colours. */
+.gate .detail-fields{display:grid;gap:14px;margin-top:16px}
+.gate .detail-field{display:grid;gap:6px;font-size:15px;min-width:0}
+.gate .detail-field small{color:var(--muted);margin-left:5px}
+.gate .detail-field input,.gate .detail-field select{width:100%;min-width:0;font-size:16px;min-height:48px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:7px;padding:10px}
+.gate .inventory-entry{padding:0 12px 12px;margin:0}
+.gate .inventory-entry .detail-field{margin-top:12px}
+.gate .g-later{margin-top:16px;min-height:44px;text-align:left}
+.insights{margin:24px 0;font-size:15px}
+.insight-head{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:20px 0 10px}
+.insight-head h3{margin:4px 0}
+.insight-edit{border:1px solid var(--line);background:var(--card);color:var(--sea);border-radius:6px;min-height:44px;padding:9px 12px;font:600 14px var(--body);cursor:pointer;margin:6px 0}
+.insight-edit:focus-visible{outline:2px solid var(--sea);outline-offset:3px}
+.readiness-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.readiness-cell{border-top:4px solid var(--line);padding:12px;background:var(--card)}
+.readiness-cell b,.readiness-cell span{display:block}.readiness-cell span{color:var(--muted);font-size:13px;margin-top:5px}
+.readiness-cell.confirmed{border-color:var(--trail)}.readiness-cell.estimated{border-color:var(--track)}
+.insight-panel{margin:16px 0}.insight-panel summary{line-height:1.4}.insight-panel .inner{padding:8px 16px 16px}
+.insight-panel h4{font:700 15px var(--disp);text-transform:uppercase;letter-spacing:.05em;margin:20px 0 10px}
+.equipment-list{list-style:none}.equipment-list li{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--line-soft)}
+.equipment-list li span{text-align:right;color:var(--muted)}
+.insight-stat{display:grid;gap:4px;margin-bottom:14px}.insight-stat strong{font:700 clamp(25px,6vw,38px) var(--mono);letter-spacing:-.05em}.insight-stat span{color:var(--muted)}
+.time-breakdown,.cutoff-grid,.nutrient-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0}
+.time-breakdown>div,.cutoff-grid>div,.nutrient-grid>div{display:grid;gap:6px;padding:12px;background:var(--paper);border-radius:5px}
+.time-breakdown span,.cutoff-grid small,.nutrient-grid small{font-size:12px;color:var(--muted)}
+.cutoff-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cutoff-grid b{font:600 20px var(--mono)}
+.insight-warning{color:var(--flag);padding:10px;background:var(--flag-soft);border-left:3px solid var(--flag);margin:10px 0}.insight-warning li{margin-left:16px}
+.session-evidence{padding:14px 0;border-top:1px solid var(--line)}.session-evidence p{margin:6px 0}
+.water-legs{list-style:none;display:grid;gap:18px;margin:18px 0}.water-legs li>div:first-child{display:flex;justify-content:space-between;gap:12px}.water-legs p{margin:6px 0}.water-legs small{color:var(--muted)}
+.water-track{height:14px;margin:8px 0;background:var(--sea-soft);border:1px solid var(--sea);border-radius:3px;overflow:hidden}.water-track i{height:100%;display:block;background:var(--sea)}
+.inventory-summary{border-top:1px solid var(--line);margin-top:14px}.nutrient-grid b{font:600 20px var(--mono)}
+.fuel-sequence{list-style:none;border-left:3px solid var(--track);padding-left:16px}.fuel-sequence li{padding:10px 0}.fuel-sequence b,.fuel-sequence span{display:block}.fuel-sequence span{color:var(--muted)}
+.weekend-line{list-style:none;margin:16px 0}.weekend-line li{display:grid;grid-template-columns:85px minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--line-soft)}.weekend-line time{font:500 12px var(--mono);color:var(--track)}.weekend-line time b{display:block;margin-top:6px}.weekend-line p{font-size:13px;color:var(--muted);margin-top:5px}
+.insights p,.insights b,.insights span{overflow-wrap:anywhere}
+@media(max-width:600px){.readiness-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.time-breakdown{grid-template-columns:1fr}.nutrient-grid{gap:6px}.nutrient-grid>div{padding:8px}.nutrient-grid b{font-size:17px}.equipment-list li{display:grid;gap:4px}.equipment-list li span{text-align:left}}
+@media print{.insight-edit{display:none!important}.insight-panel{break-inside:auto}.insight-panel .inner{display:block!important}}
+
+
+.welcome-route{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin:22px 0}.welcome-route span{font-size:12px;color:var(--muted)}.welcome-route b{display:block;font:700 28px var(--mono);color:var(--ink)}.welcome-route span:nth-child(1) b{color:var(--sea)}.welcome-route span:nth-child(2) b{color:var(--track)}.welcome-route span:nth-child(3) b{color:var(--trail)}
+.welcome-choice{display:grid;gap:10px}.gate .start-card{display:grid;gap:7px;text-align:left;padding:18px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink);cursor:pointer;font:400 14px/1.5 var(--body)}.gate .start-card b{font-size:18px}.gate .start-card.primary{border:2px solid var(--sea);background:var(--sea-soft)}.welcome-links{display:flex;gap:18px;flex-wrap:wrap;margin:18px 0}.welcome-links button{min-height:44px}.chapter-track{display:flex;gap:8px;margin:16px 0 24px;font:600 11px var(--mono);color:var(--muted)}.chapter-track span{flex:1;border-top:2px solid var(--line);padding-top:6px}.chapter-track .active{border-color:var(--sea);color:var(--sea)}
+.quick-guide{margin:16px 0}.quick-guide ol{padding-left:20px}.quick-guide li{padding:7px 0}.quick-guide a{color:var(--sea)}.backup-label{display:grid;font-size:13px;gap:4px;max-width:100%}.backup-label input{max-width:100%}#personal-share[hidden]{display:none}#plan-assumptions p{margin:4px 0}#plan-assumptions[hidden]{display:none}
+@media print{.quick-guide,.welcome-links{display:none!important}}
+#feedblock.actual-inventory .clock{min-width:0!important;width:100%}#feedblock.actual-inventory .swipe-cue{display:none!important}
+.gate input:not([type="radio"]):not([type="checkbox"]),.gate select{border-color:var(--muted)}
+@media(max-width:600px){.race-metrics{grid-template-columns:minmax(0,1fr)}.metric{min-width:0;grid-template-columns:minmax(0,1fr) auto}.metric .wx{grid-column:1/-1;min-width:0}.metric .wx span{white-space:normal}.metric>span,.metric p{overflow-wrap:anywhere}.nutrient-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,8rem),1fr))}.nutrient-grid>div{min-width:0;overflow-wrap:anywhere}.next-actions,.result-assumptions{overflow-wrap:anywhere}}
+.course-timing>div{min-width:0;overflow-wrap:anywhere}.course-timing strong{white-space:normal}
+/* Digital planner: visible focus, comfortable targets and narrow-screen reflow. */
+:where(button,a,input,select,summary):focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+button,select,summary,.backup-label{min-height:44px}
+.gate .gate-x{width:44px;height:44px;min-height:44px;flex-shrink:0}
+.result-assumptions{margin:14px 0;padding:14px 16px;border-left:3px solid var(--sea);background:var(--sea-soft);font-size:14px;overflow-wrap:anywhere}
+.result-assumptions ul{padding-left:18px;margin:8px 0}
+.next-actions{margin:18px 0;padding:18px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+.next-actions ol{padding-left:22px}.next-actions li{padding:8px 0}.next-actions p{margin:4px 0}.next-actions small{color:var(--muted)}
+.next-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.next-links button,#device-save{padding:10px 14px}
+.actual-clock{max-width:100%;overflow-wrap:anywhere}.actual-clock .fuel-sequence{margin:12px 0}
+#device-guide li{margin:10px 0}.gate-card,.detail-field{min-width:0}.detail-field span{overflow-wrap:anywhere}
+@media(max-width:600px){.gate input,.gate select,#setup input,#setup select{font-size:16px}.next-links button{flex:1 1 120px}.gate .g-nav{flex-wrap:wrap}.gate .g-nav button{white-space:normal}.gate .detail-fields{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 </style>
 <script>
 /* Theme resolves before paint so a dark start does not flash white. auto = follow the device. */
@@ -1205,7 +1265,7 @@ body.gated .edit-inline,body.gated .edit-answers{display:none}
   <div class="race-metrics" aria-label="Race distances">
     <div class="metric sea"><span>01 / Swim</span><strong>1.5 <small>km</small></strong><p>Open sea · Cadaqués</p><div class="wx"><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 6.5c2 0 2-1.5 4-1.5s2 1.5 4 1.5 2-1.5 4-1.5M1.5 11c2 0 2-1.5 4-1.5s2 1.5 4 1.5 2-1.5 4-1.5"/></svg><i>Sea</i>~18.5 °C</span><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 9.6V3a1.5 1.5 0 0 1 3 0v6.6a2.5 2.5 0 1 1-3 0Z"/><path d="M8 7v3.5"/></svg><i>Air</i>~14 °C at 09:00</span><b class="wxbr"></b><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 2.5 8 4l2.5-1.5 3 1.5-1 3-1.5-.5V13h-6V6.5L3.5 7l-1-3z"/></svg><i>Suit</i>wetsuit on</span></div></div>
     <div class="metric track"><span>02 / Gravel</span><strong>86.4 <small>km</small></strong><p>Elevation provisional · 93% unpaved</p><div class="wx"><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 9.6V3a1.5 1.5 0 0 1 3 0v6.6a2.5 2.5 0 1 1-3 0Z"/><path d="M8 7v3.5"/></svg><i>Air</i>14 → 20 °C</span><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5.5h7.5a1.75 1.75 0 1 0-1.75-1.75M2 8.5h10a2 2 0 1 1-2 2M2 11.5h5.5a1.5 1.5 0 1 1-1.5 1.5"/></svg><i>Wind</i>N · tramuntana</span><b class="wxbr"></b><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11.5" cy="4.5" r="2"/><path d="M1.5 13.5 6 6.5l2.5 4 1.5-2 4.5 5z"/></svg><i>Exposed</i>Cap de Creus · plain km 25–86</span></div></div>
-    <div class="metric trail"><span>03 / Trail</span><strong>10.5 <small>km</small></strong><p>+320 m · Girona finish</p><div class="wx"><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 9.6V3a1.5 1.5 0 0 1 3 0v6.6a2.5 2.5 0 1 1-3 0Z"/><path d="M8 7v3.5"/></svg><i>Air</i>~20–21 °C</span><b class="wxbr"></b><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 9.5A3 3 0 0 1 4 3.6a4 4 0 0 1 7.6.6A2.7 2.7 0 0 1 12 9.5H4.5z"/><path d="M5.5 11.5l-1 2M8.5 11.5l-1 2M11.5 11.5l-1 2"/></svg><i>Rain</i>~18% wet-day odds</span></div></div>
+    <div class="metric trail"><span>03 / Trail</span><strong>10.4 <small>km</small></strong><p>+320 m · Girona finish</p><div class="wx"><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 9.6V3a1.5 1.5 0 0 1 3 0v6.6a2.5 2.5 0 1 1-3 0Z"/><path d="M8 7v3.5"/></svg><i>Air</i>~20–21 °C</span><b class="wxbr"></b><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 9.5A3 3 0 0 1 4 3.6a4 4 0 0 1 7.6.6A2.7 2.7 0 0 1 12 9.5H4.5z"/><path d="M5.5 11.5l-1 2M8.5 11.5l-1 2M11.5 11.5l-1 2"/></svg><i>Rain</i>~18% wet-day odds</span></div></div>
   </div>
 </header>
 <nav aria-label="Planner contents"><label class="mobile-nav" for="mobile-section"><span class="sr-only">Jump to section</span><select id="mobile-section" aria-label="Jump to section"></select></label><span class="nav-label">Field notes / 2026</span><div class="modeside" role="group" aria-label="Dossier mode"><button type="button" data-view="prepare"><b>Prepare</b><span>until Sat 17</span></button><button type="button" data-view="race"><b>Race day</b><span>Sun 18</span></button></div><div class="row">
@@ -1231,17 +1291,22 @@ body.gated .edit-inline,body.gated .edit-answers{display:none}
 <section id="setup">
   <h2>Your plan <span class="tag">two guided surveys · saved in this browser</span></h2>
   <p class="setup-lede">Everything on this page is built from these answers: <b>01</b> drives your bags, pack list, bike checks and to-dos; <b>02</b> drives your race-day feed clock, sodium and pacing. Edit either and the plan rebuilds.</p>
+
+<template id="how-it-works-content"><ol><li><b>Start with your own answers.</b> Choose the essentials first. This is a planning tool, not a test; “I don’t know yet” creates a reminder.</li><li><b>Review the estimates.</b> Suggested values are placeholders. Use “Review my unknowns” to visit unfinished decisions, or edit either survey to add travel, training and inventory details.</li><li><b>Prepare, then race.</b> Prepare holds bags and tasks. Race day holds the course, feed clock, water and pacing. Complete both fuel inventories, including reserves and your practiced timing, to use your products in the feed clock and packing list. Incomplete inventories remain drafts.</li><li><b>Save a backup.</b> Answers stay in this browser and do not sync automatically. Download a backup before changing browser or device. Local HTML previews on phones may not run scripts; open in a full browser.</li><li><b>Share the blank planner.</b> Your friend gets their own plan. Sharing answers is a separate, explicit action.</li></ol><p class="small">Fuel, fluid, caffeine and tyre figures are planning estimates, not individual prescriptions. Use values you have tested and review the final organiser briefing.</p></template>
+<details class="quick-guide" id="race-verification"><summary>Race information · checked 26 September 2026</summary><div class="inner"><p>The <a href="https://sgrail100.com/timetable/" target="_blank" rel="noopener">organiser timetable</a> confirms the 09:00 start, 09:59 swim cutoff and 15:49 bike cutoff. It still shows both 16:59 and 17:59 finish limits. Saturday bike drop is listed as 12:00–16:00; confirm your bag arrangements separately.</p><p>The <a href="https://sgrail100.com/course/" target="_blank" rel="noopener">course page</a> currently lists a 10.4 km run, bike aid at 34.3 / 68 km and run aid at 4.4 km. The elevation drawing uses an older GPX reference; download the final race track.</p><p>Check the <a href="https://sgrail100.com/rules-regulations/" target="_blank" rel="noopener">rules and latest briefing</a> before race day. Weather figures elsewhere are historical context, not a forecast. This planner is independent of the organiser.</p></div></details>
   <div id="surveys"></div>
-  <div class="plan-tools" id="plan-tools" hidden><button type="button" id="share-plan">Copy link with my answers</button><button type="button" id="reset-plan">Start over</button><p id="tool-status" class="small" role="status"></p></div>
+  <div id="next-actions"></div>
+  <details class="quick-guide" id="device-guide"><summary>Save for another device</summary><div class="inner"><p>Your plan saves in this browser only. It does not sync automatically.</p><ol><li>Download a private backup below. It includes your answers and checklist ticks.</li><li>Send the JSON file to your other device using your own files app, AirDrop or another private transfer.</li><li>Open the same planner on that device and choose <b>Restore a backup</b>. Review the replacement prompt before importing.</li></ol><p>Changes on the two devices stay separate. Repeat the transfer whenever you want to move your latest plan.</p><button type="button" id="device-save">Download my plan backup</button></div></details>
+  <div class="plan-tools" id="plan-tools"><button type="button" id="share-clean">Share blank planner</button><button type="button" id="share-plan">Share my answers…</button><button type="button" id="backup-plan">Save my backup</button><label class="backup-label">Restore a backup<input id="import-backup" type="file" accept=".json,application/json"></label><button type="button" id="recover-plan">Recover replaced plan</button><button type="button" id="reset-plan">Start over</button><div id="personal-share" class="card rail-flag" hidden><p>This link includes your name, weight, logistics and all other entered answers. Anyone with the link can read them. To let your friend start their own plan, use <b>Share blank planner</b>.</p><button id="copy-personal" type="button">Copy link with my answers</button></div><p id="tool-status" class="small" role="status"></p></div>
   <div id="plan-warn" class="card rail-flag" role="status" hidden></div>
-  <div id="plan-built"></div>
+  <div id="plan-assumptions" class="card rail-flag" role="status"></div><div id="plan-built"></div><div id="readiness-view" class="insights"></div>
 </section>
 <aside class="essentials" aria-labelledby="essentials-title">
 <div class="view-switch" role="group" aria-label="Dossier view"><button type="button" data-view="prepare">Prepare</button><button type="button" data-view="race">Race day</button></div><p id="view-description" class="small" role="status"></p>
  <div class="essentials-head"><h2 id="essentials-title">Race essentials</h2><span class="small">16–18 October 2026 · local time</span></div>
  <ol class="essentials-grid etl">
   <li class="d-fri"><span class="day">Fri 16</span><b>17:30–19:30</b><span class="what">Check-in · bags, bibs, wristbands</span><small>Plaça dels Jurats, Girona</small></li>
-  <li class="d-sat"><span class="day">Sat 17</span><b>13:00–16:00</b><span class="what">Drop bike + black T2 bag</span><small>GEiEG de Sant Ponç · window to confirm Fri</small></li>
+  <li class="d-sat"><span class="day">Sat 17</span><b>12:00–16:00</b><span class="what">Drop bike + black T2 bag</span><small>GEiEG de Sant Ponç · window to confirm Fri</small></li>
   <li class="d-sun"><span class="day">Sun 18</span><b>06:15–06:45</b><span class="what">Bus to Cadaqués · take an early one</span><small>La Copa, Girona</small></li>
   <li class="d-sun start"><span class="day">Sun 18</span><b>09:00</b><span class="what">Start</span><small>Platja Gran, Cadaqués</small></li>
   <li class="d-sun cut"><span class="day">Sun 18 · cutoffs</span><dl class="cutoff-times"><div><dt>Swim</dt><dd><b>09:59</b></dd></div><div><dt>Gravel</dt><dd><b>15:49</b></dd></div><div><dt>Overall</dt><dd><b>17:59</b></dd></div></dl><small>16:59 trail limit — unconfirmed</small></li>
@@ -1264,14 +1329,16 @@ body.gated .edit-inline,body.gated .edit-answers{display:none}
   <div class="card rail-flag bagscard">
     <p class="small">Bags come from check-in · Saturday: black with the bike · Sunday: white + personal travel with you.</p>
     <ul class="check bag-journeys">
-<li class="bagrow b-black"><input type="checkbox" data-k="bag-t2" aria-label="Black · T2 packed"><div class="bagflow"><b class="bagname">Black · T2</b><div class="stage"><em>Drop</em><strong>Sat 13:00–16:00</strong><span>GEiEG, Girona · with the bike</span></div><div class="stage"><em>Use</em><span>T2 Celrà · run kit</span></div><div class="stage contents"><em>In it</em><div id="bag-t2"></div></div></div></li>
+<li class="bagrow b-black"><input type="checkbox" data-k="bag-t2" aria-label="Black · T2 packed"><div class="bagflow"><b class="bagname">Black · T2</b><div class="stage"><em>Drop</em><strong>Sat 12:00–16:00</strong><span>GEiEG, Girona · with the bike</span></div><div class="stage"><em>Use</em><span>T2 Celrà · run kit</span></div><div class="stage contents"><em>In it</em><div id="bag-t2"></div></div></div></li>
 <li class="bagrow b-white"><input type="checkbox" data-k="bag-t1" aria-label="White · T1 packed"><div class="bagflow"><b class="bagname">White · T1</b><div class="stage"><em>Drop</em><strong>Sun 08:00–08:45</strong><span>T1, Cadaqués · travels with you</span></div><div class="stage"><em>Use</em><span>After the swim · bike kit on, wetsuit in</span></div><div class="stage contents"><em>In it</em><div id="bag-t1"></div></div></div></li>
 <li class="bagrow b-pers"><input type="checkbox" data-k="bag-cl" aria-label="Personal · cloakroom packed"><div class="bagflow"><b class="bagname">Personal · cloakroom</b><div class="stage"><em>Drop</em><strong>Sun 08:00–08:45</strong><span>Cadaqués cloakroom · before the wetsuit</span></div><div class="stage"><em>Use</em><span>Warm until 09:00 · collect in Girona</span></div><div class="stage contents"><em>In it</em><div id="bag-cl"></div></div></div></li>
 </ul>
   </div>
   <div class="pk-head">Pack</div>
+  <div id="pack-assumptions"></div>
   <div class="tblwrap transition-wrap" tabindex="0" role="region" aria-label="Pack list by discipline"><table class="transition-matrix packtbl"><thead><tr data-stage-count="0"><th>Pack</th><th>Swim</th><th>Bike</th><th>Run</th></tr></thead><tbody id="pack-body"></tbody></table></div>
   <p class="small">Cold or rain: add the layer. Canyon mechanics at km 68 only (W2), plus roving mechanics on bikes — the backstop, not the plan.</p>
+  <div id="bike-assumptions"></div>
   <div class="pk-head" id="bike-title">Bike setup</div>
   <div class="card rail-track pickup">
     <div class="tblwrap" tabindex="0" role="region" aria-label="Bike checks"><table class="spec" style="min-width:460px"><tbody id="bike-body"></tbody></table></div>
@@ -1292,7 +1359,7 @@ body.gated .edit-inline,body.gated .edit-answers{display:none}
   <div class="mobile-route" aria-label="Course overview, schematic">
     <div class="route-swim"><b>Swim <span>1.5 km</span></b><p>Open sea → T1</p></div>
     <div class="route-bike"><b>Bike <span>86.4 km · ~1,000 m ascent</span></b><div class="route-sectors"><span>0–25 km<br>Technical</span><span>25–86.4 km<br>Plain · draft &amp; fuel</span></div></div>
-    <div class="route-run"><b>Run <span>10.5 km · 320 m ascent</span></b><p>Climb → castle aid 4.2 km → descend → late rises</p></div>
+    <div class="route-run"><b>Run <span>10.4 km · 320 m ascent</span></b><p>Climb → castle aid 4.2 km → descend → late rises</p></div>
     <small>Route sequence · detailed altitude profile below</small>
   </div>
   <div class="course-timing" aria-label="Your discipline times and cutoffs">
@@ -1305,7 +1372,7 @@ body.gated .edit-inline,body.gated .edit-answers{display:none}
   <div class="prof-scroll" tabindex="0" role="region" aria-label="Detailed course profile"><div class="prof-inner">
   <svg id="profsvg" viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" role="group" aria-labelledby="course-graph-title course-graph-desc">
     <text x="14" y="16" class="chart-axis-label">ALT. m</text><title id="course-graph-title">Course, timing and execution</title>
-    <desc id="course-graph-desc">Swim: 28–33 minutes, cutoff 09:59. Anti-clockwise rectangle at Platja Gran, approximately 18.5 degrees Celsius, wetsuit on. First 300 m easy; sight every 6–8 strokes. Bike: 86.4 km, approximately 1,000 m ascent, 4:00–4:45, cutoff 15:49. First 25 km contain about 67 percent of climbing; ride carefully, then draft and fuel on the plain. Budget about 2 minutes across both water stops. Station drink does not replace the capsule plan. Run: 10.5 km, 320 m ascent, 1:10–1:20. Climb 250 m in 4.5 km, descend for 3 km, then 50 m and 20 m rises and 20 finish steps. Regroup at castle aid, km 4.2. Cutoff unconfirmed: 16:59 trail versus 17:59 overall.</desc>
+    <desc id="course-graph-desc">Swim: 28–33 minutes, cutoff 09:59. Anti-clockwise rectangle at Platja Gran, approximately 18.5 degrees Celsius, wetsuit on. First 300 m easy; sight every 6–8 strokes. Bike: 86.4 km, approximately 1,000 m ascent, 4:00–4:45, cutoff 15:49. First 25 km contain about 67 percent of climbing; ride carefully, then draft and fuel on the plain. Budget about 2 minutes across both water stops. Station drink does not replace the capsule plan. Run: 10.4 km, 320 m ascent, 1:10–1:20. Climb 250 m in 4.5 km, descend for 3 km, then 50 m and 20 m rises and 20 finish steps. Regroup at castle aid, km 4.4. Cutoff unconfirmed: 16:59 trail versus 17:59 overall.</desc>
     <text x="84" y="20" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#8A5A2B">KM 0–25 · LOW Z3 / WALK PITCHES</text>
     <text x="360" y="95" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#8A5A2B">KM 25–86 · DRAFT + FUEL</text>
     <text x="360" y="112" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">EXPOSED PLAIN · WIND</text>
@@ -1335,7 +1402,7 @@ body.gated .edit-inline,body.gated .edit-answers{display:none}
     <text x="286.2" y="203" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10.5" font-weight="700" fill="var(--track)">W1 · 34.2</text><text x="286.2" y="215" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">CASTELLÓ</text>
     <text x="495.9" y="203" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10.5" font-weight="700" fill="var(--track)">W2 · 68</text><text x="495.9" y="215" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">JAFRE</text>
     <text x="610" y="203" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10.5" font-weight="700" fill="#1B2A32">T2</text><text x="610" y="215" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">CELRÀ</text>
-    <text x="669.0" y="203" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10.5" font-weight="700" fill="#4A6741">KM 4.2</text><text x="669.0" y="215" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">CASTLE AID</text>
+    <text x="669.0" y="203" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10.5" font-weight="700" fill="#4A6741">KM 4.4</text><text x="669.0" y="215" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">CASTLE AID</text>
     <text x="752" y="203" text-anchor="end" font-family="ui-monospace,Menlo,monospace" font-size="10.5" font-weight="700" fill="#1B2A32">FINISH</text><text x="752" y="215" text-anchor="end" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">GIRONA</text>
     <line x1="74.0" y1="181.0" x2="74.0" y2="185.0" stroke="#D9DDD5"/><text x="74.0" y="234" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">0</text>
     <line x1="229.1" y1="181.0" x2="229.1" y2="185.0" stroke="#D9DDD5"/><text x="229.1" y="234" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">25</text>
@@ -1344,7 +1411,7 @@ body.gated .edit-inline,body.gated .edit-answers{display:none}
     <line x1="675.5" y1="181.0" x2="675.5" y2="185.0" stroke="#D9DDD5"/><text x="675.5" y="234" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">5</text>
     <line x1="741.0" y1="181.0" x2="741.0" y2="185.0" stroke="#D9DDD5"/><text x="741.0" y="234" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">10</text>
     <text x="342" y="250" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">BIKE · 86.4 KM · ~1,000 M ASCENT</text>
-    <text x="678" y="250" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">RUN · 10.5 KM</text>
+    <text x="678" y="250" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">RUN · 10.4 KM</text>
     <text x="678" y="266" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">320 M ASCENT</text>
     <line id="cx-line" x1="0" x2="0" y1="34" y2="178.0" stroke="#1B2A32" stroke-width="1" stroke-dasharray="2,3" opacity="0" pointer-events="none"/>
     <circle id="cx-dot" r="4.5" fill="#1B2A32" stroke="#FFFFFF" stroke-width="1.5" opacity="0" pointer-events="none"/>
@@ -1385,7 +1452,7 @@ body.gated .edit-inline,body.gated .edit-answers{display:none}
     <div class="clock-scroll" tabindex="0" role="region" aria-label="Scrollable feed chart"><div class="clock" id="feedchart"></div></div>
     <p class="swipe-cue" aria-hidden="true">Swipe for the whole ride <b>→</b></p>
     <div class="feedkey" id="feedkey" aria-label="Feeding chart key"></div>
-    <p class="small">Clock time is the instruction; the km is where that time is likely to fall at your pace.</p>
+    <p class="small" id="feed-explanation">Clock time is the instruction; the km is where that time is likely to fall at your pace.</p>
   </details>
 
   <div class="sec-label" style="margin-top:26px">Race phases · kit and instructions</div>
@@ -1417,7 +1484,7 @@ body.gated .edit-inline,body.gated .edit-answers{display:none}
     <h3 style="color:var(--flag)">Rules that carry penalties</h3>
     <ul style="list-style:none">
       <li style="padding:3px 0"><span class="penalty">DQ</span> — course deviation or missed control point. <b>The gravel leg is unsigned: GPS only.</b> The trail leg <i>is</i> marked, red ribbons and blue arrows. Follow the track, not the rider ahead.</li>
-      <li style="padding:3px 0"><span class="penalty">+30 min</span> — taking supplies outside an aid zone. Carry all fuel; anything taken <b>at</b> a station is legal — water refills at 34.2 / 68 are mandatory, course Maurten = emergency fallback.</li>
+      <li style="padding:3px 0"><span class="penalty">+30 min</span> — taking supplies outside an aid zone. Carry all fuel; anything taken <b>at</b> a station is legal — water refills at 34.3 / 68 are mandatory, course Maurten = emergency fallback.</li>
       <li style="padding:3px 0"><span class="penalty">+30 min</span> — riding the bike inside T1.</li>
     </ul>
   </div>
@@ -1461,7 +1528,7 @@ body.gated .edit-inline,body.gated .edit-answers{display:none}
   <div class="mbody">
   <ol class="chain" aria-label="The one chain that cannot break">
    <li><em>Fri</em><b>17:30–19:30</b><span>Check-in · Plaça dels Jurats</span><small>hands you bags + bibs</small></li>
-   <li><em>Sat</em><b>13:00–16:00</b><span>Drop bike + black bag · GEiEG</span><small>needs Friday's bag + bib</small></li>
+   <li><em>Sat</em><b>12:00–16:00</b><span>Drop bike + black bag · GEiEG</span><small>needs Friday's bag + bib</small></li>
    <li><em>Sun</em><b>08:00–08:45</b><span>White bag → T1 boxes · Cadaqués</span><small>on the bus with you</small></li>
   </ol>
   <div class="tblwrap" tabindex="0" role="region" aria-label="Scrollable data table"><table role="table" data-mobile="cards" class="tight" style="min-width:520px">
@@ -1471,7 +1538,7 @@ body.gated .edit-inline,body.gated .edit-answers{display:none}
     <tr role="row"><td role="cell" data-label="When" class="m">Fri 18:00–19:00</td><td role="cell" data-label="What">Maurten fuelling session, then beers, burgers and live music to 21:00</td><td role="cell" data-label="Where">Plaça dels Jurats</td></tr>
     <tr role="row"><td role="cell" data-label="When" class="m">Sat 10:00–12:00</td><td role="cell" data-label="What">CANYON gravel warm-up <span class="small">(optional — two hours the day before; skip it)</span></td><td role="cell" data-label="Where">La Copa, Girona</td></tr>
     <tr role="row"><td role="cell" data-label="When" class="m">Sat 12:00–17:00</td><td role="cell" data-label="What">Check-in, last chance</td><td role="cell" data-label="Where">Plaça dels Jurats</td></tr>
-    <tr role="row" class="hl"><td role="cell" data-label="When" class="m">Sat 13:00–16:00</td><td role="cell" data-label="What"><b>DROP BIKE + BLACK T2 BAG.</b> Canyon mech point here <span class="small">— use the overlap: the timetable says 12:00–16:00, the briefing says 13:00–17:00</span></td><td role="cell" data-label="Where">GEiEG de Sant Ponç</td></tr>
+    <tr role="row" class="hl"><td role="cell" data-label="When" class="m">Sat 12:00–16:00</td><td role="cell" data-label="What"><b>DROP BIKE + BLACK T2 BAG.</b> Canyon mech point here <span class="small">— use the overlap: the timetable says 12:00–16:00, the briefing says 13:00–17:00</span></td><td role="cell" data-label="Where">GEiEG de Sant Ponç</td></tr>
     <tr role="row"><td role="cell" data-label="When" class="m">Sat 16:30</td><td role="cell" data-label="What">Drink with the pros</td><td role="cell" data-label="Where">Plaça dels Jurats</td></tr>
     <tr role="row"><td role="cell" data-label="When" class="m">Sun 06:15–06:45</td><td role="cell" data-label="What">Staggered buses to Cadaqués</td><td role="cell" data-label="Where">La Copa, Girona</td></tr>
     <tr role="row"><td role="cell" data-label="When" class="m">Sun 08:00</td><td role="cell" data-label="What">Arrival · 08:00–08:45 T1 preparation</td><td role="cell" data-label="Where">Platja Gran</td></tr>
@@ -1515,7 +1582,7 @@ var SURVEYS={
  kit:{ n:'01', title:'Kit & logistics', builds:'Builds your bags, pack list, bike checks and to-do list', steps:[
   {title:'You', qs:[
    {id:'name', type:'text', label:'What name would you like on your plan? (optional)', help:'Optional. Shown at the top of the page.', def:''},
-   {id:'weight', type:'number', label:'What is your body weight?', unit:'kg', min:40, max:140, step:1, def:72, help:'Sets the tyre-pressure starting point and the caffeine ceiling.'},
+   {id:'weight', type:'number', label:'What is your body weight?', unit:'kg', min:40, max:140, step:1, def:72, help:'Sets the tyre-pressure starting point and the caffeine reference calculation.'},
    {id:'insurance', type:'choice', label:'Have you checked your event insurance cover?', help:'Choose “Not sure” if you still need to check your policy. We’ll add a reminder to your to-do list.', def:'unsure',
     options:[['yes','Yes, verified'],['unsure','Not sure'],['no','No']]}
   ]},
@@ -1548,7 +1615,7 @@ var SURVEYS={
   {title:'Times', qs:[
    {id:'swimpace', type:'select', label:'What is your usual open-water swim pace?', help:'Minutes and seconds per 100 m, wearing your wetsuit. Use a recent swim rather than your fastest pool pace.', def:'120', options:paceOpts},
    {id:'biketime', type:'select', label:'Expected bike time · 86.4 km', help:'Most of the climbing is in the first 25 km and 93% is unpaved. Use a realistic time for similar terrain. The suggested 4 h 30 min is a placeholder you can change.', def:'270', options:bikeOpts},
-   {id:'runtime', type:'select', label:'Expected run time · 10.5 km, +320 m', help:'A 250 m climb, a long descent, late rises and steps. Use a recent hilly trail run to estimate your time, including walking on climbs.', def:'85', options:runOpts}
+   {id:'runtime', type:'select', label:'Expected run time · 10.4 km, +320 m', help:'A 250 m climb, a long descent, late rises and steps. Use a recent hilly trail run to estimate your time, including walking on climbs.', def:'85', options:runOpts}
   ]},
   {title:'Carbs', qs:[
    {id:'carbrate', type:'choice', label:'How much carbohydrate have you comfortably used per hour?', help:'Pick what your gut has handled on long rides. Race day is not the day to go higher.', def:'60', options:[['45','~45 g/h'],['60','~60 g/h'],['75','~75 g/h'],['90','~90 g/h']]},
@@ -1564,7 +1631,7 @@ var SURVEYS={
   ]},
   {title:'Bottles & stops', qs:[
    {id:'mixbottles', type:'choice', label:'How many bottles of drink mix at the start?', help:'The other bottles start with plain water.', def:'1', options:[['1','One'],['2','Two'],['3','Three']], when:function(a){ return has(a,'sources','mix')&&(+a.cages||2)>=2; }},
-   {id:'refill', type:'choice', label:'What goes into your bottles at W1 and W2?', help:'Water refills at km 34.2 and km 68 are mandatory stops. The station drink is legal there; taking supplies outside an aid zone is +30 min.', def:'powder', options:[['powder','Water + my own powder, carried in vials'],['station','Water + the station drink'],['water','Water only']], when:function(a){ return has(a,'sources','mix')||has(a,'salt','mix'); }}
+   {id:'refill', type:'choice', label:'What goes into your bottles at W1 and W2?', help:'Water refills at km 34.3 and km 68 are mandatory stops. The station drink is legal there; taking supplies outside an aid zone is +30 min.', def:'powder', options:[['powder','Water + my own powder, carried in vials'],['station','Water + the station drink'],['water','Water only']], when:function(a){ return has(a,'sources','mix')||has(a,'salt','mix'); }}
   ]},
   {title:'Products', note:'Suggested amounts are placeholders. Check the nutrition label for the portion you will actually carry.', qs:[
    {id:'gelname', type:'text', label:'Which gel? (optional)', help:'Brand and product, as you want it on your plan and pack list.', placeholder:'e.g. brand and product', def:'', when:function(a){ return has(a,'sources','gels'); }},
@@ -1581,23 +1648,171 @@ var SURVEYS={
  ]}
 };
 
+
+// Optional planning detail: blank fields remain unknown, never zero or an invented answer.
+var CONFIDENCE=[['confirmed','Confirmed'],['estimated','Estimated'],['undecided','Undecided']];
+var EQUIPMENT=[['bike','Bike'],['wetsuit','Wetsuit'],['shoes','Race shoes'],['nav','Navigation device'],['bottles','Bottles / hydration pack'],['repair','Repair kit']];
+var GEAR_STATUS=[['tested','In hand and tested'],['owned','Owned · not yet tested'],['borrowed','Borrowing · collection / test pending'],['booked','Booked · collection / test pending'],['need','Still needed']];
+function numberField(id,label,unit,max,step){return {id:id,label:label,type:'number',unit:unit,min:0,max:max,step:step||1};}
+function textField(id,label,type){return {id:id,label:label,type:type||'text'};}
+function detailQuestion(id,label,fields,when,help){return {id:id,type:'fields',label:label,fields:fields,def:{},optional:true,when:when,help:help||'Fill in what you know. Blank fields stay undecided and can be completed later.'};}
+SURVEYS.kit.steps.push({title:'Readiness',qs:[
+ detailQuestion('confidence','How settled is your plan?',[
+  {id:'equipment',label:'Equipment choices',options:CONFIDENCE},
+  {id:'transport',label:'Travel and bookings',options:CONFIDENCE},
+  {id:'timing',label:'Race times',options:CONFIDENCE},
+  {id:'nutrition',label:'Nutrition products and quantities',options:CONFIDENCE}
+ ]),
+ detailQuestion('equipment','What is ready to race?',EQUIPMENT.map(function(e){return {id:e[0],label:e[1],options:GEAR_STATUS};}),null,'Ready means in your hands and tested. Owned, borrowed and booked items still get a test or collection task.')
+]});
+SURVEYS.kit.steps.push({title:'Your weekend',qs:[
+ detailQuestion('weekend','Where will you stay and when will you arrive?',[
+  textField('stay','Accommodation area (no full address needed)'),
+  {id:'stayStatus',label:'Accommodation booking',options:[['booked','Booked'],['needed','Still to book'],['none','Not needed']]},
+  {id:'day',label:'Arrival day',options:[['thu','Thursday 15 October'],['fri','Friday 16 October'],['sat','Saturday 17 October'],['sun','Sunday 18 October']]},
+  textField('arrival','Arrival time · local time','time'),
+  numberField('travel','Minutes from accommodation to bus pickup / start','min',360),
+  numberField('buffer','Extra departure buffer','min',180),
+  {id:'transportStatus',label:'Start transport',options:[['booked','Booked / arranged'],['needed','Still to arrange']]}
+ ],null,'These details build your weekend timeline. Enter local times. The departure calculation uses the first bus at 06:15, or arrival at T1 by 08:00 for your own transport.'),
+ detailQuestion('pickup','When and where will you collect the rental bike?',[
+  textField('place','Rental shop / collection location'),
+  {id:'day',label:'Collection day',options:[['fri','Friday 16 October'],['sat','Saturday 17 October']]},
+  textField('time','Collection time','time'),
+  numberField('travel','Travel from collection to bike drop','min',300),
+  numberField('setup','Time for fitting and checks','min',180),
+  {id:'status',label:'Collection booking',options:[['booked','Confirmed'],['needed','Awaiting confirmation']]}
+ ],function(a){return a.bike==='rental';}),
+ {id:'support',type:'choice',optional:true,label:'Will someone support your weekend?',def:'unknown',options:[['yes','Yes · add a simple handover plan'],['solo','No · I’m managing it myself'],['unknown','Not decided yet']]},
+ detailQuestion('supportPlan','What should your support person know?',[
+  textField('name','First name / nickname'),textField('meeting','Meeting place after the finish'),textField('role','What they will help with')
+ ],function(a){return a.support==='yes';},'Optional. Avoid private contact details: these answers are included if you share your plan link.')
+]});
+SURVEYS.fuel.steps.unshift({title:'Recent training',qs:[
+ {id:'sessions',type:'multi',optional:true,label:'Do you have recent sessions to compare?',help:'Choose the sessions you want to record. Leave blank to keep using your own race-time estimates.',def:[],options:[['swim','Open-water swim'],['bike','Similar gravel ride'],['run','Hilly trail run']]}
+].concat(['swim','bike','run'].map(function(k){return detailQuestion('session_'+k,'Your recent '+{swim:'open-water swim',bike:'gravel ride',run:'trail run'}[k],[
+ textField('date','Session date','date'),numberField('distance','Distance','km',k==='bike'?400:60,0.1),
+ numberField('ascent','Ascent','m',10000),numberField('moving','Moving time','min',1440),numberField('stops','Stopped time','min',600),
+ {id:'effort',label:'How hard did it feel?',options:[['easy','Easy'],['steady','Steady / sustainable'],['hard','Hard']]},
+ {id:'similar',label:'Similarity to the race',options:[['similar','Similar terrain / conditions'],['different','Different terrain / conditions']]}
+],function(a){return has(a,'sessions',k);},'This is a comparison, not a race prediction. Include walking in moving time. Blank means unknown; enter 0 only when you know there were no stops or ascent.');}))});
+SURVEYS.fuel.steps.splice(2,0,{title:'Time allowances',qs:[
+ {id:'timebasis',type:'choice',optional:true,label:'Do your bike and run estimates include stops?',help:'Transitions are always separate. Older plans are treated as elapsed time, including stops.',def:'elapsed',options:[['elapsed','Yes · total time for each leg'],['moving','No · moving time only'],['unknown','I need to check']]},
+ detailQuestion('allowances','How much time will you allow for stops and transitions?',[
+ numberField('t1','T1 · swim to bike','min',60),numberField('t2','T2 · bike to run','min',60),
+ numberField('bikeStops','Bike stops in total','min',180),numberField('runStops','Run stops in total','min',120)
+ ],null,'Stops are added only when you chose moving time. If your estimates already include stops, they are shown as part of the total. Blank transitions keep the existing 8 min T1 / 6 min T2 assumptions.')
+]});
+SURVEYS.fuel.steps.push({title:'Carrying water',qs:[
+ {id:'capacityMode',type:'choice',optional:true,label:'Would you like to enter your actual water capacity?',help:'Useful for mixed bottle sizes or a hydration pack. Only bottles matching your number of cages are shown.',def:'simple',options:[['simple','Use the bottle size already entered'],['exact','Enter each bottle and any pack']]},
+ detailQuestion('capacity','What will you carry?',[
+  Object.assign(numberField('b1','Bike bottle 1','ml',2000,10),{min:50}),
+  Object.assign(numberField('b2','Bike bottle 2','ml',2000,10),{min:50,when:function(a){return +a.cages>=2;}}),
+  Object.assign(numberField('b3','Bike bottle 3','ml',2000,10),{min:50,when:function(a){return +a.cages>=3;}}),
+  numberField('pack','Bike hydration pack · plain water','ml',4000,10),
+  Object.assign(numberField('run','Run bottle / flask / vest total','ml',3000,10),{when:function(a){return a.runcarry!=='none';}})
+ ],function(a){return a.capacityMode==='exact';},'Enter usable full capacity. Enter 0 for no pack. Each mixed bottle still uses one serving of the product amounts you entered. Blank bottle sizes retain the earlier estimate and stay flagged.'),
+ detailQuestion('waterPlan','How will you refill?',[
+ {id:'bike',label:'Top up to full at both W1 and W2?',options:[['yes','Yes · both stops'],['unknown','Not confirmed yet']]},
+ {id:'run',label:'Refill at the castle aid station?',options:[['yes','Yes'],['no','No · carry from T2'],['unknown','Not decided']]},
+ numberField('bikeRate','Your practiced bike drinking rate (optional)','ml/h',2000,10),
+ numberField('runRate','Your practiced run drinking rate (optional)','ml/h',2000,10),
+ numberField('castleMinutes','Expected minutes from T2 to castle aid','min',180)
+ ],null,'Capacity bars compare carrying space with your entered rate × time. A blank bike rate uses the existing sweat-based estimate; no run rate is invented. Refill availability still needs organiser confirmation.')
+]});
+SURVEYS.fuel.steps.push({title:'What you will pack',qs:[
+ {id:'inventoryMode',type:'choice',optional:true,label:'Do you want to check the fuel you plan to pack?',help:'Use your own products for packing and the feed clock. Complete both legs, including reserve quantities and timing, to activate your schedule. Until then the suggested schedule stays clearly labelled.',def:'later',options:[['later','Later · keep the suggested packing list'],['enter','Yes · enter my products by discipline']]}
+].concat(['bike','run'].map(function(leg){return detailQuestion('inventory_'+leg,'Your '+leg+' fuel inventory',[],function(a){return a.inventoryMode==='enter';},'Add up to four products per leg. Enter label amounts per serving, total packed and reserves (0 if none). Set the first serving and interval in minutes from the start of this leg. Drink servings are sipped across each interval. Blank values stay unknown. Only enter quantities and timing you have practised; this tool does not prescribe them.');}))});
+['bike','run'].forEach(function(leg){
+ var q=SURVEYS.fuel.steps[SURVEYS.fuel.steps.length-1].qs.filter(function(q){return q.id==='inventory_'+leg;})[0];
+ q.type='inventory';
+ for(var i=1;i<=4;i++){
+  q.fields.push(textField('name'+i,'Name and serving size'));
+  q.fields.push(numberField('qty'+i,'Servings packed','servings',100,0.5));
+  q.fields.push(numberField('carb'+i,'Carbohydrate per serving','g',200,0.1));
+  q.fields.push(numberField('sodium'+i,'Sodium per serving','mg',3000));
+  q.fields.push(numberField('caffeine'+i,'Caffeine per serving','mg',500));
+  q.fields.push({id:'kind'+i,label:'Product form',options:[['food','Food / gel / chews'],['drink','Drink portion'],['capsule','Capsule']]});
+  q.fields.push(numberField('reserve'+i,'Reserve servings · not scheduled','servings',100,0.5));
+  q.fields.push(numberField('first'+i,'First serving · minutes into this leg','min',600));
+  q.fields.push(Object.assign(numberField('every'+i,'Interval between servings / drink portions','min',600),{min:1}));
+  q.fields.push(numberField('water'+i,'Water per drink portion · 0 for food / capsules','ml',2000,10));
+ }
+});
+
+['bike','run'].forEach(function(leg){
+ var step=SURVEYS.fuel.steps[SURVEYS.fuel.steps.length-1],at=step.qs.findIndex(function(q){return q.id==='inventory_'+leg;});
+ step.qs[at].when=function(a){return a.inventoryMode==='enter'&&a['inventory_'+leg+'_none']!=='yes';};
+ step.qs.splice(at,0,{id:'inventory_'+leg+'_none',type:'choice',optional:true,label:'Will you pack fuel for the '+leg+'?',help:'Choose no only if you deliberately plan no food, nutrient drinks or capsules on this leg. Plain water is separate.',def:'no',when:function(a){return a.inventoryMode==='enter';},options:[['no','Yes · enter my products'],['yes','No fuel on this leg']]});
+});
+
 // ---------------- state ----------------
-var state=lsGet('state',{answers:{},done:{kit:false,fuel:false}});
-// Answers from a shared link: #a=<base64 json>
+function cleanState(raw){
+  if(!raw||typeof raw!=='object'||!raw.answers||typeof raw.answers!=='object'||Array.isArray(raw.answers))throw new Error('This is not a planner backup.');
+  var out={answers:{},done:{kit:!!(raw.done&&raw.done.kit===true),fuel:!!(raw.done&&raw.done.fuel===true)},unknown:{},setupMode:raw.setupMode==='full'?'full':'essentials'};
+  allQs().forEach(function(q){
+    var v=raw.answers[q.id];
+    if(v===undefined)return;
+    function validNumber(v,min,max,step){return (typeof v==='number'||typeof v==='string'&&v.trim()!=='')&&Number.isFinite(Number(v))&&+v>=min&&+v<=max&&Math.abs((+v-min)/step-Math.round((+v-min)/step))<0.00001;}
+    if(q.type==='fields'||q.type==='inventory'){
+      if(!v||typeof v!=='object'||Array.isArray(v))throw new Error('Invalid detail answer.');
+      var obj={};q.fields.forEach(function(f){var x=v[f.id];if(x===undefined||x==='')return;
+        if(f.type==='number'){if(!validNumber(x,f.min,f.max,f.step))throw new Error('Invalid number.');obj[f.id]=+x;}
+        else if(f.options){if(!f.options.some(function(o){return o[0]===x;}))throw new Error('Invalid option.');obj[f.id]=x;}
+        else {if(typeof x!=='string'||x.length>120)throw new Error('Invalid text.');if(f.type==='time'&&!/^([01]\d|2[0-3]):[0-5]\d$/.test(x))throw new Error('Invalid time.');if(f.type==='date'&&!/^\d{4}-\d{2}-\d{2}$/.test(x))throw new Error('Invalid date.');obj[f.id]=x;}
+      });out.answers[q.id]=obj;
+    }else if(q.type==='number'){if(!validNumber(v,q.min,q.max,q.step))throw new Error('Invalid number.');out.answers[q.id]=+v;}
+    else if(q.type==='text'){if(typeof v!=='string'||v.length>120)throw new Error('Invalid text.');out.answers[q.id]=v;}
+    else if(q.type==='multi'){if(typeof v==='string')v=[v];if(!Array.isArray(v)||!v.every(function(x){return q.options.some(function(o){return o[0]===x;});}))throw new Error('Invalid selection.');out.answers[q.id]=Array.from(new Set(v));}
+    else {if(!q.options.some(function(o){return o[0]===String(v);})&&!(q.id==='caffeine'&&v==='yes'))throw new Error('Invalid choice.');out.answers[q.id]=String(v);}
+  });
+  allQs().forEach(function(q){if(raw.unknown&&raw.unknown[q.id]===true)out.unknown[q.id]=true;});
+  if(typeof raw.pos==='string')out.pos=raw.pos;
+  if(raw.checks&&typeof raw.checks==='object'){out.checks={};Object.keys(raw.checks).forEach(function(k){if(/^[a-z][a-z0-9-]{0,99}$/.test(k)&&k!=='constructor'&&k!=='prototype'&&typeof raw.checks[k]==='boolean')out.checks[k]=raw.checks[k];});}
+  return out;
+}
+var state=lsGet('state',{answers:{},done:{kit:false,fuel:false}}),incoming=null,importError='';
+// Opening an answer link stages a preview. It never replaces saved answers automatically.
 (function(){
-  var m=location.hash.match(/[#&]a=([^&]+)/); if(!m) return;
-  try{
-    var inc=JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(m[1])))));
-    if(inc&&inc.answers){ state={answers:inc.answers,done:inc.done||{kit:true,fuel:true}}; lsSet('state',state); }
-    history.replaceState(null,'',location.pathname+location.search);
-  }catch(e){}
+  var m=location.hash.match(/[#&]a=([^&]+)/);if(!m)return;
+  try{if(m[1].length>100000)throw new Error('Link too large.');incoming=cleanState(JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(m[1]))))));}
+  catch(e){importError='This answer link is invalid or incomplete. Your saved plan has not changed.';}
+  history.replaceState(null,'',location.pathname+location.search);
 })();
+var STARTER_IDS='name weight insurance bike tyres width pedals cages wetsuit transport swimpace biketime runtime carbrate sources caffeine cafmg salt mixbottles refill gelg barg chewg mixg mixna capna bottleml'.split(' ');
+function starterQuestion(q){return STARTER_IDS.indexOf(q.id)>=0;}
+function pendingAnswers(){return pendingQuestions(state,answers());}
+function pendingQuestions(raw,a){
+  return allQs().filter(function(q){
+    if(q.when&&!q.when(a))return false;
+    var v=raw.answers[q.id],unknown=raw.unknown||{};
+    if(unknown[q.id]||v==='unknown'||v==='unsure')return true;
+    if(!q.optional&&q.type!=='text'&&v===undefined)return true;
+    if(q.type==='inventory'&&a.inventoryMode==='enter')return !inventorySchedule(a,q.id.slice(10),(q.id==='inventory_bike'?+a.biketime:+a.runtime)+(a.timebasis==='moving'?((a.allowances||{})[q.id.slice(10)+'Stops']||0):0)).ready;
+    if(q.type==='fields'&&v&&Object.keys(v).length&&q.fields.some(function(f){return (!f.when||f.when(a))&&(v[f.id]==='unknown'||v[f.id]==='undecided');}))return true;
+    if(q.id==='allowances')return !present((a.allowances||{}).t1)||!present((a.allowances||{}).t2)||(a.timebasis==='moving'&&(!present((a.allowances||{}).bikeStops)||!present((a.allowances||{}).runStops)));
+    if(q.id==='capacity'&&a.capacityMode==='exact')return Array.from({length:+a.cages},function(_,i){return (a.capacity||{})['b'+(i+1)];}).some(function(x){return !present(x);});
+    return false;
+  });
+}
+function assumptionNote(ids,extra){
+  var a=answers(),pending=pendingAnswers(),items=[];
+  ids.forEach(function(id){var q=pending.find(function(q){return q.id===id;});if(!q)return;var v=a[id],value=Array.isArray(v)?v.join(', '):typeof v==='object'?'incomplete details':String(v);if(q.options&&!Array.isArray(v)){var option=q.options.find(function(o){return String(o[0])===String(v);});if(option)value=option[1];}items.push(esc(q.label)+' — '+esc(value)+(q.unit?' '+esc(q.unit):'')+' (provisional)');});
+  (extra||[]).forEach(function(x){items.push(esc(x));});
+  return '<aside class="result-assumptions"><b>Basis of this result</b><ul>'+items.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul><button type="button" class="insight-edit" data-unknown-review>Review my unknowns</button></aside>';
+}
+function nextActions(a,P){
+  var checks=lsGet('checks',{}),items=[];tasks(a,P).forEach(function(g){g.items.forEach(function(it){if(!checks['task-'+it.k])items.push(it);});});
+  items.sort(function(x,y){return Number(!!y.req)-Number(!!x.req);});
+  return '<div class="next-actions"><h3>Your next three steps</h3>'+(items.length?'<ol>'+items.slice(0,3).map(function(it){return '<li><b>'+it.title+'</b><p>'+it.sub+'</p><small>'+it.when+'</small></li>';}).join('')+'</ol>':'<p>All preparation tasks are checked. Review final organiser updates before the race.</p>')+'<div class="next-links"><button type="button" data-plan-go="openitems">Packing &amp; tasks</button><button type="button" data-plan-go="fuel">Fuel plan</button><button type="button" data-plan-go="pacing">Pacing</button></div></div>';
+}
+
 function allQs(){ var o=[]; Object.keys(SURVEYS).forEach(function(k){ SURVEYS[k].steps.forEach(function(s){ s.qs.forEach(function(q){ o.push(q); }); }); }); return o; }
-function answers(){ var a={}; allQs().forEach(function(q){ var v=state.answers[q.id]; if(q.type==='multi'&&typeof v==='string') v=[v]; a[q.id]=(v===undefined)?(Array.isArray(q.def)?q.def.slice():q.def):v; }); return a; }
+function answers(){ var a={}; allQs().forEach(function(q){ var v=state.answers[q.id]; if(q.type==='multi'&&typeof v==='string') v=[v]; a[q.id]=(v===undefined)?(Array.isArray(q.def)?q.def.slice():q.def):v; }); a._unknown=state.unknown||{};return a; }
 function save(){ lsSet('state',state); }
 
 // ---------------- computation ----------------
-var COURSE={bikeKm:86.4, w1:34.2, w2:68, techKm:25, fW1:0.42, fW2:0.76, cutSwim:59, cutT2:409, cutFin1:479, cutFin2:539};
+var COURSE={bikeKm:86.4, w1:34.3, w2:68, techKm:25, fW1:0.42, fW2:0.76, cutSwim:59, cutT2:409, cutFin1:479, cutFin2:539};
 // Terrain-weighted time fractions: the technical first 34 km take ~42% of bike time, not 40%.
 function kmAt(t,B){ var A=[[0,0],[COURSE.fW1*B,COURSE.w1],[COURSE.fW2*B,COURSE.w2],[B,COURSE.bikeKm]];
   for(var i=1;i<A.length;i++){ if(t<=A[i][0]){ var p=A[i-1],q=A[i]; return p[1]+(q[1]-p[1])*(t-p[0])/(q[0]-p[0]); } } return COURSE.bikeKm; }
@@ -1606,12 +1821,14 @@ function timeAtKm(km,B){ var A=[[0,0],[COURSE.w1,COURSE.fW1*B],[COURSE.w2,COURSE
 
 function compute(a){
   var P={a:a, warn:[]};
-  var swim=15*(+a.swimpace)/60, B=+a.biketime, R=+a.runtime;
+  var al=a.allowances||{}, extra=a.timebasis==='moving';
+  var swim=15*(+a.swimpace)/60, B=+a.biketime+(extra?(al.bikeStops||0):0), R=+a.runtime+(extra?(al.runStops||0):0);
+  var t1=al.t1==null?8:al.t1, t2=al.t2==null?6:al.t2;
   P.swim=swim; P.B=B; P.R=R;
   P.scen=[
-    {k:'Best',why:'clean day, a good group on the plain',sw:swim*0.95,t1:6,bk:B*0.93,t2:4,rn:R*0.93},
-    {k:'Base',why:'your answers',sw:swim,t1:8,bk:B,t2:6,rn:R,base:true},
-    {k:'Slow',why:'a flat, wind, a navigation error',sw:swim*1.1,t1:10,bk:B*1.18,t2:8,rn:R*1.15}
+    {k:'Best',why:'clean day, a good group on the plain',sw:swim*0.95,t1:Math.max(0,t1-2),bk:B*0.93,t2:Math.max(0,t2-2),rn:R*0.93},
+    {k:'Base',why:'your answers',sw:swim,t1:t1,bk:B,t2:t2,rn:R,base:true},
+    {k:'Slow',why:'a flat, wind, a navigation error',sw:swim*1.1,t1:t1+2,bk:B*1.18,t2:t2+2,rn:R*1.15}
   ];
   P.scen.forEach(function(s){ s.swimExit=s.sw; s.t2Out=s.sw+s.t1+s.bk; s.runStart=s.t2Out+s.t2; s.fin=s.runStart+s.rn; });
   var base=P.scen[1], slow=P.scen[2];
@@ -1627,11 +1844,14 @@ function compute(a){
   // ---- fuel ----
   var H=B/60, rate=+a.carbrate, gelg=+a.gelg||25, barg=+a.barg||40, chewg=+a.chewg||24, mixg=+a.mixg||60;
   var cages=+a.cages, bml=+a.bottleml||750;
+  var cap=a.capacity||{}, exact=a.capacityMode==='exact';
+  var volumes=Array.from({length:cages},function(_,i){return exact&&cap['b'+(i+1)]!=null?cap['b'+(i+1)]:bml;});
+  var pack=exact?(cap.pack||0):0; P.volumes=volumes; P.packWater=pack; P.bottleDescription=volumes.join(' + ')+' ml'+(pack?' + '+pack+' ml pack':'');
   var src=a.sources||[];
   var useMix=src.indexOf('mix')>=0, useGel=src.indexOf('gels')>=0, useBar=src.indexOf('bars')>=0, useChew=src.indexOf('chews')>=0;
   if(!src.length){ useGel=true; P.warn.push(['rec','No carb source chosen — the plan assumes gels. Change it in survey 02.']); }
   P.bikeCarbs=Math.round(rate*H);
-  var fr={light:500,avg:650,heavy:800}[a.sweat]||650;
+  var fr=(a.waterPlan||{}).bikeRate; if(fr==null) fr={light:500,avg:650,heavy:800}[a.sweat]||650;
   // ---- bottles: what each cage holds on each leg (start→W1, W1→W2, W2→T2) ----
   var legs=[[0,COURSE.fW1*B],[COURSE.fW1*B,COURSE.fW2*B],[COURSE.fW2*B,B]];
   var elecOwn=has(a,'salt','mix')&&!useMix;
@@ -1642,18 +1862,18 @@ function compute(a){
   function startKind(c){ return c<nMixStart?'mix':(c<nMixStart+nElecStart?'elec':'water'); }
   function refillKind(c){ var k=startKind(c); if(k==='water'||refill==='water') return 'water'; if(refill==='station') return k==='mix'?'station':'water'; return k; }
   // W2 → T2 is short: fill only what the last leg needs, flavoured bottles first
-  var need2=fr*(legs[2][1]-legs[2][0])/60, fill2=Math.min(cages,Math.max(1,Math.ceil(need2/bml)));
+  var need2=fr*(legs[2][1]-legs[2][0])/60, fill2=exact?cages:Math.min(cages,Math.max(1,Math.ceil(need2/bml)));
   var rows=[]; for(var c=0;c<cages;c++) rows.push([startKind(c),refillKind(c),c<fill2?refillKind(c):null]);
   var mixna=+a.mixna||0, legDrinkG=[0,0,0];
   P.mixPortions=0; P.saltPortions=0; P.powderMix=0; P.powderElec=0; P.stationBottles=0; P.naFromMix=0;
   // you only get the carbs and sodium you actually drink: flavoured bottles are drunk first, water after;
   // if even those hold more than you drink before the next stop, count the share you drink
-  var legFrac=legs.map(function(L,li){ var flav=rows.filter(function(r){ return r[li]&&r[li]!=='water'; }).length; return flav?Math.min(1,fr*(L[1]-L[0])/60/(flav*bml)):1; });
-  rows.forEach(function(r){ r.forEach(function(k,li){
-    var f=legFrac[li];
+  var legFrac=legs.map(function(L,li){ var flav=rows.reduce(function(sum,r,ci){return sum+(r[li]&&r[li]!=='water'?volumes[ci]:0);},0); return flav?Math.min(1,fr*(L[1]-L[0])/60/flav):0; });
+  rows.forEach(function(r,ci){ r.forEach(function(k,li){
+    var f=volumes[ci]>0?legFrac[li]:0;
     if(k==='mix'){ legDrinkG[li]+=mixg*f; P.naFromMix+=mixna*f; P.mixPortions++; if(li) P.powderMix++; }
     else if(k==='elec'){ P.naFromMix+=mixna*f; P.saltPortions++; if(li) P.powderElec++; }
-    else if(k==='station'){ legDrinkG[li]+=stationG*f; P.stationBottles++; }
+    else if(k==='station'){ legDrinkG[li]+=80*volumes[ci]/1000*f; P.stationBottles++; }
   }); });
   legDrinkG=legDrinkG.map(Math.round); P.naFromMix=Math.round(P.naFromMix); P.legFrac=legFrac;
   if(legFrac.some(function(f,li){ return f<0.8&&rows.some(function(r){ return r[li]==='mix'||r[li]==='station'; }); })) P.warn.push(['rec','At '+fr+' ml/h you will not finish every bottle before the next stop, so the plan only counts the share you drink. Fewer flavoured bottles, or a stronger mix you have trained with, gets the carbs in.']);
@@ -1714,10 +1934,10 @@ function compute(a){
     P.cum.push([t,eaten+dr,rate*t/60]); }
 
   // fluid
-  P.fluidRate=fr; P.capacity=cages*bml;
-  P.seg=[{from:'T1',to:'W1 · km 34.2',min:COURSE.fW1*B},{from:'W1',to:'W2 · km 68',min:(COURSE.fW2-COURSE.fW1)*B},{from:'W2',to:'T2 · km 86.4',min:(1-COURSE.fW2)*B}];
+  P.fluidRate=fr; P.capacity=volumes.reduce(function(sum,v){return sum+v;},0)+pack;
+  P.seg=[{from:'T1',to:'W1 · km 34.3',min:COURSE.fW1*B},{from:'W1',to:'W2 · km 68',min:(COURSE.fW2-COURSE.fW1)*B},{from:'W2',to:'T2 · km 86.4',min:(1-COURSE.fW2)*B}];
   P.seg.forEach(function(s){ s.need=Math.round(fr*s.min/60/50)*50; s.short=s.need>P.capacity; });
-  if(P.seg[0].short||P.seg[1].short) P.warn.push(['rec','At '+fr+' ml/h a leg between stops needs up to '+fmtNum(Math.max(P.seg[0].need,P.seg[1].need))+' ml; you carry '+fmtNum(P.capacity)+' ml. Add a cage or bigger bottles, or drink 500 ml before the start.']);
+  if(P.seg[0].short||P.seg[1].short) P.warn.push(['rec','At '+fr+' ml/h a leg between stops needs up to '+fmtNum(Math.max(P.seg[0].need,P.seg[1].need))+' ml; you carry '+fmtNum(P.capacity)+' ml. Check your carrying capacity and refill plan before race day.']);
 
   // sodium
   var nr={light:400,avg:600,heavy:850}[a.sweat]||600; if(a.salty==='yes') nr+=200;
@@ -1748,6 +1968,7 @@ function compute(a){
   P.preload=(a.sweat==='heavy'||a.salty==='yes'||has(a,'salt','mix'));
   var nmClean=function(v){ return String(v||'').trim(); };
   P.names={gel:nmClean(a.gelname),bar:nmClean(a.barname),mix:nmClean(a.mixname)};
+  if(a.inventoryMode==='enter') applyInventory(a,P);
   return P;
 }
 
@@ -1790,6 +2011,7 @@ function packRows(a,P){
   R.push({g:'Fuel'});
   var tot=function(n,u){ return n+' × '+u; };
   var nmTag=function(k){ return P.names&&P.names[k]?' <small>'+esc(P.names[k])+'</small>':''; };
+  if(!P.actualInventory){
   if(P.mixPortions){ var ms=P.mixPortions-P.powderMix; R.push({k:'mix',l:'Drink mix · '+P.mixPortions+' portion'+(P.mixPortions>1?'s':'')+nmTag('mix'),c:['',ms+' mixed before the swim'+(P.powderMix?' · '+P.powderMix+' in vials for the stops':''),'']}); }
   if(P.saltPortions){ var es=P.saltPortions-P.powderElec; R.push({k:'saltmix',l:'Electrolyte powder · '+P.saltPortions+' portion'+(P.saltPortions>1?'s':''),c:['',es+' mixed before the swim'+(P.powderElec?' · '+P.powderElec+' in vials for the stops':''),'']}); }
   var runG=P.runKind==='gel'?P.runUnits+P.runSpare:0, runC=P.runKind==='chew'?P.runUnits+P.runSpare:0;
@@ -1799,9 +2021,13 @@ function packRows(a,P){
   if(P.nChew||runC) R.push({k:'chews',l:'Chew packs · '+(P.nChew+runC),c:['',P.nChew?P.nChew+' · '+carryPlace:'',runC?runC+' · T2 bag':''],bag:runC?{t2:runC+' × chews'}:null});
   if(P.caps||P.runCaps){ var tc=P.caps+P.runCaps+2; R.push({k:'caps',l:'Sodium capsules · '+tc+' <small>incl. 2 spare</small>',c:['',P.caps?P.caps+' + 2 in a pill vial':'',P.runCaps?P.runCaps+' · T2 bag':''],bag:P.runCaps?{t2:P.runCaps+' × capsule'}:null}); }
   if(P.powderMix||P.powderElec) R.push({k:'vials',l:'Screw-top vials for powder',c:['','Suit pocket · powder first, then water','']});
+  }else{
+    ['bike','run'].forEach(function(leg){P.actualInventory[leg].rows.forEach(function(r){var label=r.qty+' × '+esc(r.name)+' <small>'+r.reserve+' reserved</small>',bag={};bag[leg==='bike'?'t1':'t2']=label;
+      R.push({k:'inventory-'+leg+'-'+r.id,l:label,c:['',leg==='bike'?'Prepare before swim / carry on bike':'',leg==='run'?'Black T2 bag':''],bag:bag});});});
+  }
   if(a.runcarry!=='none') R.push({k:'runcarry',l:{flask:'Soft flask',bottle:'Handheld bottle',belt:'Run belt or vest'}[a.runcarry],c:['','','T2 bag · fill with station water'],bag:{t2:{flask:'Soft flask',bottle:'Handheld bottle',belt:'Run belt or vest'}[a.runcarry]}});
   if(P.preload) R.push({k:'preload',l:'500 ml bottle for a pre-start drink',c:['Cloakroom','',''],bag:{cl:'500 ml bottle + electrolyte'}});
-  R.push({k:'bottles',l:a.cages+' bike bottle'+(a.cages!=='1'?'s':'')+' · '+a.bottleml+' ml',c:['','On the bike','Leave at T2']});
+  R.push({k:'bottles',l:'Bike water · '+P.bottleDescription,c:['','On the bike','Leave at T2']});
 
   R.push({g:'Repair · on the bike'});
   if(a.tyres==='tubeless'){
@@ -1839,8 +2065,8 @@ function renderPack(a,P){
 function bagContents(rows,P,a){
   var b={t1:[],t2:[],cl:[]};
   rows.forEach(function(r){ if(r.bag) Object.keys(r.bag).forEach(function(k){ b[k].push(r.bag[k]); }); });
-  if(P.caps) b.t1.push('Capsule vial · '+(P.caps+2));
-  if(P.powderMix||P.powderElec) b.t1.push('Powder vials for the stops');
+  if(!P.actualInventory&&P.caps) b.t1.push('Capsule vial · '+(P.caps+2));
+  if(!P.actualInventory&&(P.powderMix||P.powderElec)) b.t1.push('Powder vials for the stops');
   b.cl.push('Phone + wallet if not carried','Dry clothes for after');
   return b;
 }
@@ -1853,7 +2079,7 @@ function renderBike(a,P){
   rows.push(['Pressure','<b>'+p.f+' bar front · '+p.r+' rear</b> · at '+a.weight+' kg · <b>floor '+p.floor+'</b>'+(a.tyres==='tubes'?' (pinch flats)':''),'rec','Test on rough gravel']);
   rows.push(['Gearing','<b>Lowest gear ≤ 1:1</b> (e.g. 40 × 42+ or 30 × 34) · ~12% pitches in km 0–25','rec','Check your lowest ratio']);
   rows.push(['Pedals',a.pedals==='flat'?'<b>Pinned flat pedals</b> · '+(a.shoes==='same'?'same shoes for the run':'run-shoe change at T2'):'<b>Clipless</b> · cleats tight, easy to walk steep pitches','rec',a.pedals==='flat'?'Long ride on them first':'Check cleat bolts']);
-  rows.push(['Cages','<b>'+a.cages+' × '+a.bottleml+' ml</b> · '+fmtNum(P.capacity)+' ml between stops',(+a.cages>=2)?'ok':'rec',(+a.cages>=2)?'—':'Add a cage if you can']);
+  rows.push(['Cages','<b>'+P.bottleDescription+'</b> · '+fmtNum(P.capacity)+' ml between stops',(+a.cages>=2)?'ok':'rec',(+a.cages>=2)?'—':'Add a cage if you can']);
   rows.push(['Storage',(a.storage||[]).map(function(s){ return {saddle:'saddle bag',toptube:'top-tube bag',pockets:'suit pockets'}[s]; }).join(' · ')+' · food reachable while riding, spares separate','rec','Pack and ride it once']);
   rows.push(['Repair kit',a.tyres==='tubeless'?'Plugs, <b>1 tube '+tubeSize(a)+'</b>, valve tool, levers, boot, pump':'<b>2 tubes '+tubeSize(a)+'</b>, valves long enough for the rims, levers, boot, <b>a pump, not a lone CO2</b>','rec',rental?'Check at pickup':'Check contents']);
   rows.push(['Navigation',{unit:'Bike computer',watch:'Watch',phone:'Phone on the bars'}[a.nav]+' · <b>GPX loaded and following</b> · the gravel leg is unsigned','rec','Load the final GPX']);
@@ -1871,9 +2097,9 @@ function tasks(a,P){
   add(0,'rehearse','Rehearse the fuel plan','Ride 3 h+ eating exactly what the plan says, at the times it says.','Before travel','Every product and the '+P.bikeRate+' g/h rate tried on one ride.','Nothing debuts on race day. If a product upsets you, change it in survey 02 and rehearse again.');
   add(0,'gpx','Load the route','Load the GPX into your '+{unit:'bike computer',watch:'watch',phone:'phone'}[a.nav]+' and follow it on a ride.','When the organiser publishes the final GPX','Track shows, turn alerts work, battery lasts 6 h+.','The gravel leg is unsigned — course deviation is a DQ. The run is marked (red ribbons, blue arrows).');
   if(a.openwater==='no') add(0,'ow','One open-water session','Swim 20–30 min in your wetsuit in open water.','Before travel','Wetsuit on, sighting practised, cold water no surprise.','Sea around 18.5 °C in mid-October. Sight every 6–8 strokes for the turns.');
-  if(a.flatfix==='no') add(0,'flat','Fix a flat on this bike','Change a tube'+(a.tyres==='tubeless'?' or plug a tyre':'')+' at home, timed, with the kit you will carry.','Before travel','Done once with race kit, under 10 min.','Cap de Creus is rocky and the first aid is at km 34.2.');
+  if(a.flatfix==='no') add(0,'flat','Fix a flat on this bike','Change a tube'+(a.tyres==='tubeless'?' or plug a tyre':'')+' at home, timed, with the kit you will carry.','Before travel','Done once with race kit, under 10 min.','Cap de Creus is rocky and the first aid is at km 34.3.');
   if(a.gravel==='first') add(0,'gravel','Gravel skills ride','Ride rocky descents and loose climbs on the bike you will race.','Before travel','Comfortable at race pressure on rough ground.','First gravel race on 93% unpaved terrain. Conservative lines; walk what you would not ride at home.');
-  if(a.pedals==='flat') add(0,'flatped','Long ride on flat pedals','3 h in the shoes you will race in.','Before travel','No hot spots; feet fine for the run.','Around 19,000 pedal revolutions, then 10.5 km on the same feet.');
+  if(a.pedals==='flat') add(0,'flatped','Long ride on flat pedals','3 h in the shoes you will race in.','Before travel','No hot spots; feet fine for the run.','Around 19,000 pedal revolutions, then 10.4 km on the same feet.');
   if(a.wetsuit!=='own') add(0,'wetsuit','Sort the wetsuit',a.wetsuit==='need'?'Buy, rent or borrow a wetsuit.':'Confirm the rental and try it on.','Before travel','Wetsuit in hand and swum in once.','Wetsuits are expected.');
   if(a.tyres==='unsure') add(0,'tyres','Tubeless or tubes?','Find out — it decides the repair kit and pressure.','Before travel','Setup known; repair kit matches.','');
   if(a.bike==='rental') add(0,'rental','Confirm the rental spec','Tyres, gearing, pedals, cages and repair kit.','Before travel','Spec in writing; pickup time fixed.','See the bike checks above for what to ask.');
@@ -1881,16 +2107,17 @@ function tasks(a,P){
   if(miss.length) add(0,'extras','Decide on '+miss.join(', '),'Buy, borrow or decide against, from the forecast.','Friday forecast','Decided and packed, or consciously left.','Climatology, not a forecast: ~14 °C at 09:00 in Cadaqués, 20 °C later, north wind on the plain, ~18% wet-day odds.');
   add(0,'breakfast','Race breakfast written down','Write your familiar breakfast and time.','Before travel','Contents, quantities and time recorded ('+P.breakfast+').','Familiar food only. Nothing new within 48 h of the start.');
   if(P.powderMix||P.powderElec||P.caps) add(0,'portion','Portion the fuel','Powder into screw-top vials; capsules decanted into a pill vial.','Two days out','Every portion labelled by where it is used.','Powder first, water second. You open these with cold, wet or gloved hands.');
-  add(1,'bags','Bag drop and collection','Confirm where bags are dropped and collected.','At check-in','Times and places recorded.','The organiser’s timetable and the race briefing disagree on the drop window (12:00–16:00 vs 13:00–17:00) and the bag collection point. Use the 13:00–16:00 overlap.');
+  add(1,'bags','Bag drop and collection','Confirm where bags are dropped and collected.','At check-in','Times and places recorded.','The organiser’s timetable and the race briefing disagree on the drop window (12:00–16:00 vs 13:00–17:00) and the bag collection point. The current timetable lists 12:00–16:00 for bikes; verify the bag procedure.');
   add(1,'drink','Station drink','Ask which drink is at the stations, and at what strength.','At check-in','Product and concentration recorded.','It is your fallback if a bottle is lost — the carb maths depends on it.');
-  add(1,'refill','Water refills at W1 and W2','Ask whether refills are jugs or handed bottles.','At check-in','Refill method known.','Refills at km 34.2 and km 68 are mandatory stops. It decides how long they take.');
+  add(1,'refill','Water refills at W1 and W2','Ask whether refills are jugs or handed bottles.','At check-in','Refill method known.','Refills at km 34.3 and km 68 are mandatory stops. It decides how long they take.');
   add(1,'cutoff','Which finish limit applies','Ask whether 16:59 or 17:59 binds at the finish.','At check-in','Binding limit recorded.','The timetable lists a 16:59 trail limit alongside the 17:59 overall. Your slow scenario: '+clock(P.scen[2].fin)+'.');
   if(a.checkin==='sat') add(2,'satcheck','Check in early on Saturday','Check-in opens 12:00; the bike drop closes 16:00.','Saturday before 13:00','Checked in with bags and bibs in hand.','Check-in hands you the T2 bag and bibs you need for the bike drop. Leave margin.');
   add(2,'bib','Gravel bib and stem label on the bike','Fit them the day before.','After check-in','Bib under the saddle, stem label on.','');
-  add(2,'drop','Drop the bike and black T2 bag','GEiEG de Sant Ponç, Girona.','Saturday 13:00–16:00','Bike racked, T2 bag handed in.','Nothing wet or pre-mixed in the T2 bag — it waits about 20 h.');
+  add(2,'drop','Drop the bike and black T2 bag','GEiEG de Sant Ponç, Girona.','Saturday 12:00–16:00','Bike racked, T2 bag handed in.','Nothing wet or pre-mixed in the T2 bag — it waits about 20 h.');
   add(2,'packsun','Pack the white T1 bag and personal bag','Both travel with you on Sunday.','Saturday evening','Both packed; bottles ready to fill.','');
   if(a.transport==='bus') add(2,'bus','Take an early bus','La Copa, Girona · staggered buses 06:15–06:45.','Sunday 06:15','On the bus.','T1 preparation is 08:00–08:45 in Cadaqués.');
   else add(2,'drive','Plan the drive to Cadaqués','Parking and the route; T1 closes 08:45.','Before the weekend','Route and parking known.','Ask the organiser about parking and getting back from Girona.');
+  planningActions(a).forEach(function(it){add(0,it.key,esc(it.title),esc(it.action),it.deadline,'Detail confirmed in your answers.','');});
   return G;
 }
 function renderTasks(G,checks){
@@ -1924,11 +2151,11 @@ function renderPhases(a,P,bags){
     html:'<div class="zone"><div class="zh">On arrival · in order</div><ol class="rail"><li>Up the beach, past the aid station</li>'+t1steps.map(function(s,i){ return '<li>'+cb('tr-t1-'+i,s,' data-transition="1"')+'</li>'; }).join('')+'</ol></div><div class="zone"><div class="zh">In the white bag</div>'+chips(bags.t1)+'</div><details class="prov notes"><summary>Notes</summary><p>Riding inside T1 is +30 min. Target 6–8 min.</p></details>'};
   // bike
   var nmOf=function(k){ return P.names&&P.names[k]?' · '+esc(P.names[k]):''; };
-  var fl=P.feeds.map(function(f){ var lab=f.cafOnly?'Caffeine · '+P.cafMg+' mg':({gel:(f.caf?'Gel · caffeine':'Gel')+nmOf('gel'),bar:(P.barHalves?'½ bar':'Bar')+nmOf('bar'),chew:'Chews'}[f.kind]); return '<li><time>'+hm(f.t)+'</time><span>'+lab+'</span><small>km '+Math.round(f.km)+' · '+Math.round(f.g)+' g</small></li>'; });
-  var stops=[[hm(COURSE.fW1*P.B),'W1 · km 34.2 · <b>mandatory water</b> · '+P.stopText[0]],[hm(COURSE.fW2*P.B),'W2 · km 68 · <b>mandatory water</b> · '+P.stopText[1]]];
+  var fl=P.feeds.map(function(f){ var lab=f.label?esc(f.label):f.cafOnly?'Caffeine · '+P.cafMg+' mg':({gel:(f.caf?'Gel · caffeine':'Gel')+nmOf('gel'),bar:(P.barHalves?'½ bar':'Bar')+nmOf('bar'),chew:'Chews'}[f.kind]); return '<li><time>'+hm(f.t)+'</time><span>'+lab+'</span><small>km '+Math.round(f.km)+' · '+Math.round(f.g)+' g</small></li>'; });
+  var stops=[[hm(COURSE.fW1*P.B),'W1 · km 34.3 · <b>mandatory water</b> · '+P.stopText[0]],[hm(COURSE.fW2*P.B),'W2 · km 68 · <b>mandatory water</b> · '+P.stopText[1]]];
   var bottleLine=P.fillText(0)+(P.mixCarbs?' · '+P.mixCarbs+' g from bottles over the ride':'');
   out.bike={pd:P.bikeTotal+' g carbs over '+hm(P.B)+' · ≈'+P.bikeRate+' g/h', brief:'Eat on the clock, not on hunger; follow the GPS.',
-    html:'<div class="carry"><div class="zone"><div class="zh">On the bike</div><ul class="plain"><li><b>'+a.cages+' × '+a.bottleml+' ml</b> · '+bottleLine+'</li><li>Refill at W1 and W2 — '+P.fluidRate+' ml/h</li></ul></div>'+
+    html:'<div class="carry"><div class="zone"><div class="zh">On the bike</div><ul class="plain"><li><b>'+P.bottleDescription+'</b> · '+bottleLine+'</li><li>Refill at W1 and W2 — '+P.fluidRate+' ml/h</li></ul></div>'+
     '<div class="zone"><div class="zh">Food</div><ul class="plain">'+(P.nGelBike?'<li><b>'+P.nGelBike+' × gel</b>'+nmOf('gel')+(P.caf.length-P.nCafOnly>0?' · '+(P.caf.length-P.nCafOnly)+' with caffeine':'')+'</li>':'')+(P.nCafOnly?'<li><b>'+P.nCafOnly+' × caffeine dose</b> · '+P.cafMg+' mg</li>':'')+(P.nBar?'<li><b>'+P.nBar+' × bar</b>'+nmOf('bar')+' · '+(P.barHalves?'eaten in halves, ':'')+'after km 25, none in the last hour</li>':'')+(P.nChew?'<li><b>'+P.nChew+' × chews</b></li>':'')+(P.mixPortions?'<li><b>'+P.mixPortions+' × drink mix</b>'+nmOf('mix')+'</li>':'')+(P.stationBottles?'<li><b>'+P.stationBottles+' × station drink</b> · ~'+P.stationG+' g each</li>':'')+'</ul></div>'+
     '<div class="zone"><div class="zh">Sodium</div><ul class="plain">'+(P.caps?'<li><b>'+P.caps+' capsules</b> · 1 every ~'+P.capEvery+' min</li>':'')+(P.naFromMix?'<li>'+fmtNum(P.naFromMix)+' mg from the bottles</li>':'')+'<li>Target ~'+fmtNum(P.naRate)+' mg/h</li></ul></div></div>'+
     '<div class="zone feedzone"><div class="zh">Feed clock · elapsed bike time</div><ol class="feedlist">'+fl.join('')+'</ol><ol class="feedlist stops">'+stops.map(function(s){ return '<li><time>'+s[0]+'</time><span>'+s[1]+'</span></li>'; }).join('')+'</ol></div>'+
@@ -1938,18 +2165,28 @@ function renderPhases(a,P,bags){
   if(a.runcarry!=='none') t2steps.push({flask:'Soft flask',bottle:'Handheld bottle',belt:'Belt bottles'}[a.runcarry]+': fill with station water');
   t2steps.push('Trail bib on the front'+(P.runUnits?' · run food in a pocket':''));
   t2steps.push('Black bag → deposit · helmet stays with the bike');
-  out.t2={pd:'black bag · dropped in Girona Saturday 13:00–16:00', brief:'Dismount before entering.',
+  out.t2={pd:'black bag · dropped in Girona Saturday 12:00–16:00', brief:'Dismount before entering.',
     html:'<div class="zone"><div class="zh">On arrival · in order</div><ol class="rail">'+t2steps.map(function(s,i){ return '<li>'+cb('tr-t2-'+i,s,' data-transition="1"')+'</li>'; }).join('')+'</ol></div><div class="zone"><div class="zh">In the black bag</div>'+chips(bags.t2.length?bags.t2:['Trail bib'])+'</div><details class="prov notes"><summary>Notes</summary><p>Nothing wet and nothing pre-mixed — the bag leaves your hands about 20 h before you open it.</p><p>Aid here: Maurten, water, fruit, food, coffee. Riding into T2 is a penalty. Target 5–6 min.</p></details>'};
   var runFood=P.runUnits+' × '+(P.runKind==='gel'?'gel':'chews')+' + '+P.runSpare+' spare'+(P.runCaf?' · 1 with caffeine ('+P.cafMg+' mg)':'');
   out.run={pd:runFood+' · ≈'+P.runCarbTarget+' g', brief:'There are climbs after the main descent.',
-    html:'<div class="carry"><div class="zone"><div class="zh">Carry</div><ul class="plain"><li><b>'+runFood+'</b></li>'+(a.runcarry!=='none'?'<li>'+{flask:'Soft flask',bottle:'Handheld bottle',belt:'Belt bottles'}[a.runcarry]+' · refill at the castle aid, km 4.2</li>':'<li>Drink at T2, the castle aid at km 4.2 and the finish</li>')+(P.runCaps?'<li>'+P.runCaps+' capsule'+(P.runCaps>1?'s':'')+'</li>':'')+'</ul></div>'+
-    '<div class="zone"><div class="zh">The course</div><ul class="plain"><li>250 m up in 4.5 km — hike the steep parts</li><li>Castle aid · km 4.2 · water, Maurten, fruit</li><li>3 km down to Font del Ferro, then a 50 m kicker</li><li>A 20 m sting 1 km out, then 20 finish steps</li></ul></div></div>'+
+    html:'<div class="carry"><div class="zone"><div class="zh">Carry</div><ul class="plain"><li><b>'+runFood+'</b></li>'+(a.runcarry!=='none'?'<li>'+{flask:'Soft flask',bottle:'Handheld bottle',belt:'Belt bottles'}[a.runcarry]+' · refill at the castle aid, km 4.4</li>':'<li>Drink at T2, the castle aid at km 4.4 and the finish</li>')+(P.runCaps?'<li>'+P.runCaps+' capsule'+(P.runCaps>1?'s':'')+'</li>':'')+'</ul></div>'+
+    '<div class="zone"><div class="zh">The course</div><ul class="plain"><li>250 m up in 4.5 km — hike the steep parts</li><li>Castle aid · km 4.4 · water, Maurten, fruit</li><li>3 km down to Font del Ferro, then a 50 m kicker</li><li>A 20 m sting 1 km out, then 20 finish steps</li></ul></div></div>'+
     '<div class="sumbar"><span>Out of T2 ≈ <b>'+clock(base.runStart)+'</b></span><span>Finish ≈ <b>'+clock(base.fin)+'</b></span><span>'+(base.fin<=COURSE.cutFin1?Math.round(COURSE.cutFin1-base.fin)+' min to 16:59':Math.round(COURSE.cutFin2-base.fin)+' min to 17:59')+'</span></div>'};
+  if(P.actualInventory){
+    out.bike.html=inventoryTimeline(P.actualInventory.bike,'Bike')+'<p>Stop at W1 and W2. '+esc(P.stopText.join(' · '))+'</p>';
+    out.bike.brief='Follow your entered product schedule; reserves stay separate.';
+    out.run.pd=fmtNum(P.actualInventory.run.used.carb)+' g scheduled carbohydrate · '+dur(P.R);
+    out.run.html=inventoryTimeline(P.actualInventory.run,'Run')+'<p>Castle aid at km 4.4. Climbs continue after the main descent. Base finish estimate: '+clock(base.fin)+'.</p>';
+    out.run.brief='Collect your entered run products from the black T2 bag.';
+    out.swim.note='<p>Estimated swim exit: '+clock(base.sw)+'. Swim cutoff: 09:59.</p><p>At T1, collect the bike products in your packing list. The feed clock starts when the bike leg starts.</p>';
+    out.pre.html+='<p>Prepare your entered bike drink portions according to their labels; keep later portions accessible for refills.</p>';
+  }
   return out;
 }
 
 // ---------------- fuel totals, pacing, risks, feed chart ----------------
 function renderFuel(a,P){
+  if(P.actualInventory)return renderActualFuel(P);
   var runNa=P.runCaps*(+a.capna||250);
   return '<div class="fkv2"><ul class="fkv">'+
    '<li><span class="k">Carbs, bike</span><span class="v">'+P.bikeTotal+' g <small>≈'+P.bikeRate+' g/h over '+hm(P.B)+'</small></span></li>'+
@@ -1959,7 +2196,7 @@ function renderFuel(a,P){
    '</ul><ul class="fkv">'+
    '<li><span class="k">Fluid</span><span class="v">'+fmtNum(P.capacity)+' ml on board · ≈'+P.fluidRate+' ml/h <small>refill at W1 and W2</small></span></li>'+
    '<li><span class="k">Sodium</span><span class="v">target ≈'+fmtNum(P.naRate)+' mg/h <small>planned '+fmtNum(P.naPlanned)+' mg on the bike'+(runNa?' · '+fmtNum(runNa)+' on the run':'')+'</small></span></li>'+
-   '<li><span class="k">Caffeine</span><span class="v">'+(P.cafPlan?'≈'+P.cafPlan+' mg planned <small>'+(P.caf.length+(P.runCaf?1:0))+' × '+P.cafMg+' mg</small>':'none')+' <small>ceiling '+P.cafLo+'–'+P.cafHi+' mg · 3–6 mg/kg</small></span></li>'+
+   '<li><span class="k">Caffeine</span><span class="v">'+(P.cafPlan?'≈'+P.cafPlan+' mg planned <small>'+(P.caf.length+(P.runCaf?1:0))+' × '+P.cafMg+' mg</small>':'none')+' <small>reference range '+P.cafLo+'–'+P.cafHi+' mg · 3–6 mg/kg</small></span></li>'+
    '<li><span class="k">Pre-start</span><span class="v">'+(P.preload?'500 ml with electrolyte at 07:30':'water to thirst')+'</span></li>'+
    '</ul></div>';
 }
@@ -1979,7 +2216,7 @@ function renderPacing(P){
   var c='<table class="tight" style="min-width:420px"><tr><th>Clock check</th><th class="m">Best</th><th class="m">Base</th><th class="m">Slow</th><th class="m">Limit</th></tr>';
   function row(lab,f,lim,limMin){ c+='<tr><td>'+lab+'</td>'+P.scen.map(function(s){ var v=f(s); return '<td class="m'+(limMin!=null&&v>limMin?' late':'')+'">'+clock(v)+'</td>'; }).join('')+'<td class="m" style="color:var(--flag)">'+lim+'</td></tr>'; }
   row('Swim exit',function(s){ return s.sw; },'09:59',COURSE.cutSwim);
-  row('W1 · km 34.2',function(s){ return s.sw+s.t1+s.bk*COURSE.fW1; },'—',null);
+  row('W1 · km 34.3',function(s){ return s.sw+s.t1+s.bk*COURSE.fW1; },'—',null);
   row('W2 · km 68',function(s){ return s.sw+s.t1+s.bk*COURSE.fW2; },'—',null);
   row('T2 · bike in',function(s){ return s.t2Out; },'15:49',COURSE.cutT2);
   row('Finish',function(s){ return s.fin; },'16:59? / 17:59',COURSE.cutFin2);
@@ -1990,17 +2227,18 @@ function renderRisks(a,P){
   var R=[];
   if(a.gravel!=='lots') R.push(['Gravel handling',(a.gravel==='first'?'First gravel race':'Limited gravel time')+' on 93% unpaved terrain','Conservative lines. Walk what you would not ride at home.']);
   R.push(['Navigation → DQ','Gravel leg unsigned — GPS or nothing; riders have got lost following each other','Follow the track, never the rider ahead.']);
-  R.push(['Mechanical in Cap de Creus','Rocky, technical, before the first aid at km 34.2'+(a.tyres==='tubes'?' — tubes do not self-seal':''),a.tyres==='tubeless'?'Plugs first, tube second, boot for a cut. One rehearsed repair.':'Two tubes, boot, pump — one rehearsed change.']);
+  R.push(['Mechanical in Cap de Creus','Rocky, technical, before the first aid at km 34.3'+(a.tyres==='tubes'?' — tubes do not self-seal':''),a.tyres==='tubeless'?'Plugs first, tube second, boot for a cut. One rehearsed repair.':'Two tubes, boot, pump — one rehearsed change.']);
   R.push(['Tramuntana wind','Prevailing north wind across the exposed Empordà plain','Draft on the plain — drafting is legal. '+((a.extras||[]).indexOf('sleeves')>=0?'Sleeves on.':'Consider sleeves.')]);
   R.push(['Penalty time','+30 min for supplies outside an aid zone or riding in T1','Carry all fuel. Take only in-zone. Run the bike through T1. Dismount before T2.']);
   if(P.scen[2].t2Out>COURSE.cutT2-20) R.push(['Gravel cutoff','Slow scenario reaches T2 at '+clock(P.scen[2].t2Out)+' vs 15:49','Know your W1/W2 check times; do not lose time at the stops.']);
-  if(a.pedals==='flat') R.push(['Foot hot spots','Flat pedals for ~19,000 revolutions, then 10.5 km on the same feet','Pinned platforms. Shift foot position on the plain.']);
+  if(a.pedals==='flat') R.push(['Foot hot spots','Flat pedals for ~19,000 revolutions, then 10.4 km on the same feet','Pinned platforms. Shift foot position on the plain.']);
   R.push(['Wet course','Rain in the week = mud, slick rock, a live river crossing','Slow down, not out. Lower pressure (not below '+pressure(a).floor+' bar), walk slick rock and the wet steps.']);
   var h='<tr role="row"><th role="columnheader">Risk</th><th role="columnheader">Trigger</th><th role="columnheader">Response</th></tr>';
   R.forEach(function(r){ h+='<tr role="row"><td role="cell" data-label="Risk"><b>'+r[0]+'</b></td><td role="cell" data-label="Trigger">'+r[1]+'</td><td role="cell" data-label="Response">'+r[2]+'</td></tr>'; });
   return h;
 }
 function renderFeedChart(P){
+  if(P.actualInventory)return inventoryTimeline(P.actualInventory.bike,'Bike');
   var bike=(window.PROF_PTS||[]).filter(function(p){ return p[0]<610; });
   var X=function(km){ return 44+km/86.4*690; }, Y=function(e){ return 212-e*0.34; }, XT=function(t){ return X(kmAt(t,P.B)); };
   var mono='font-family="ui-monospace,monospace"';
@@ -2063,6 +2301,7 @@ function renderFeedChart(P){
   return s;
 }
 function renderFeedKey(P){
+  if(P.actualInventory)return '<span>Elapsed time from the start of each leg · your entered portions and timing</span>';
   var n=P.names||{}, k=[], used={};
   P.feeds.forEach(function(f){ used[f.cafOnly?'cafonly':f.kind+(f.caf?'caf':'')]=1; });
   (P.bottles||[]).forEach(function(r){ r.forEach(function(x){ if(x) used['b-'+x]=1; }); });
@@ -2088,7 +2327,20 @@ function qHtml(q,a){
   var v=state.answers[q.id]===undefined?(q.type==='multi'?[]:q.type==='choice'?null:a[q.id]):a[q.id], id='q-'+q.id, h='<div class="q" data-q="'+q.id+'">';
   if(q.help) h+='<p class="qhelp" id="'+id+'-h">'+q.help+'</p>';
   var desc=q.help?' aria-describedby="'+id+'-h"':'';
-  if(q.type==='choice'||q.type==='multi'){
+  if(q.type==='fields'||q.type==='inventory'){
+    h+='<div class="detail-fields">';
+    (q.fields||[]).filter(function(f){return !f.when||f.when(a);}).forEach(function(f,fi){
+      if(q.type==='inventory'&&fi%10===0){if(fi)h+='</details>'; h+='<details class="inventory-entry"'+(fi===0||v[f.id]?' open':'')+'><summary>Product '+(Math.floor(fi/10)+1)+(v[f.id]?' · '+esc(v[f.id]):' · optional')+'</summary>';}
+      var fid=id+'-'+f.id, value=v[f.id]==null?'':v[f.id];
+      var fieldName=q.type==='inventory'?' aria-label="Product '+(Math.floor(fi/10)+1)+' · '+esc(f.label)+'"':'';
+      h+='<label class="detail-field" for="'+fid+'"><span>'+esc(f.label)+(f.unit?' <small>'+f.unit+'</small>':'')+'</span>';
+      if(f.options) h+='<select id="'+fid+'" name="'+fid+'" data-field="'+f.id+'"'+fieldName+'><option value="">Not decided yet</option>'+f.options.map(function(o){return '<option value="'+o[0]+'"'+(value===o[0]?' selected':'')+'>'+esc(o[1])+'</option>';}).join('')+'</select>';
+      else h+='<input id="'+fid+'" name="'+fid+'" data-field="'+f.id+'"'+fieldName+' type="'+f.type+'" value="'+esc(value)+'"'+(f.type==='number'?' min="'+f.min+'" max="'+f.max+'" step="'+f.step+'" inputmode="decimal"':f.type==='text'?' maxlength="120" autocomplete="off"':'')+'>';
+      h+='</label>';
+    });
+    if(q.type==='inventory')h+='</details>';
+    h+='</div>';
+  } else if(q.type==='choice'||q.type==='multi'){
     h+='<div class="opts'+(q.type==='multi'?' multi':'')+'" role="'+(q.type==='choice'?'radiogroup':'group')+'" aria-labelledby="gate-title"'+desc+'>';
     q.options.forEach(function(o){ var on=q.type==='multi'?(v||[]).indexOf(o[0])>=0:String(v)===o[0];
       h+='<label class="opt'+(on?' on':'')+'"><input type="'+(q.type==='choice'?'radio':'checkbox')+'" name="'+id+'" value="'+o[0]+'"'+(on?' checked':'')+'><span>'+o[1]+'</span></label>'; });
@@ -2115,17 +2367,21 @@ function renderSurveys(){
     return '<article class="survey'+(done?' done':'')+'" id="survey-'+key+'"><div class="sv-head"><span class="sv-n">'+S.n+'</span><div><h3>'+S.title+'</h3><p class="small">'+S.builds+'</p></div><button type="button" class="sv-go'+(done?'':' primary')+'" data-sv-open="'+key+'">'+(done?'Edit answers':state.pos?'Resume setup':'Start setup')+'</button></div>'+
       (done?'<div class="sv-sum">'+summaryLine(key,a).map(function(x){ return '<i>'+esc(x)+'</i>'; }).join('')+'</div>':'')+'</article>';
   }).join('');
-  document.getElementById('plan-tools').hidden=!(state.done.kit||state.done.fuel);
+  document.getElementById('plan-tools').hidden=false;
 }
 // page list for the current gate mode; question pages are keyed by id so hidden questions drop out cleanly
 function gatePages(){
   var a=answers(), pages=[];
+  if(gate.help)return [{id:'guide',kind:'guide'}];
+  if(gate.mode==='complete')return [{id:'complete',kind:'complete'}];
+  if(gate.mode==='import')return [{id:'import',kind:'import'}];
   var keys=gate.mode==='edit'&&gate.key!=='all'?[gate.key]:['kit','fuel'];
   if(gate.mode==='onboard') pages.push({id:'intro',kind:'intro'});
   keys.forEach(function(key,ki){
     if(gate.mode==='onboard' && ki>0) pages.push({id:'mid-'+key,kind:'mid',key:key});
-    SURVEYS[key].steps.forEach(function(st){ visibleQs(st,a).forEach(function(q){ pages.push({id:q.id,kind:'q',key:key,step:st,q:q}); }); });
+    SURVEYS[key].steps.forEach(function(st){ visibleQs(st,a).filter(function(q){return gate.mode==='unknown'?gate.queue.indexOf(q.id)>=0:gate.mode!=='onboard'||state.setupMode==='full'||starterQuestion(q);}).forEach(function(q){ pages.push({id:q.id,kind:'q',key:key,step:st,q:q}); }); });
   });
+  if(gate.mode==='unknown')pages.sort(function(x,y){return gate.queue.indexOf(x.id)-gate.queue.indexOf(y.id);});
   pages.push({id:'end',kind:'end'});
   return pages;
 }
@@ -2133,8 +2389,9 @@ function visibleQs(step,a){ return step.qs.filter(function(q){ return !q.when||q
 function gateIndex(pages){ for(var i=0;i<pages.length;i++) if(pages[i].id===gate.pos) return i; return 0; }
 function setInert(on){ document.querySelectorAll('.wrap,dialog').forEach(function(el){ if(on) el.setAttribute('inert',''); else el.removeAttribute('inert'); }); }
 function openGate(mode,key){
-  gate.opener=document.activeElement; gate.reviewing=false; gate.mode=mode; gate.key=key||null;
-  if(mode==='onboard'){ gate.pos=state.pos||'intro'; } else { gate.pos='end'; }
+  gate.opener=document.activeElement; gate.help=false; gate.reviewing=false; gate.mode=mode; gate.key=key||null;
+  if(mode==='onboard'){ gate.pos=state.pos||'intro'; if(!gatePages().some(function(p){return p.id===gate.pos;}))gate.pos='intro'; } else { gate.pos=mode==='import'?'import':'end'; }
+  if(mode==='unknown'){gate.queue=pendingAnswers().map(function(q){return q.id;});gate.pos=gate.queue[0]||'end';}
   var g=document.getElementById('gate'); g.hidden=false; document.body.classList.add('gate-open');
   document.body.classList.toggle('gated',mode==='onboard');
   setInert(true); renderGate(true);
@@ -2145,33 +2402,38 @@ function closeGate(){
   gate.mode=null; save();
   if(gate.opener&&gate.opener.isConnected) gate.opener.focus();
 }
-function nq(key){ var a=answers(), n=0; SURVEYS[key].steps.forEach(function(st){ n+=visibleQs(st,a).length; }); return n; }
+function nq(key){ var a=answers(), n=0; SURVEYS[key].steps.forEach(function(st){ n+=visibleQs(st,a).filter(function(q){return state.setupMode==='full'||starterQuestion(q);}).length; }); return n; }
 function renderGate(focus){
   var pages=gatePages(), i=gateIndex(pages), pg=pages[i], a=answers(), body=document.getElementById('gate-body');
   var qPages=pages.filter(function(p){ return p.kind==='q'; }), qi=qPages.indexOf(pg);
-  document.getElementById('gate-bar').style.width=(pg.kind==='end'?100:pages.slice(0,i).filter(function(p){return p.kind==='q';}).length/qPages.length*100)+'%';
+  document.getElementById('gate-bar').style.width=(pg.kind==='end'?100:pages.slice(0,i).filter(function(p){return p.kind==='q';}).length/(qPages.length||1)*100)+'%';
   document.getElementById('gate-prog').textContent=pg.kind==='q'?(qi+1)+' / '+qPages.length:'';
   document.getElementById('gate-close').hidden=false;
   var h='';
-  if(pg.kind==='intro'){
-    h='<p class="g-kicker">Sunday 18 October 2026 · Cadaqués → Girona</p><h2 id="gate-title" tabindex="-1">Build your SGRAIL 100 plan</h2>'+
-      '<p class="g-lede">Two guided surveys, about 6–8 minutes. Have your bike details and nutrition labels nearby. Your answers build your bags, pack list, bike checks and to-dos, then your race-day feed clock, sodium and pacing against the cutoffs.</p>'+
-      '<ol class="g-parts"><li><b>01 · Kit &amp; logistics</b><span>'+nq('kit')+' questions</span></li><li><b>02 · Fuel &amp; pacing</b><span>'+nq('fuel')+' questions</span></li></ol>'+
-      '<p class="g-note">Your progress saves in this browser as you go. You can pause and return later. Sharing a plan link includes your answers.</p>'+
-      '<div class="g-nav"><button type="button" class="primary" data-g="next">Start my plan</button></div>';
+  document.getElementById('gate-close').setAttribute('aria-label',gate.help?'Back to welcome':'Save progress and close');
+  document.getElementById('gate-close').title=gate.help?'Back to welcome':'Save progress and close';
+  if(pg.kind==='guide'){
+    h='<p class="g-kicker">A one-minute guide</p><h2 id="gate-title" tabindex="-1">How it works</h2><div class="quick-guide">'+document.getElementById('how-it-works-content').innerHTML+'</div><div class="g-nav"><button type="button" class="primary" data-g="guide-back">Back to welcome</button></div>';
+  } else if(pg.kind==='complete'){
+    h='<p class="g-kicker">Plan updated</p><h2 id="gate-title" tabindex="-1">Your working plan</h2><p>'+pendingAnswers().length+' details still need confirmation. You can return to them whenever you are ready.</p>'+nextActions(a,compute(a))+'<div class="g-nav"><button type="button" data-unknown-review>Review my unknowns</button><button type="button" class="primary" data-g="close">View my plan</button></div>';
+  } else if(pg.kind==='import'){
+    h='<p class="g-kicker">Someone shared a plan</p><h2 id="gate-title" tabindex="-1">Keep yours, or use these answers?</h2><p class="g-lede">This link contains another set of personal answers'+(incoming&&incoming.answers.name?' for <b>'+esc(incoming.answers.name)+'</b>':'')+'. Opening it has not changed your saved plan.</p><p>Use them only if you want to replace your answers in this browser. Your previous answers and checklist will be kept as a recovery backup.</p><div class="g-nav"><button type="button" data-g="keep">Keep my plan</button><button type="button" class="primary" data-g="import">Use shared answers</button></div>';
+  } else if(pg.kind==='intro'){
+    h='<p class="g-kicker">SGRAIL 100 · 18 October 2026</p><h2 id="gate-title" tabindex="-1">Your race.<br>Your plan.</h2><p class="g-lede">Turn your kit, pace and familiar fuel into a packing list and race-day plan.</p><div class="welcome-route" aria-label="Swim 1.5 km, bike 86.4 km, run 10.4 km"><span><b>1.5</b> km swim</span><span><b>86.4</b> km bike</span><span><b>10.4</b> km run</span></div><div class="welcome-choice"><button type="button" class="start-card primary" data-g="start-short"><span class="eyebrow">Recommended · about 5–7 min</span><b>Start with the essentials</b><span>Your setup, race times and fuel. Add weekend details and training later.</span></button><button type="button" class="start-card" data-g="start-full"><span class="eyebrow">About 10–15 min · plus product labels</span><b>Build the detailed plan</b><span>Your setup, race times and fuel, plus travel, readiness and training.</span></button></div><p class="g-note">No account. Progress saves in this browser. Unsure of an answer? Choose “I don’t know yet” and come back to it.</p><div class="welcome-links"><button type="button" class="g-link" data-g="preview">Explore a sample plan</button><button type="button" class="g-link" data-g="guide">How it works</button></div><p class="small">Independent planning tool · check final details with the organiser.</p>';
   } else if(pg.kind==='mid'){
     h='<p class="g-kicker">01 · Kit &amp; logistics · saved</p><h2 id="gate-title" tabindex="-1">Now fuel and pacing</h2><p class="g-lede">Your times, what you eat and drink, and how much you sweat. This builds your feed clock, sodium, fluid and finish-time scenarios.</p>'+
       '<div class="g-nav"><button type="button" data-g="back">Back</button><button type="button" class="primary" data-g="next">Continue</button></div>';
   } else if(pg.kind==='end'){
     var editing=gate.mode==='edit', scope=editing?(gate.key==='all'?'All answers':SURVEYS[gate.key].n+' · '+SURVEYS[gate.key].title):'Review your answers';
-    h='<p class="g-kicker">'+scope+'</p><h2 id="gate-title" tabindex="-1">'+(editing?'Edit your answers':'One last check before your plan')+'</h2><p class="g-lede">'+(editing?'Tap <b>Change</b> on any answer. Your checklists, feed chart and pacing rebuild when you save.':'Check your kit, times and product amounts. You can change any answer here, or update it later from your plan.')+'</p>'+
+    if(gate.mode==='unknown')scope='Unknowns review · '+pendingAnswers().length+' still open';
+    h='<p class="g-kicker">'+scope+'</p><h2 id="gate-title" tabindex="-1">'+(gate.mode==='unknown'?'Your unknowns review':editing?'Edit your answers':'Your first plan is ready to review')+'</h2><p class="g-lede">'+(editing?'Tap <b>Change</b> on any answer. Your checklists, feed chart and pacing rebuild when you save.':'These are the answers you entered. Other details still use estimates: review them in Your plan before relying on the race-day schedule.')+'</p>'+
       (editing&&gate.key!=='all'?'<p class="g-note"><button type="button" class="g-link" data-edit-scope="all">Show all answers from both surveys</button></p>':'')+reviewHtml(pages,a)+
-      '<div class="g-nav">'+(editing?'<button type="button" data-g="close">Close</button>':'<button type="button" data-g="back">Back</button>')+'<button type="button" class="primary" data-g="finish">'+(editing?'Save and update my plan':'Build my plan')+'</button></div>';
+      '<div class="g-nav">'+(editing?'<button type="button" data-g="close">Close</button>':'<button type="button" data-g="back">Back</button>')+'<button type="button" class="primary" data-g="finish">'+(gate.mode==='unknown'?'Update my plan':editing?'Save and update my plan':'Build my plan')+'</button></div>';
   } else {
     var S=SURVEYS[pg.key], q=pg.q;
     h='<p class="g-kicker">'+S.n+' · '+S.title+' · '+pg.step.title+'</p><h2 id="gate-title" tabindex="-1">'+q.label+'</h2>'+(pg.step.note&&pg.step.qs.filter(function(x){ return !x.when||x.when(a); })[0]===q?'<p class="g-note">'+pg.step.note+'</p>':'')+
-      '<form class="g-form" novalidate>'+qHtml(q,a)+
-      '<p id="q-error" class="g-error" role="alert" hidden></p><div class="g-nav">'+(i>0?'<button type="button" data-g="back">Back</button>':'')+'<button type="submit" class="primary">'+(gate.reviewing?'Save and return to review':q.id==='name'&&!a.name?'Skip name':'Continue')+'</button></div></form>'+
+      '<div class="chapter-track" aria-label="Setup stages"><span class="'+(pg.key==='kit'?'active':'')+'">1 · Kit</span><span class="'+(pg.key==='fuel'?'active':'')+'">2 · Fuel &amp; pace</span><span>3 · Review</span></div><form class="g-form" novalidate>'+qHtml(q,a)+
+      '<p id="q-error" class="g-error" role="alert" hidden></p><div class="g-nav">'+(i>0?'<button type="button" data-g="back">Back</button>':'')+'<button type="submit" class="primary">'+(gate.reviewing?'Save and return to review':q.id==='name'&&!a.name?'Skip name':'Continue')+'</button></div><button type="button" class="g-link g-later" data-g="unknown">I don’t know yet · add a reminder</button></form>'+
       '<p class="g-hint">'+(q.type==='multi'?'Select all that apply. ':q.type==='choice'?'Choose one answer. ':'')+'You can go back to change an answer.</p>';
   }
   body.innerHTML=h+'<p class="g-save" role="status">'+(storageOK?'Progress saves in this browser.':'This browser cannot save progress. Keep this tab open until you finish.')+'</p>';
@@ -2181,11 +2443,13 @@ function reviewHtml(pages,a){
   var h='', group='';
   pages.filter(function(p){return p.kind==='q';}).forEach(function(p){
     var title=SURVEYS[p.key].title+' · '+p.step.title;
-    if(title!==group){ if(group) h+='</dl></details>'; group=title; h+='<details class="g-review" open><summary>'+esc(title)+'</summary><dl>'; }
+    if(title!==group){ if(group) h+='</dl></details>'; group=title; h+='<details class="g-review"'+(gate.mode==='onboard'?' open':'')+'><summary>'+esc(title)+'</summary><dl>'; }
     var q=p.q,v=a[q.id], label;
-    if(q.options){ var values=Array.isArray(v)?v:[String(v)]; label=q.options.filter(function(o){return values.indexOf(o[0])>=0;}).map(function(o){return o[1];}).join(', '); }
+    if(q.type==='fields'||q.type==='inventory'){ label=(q.fields||[]).filter(function(f){return (!f.when||f.when(a))&&v[f.id]!==undefined&&v[f.id]!=='';}).map(function(f){var x=v[f.id]; if(f.options){var o=f.options.find(function(o){return o[0]===x;});x=o?o[1]:x;} return f.label+': '+x+(f.unit?' '+f.unit:'');}).join(' · ')||'Details not entered'; }
+    else if(q.options){ var values=Array.isArray(v)?v:[String(v)]; label=q.options.filter(function(o){return values.indexOf(o[0])>=0;}).map(function(o){return o[1];}).join(', '); }
     else label=String(v)+(q.unit?' '+q.unit:'');
-    h+='<div><dt>'+esc(q.label)+'</dt><dd>'+esc(label||(q.type==='text'?'Not provided':'None selected'))+(state.answers[q.id]===undefined?' <small>Suggested · not confirmed</small>':'')+'</dd><button type="button" data-review="'+q.id+'" aria-label="Change: '+esc(q.label)+'">Change</button></div>';
+    if(q.options&&!label&&!Array.isArray(v)&&present(v))label='Earlier answer: '+String(v)+' · review current choices';
+    h+='<div><dt>'+esc(q.label)+'</dt><dd>'+esc(label||(q.type==='text'?'Not provided':'None selected'))+((state.unknown||{})[q.id]?' <small>Undecided · follow-up task added</small>':state.answers[q.id]===undefined?' <small>Not confirmed</small>':'')+'</dd><button type="button" data-review="'+q.id+'" aria-label="Change: '+esc(q.label)+'">Change</button></div>';
   });
   return h+(group?'</dl></details>':'');
 }
@@ -2193,7 +2457,15 @@ function readQ(form,validate){
   var el=form.querySelector('.q'); if(!el) return true;
   var id=el.dataset.q, q=allQs().filter(function(x){return x.id===id;})[0], n='q-'+id;
   var f=form.querySelector('[name="'+n+'"]'), v, error='';
-  if(q.type==='multi'){
+  if(q.type==='fields'||q.type==='inventory'){
+    v={};
+    (q.fields||[]).filter(function(x){return !x.when||x.when(answers());}).forEach(function(field){
+      var input=form.querySelector('[data-field="'+field.id+'"]'); if(!f)f=input;
+      if(!input||input.value==='')return;
+      if(!input.validity.valid){if(!error){error='Check '+field.label+(field.type==='number'?' · enter '+field.min+'–'+field.max+' '+field.unit+' in increments of '+field.step:'.');f=input;}return;}
+      v[field.id]=field.type==='number'?Number(input.value):input.value.trim();
+    });
+  } else if(q.type==='multi'){
     v=Array.from(form.querySelectorAll('input:checked')).map(function(i){return i.value;});
     if(id==='sources'&&!v.length) error='Select at least one carbohydrate source to build your feed schedule.';
     if(id==='salt'&&!v.length) error='Select at least one option, or “Nothing extra”.';
@@ -2208,16 +2480,17 @@ function readQ(form,validate){
     }
   }
   if(error){
-    if(validate){ var msg=form.querySelector('#q-error'); msg.textContent=error; msg.hidden=false; f.setAttribute('aria-invalid','true'); f.setAttribute('aria-describedby','q-error'); f.focus(); }
+    if(validate){ var msg=form.querySelector('#q-error'); msg.textContent=error; msg.hidden=false; f.setAttribute('aria-invalid','true'); f.setAttribute('aria-describedby','q-error'); var disclosure=f.closest('details'); if(disclosure)disclosure.open=true; f.focus(); }
     return false;
   }
   if(f) f.removeAttribute('aria-invalid');
   var msg=form.querySelector('#q-error'); if(msg) msg.hidden=true;
-  state.answers[id]=v; return true;
+  state.answers[id]=v; if(state.unknown)delete state.unknown[id]; return true;
 }
 function gateMove(d){
   var form=document.querySelector('#gate-body form');
   if(form&&!readQ(form,d>0)&&d>0) return;
+  if(gate.mode==='unknown')pendingAnswers().forEach(function(q){if(gate.queue.indexOf(q.id)<0)gate.queue.push(q.id);});
   var pages=gatePages(), i=gateIndex(pages);
   gate.pos=gate.reviewing?'end':pages[Math.max(0,Math.min(pages.length-1,i+d))].id;
   gate.reviewing=false;
@@ -2225,6 +2498,8 @@ function gateMove(d){
   save(); renderGate(true);
 }
 function pauseGate(){
+  if(gate.help){gate.help=false;renderGate(false);var helpButton=document.querySelector('[data-g="guide"]');if(helpButton)helpButton.focus();return;}
+  if(gate.mode==='import')incoming=null;
   var f=document.querySelector('#gate-body form'); if(f) readQ(f,false);
   var key=gate.key&&gate.key!=='all'?gate.key:'kit';
   closeGate(); renderSurveys(); renderAll(); if(window.PLAN_AFTER) window.PLAN_AFTER();
@@ -2232,20 +2507,35 @@ function pauseGate(){
 }
 function bindGate(){
   var g=document.getElementById('gate');
+  document.addEventListener('click',function(e){var b=e.target.closest('[data-detail-edit]');if(!b)return;var id=b.dataset.detailEdit,key=Object.keys(SURVEYS).find(function(k){return SURVEYS[k].steps.some(function(st){return st.qs.some(function(q){return q.id===id;});});});openGate('edit',key);gate.pos=id;gate.reviewing=true;renderGate(true);});
   g.addEventListener('click',function(e){
     var sc=e.target.closest('[data-edit-scope]');
     if(sc){ gate.key=sc.dataset.editScope; gate.pos='end'; gate.reviewing=false; renderGate(true); return; }
     var edit=e.target.closest('[data-review]');
     if(edit){gate.pos=edit.dataset.review; gate.reviewing=true; renderGate(true); return;}
     var b=e.target.closest('[data-g]'); if(!b) return;
-    if(b.dataset.g==='next') gateMove(1);
+    if(b.dataset.g==='start-short'||b.dataset.g==='start-full'){
+      state.setupMode=b.dataset.g==='start-full'?'full':'essentials';gate.pos='intro';gateMove(1);
+    } else if(b.dataset.g==='preview'){pauseGate();}
+    else if(b.dataset.g==='guide'){gate.help=true;renderGate(true);}
+    else if(b.dataset.g==='guide-back'){pauseGate();}
+    else if(b.dataset.g==='keep'){incoming=null;closeGate();if(!(state.done.kit&&state.done.fuel))openGate('onboard');}
+    else if(b.dataset.g==='import'){
+      lsSet('recovery',{state:state,checks:lsGet('checks',{})});var importedChecks=incoming.checks||{};delete incoming.checks;state=incoming;incoming=null;lsSet('checks',importedChecks);save();closeGate();renderSurveys();renderAll();if(!(state.done.kit&&state.done.fuel))openGate('onboard');
+    } else if(b.dataset.g==='unknown'){
+      var pages=gatePages(),i=gateIndex(pages),q=pages[i].q;
+      state.unknown=state.unknown||{}; state.unknown[q.id]=true;
+      gate.pos=gate.reviewing?'end':pages[Math.min(i+1,pages.length-1)].id; gate.reviewing=false;
+      if(gate.mode==='onboard')state.pos=gate.pos;
+      save();renderGate(true);
+    } else if(b.dataset.g==='next') gateMove(1);
     else if(b.dataset.g==='back') gateMove(-1);
     else if(b.dataset.g==='finish'){
-      var missing=gatePages().find(function(p){return p.kind==='q'&&state.answers[p.q.id]===undefined&&p.q.type!=='text'&&p.q.type!=='multi';});
+      var missing=gate.mode==='unknown'?null:gatePages().find(function(p){return p.kind==='q'&&state.answers[p.q.id]===undefined&&p.q.type!=='text'&&p.q.type!=='multi'&&!p.q.optional&&!(state.unknown||{})[p.q.id];});
       if(missing){gate.pos=missing.id; gate.reviewing=true; renderGate(true); return;}
-      (gate.mode==='edit'&&gate.key!=='all'?[gate.key]:['kit','fuel']).forEach(function(k){state.done[k]=true;});
+      (gate.mode==='unknown'?[]:gate.mode==='edit'&&gate.key!=='all'?[gate.key]:['kit','fuel']).forEach(function(k){state.done[k]=true;});
       delete state.pos; closeGate(); renderSurveys(); renderAll(); window.scrollTo(0,0);
-      var s=document.querySelector('#survey-'+(gate.key||'kit')+' button'); if(s) s.focus({preventScroll:true});
+      openGate('complete');
       if(window.PLAN_AFTER) window.PLAN_AFTER();
     } else if(b.dataset.g==='close') pauseGate();
   });
@@ -2274,6 +2564,181 @@ function bindGate(){
   document.getElementById('surveys').addEventListener('click',function(e){var o=e.target.closest('[data-sv-open]');if(o) openGate(state.done.kit&&state.done.fuel?'edit':'onboard',o.dataset.svOpen);});
 }
 
+// ---------------- planning evidence and visual summaries ----------------
+function present(v){return v!==undefined&&v!==null&&v!=='';}
+function planningActions(a){
+  var out=[],cf=a.confidence||{},eq=a.equipment||{},w=a.weekend||{};
+  function add(key,title,action,deadline){out.push({key:'detail-'+key,title:title,action:action,deadline:deadline||'Before travel'});}
+  [['equipment','Equipment'],['transport','Travel'],['timing','Race times'],['nutrition','Nutrition']].forEach(function(x){
+    if(cf[x[0]]!=='confirmed')add('confidence-'+x[0],'Confirm '+x[1].toLowerCase(),cf[x[0]]==='estimated'?'Replace estimates with checked details.':'Review the '+x[1].toLowerCase()+' details and mark their status.');
+  });
+  EQUIPMENT.forEach(function(e){var v=eq[e[0]];if(!v||v==='tested')return;add('gear-'+e[0],(v==='need'?'Arrange ':v==='booked'||v==='borrowed'?'Collect and test ':'Test ')+e[1].toLowerCase(),'Update readiness once the item is in hand and tested.');});
+  if(w.stayStatus!=='booked'&&w.stayStatus!=='none')add('stay','Confirm accommodation','Record your accommodation area and booking status.');
+  if(w.transportStatus!=='booked')add('travel','Arrange start transport','Confirm your bus booking or own transport, including the return arrangements.');
+  if(!w.day||!w.arrival)add('arrival','Record arrival time','Check travel timing against check-in and Saturday bike drop.');
+  if(!Object.keys(eq).length)add('gear-status','Record equipment readiness','Check which items are in hand and tested before marking equipment confirmed.');
+  if(!present(w.travel)||!present(w.buffer))add('departure','Check Sunday departure','Enter travel minutes and a departure buffer.');
+  if(a.bike==='rental'){var p=a.pickup||{};if(p.status!=='booked'||!p.place||!p.time||!p.day)add('pickup','Confirm bike collection','Record shop, date and confirmed collection time.');}
+  if(a.support==='unknown'||!a.support)add('support','Decide on weekend support','Choose solo or record your support handover plan.');
+  if(a.timebasis==='unknown')add('timebasis','Check how race times were measured','Separate moving time, stops and transitions.');
+  if(a.timebasis==='moving'&&(!present((a.allowances||{}).bikeStops)||!present((a.allowances||{}).runStops)))add('stops','Estimate stopped time','Moving-time estimates need separate bike and run stop allowances.');
+  (a.sessions||[]).forEach(function(k){var v=a['session_'+k]||{};if(!(v.distance>0)||!(v.moving>0))add('session-'+k,'Complete '+k+' session reference','Enter distance and moving time to show the pace comparison.');});
+  if(a.runcarry!=='none'&&(a.waterPlan||{}).run!=='no'&&((a.waterPlan||{}).run!=='yes'||!present((a.waterPlan||{}).castleMinutes)))add('run-refill','Plan run water refill','Record whether you will refill at castle aid and your expected time to reach it.');
+  if((a.waterPlan||{}).bike!=='yes')add('water','Confirm both bike refills','The feed schedule assumes refills at W1 and W2. Confirm water availability and top up bottles and any pack.','At check-in');
+  if(a.capacityMode==='exact'){
+    var c=a.capacity||{};
+    if(Array.from({length:+a.cages},function(_,i){return c['b'+(i+1)];}).some(function(v){return !present(v);}))add('capacity','Measure each bottle','Missing sizes still use your earlier bottle-size estimate.');
+  }
+  if(a.inventoryMode==='enter')['bike','run'].forEach(function(leg){var al=a.allowances||{},duration=+(leg==='bike'?a.biketime:a.runtime)+(a.timebasis==='moving'?(al[leg+'Stops']||0):0),inv=inventorySchedule(a,leg,duration);if(!inv.ready)add('inventory-'+leg,'Complete '+leg+' products and timing','Record labels, quantities, reserves and when you will use each portion. Blank values are unknown.');});
+  allQs().filter(function(q){return (!q.when||q.when(a))&&(state.unknown||{})[q.id];}).forEach(function(q){add('unknown-'+q.id,'Decide: '+q.label,'Open this answer and replace the undecided status.');});
+  return out;
+}
+function editDetail(id,label){return '<button type="button" class="insight-edit" data-detail-edit="'+id+'">'+esc(label||'Update details')+'</button>';}
+function renderInsights(a,P){
+  var c=a.confidence||{}, statuses=[['equipment','Equipment'],['transport','Travel'],['timing','Race times'],['nutrition','Nutrition']];
+  var confirmed=statuses.filter(function(x){return c[x[0]]==='confirmed';}).length, actions=planningActions(a);
+  var h='<div class="insight-head"><div><span class="eyebrow">Your planning picture</span><h3>'+confirmed+' of 4 areas confirmed</h3></div>'+editDetail('confidence','Update confidence')+'</div><p class="small">Confirmation reflects your answers, not a safety assessment. '+actions.length+' planning follow-ups appear in Before Girona.</p><div class="readiness-grid">';
+  statuses.forEach(function(x){var v=c[x[0]]||'undecided';h+='<div class="readiness-cell '+v+'"><b>'+x[1]+'</b><span>'+({confirmed:'Confirmed',estimated:'Estimated',undecided:'Undecided'}[v]||'Undecided')+'</span></div>';});
+  h+='</div><details class="insight-panel"><summary>Equipment · '+EQUIPMENT.filter(function(e){return (a.equipment||{})[e[0]]==='tested';}).length+' of '+EQUIPMENT.length+' in hand and tested</summary><div class="inner"><ul class="equipment-list">';
+  EQUIPMENT.forEach(function(e){var v=(a.equipment||{})[e[0]],match=GEAR_STATUS.find(function(x){return x[0]===v;});h+='<li><b>'+e[1]+'</b><span>'+esc(match?match[1]:'Readiness not recorded')+'</span></li>';});
+  h+='</ul>'+editDetail('equipment','Update equipment')+'</div></details>';
+  var unknown=allQs().filter(function(q){return (!q.when||q.when(a))&&(state.unknown||{})[q.id];});
+  if(unknown.length)h+='<p class="insight-warning">'+unknown.length+' answers are undecided. Their previous or suggested values remain provisional in calculations.</p>';
+  setHTML('readiness-view',h);
+}
+function renderTimeEvidence(a,P){
+  var al=a.allowances||{},base=P.scen[1];
+  var h='<details class="insight-panel" open><summary>Time range &amp; evidence</summary><div class="inner"><div class="insight-stat"><strong>'+clock(P.scen[0].fin)+'–'+clock(P.scen[2].fin)+'</strong><span>finish window across the existing best / slow scenarios</span></div><p class="small">Scenario range, not a statistical prediction. Best uses swim −5%, bike/run −7%; slow uses swim +10%, bike +18%, run +15%. Transitions vary by 2 min. Recent sessions below are context and do not silently change your estimates.</p><div class="time-breakdown">';
+  [['Bike',P.B,al.bikeStops],['Run',P.R,al.runStops]].forEach(function(x){
+    var stops=present(x[2])?x[2]:null, moving=stops==null?null:x[1]-stops;
+    h+='<div><b>'+x[0]+' · '+dur(x[1])+' elapsed</b><span>'+(moving==null?'Moving / stopped split not entered':moving<0?'Check: stopped time exceeds elapsed time':dur(moving)+' moving + '+dur(stops)+' stopped')+'</span></div>';
+  });
+  h+='<div><b>Transitions · '+dur(base.t1+base.t2)+'</b><span>T1 '+dur(base.t1)+' + T2 '+dur(base.t2)+'</span></div></div><p class="small">'+(a.timebasis==='moving'?'Entered stops are added to your moving estimates. Missing stop allowances currently add 0 min and need checking.':'Your leg estimates are treated as elapsed time; entered stops are already included.')+'</p><div class="cutoff-grid">';
+  [['Swim exit',base.sw,COURSE.cutSwim],['Bike arrival',base.t2Out,COURSE.cutT2],['Earlier finish limit · unconfirmed',base.fin,COURSE.cutFin1],['Overall limit',base.fin,COURSE.cutFin2]].forEach(function(x){var m=Math.round(x[2]-x[1]);h+='<div class="'+(m<0?'insight-warning':'')+'"><span>'+x[0]+' · '+clock(x[2])+'</span><b>'+Math.abs(m)+' min '+(m<0?'over':'margin')+'</b><small>Base arrival '+clock(x[1])+'</small></div>';});
+  h+='</div><p class="small">Timetable checked 26 September 2026. The organiser still lists conflicting finish limits; confirm which applies.</p>'+editDetail('allowances','Edit time allowances')+'<h4>Recent sessions</h4>';
+  if(!(a.sessions||[]).length)h+='<p class="small">No training references entered.</p>'+editDetail('sessions','Add a session');
+  (a.sessions||[]).forEach(function(k){var v=a['session_'+k]||{},label={swim:'Open water',bike:'Gravel',run:'Trail'}[k];var rate=v.distance>0&&v.moving>0?v.moving/v.distance:null;var target={swim:1.5,bike:86.4,run:10.4}[k];
+    h+='<article class="session-evidence"><b>'+label+(v.date?' · '+esc(v.date):'')+'</b><p>'+[present(v.distance)?v.distance+' km':'Distance unknown',present(v.ascent)?v.ascent+' m ascent':'Ascent unknown',present(v.moving)?dur(v.moving)+' moving':'Time unknown',present(v.stops)?dur(v.stops)+' stopped':'Stops unknown'].join(' · ')+'</p><span class="small">'+esc(v.effort||'Effort unknown')+' · '+(v.similar==='similar'?'Similar conditions':v.similar==='different'?'Different conditions':'Similarity unknown')+'</span>'+(rate?'<p>Same pace over the race distance: <b>'+dur(rate*target)+'</b> moving.</p><p class="small">Distance-only comparison; no adjustment for terrain, weather, fatigue or race effort.</p>':'<p class="small">Add distance and moving time to compare pace.</p>')+editDetail('session_'+k,'Edit session')+'</article>';
+  });
+  return h+'</div></details>';
+}
+function renderWater(a,P){
+  var w=a.waterPlan||{},c=a.capacity||{},h='<details class="insight-panel" open><summary>Water · capacity between refills</summary><div class="inner"><p><b>'+fmtNum(P.capacity)+' ml on the bike</b> · '+esc(P.bottleDescription)+'</p><p class="small">'+(present(w.bikeRate)?'Your entered rate':'Existing sweat-based estimate')+': '+P.fluidRate+' ml/h. Bars show estimated use ÷ full carrying capacity, not a prescription. Full refills at W1 and W2 are '+(w.bike==='yes'?'planned.':'unconfirmed assumptions.')+'</p><ol class="water-legs">';
+  function leg(label,minutes,need,cap,note){var ratio=cap>0?Math.min(100,need/cap*100):100,gap=Math.round(cap-need);return '<li><div><b>'+label+'</b><span>'+dur(minutes)+'</span></div><div class="water-track" role="img" aria-label="'+esc(label)+': '+Math.round(need)+' ml estimated use, '+cap+' ml capacity"><i style="width:'+ratio+'%"></i></div><p class="'+(gap<0?'insight-warning':'small')+'">'+Math.round(need)+' ml estimated use · '+Math.abs(gap)+' ml '+(gap<0?'capacity shortfall':'capacity remaining')+'</p><small>'+note+'</small></li>';}
+  P.seg.forEach(function(x,i){var loaded=i===2?P.volumes.reduce(function(sum,v,ci){return sum+(P.bottles[ci][2]?v:0);},0)+P.packWater:P.capacity;h+=leg(x.from+' → '+x.to,x.min,x.need,loaded,i<2?'Top up all bottles and any water pack at the next stop.':'Leave the bike and collect run water at T2.');});
+  h+='</ol><h4>Run water</h4>';
+  var rc=a.runcarry==='none'?0:(a.capacityMode==='exact'&&present(c.run)?c.run:null);
+  if(rc==null||!present(w.runRate))h+='<p class="small">Enter run capacity and your practiced run drinking rate to compare carrying space.</p>';
+  else if(w.run==='yes'&&present(w.castleMinutes)&&w.castleMinutes>0&&w.castleMinutes<P.R){h+='<ol class="water-legs">'+leg('T2 → castle aid',w.castleMinutes,w.runRate*w.castleMinutes/60,rc,'Refill planned at castle aid.')+leg('Castle aid → finish',P.R-w.castleMinutes,w.runRate*(P.R-w.castleMinutes)/60,rc,'Based on your time to castle aid.')+'</ol>';}
+  else {h+='<ol class="water-legs">'+leg('T2 → finish · no refill counted',P.R,w.runRate*P.R/60,rc,w.run==='no'?'You plan to carry water from T2.':'Refill timing is incomplete; this comparison conservatively counts no refill.')+'</ol>';}
+  return h+editDetail('capacityMode','Edit capacity')+' '+editDetail('waterPlan','Edit refills and rates')+'</div></details>';
+}
+function inventoryData(a,leg){
+  var v=a['inventory_'+leg]||{},rows=[],totals={carb:0,sodium:0,caffeine:0},known={carb:true,sodium:true,caffeine:true},incomplete=false;
+  for(var i=1;i<=4;i++){
+    if(!['name','qty','carb','sodium','caffeine','kind','reserve','first','every','water'].some(function(k){return present(v[k+i]);}))continue;
+    var r={id:i,name:v['name'+i]||'Unnamed product',qty:v['qty'+i],kind:v['kind'+i],reserve:v['reserve'+i],first:v['first'+i],every:v['every'+i],water:v['water'+i]};
+    if(!v['name'+i]||!present(r.qty))incomplete=true;
+    Object.keys(totals).forEach(function(k){r[k]=v[k+i];if(!present(r[k])||!present(r.qty)){known[k]=false;incomplete=true;}else totals[k]+=r[k]*r.qty;});rows.push(r);
+  }
+  if(!rows.length){incomplete=true;Object.keys(known).forEach(function(k){known[k]=false;});}
+  return {rows:rows,totals:totals,known:known,incomplete:incomplete};
+}
+function inventorySchedule(a,leg,duration){
+  var d=inventoryData(a,leg),events=[],issues=[],used={carb:0,sodium:0,caffeine:0,water:0};
+  if(a._unknown&&(a._unknown['inventory_'+leg]||a._unknown['inventory_'+leg+'_none']))issues.push('This inventory is marked undecided. Confirm it in your answers before using it.');
+  if(a['inventory_'+leg+'_none']==='yes')return {rows:[],totals:{carb:0,sodium:0,caffeine:0},known:{carb:true,sodium:true,caffeine:true},used:used,events:[],issues:issues,ready:!issues.length,duration:duration};
+  if(d.incomplete)issues.push('Complete product names, packed quantities and all three nutrient labels.');
+  d.rows.forEach(function(r){
+    if(!r.kind||!present(r.reserve)||r.qty>r.reserve&&(!present(r.first)||((r.qty-r.reserve>1||r.kind==='drink')&&!present(r.every))||(r.kind==='drink'&&!present(r.water)))){issues.push(r.name+': complete form, reserves, timing and drink volume.');return;}
+    if(r.reserve>r.qty||(present(r.every)&&r.every<=0)||(present(r.first)&&r.first<0)){issues.push(r.name+': reserves cannot exceed packed servings; check timing.');return;}
+    var count=r.qty-r.reserve;r.consumed=count;if(!present(r.first))r.first=0;if(!present(r.every))r.every=duration;
+    var n=Math.ceil(count),last=r.first+Math.max(0,n-1)*r.every;
+    if(count>0&&(last>=duration||r.kind==='drink'&&r.water<=0)){issues.push(r.name+': portions must start before the leg ends; drinks need a positive water volume.');return;}
+    for(var i=0;i<n;i++){
+      var qty=Math.min(1,count-i),t=r.first+i*r.every,end=r.kind==='drink'?Math.min(duration,t+r.every):t;
+      events.push({t:t,end:end,name:r.name,kind:r.kind,qty:qty,g:r.carb*qty,sodium:r.sodium*qty,caffeine:r.caffeine*qty,water:r.kind==='drink'?r.water*qty:0});
+    }
+    ['carb','sodium','caffeine'].forEach(function(k){used[k]+=r[k]*count;});
+    if(r.kind==='drink')used.water+=r.water*count;
+  });
+  events.sort(function(x,y){return x.t-y.t;});
+  return {rows:d.rows,totals:d.totals,known:d.known,used:used,events:events,issues:issues,ready:!issues.length,duration:duration};
+}
+function applyInventory(a,P){
+  var bike=inventorySchedule(a,'bike',P.B),run=inventorySchedule(a,'run',P.R);
+  P.inventoryDraft={bike:bike,run:run};
+  if(!bike.ready||!run.ready){P.warn.push(['warn','Your product schedule is incomplete. The suggested schedule is still displayed; complete both inventories to replace it.']);return;}
+  P.actualInventory={bike:bike,run:run};
+  P.feeds=bike.events.map(function(e){return Object.assign({},e,{label:e.qty+' × '+e.name,km:kmAt(e.t,P.B)});});
+  P.runUnits=run.rows.reduce(function(n,r){return n+r.consumed;},0);P.runSpare=run.rows.reduce(function(n,r){return n+r.reserve;},0);P.runCarbTarget=run.used.carb;P.runCaf=false;
+  P.mixCarbs=bike.events.filter(function(e){return e.kind==='drink';}).reduce(function(n,e){return n+e.g;},0);P.unitCarbs=bike.used.carb-P.mixCarbs;
+  P.cum=[];for(var t=0;t<=P.B;t+=5){P.cum.push([t,bike.events.reduce(function(n,e){return n+(e.kind==='drink'?e.g*Math.max(0,Math.min(1,(t-e.t)/(e.end-e.t))):e.t<=t?e.g:0);},0),a.carbrate*t/60]);}
+  P.bikeTotal=bike.used.carb;P.bikeRate=Math.round(bike.used.carb/(P.B/60));P.naPlanned=bike.used.sodium;P.cafPlan=bike.used.caffeine+run.used.caffeine;
+  P.caps=0;P.runCaps=0;P.capTimes=[];P.powderMix=0;P.powderElec=0;P.mixPortions=0;P.saltPortions=0;
+  P.startText='Prepare your entered drink portions; fill remaining carrying space with water.';
+  P.stopText=['Refill water at W1; use only the drink portions you entered.','Refill water at W2; use only the drink portions you entered.'];
+  // Inventory nutrient totals replace all generic products. Water capacity remains a separate comparison.
+  P.warn=P.warn.filter(function(w){return !/caffe|capsule|sodium|carb|g\/h|fuel/i.test(w[1]);});
+  if(P.bikeTotal<a.carbrate*P.B/60)P.warn.push(['warn','Your entered bike products provide '+P.bikeRate+' g/h, below your selected '+a.carbrate+' g/h target. Reserves are excluded.']);
+  P.bottles=P.bottles.map(function(){return ['water','water','water'];});P.fill2=P.bottles.length;
+  if(bike.used.water>P.fluidRate*P.B/60)P.warn.push(['warn','The water in your scheduled bike drink portions exceeds the bike drinking-volume estimate. Reconcile drink portions and your practiced rate.']);
+  P.legs.forEach(function(bounds,i){var need=bike.events.filter(function(e){return e.kind==='drink';}).reduce(function(n,e){var overlap=Math.max(0,Math.min(bounds[1],e.end)-Math.max(bounds[0],e.t));return n+e.water*overlap/(e.end-e.t);},0);if(need>P.capacity)P.warn.push(['warn','Scheduled drink portions use '+Math.round(need)+' ml between '+['T1 and W1','W1 and W2','W2 and T2'][i]+', above your '+P.capacity+' ml carrying capacity. Reconcile portions and refills.']);});
+  if(a.runcarry==='none'&&run.used.water>0)P.warn.push(['warn','Run drinks are scheduled but you selected no run container. Confirm where each drink will be available.']);
+}
+function inventoryTimeline(d,label){
+  var h='<div class="actual-clock"><h4>'+label+' · your product schedule</h4><p class="small">Elapsed time from the start of this leg. Drink intervals describe sipping, not a single dose. Timing comes from your answers.</p><ol class="fuel-sequence">';
+  d.events.forEach(function(e){h+='<li><b>'+hm(e.t)+(e.end>e.t?'–'+hm(e.end):'')+'</b><span>'+e.qty+' × '+esc(e.name)+' · '+fmtNum(e.g)+' g carbohydrate'+(e.caffeine?' · '+fmtNum(e.caffeine)+' mg caffeine':'')+(e.water?' · '+fmtNum(e.water)+' ml water':'')+'</span></li>';});
+  if(!d.events.length)h+='<li>No servings scheduled. Any entered products are held in reserve.</li>';
+  return h+'</ol><p class="small">Reserve servings kept separate: '+fmtNum(d.rows.reduce(function(n,r){return n+r.reserve;},0))+'. Water-only refills add no nutrients to these totals.</p></div>';
+}
+function renderActualFuel(P){
+  var h='<p><b>Using your actual products.</b> Packing includes reserves; consumption totals exclude them. No generic gels, drink mix or capsules are added.</p>';
+  ['bike','run'].forEach(function(leg){var d=P.actualInventory[leg];h+='<h4>'+ (leg==='bike'?'Bike':'Run')+' · scheduled consumption</h4><div class="nutrient-grid">';
+    [['carb','Carbohydrate','g'],['sodium','Sodium','mg'],['caffeine','Caffeine','mg'],['water','Water in drink portions','ml']].forEach(function(x){h+='<div><b>'+fmtNum(d.used[x[0]])+' '+x[2]+'</b><span>'+x[1]+'</span></div>';});
+    h+='</div><p class="small">'+Math.round(d.used.carb/(d.duration/60))+' g/h across '+dur(d.duration)+'. Water-only drinks are tracked separately in the capacity comparison.</p>';
+  });
+  return h+'<p>Total scheduled caffeine across both legs: <b>'+fmtNum(P.cafPlan)+' mg</b>. This is a label total, not a recommended dose. Earlier food or drinks are not included.</p>'+inventoryTimeline(P.actualInventory.run,'Run');
+}
+function renderInventory(a,P){
+  var h='<details class="insight-panel"'+(a.inventoryMode==='enter'?' open':'')+'><summary>Fuel inventory · bike &amp; run bags</summary><div class="inner">';
+  if(a.inventoryMode!=='enter')return h+'<p>Use your practiced products and timing to replace the suggested fuel schedule and packing quantities.</p>'+editDetail('inventoryMode','Use my own fuel products')+'</div></details>';
+  h+='<p><b>'+(P.actualInventory?'Your inventory drives the feed clock and packing list.':'Draft inventory · the suggested feed clock and packing list remain active.')+'</b> Complete both legs to activate your products. For a product kept entirely in reserve, set reserves equal to packed servings.</p>';
+  ['bike','run'].forEach(function(leg){var d=P.inventoryDraft[leg];h+='<article class="inventory-summary"><h4>'+(leg==='bike'?'Bike · prepare before swim / T1':'Run · black T2 bag')+'</h4><ul class="equipment-list">';
+    d.rows.forEach(function(r){h+='<li><b>'+esc(r.name)+'</b><span>'+(present(r.qty)?r.qty+' packed':'Quantity unknown')+(present(r.reserve)?' · '+r.reserve+' reserve':' · reserves unknown')+'</span></li>';});
+    h+='</ul><div class="nutrient-grid">';
+    [['carb','Carbs','g'],['sodium','Sodium','mg'],['caffeine','Caffeine','mg']].forEach(function(x){h+='<div><b>'+fmtNum(d.totals[x[0]])+' '+x[2]+'</b><span>'+x[1]+'</span><small>'+(d.known[x[0]]?'Packed total, including reserves':'Known subtotal · incomplete')+'</small></div>';});
+    h+='</div>'+(d.issues.length?'<ul class="insight-warning">'+d.issues.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>':'<p class="small">Products and timing complete.</p>')+editDetail('inventory_'+leg+'_none','Change '+leg+' fuel choice')+(a['inventory_'+leg+'_none']==='yes'?'':editDetail('inventory_'+leg,'Edit '+leg+' products'))+'</article>';
+  });
+  return h+'</div></details>';
+}
+function localMinutes(t){if(!/^\d{2}:\d{2}$/.test(t||''))return null;var n=t.split(':').map(Number);return n[0]<24&&n[1]<60?n[0]*60+n[1]:null;}
+function weekendEvents(a){
+  var w=a.weekend||{},p=a.pickup||{},day={thu:0,fri:1,sat:2,sun:3},events=[];
+  function add(d,t,title,note){events.push({day:d,time:t,title:title,note:note});}
+  if(w.day)add(day[w.day],localMinutes(w.arrival),'Arrive'+(w.stay?' · '+w.stay:''),'Accommodation: '+({booked:'booked',needed:'still to book',none:'not needed'}[w.stayStatus]||'not recorded'));
+  add(a.checkin==='sat'?2:1,a.checkin==='sat'?720:1050,'Check-in · Girona','Existing dossier window: '+(a.checkin==='sat'?'12:00–17:00':'17:30–19:30')+'. Verify current organiser timings.');
+  if(a.bike==='rental')add(day[p.day]==null?2:day[p.day],localMinutes(p.time),'Collect rental'+(p.place?' · '+p.place:''),(p.status==='booked'?'Confirmed':'Unconfirmed')+' · '+(present(p.setup)?p.setup+' min fitting / checks':'fitting time unknown')+' · '+(present(p.travel)?p.travel+' min to bike drop':'travel time unknown'));
+  add(2,720,'Bike + black bag drop','12:00–16:00 published bike-drop window · GEiEG, Girona. Confirm at check-in.');
+  var target=a.transport==='bus'?375:480;
+  if(present(w.travel)&&present(w.buffer))add(3,target-w.travel-w.buffer,'Leave accommodation',w.travel+' min travel + '+w.buffer+' min buffer. Destination: '+(a.transport==='bus'?'La Copa bus pickup':'T1, Cadaqués')+'.');
+  add(3,target,a.transport==='bus'?'First organiser bus · La Copa':'Arrive at T1 · Cadaqués',w.transportStatus==='booked'?'Transport arranged':'Transport needs confirmation');
+  add(3,540,'Race start','09:00 · existing dossier time');
+  return events.sort(function(x,y){return x.day-y.day||(x.time==null?1440:x.time)-(y.time==null?1440:y.time);});
+}
+function renderWeekend(a){
+  var w=a.weekend||{},p=a.pickup||{},h='<details class="insight-panel" open><summary>Your weekend · Thursday to Sunday</summary><div class="inner"><p class="small">Local times. Timetable checked 26 September 2026; confirm bag arrangements and final timings at check-in.</p><ol class="weekend-line">';
+  weekendEvents(a).forEach(function(e){var t=e.time;h+='<li><time>'+['Thu 15','Fri 16','Sat 17','Sun 18'][e.day]+'<b>'+(t==null?'Time TBD':t<0?hm(t+1440)+' previous day':hm(t))+'</b></time><div><b>'+esc(e.title)+'</b><p>'+esc(e.note)+'</p></div></li>';});h+='</ol>';
+  var warnings=[],arr=localMinutes(w.arrival),pick=localMinutes(p.time);
+  if(w.day==='sun')warnings.push('Sunday arrival is after Saturday bike drop. Arrange delivery of your bike and bag or revise travel.');
+  if(w.day==='sat'&&arr!=null&&arr>=960)warnings.push('Arrival is at or after the 16:00 bike-drop overlap deadline. Recheck your travel plan.');
+  if(a.checkin==='fri'&&(w.day==='sat'||w.day==='sun'||w.day==='fri'&&arr!=null&&arr>1170))warnings.push('Your arrival does not fit Friday check-in. Revise arrival or check-in choice.');
+  if(a.bike==='rental'&&p.day==='sat'&&pick!=null&&pick+(p.setup||0)+(p.travel||0)>=960)warnings.push('Rental collection, fitting and travel reach or exceed the bike-drop deadline. Book an earlier collection.');
+  if(warnings.length)h+='<ul class="insight-warning">'+warnings.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>';
+  if(a.support==='yes'){var sp=a.supportPlan||{};h+='<p><b>Support · '+esc(sp.name||'Name to confirm')+'</b><br>'+esc(sp.role||'Role to confirm')+'<br>Finish meeting: '+esc(sp.meeting||'Place to confirm')+'</p>';}else h+='<p class="small">Support: '+(a.support==='solo'?'solo weekend':'not decided')+'</p>';
+  return h+editDetail('weekend','Edit weekend')+(a.bike==='rental'?' '+editDetail('pickup','Edit rental collection'):'')+'</div></details>';
+}
+
 // ---------------- page render ----------------
 function setHTML(id,h){ var el=document.getElementById(id); if(el) el.innerHTML=h; }
 function renderAll(){
@@ -2283,14 +2748,20 @@ function renderAll(){
   var who=(a.name||'').trim();
   setHTML('plan-eyebrow','Race plan'+(who?' · '+esc(who):'')+' · SGRAIL 100 · 2026');
   document.body.classList.toggle('plan-empty',!k&&!f);
+  var pending=pendingAnswers();setHTML('plan-assumptions','<b>'+(state.done.kit&&state.done.fuel?'Your working plan':'Sample / draft plan')+'</b><p>'+pending.length+' setup details still use suggested values or need confirmation. Check these before using the race-day schedule.</p><button type="button" class="insight-edit" data-unknown-review>Review my unknowns</button>');
+  document.getElementById('plan-assumptions').hidden=!pending.length;
   // preview banners
   document.querySelectorAll('[data-needs]').forEach(function(el){ var need=el.dataset.needs.split(' '); var miss=need.filter(function(n){ return !state.done[n]; }); el.hidden=!miss.length; if(miss.length){ var b=el.querySelector('[data-sv-jump]'); if(b) b.dataset.svJump=miss[0]; var t=el.querySelector('.pv-which'); if(t) t.textContent=miss.map(function(m){ return SURVEYS[m].n+' · '+SURVEYS[m].title; }).join(' and '); } });
+  renderInsights(a,P);
+  setHTML('next-actions',nextActions(a,P));
   // pack + bags
   var pk=renderPack(a,P); setHTML('pack-body',pk.html);
+  setHTML('pack-assumptions',assumptionNote(['bike','tyres','pedals','runcarry'],[P.actualInventory?'Fuel quantities come from your inventory and include reserves.':'Fuel quantities are generated from the suggested consumption schedule, with its stated spares.']));
   var bags=bagContents(pk.rows,P,a);
   setHTML('bag-t1',chips(bags.t1)); setHTML('bag-t2',chips(bags.t2.length?bags.t2:['Trail bib'])); setHTML('bag-cl',chips(bags.cl));
   var bk=renderBike(a,P); setHTML('bike-body',bk.html); setHTML('bike-title',bk.title);
-  var T=renderTasks(tasks(a,P),checks); setHTML('task-body',T.html);
+  setHTML('bike-assumptions',assumptionNote(['weight','tyres','width','cages','bottleml'],['Pressure is a rough starting estimate; it does not model rim width, tyre construction or total bike load.']));
+  var T=renderTasks(tasks(a,P),checks); setHTML('task-body',T.html+'<div class="insights">'+renderWeekend(a)+'</div>');
   // phases
   var ph=renderPhases(a,P,bags);
   ['pre','swim','t1','bike','t2','run'].forEach(function(id){ var o=ph[id], root=document.getElementById('ph-'+id); if(!root) return;
@@ -2301,19 +2772,24 @@ function renderAll(){
   setHTML('strip-swim',Math.round(base.sw)+'′'); setHTML('strip-bike',hm(P.B)); setHTML('strip-run',hm(P.R)); setHTML('strip-pre',P.breakfast.split('–')[0]+'–09:00');
   setHTML('ct-swim',Math.round(base.sw)+' min'); setHTML('ct-bike',hm(P.B)); setHTML('ct-run',hm(P.R));
   setHTML('feedchart',renderFeedChart(P)); setHTML('feedkey',renderFeedKey(P));
-  setHTML('fuel-body',renderFuel(a,P));
-  var pc=renderPacing(P); setHTML('pace-bars',pc.bars); setHTML('pace-splits',pc.splits); setHTML('pace-clock',pc.clock);
+  var feedblock=document.getElementById('feedblock');feedblock.classList.toggle('actual-inventory',!!P.actualInventory);
+  feedblock.querySelector('.pn').textContent=P.actualInventory?'Your feed clock':'Feeding chart';
+  feedblock.querySelector('.pd').textContent=P.actualInventory?'your products · elapsed bike time':'graph · your feed times on the bike profile';
+  feedblock.querySelector('.graph-cue').textContent=P.actualInventory?'Show schedule':'Show graph';
+  setHTML('feed-explanation',P.actualInventory?'Times and portions come from your entries. Run timing appears under Fuel &amp; salt.':'Clock time is the instruction; the km is where that time is likely to fall at your pace.');
+  setHTML('fuel-body',assumptionNote(P.actualInventory?['sweat','capacity','bottleml','runcarry']:['carbrate','sweat','salty','sources','refill','gelg','barg','chewg','mixg','mixna','capna','caffeine','cafmg'],[P.actualInventory?'Nutrients use your product labels and scheduled servings. Reserve servings are excluded.':'Suggested product amounts use your entered or default label values. Station mix strength is unconfirmed.','Water capacity assumes the displayed refills; availability and actual drinking rate must be confirmed.'])+renderFuel(a,P)+'<div class="insights">'+renderWater(a,P)+renderInventory(a,P)+'</div>');
+  var pc=renderPacing(P); setHTML('pace-bars',assumptionNote(['swimpace','biketime','runtime','timebasis'],['T1: '+P.scen[1].t1+' min'+(!present((a.allowances||{}).t1)?' assumed':'' )+'; T2: '+P.scen[1].t2+' min'+(!present((a.allowances||{}).t2)?' assumed':'' )+'.','Scenario ranges are illustrative. The earlier finish cutoff remains unconfirmed.'])+pc.bars+'<div class="insights">'+renderTimeEvidence(a,P)+'</div>'); setHTML('pace-splits',pc.splits); setHTML('pace-clock',pc.clock);
   setHTML('risk-body',renderRisks(a,P));
   // warnings
   var wh=P.warn.map(function(w){ return '<li class="w-'+w[0]+'">'+w[1]+'</li>'; }).join('');
   setHTML('plan-warn',wh?'<ul>'+wh+'</ul>':''); document.getElementById('plan-warn').hidden=!wh||!f;
   // station texts for the course profile
   PLAN_ST.t1=['#5C6B72','T1 · PLATJA GRAN','Swim: anti-clockwise rectangle, ~18.5 °C, wetsuit on. T1: water, Maurten and food. Mount outside T1.'];
-  PLAN_ST.w1=['var(--track)','KM 34.2 · CASTELLÓ — MANDATORY','Refill: '+P.stopText[0]+'. Be through by '+clock(base.sw+base.t1+P.w1Check)+' to make the 15:49 gravel cutoff.'];
+  PLAN_ST.w1=['var(--track)','KM 34.3 · CASTELLÓ — MANDATORY','Refill: '+P.stopText[0]+'. Be through by '+clock(base.sw+base.t1+P.w1Check)+' to make the 15:49 gravel cutoff.'];
   PLAN_ST.w2=['var(--track)','KM 68 · JAFRE — MANDATORY','Refill: '+P.stopText[1]+'. Be through by '+clock(base.sw+base.t1+P.w2Check)+' to make the 15:49 gravel cutoff.'];
   PLAN_ST.pk=['#8A5A2B','KM 13.5 · 419 M — HIGH POINT','~67% of the climbing is in km 0–25. Conservative lines; walk difficult pitches. Gels or drink only here — solids after km 25.'];
   PLAN_ST.t2=['#5C6B72','T2 · CELRÀ','Dismount before the entrance. Helmet stays with the bike. See your T2 checklist.'];
-  PLAN_ST.c45=['var(--trail)','RUN KM 4.2 · SANT MIQUEL — CASTLE AID','Water, Maurten and fruit. '+(a.runcarry!=='none'?'Refill here. ':'')+'Then 3 km down, a 50 m and a 20 m rise, and 20 finish steps.'];
+  PLAN_ST.c45=['var(--trail)','RUN KM 4.4 · SANT MIQUEL — CASTLE AID','Water, Maurten and fruit. '+(a.runcarry!=='none'?'Refill here. ':'')+'Then 3 km down, a 50 m and a 20 m rise, and 20 finish steps.'];
   PLAN_ST.fin=['#5C6B72','FINISH · GIRONA','Maurten, fruit, food, coffee.'];
   // checkboxes
   bindChecks(checks);
@@ -2327,6 +2803,7 @@ function bindChecks(checks){
   });
 }
 function updateStatus(){
+  setHTML('next-actions',nextActions(answers(),compute(answers())));
   var boxes=Array.from(document.querySelectorAll('#task-body input[type=checkbox]'));
   var n=boxes.length, d=boxes.filter(function(b){ return b.checked; }).length, left=n-d;
   var c=document.getElementById('prep-count'); if(c) c.textContent=left+' open task'+(left===1?'':'s');
@@ -2341,13 +2818,31 @@ function updateStatus(){
 // ---------------- tools: share link, reset ----------------
 function bindTools(){
   var share=document.getElementById('share-plan'), status=document.getElementById('tool-status'), reset=document.getElementById('reset-plan'), armed=false;
-  share.addEventListener('click',function(){
-    var enc=encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify({answers:state.answers,done:state.done})))));
-    var url=location.origin+location.pathname+'#a='+enc;
-    function ok(){ status.textContent='Link copied. Open it on your phone to load the same plan.'; }
-    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(url).then(ok,function(){ status.innerHTML='Copy this link: <input readonly value="'+esc(url)+'" onfocus="this.select()">'; }); }
-    else status.innerHTML='Copy this link: <input readonly value="'+esc(url)+'" onfocus="this.select()">';
+  function isHosted(){return /^https?:$/.test(location.protocol)&&!/(^localhost$|^127\.|^\[?::1\]?$)/.test(location.hostname);}
+  function copy(url,message){if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(url).then(function(){status.textContent=message;},fallback);else fallback();function fallback(){status.innerHTML='Copy this link: <input aria-label="Link to copy" readonly value="'+esc(url)+'">';}}
+  document.addEventListener('click',function(e){
+    var review=e.target.closest('[data-unknown-review]');if(review){openGate('unknown');return;}
+    var go=e.target.closest('[data-plan-go]');if(!go)return;
+    if(gate.mode)closeGate();
+    var race=go.dataset.planGo!=='openitems';document.querySelector('[data-view="'+(race?'race':'prepare')+'"]').click();
+    var section=document.getElementById(go.dataset.planGo);section.scrollIntoView({block:'start'});var heading=section.querySelector('h2');if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true});}
   });
+  document.getElementById('device-save').addEventListener('click',function(){document.getElementById('backup-plan').click();});
+  document.getElementById('share-clean').addEventListener('click',function(){
+    if(!isHosted()){status.textContent='This is a local copy. Send your friend the clean planner HTML file (or the prepared ZIP), not a localhost or file link. Browser answers are not inside the original HTML file.';return;}
+    copy(location.origin+location.pathname,'Planner link copied. It contains none of your answers. Your friend starts with their own plan.');
+  });
+  share.addEventListener('click',function(){
+    if(!isHosted()){status.textContent='Answer links need a hosted page. Use Save my backup to move your answers, or send the clean HTML file for your friend to start separately.';return;}
+    var panel=document.getElementById('personal-share');panel.hidden=!panel.hidden;
+  });
+  document.getElementById('copy-personal').addEventListener('click',function(){
+    var enc=encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(state)))));
+    copy(location.origin+location.pathname+'#a='+enc,'Personal link copied. Anyone receiving it can read your entered answers.');document.getElementById('personal-share').hidden=true;
+  });
+  document.getElementById('backup-plan').addEventListener('click',function(){var data={...state,checks:lsGet('checks',{})};var url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));var a=document.createElement('a');a.href=url;a.download='sgrail-my-plan.json';a.click();setTimeout(function(){URL.revokeObjectURL(url);},1000);status.textContent='Backup saved. It includes your answers and checklist. Keep it private.';});
+  document.getElementById('import-backup').addEventListener('change',function(e){var f=e.target.files[0];if(!f)return;if(f.size>150000){status.textContent='That backup is too large. Choose a planner JSON backup.';return;}f.text().then(function(text){try{incoming=cleanState(JSON.parse(text));openGate('import');}catch(err){status.textContent='That file is not a valid planner backup. Your plan has not changed.';}e.target.value='';}).catch(function(){status.textContent='The backup could not be read. Your saved plan has not changed. Try selecting the file again.';e.target.value='';});});
+  document.getElementById('recover-plan').addEventListener('click',function(){var old=lsGet('recovery',null);if(!old){status.textContent='No replaced plan to recover.';return;}var current={state:state,checks:lsGet('checks',{})};state=cleanState(old.state);lsSet('checks',old.checks||{});lsSet('recovery',current);save();renderSurveys();renderAll();status.textContent='Previous plan restored. The plan you replaced is now the recovery copy.';});
   reset.addEventListener('click',function(){
     if(!armed){ armed=true; reset.textContent='Tap again to clear all answers and ticks'; reset.classList.add('armed'); setTimeout(function(){ armed=false; reset.textContent='Start over'; reset.classList.remove('armed'); },4000); return; }
     state={answers:{},done:{kit:false,fuel:false}}; save(); lsSet('checks',{}); armed=false; reset.textContent='Start over'; reset.classList.remove('armed');
@@ -2355,7 +2850,7 @@ function bindTools(){
   });
   document.addEventListener('click',function(e){
     var ed=e.target.closest('[data-edit]'); if(!ed) return; e.preventDefault();
-    if(!(state.done.kit&&state.done.fuel)){ openGate('onboard'); return; }
+    if(!(state.done.kit&&state.done.fuel)&&ed.dataset.edit!=='all'){ openGate('onboard'); return; }
     var sh=document.getElementById('dock-sheet'); if(sh&&!sh.hidden){ document.body.classList.remove('sheet-open'); sh.hidden=true; }
     openGate('edit',ed.dataset.edit||'all');
   });
@@ -2371,8 +2866,8 @@ function bindTools(){
 }
 
 // Resume unfinished setup on reload; closing it reveals the clearly labelled draft plan.
-window.PLAN_INIT=function(){ renderSurveys(); bindGate(); renderAll(); bindTools(); if(!(state.done.kit&&state.done.fuel)) openGate('onboard'); };
-window.PLAN_TEST={compute:compute,answers:answers,SURVEYS:SURVEYS,pressure:pressure};
+window.PLAN_INIT=function(){ renderSurveys(); bindGate(); renderAll(); bindTools(); if(incoming)openGate('import');else if(!(state.done.kit&&state.done.fuel))openGate('onboard');if(importError)document.getElementById('tool-status').textContent=importError; };
+window.PLAN_TEST={inventorySchedule:inventorySchedule,packRows:packRows,renderActualFuel:renderActualFuel,pendingQuestions:pendingQuestions,compute:compute,answers:answers,SURVEYS:SURVEYS,pressure:pressure,inventoryData:inventoryData,weekendEvents:weekendEvents,planningActions:planningActions,renderWater:renderWater,renderTimeEvidence:renderTimeEvidence,cleanState:cleanState,starterQuestion:starterQuestion};
 })();
 
 PLAN_INIT();
