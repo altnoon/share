@@ -1194,6 +1194,42 @@ button,select,summary,.backup-label{min-height:44px}
 #device-guide li{margin:10px 0}.gate-card,.detail-field{min-width:0}.detail-field span{overflow-wrap:anywhere}
 @media(max-width:600px){.gate input,.gate select,#setup input,#setup select{font-size:16px}.next-links button{flex:1 1 120px}.gate .g-nav{flex-wrap:wrap}.gate .g-nav button{white-space:normal}.gate .detail-fields{grid-template-columns:minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* setup flow · 29 Sep: grouped screens, live feedback, welcome outputs */
+.gate .q+.q{margin-top:6px}
+.gate .q-sub{font:600 16px/1.35 var(--body);letter-spacing:0;text-transform:none;color:var(--ink);margin:22px 0 10px;border:0;padding:0}
+.gate .g-form>.q:first-child .q-sub,.gate .preset+.preset-note+.q .q-sub{margin-top:18px}
+.gate .q-feedback{font:500 13px/1.5 var(--mono);color:var(--muted);margin:8px 0 0;min-height:1em}
+.gate .q-feedback:empty{display:none}
+.gate .times-sum{margin-top:22px;padding:14px 16px;border-left:3px solid var(--sea);background:var(--sea-soft);font-size:15px;line-height:1.5}
+.gate .times-sum p{margin:0}.gate .times-sum .ts-k{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.gate .times-sum dl{margin:0 0 10px;display:grid;gap:8px}.gate .times-sum dt{font-size:13px;color:var(--muted)}.gate .times-sum dd{margin:2px 0 0}.gate .times-sum dd b{font:600 20px var(--mono);margin-right:6px}
+.gate .times-sum .small{font-size:13px;color:var(--muted)}
+.gate span.late{color:var(--flag);font-weight:600}.gate span.tight{color:var(--track);font-weight:600}
+.gate .g-warn{color:var(--flag);background:var(--flag-soft);padding:12px 14px;border-radius:6px;margin:12px 0 0;font-size:15px;line-height:1.5}
+.gate .preset{display:grid;gap:6px;font-size:15px;font-weight:600}
+.gate .preset-note{margin:8px 0 4px;font-size:13px}
+.gate .resume-note{font-size:14px;color:var(--ink);background:var(--paper);border-radius:6px;padding:10px 12px;margin:0 0 18px}
+.gate .resume-note .g-link{min-height:auto;margin-left:4px}
+.gate .countdown{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:14px 0 4px;font-size:15px;color:var(--ink)}
+.gate .countdown b{font:700 28px var(--mono);color:var(--ink)}
+.gate .countdown span{flex-basis:100%;font-size:14px;color:var(--muted)}
+.gate .welcome-out{list-style:none;padding:0;margin:18px 0 22px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 18px;border-top:1px solid var(--line);padding-top:16px}
+.gate .welcome-out li{font-size:13.5px;line-height:1.45;color:var(--muted)}
+.gate .welcome-out b{display:block;font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:3px}
+.gate .sample-card{display:grid;gap:4px;width:100%;margin-top:10px;text-align:left;padding:14px 18px;border:1px dashed var(--line);border-radius:9px;background:transparent;color:var(--ink);cursor:pointer;font:400 14px/1.5 var(--body)}
+.gate .sample-card b{font-size:16px;color:var(--sea);text-decoration:underline}
+.gate .sample-card .eyebrow{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.gate .sample-card:focus-visible,.gate .start-card:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
+.gate .pend-list{list-style:none;padding:0;margin:10px 0 18px;display:grid;gap:10px}
+.gate .pend-list li{padding:10px 12px;background:var(--paper);border-radius:6px;font-size:14px;line-height:1.45}
+.gate .pend-list b{display:block}.gate .pend-list span{color:var(--muted)}
+.gate .name-field{display:grid;gap:6px;margin:6px 0 4px;font-size:15px;font-weight:600}
+.gate .name-field small{font-weight:400;color:var(--muted);margin-left:4px}
+.next-links button{background:var(--card);border:1px solid var(--line);border-radius:8px;color:var(--sea);font:600 14px var(--body);min-height:44px;cursor:pointer}
+.next-links button:hover{border-color:var(--sea)}
+@media(max-width:600px){.gate .welcome-out{grid-template-columns:minmax(0,1fr)}}
+.gate .g-nav-end button{flex:1 1 auto}
 </style>
 <script>
 /* Theme resolves before paint so a dark start does not flash white. auto = follow the device. */
@@ -1292,7 +1328,7 @@ button,select,summary,.backup-label{min-height:44px}
   <h2>Your plan <span class="tag">two guided surveys · saved in this browser</span></h2>
   <p class="setup-lede">Everything on this page is built from these answers: <b>01</b> drives your bags, pack list, bike checks and to-dos; <b>02</b> drives your race-day feed clock, sodium and pacing. Edit either and the plan rebuilds.</p>
 
-<template id="how-it-works-content"><ol><li><b>Start with your own answers.</b> Choose the essentials first. This is a planning tool, not a test; “I don’t know yet” creates a reminder.</li><li><b>Review the estimates.</b> Suggested values are placeholders. Use “Review my unknowns” to visit unfinished decisions, or edit either survey to add travel, training and inventory details.</li><li><b>Prepare, then race.</b> Prepare holds bags and tasks. Race day holds the course, feed clock, water and pacing. Complete both fuel inventories, including reserves and your practiced timing, to use your products in the feed clock and packing list. Incomplete inventories remain drafts.</li><li><b>Save a backup.</b> Answers stay in this browser and do not sync automatically. Download a backup before changing browser or device. Local HTML previews on phones may not run scripts; open in a full browser.</li><li><b>Share the blank planner.</b> Your friend gets their own plan. Sharing answers is a separate, explicit action.</li></ol><p class="small">Fuel, fluid, caffeine and tyre figures are planning estimates, not individual prescriptions. Use values you have tested and review the final organiser briefing.</p></template>
+<template id="how-it-works-content"><ol><li><b>Start with your own answers.</b> Choose the essentials first. This is a planning tool, not a test; “I don’t know yet” creates a reminder.</li><li><b>Review the estimates.</b> Anything you mark “Not sure” uses a typical value until you answer it. Your own numbers replace it; pick your product to fill in label values. Use “Review my unknowns” to visit unfinished decisions, or edit either survey to add travel, training and inventory details.</li><li><b>Prepare, then race.</b> Prepare holds bags and tasks. Race day holds the course, feed clock, water and pacing. Complete both fuel inventories, including reserves and your practiced timing, to use your products in the feed clock and packing list. Incomplete inventories remain drafts.</li><li><b>Save a backup.</b> Answers stay in this browser and do not sync automatically. Download a backup before changing browser or device. Local HTML previews on phones may not run scripts; open in a full browser.</li><li><b>Share the blank planner.</b> Your friend gets their own plan. Sharing answers is a separate, explicit action.</li></ol><p class="small">Fuel, fluid, caffeine and tyre figures are planning estimates, not individual prescriptions. Use values you have tested and review the final organiser briefing.</p></template>
 <details class="quick-guide" id="race-verification"><summary>Race information · checked 26 September 2026</summary><div class="inner"><p>The <a href="https://sgrail100.com/timetable/" target="_blank" rel="noopener">organiser timetable</a> confirms the 09:00 start, 09:59 swim cutoff and 15:49 bike cutoff. It still shows both 16:59 and 17:59 finish limits. Saturday bike drop is listed as 12:00–16:00; confirm your bag arrangements separately.</p><p>The <a href="https://sgrail100.com/course/" target="_blank" rel="noopener">course page</a> currently lists a 10.4 km run, bike aid at 34.3 / 68 km and run aid at 4.4 km. The elevation drawing uses an older GPX reference; download the final race track.</p><p>Check the <a href="https://sgrail100.com/rules-regulations/" target="_blank" rel="noopener">rules and latest briefing</a> before race day. Weather figures elsewhere are historical context, not a forecast. This planner is independent of the organiser.</p></div></details>
   <div id="surveys"></div>
   <div id="next-actions"></div>
@@ -1582,16 +1618,15 @@ var SURVEYS={
  kit:{ n:'01', title:'Kit & logistics', builds:'Builds your bags, pack list, bike checks and to-do list', steps:[
   {title:'You', qs:[
    {id:'name', type:'text', label:'What name would you like on your plan? (optional)', help:'Optional. Shown at the top of the page.', def:''},
-   {id:'weight', type:'number', label:'What is your body weight?', unit:'kg', min:40, max:140, step:1, def:72, help:'Sets the tyre-pressure starting point and the caffeine reference calculation.'},
-   {id:'insurance', type:'choice', label:'Have you checked your event insurance cover?', help:'Choose “Not sure” if you still need to check your policy. We’ll add a reminder to your to-do list.', def:'unsure',
-    options:[['yes','Yes, verified'],['unsure','Not sure'],['no','No']]}
   ]},
   {title:'Bike', qs:[
    {id:'bike', type:'choice', label:'Which bike are you racing?', def:'own', options:[['own','My own gravel bike'],['rental','A rental, collected in Girona'],['mtb','My own MTB / other']]},
-   {id:'tyres', type:'choice', label:'How are your tyres set up?', def:'tubeless', options:[['tubeless','Tubeless'],['tubes','Inner tubes'],['unsure','Not sure yet']]},
+   {id:'tyres', type:'choice', label:'How are your tyres set up?', def:'tubeless', options:[['tubeless','Tubeless'],['tubes','Inner tubes'],['unsure','Not sure yet','hide']]},
    {id:'width', type:'choice', label:'What width are your tyres?', help:'Look for the size on the tyre sidewall. Choose the closest range.', def:'45', options:[['40','38–40 mm'],['45','42–45 mm'],['50','47–50 mm'],['mtb','2.0″ or wider']]},
    {id:'pedals', type:'choice', label:'Which pedals will you use?', def:'clip', options:[['clip','Clip-in pedals · cycling shoes attach to the pedal'],['flat','Flat pedals']]},
    {id:'cages', type:'choice', label:'How many bottle cages can you use?', def:'2', options:[['1','One'],['2','Two'],['3','Three']]},
+   {id:'bottleml', type:'choice', label:'How much does each bike bottle hold?', def:'750', options:[['500','500 ml'],['620','600–620 ml'],['750','750 ml'],['950','950 ml']]},
+   {id:'weight', type:'number', label:'What is your body weight?', unit:'kg', min:40, max:140, step:1, def:72, help:'Sets your tyre-pressure starting point and the caffeine reference.'},
    {id:'nav', type:'choice', label:'How will you follow the bike route?', help:'Choose the device you’ll use to follow the downloaded GPX route.', def:'unit', options:[['unit','Bike computer'],['watch','Watch only'],['phone','Phone on the bars']]},
    {id:'storage', type:'multi', label:'Where can you carry food and spares?', help:'Select all that apply. Leave blank if you still need to arrange storage.', def:['saddle'], options:[['saddle','Saddle bag'],['toptube','Top-tube bag'],['pockets','Suit pockets']]}
   ]},
@@ -1606,6 +1641,8 @@ var SURVEYS={
   {title:'Weekend', qs:[
    {id:'checkin', type:'choice', label:'When will you check in?', help:'Check-in hands you the bags and bibs you need for Saturday’s bike drop.', def:'fri', options:[['fri','Friday 17:30–19:30'],['sat','Saturday, 12:00–17:00']]},
    {id:'transport', type:'choice', label:'How do you get to the start?', def:'bus', options:[['bus','Organiser bus from Girona'],['own','Own transport to Cadaqués']]},
+   {id:'insurance', type:'choice', label:'Have you checked your event insurance cover?', help:'Cover is required to start. Not sure yet? Tap “I don’t know yet” and it goes on your to-do list.', def:'unsure',
+    options:[['yes','Yes, verified'],['unsure','Not sure','hide'],['no','No']], warn:{value:'no',text:'<b>No insurance, no start.</b> Cover is checked at check-in. This goes to the top of your to-do list.'}},
    {id:'openwater', type:'choice', label:'Have you swum in open water in this wetsuit recently?', def:'yes', options:[['yes','Yes, recently'],['no','Not recently']]},
    {id:'gravel', type:'choice', label:'How often do you ride on gravel?', def:'some', options:[['lots','I ride gravel regularly'],['some','A few rides'],['first','First gravel race']]},
    {id:'flatfix', type:'choice', label:'Have you fixed a flat on the bike you will race?', def:'no', options:[['yes','Yes'],['no','Not yet']]}
@@ -1613,9 +1650,9 @@ var SURVEYS={
  ]},
  fuel:{ n:'02', title:'Fuel & pacing', builds:'Builds your feed schedule, sodium, fluid and finish-time scenarios', steps:[
   {title:'Times', qs:[
-   {id:'swimpace', type:'select', label:'What is your usual open-water swim pace?', help:'Minutes and seconds per 100 m, wearing your wetsuit. Use a recent swim rather than your fastest pool pace.', def:'120', options:paceOpts},
-   {id:'biketime', type:'select', label:'Expected bike time · 86.4 km', help:'Most of the climbing is in the first 25 km and 93% is unpaved. Use a realistic time for similar terrain. The suggested 4 h 30 min is a placeholder you can change.', def:'270', options:bikeOpts},
-   {id:'runtime', type:'select', label:'Expected run time · 10.4 km, +320 m', help:'A 250 m climb, a long descent, late rises and steps. Use a recent hilly trail run to estimate your time, including walking on climbs.', def:'85', options:runOpts}
+   {id:'swimpace', type:'select', label:'What is your usual open-water swim pace?', help:'Per 100 m in your wetsuit, from a recent open-water swim.', def:'120', options:paceOpts},
+   {id:'biketime', type:'select', label:'Expected bike time · 86.4 km', help:'Most climbing is in the first 25 km and 93% is unpaved. Use a realistic time from similar terrain.', def:'270', options:bikeOpts},
+   {id:'runtime', type:'select', label:'Expected run time · 10.4 km, +320 m', help:'A 250 m climb, a long descent, late rises and steps. Include walking on the climbs.', def:'85', options:runOpts}
   ]},
   {title:'Carbs', qs:[
    {id:'carbrate', type:'choice', label:'How much carbohydrate have you comfortably used per hour?', help:'Pick what your gut has handled on long rides. Race day is not the day to go higher.', def:'60', options:[['45','~45 g/h'],['60','~60 g/h'],['75','~75 g/h'],['90','~90 g/h']]},
@@ -1626,24 +1663,23 @@ var SURVEYS={
   ]},
   {title:'Fluid & salt', qs:[
    {id:'sweat', type:'choice', label:'How much do you sweat?', help:'Think about your own long rides in similar weather. This is a rough estimate, not a measured sweat rate.', def:'avg', options:[['light','Light'],['avg','Average'],['heavy','Heavy']]},
-   {id:'salty', type:'choice', label:'Have you noticed salt marks after training?', help:'Have you noticed white salt marks on clothing after training? Choose “Don’t know” if unsure.', def:'unsure', options:[['no','No'],['yes','Yes'],['unsure','Don’t know']]},
+   {id:'salty', type:'choice', label:'Have you noticed salt marks after training?', help:'White marks on your kit or cap after long sessions.', def:'unsure', options:[['no','No'],['yes','Yes'],['unsure','Don’t know','hide']]},
    {id:'salt', type:'multi', label:'How will you take sodium?', help:'Select all that apply — many riders combine capsules with an electrolyte bottle.', def:['caps'], options:[['caps','Capsules or tablets'],['mix','Electrolyte powder in a bottle'],['none','Nothing extra']]}
   ]},
   {title:'Bottles & stops', qs:[
    {id:'mixbottles', type:'choice', label:'How many bottles of drink mix at the start?', help:'The other bottles start with plain water.', def:'1', options:[['1','One'],['2','Two'],['3','Three']], when:function(a){ return has(a,'sources','mix')&&(+a.cages||2)>=2; }},
    {id:'refill', type:'choice', label:'What goes into your bottles at W1 and W2?', help:'Water refills at km 34.3 and km 68 are mandatory stops. The station drink is legal there; taking supplies outside an aid zone is +30 min.', def:'powder', options:[['powder','Water + my own powder, carried in vials'],['station','Water + the station drink'],['water','Water only']], when:function(a){ return has(a,'sources','mix')||has(a,'salt','mix'); }}
   ]},
-  {title:'Products', note:'Suggested amounts are placeholders. Check the nutrition label for the portion you will actually carry.', qs:[
-   {id:'gelname', type:'text', label:'Which gel? (optional)', help:'Brand and product, as you want it on your plan and pack list.', placeholder:'e.g. brand and product', def:'', when:function(a){ return has(a,'sources','gels'); }},
-   {id:'barname', type:'text', label:'Which bar? (optional)', help:'Brand and product, as you want it on your plan and pack list.', placeholder:'e.g. brand and product', def:'', when:function(a){ return has(a,'sources','bars'); }},
-   {id:'mixname', type:'text', label:'Which drink mix? (optional)', help:'Brand and product, as you want it on your plan and pack list.', placeholder:'e.g. brand and product', def:'', when:function(a){ return has(a,'sources','mix'); }},
-   {id:'gelg', type:'number', label:'Carbs per gel', unit:'g', min:10, max:60, step:1, def:25, when:function(a){ return has(a,'sources','gels'); }},
+  {title:'Products', qs:[
+   {id:'gelname', type:'text', label:'Gel name (optional)', placeholder:'e.g. brand and product', def:'', when:function(a){ return has(a,'sources','gels'); }},
+   {id:'gelg', type:'number', label:'Carbs per gel', unit:'g', min:10, max:100, step:1, def:25, when:function(a){ return has(a,'sources','gels'); }},
+   {id:'barname', type:'text', label:'Bar name (optional)', placeholder:'e.g. brand and product', def:'', when:function(a){ return has(a,'sources','bars'); }},
    {id:'barg', type:'number', label:'Carbs per bar', unit:'g', min:10, max:80, step:1, def:40, when:function(a){ return has(a,'sources','bars'); }},
    {id:'chewg', type:'number', label:'Carbs per chew pack', unit:'g', min:10, max:60, step:1, def:24, when:function(a){ return has(a,'sources','chews'); }},
-   {id:'mixg', type:'number', label:'How much carbohydrate is in one prepared bottle?', help:'Use the amount for the powder you add to one full bottle, not per 100 ml.', unit:'g', min:10, max:120, step:5, def:60, when:function(a){ return has(a,'sources','mix'); }},
-   {id:'mixna', type:'number', label:'How much sodium is in one prepared bottle?', help:'Enter sodium, not salt, for the amount of powder you use in a full bottle.', unit:'mg', min:0, max:2000, step:50, def:400, when:function(a){ return has(a,'sources','mix')||has(a,'salt','mix'); }},
-   {id:'capna', type:'number', label:'How much sodium is in one capsule or tablet?', help:'Check the amount per individual capsule, not per serving of several capsules. Enter sodium, not salt.', unit:'mg', min:50, max:1000, step:10, def:250, when:function(a){ return has(a,'salt','caps'); }},
-   {id:'bottleml', type:'choice', label:'How much does each bike bottle hold?', def:'750', options:[['500','500 ml'],['620','600–620 ml'],['750','750 ml'],['950','950 ml']]}
+   {id:'mixname', type:'text', label:'Drink mix name (optional)', placeholder:'e.g. brand and product', def:'', when:function(a){ return has(a,'sources','mix'); }},
+   {id:'mixg', type:'number', label:'Carbs in one prepared bottle', help:'For the powder you add to one full bottle, not per 100 ml.', unit:'g', min:10, max:120, step:1, def:60, when:function(a){ return has(a,'sources','mix'); }},
+   {id:'mixna', type:'number', label:'Sodium in one prepared bottle', help:'Sodium, not salt, for the powder in one full bottle.', unit:'mg', min:0, max:2000, step:1, def:400, when:function(a){ return has(a,'sources','mix')||has(a,'salt','mix'); }},
+   {id:'capna', type:'number', label:'Sodium per capsule or tablet', help:'Per single capsule, not per serving of several. Sodium, not salt.', unit:'mg', min:50, max:1000, step:1, def:250, when:function(a){ return has(a,'salt','caps'); }}
   ]}
  ]}
 };
@@ -1779,8 +1815,27 @@ var state=lsGet('state',{answers:{},done:{kit:false,fuel:false}}),incoming=null,
   catch(e){importError='This answer link is invalid or incomplete. Your saved plan has not changed.';}
   history.replaceState(null,'',location.pathname+location.search);
 })();
-var STARTER_IDS='name weight insurance bike tyres width pedals cages wetsuit transport swimpace biketime runtime carbrate sources caffeine cafmg salt mixbottles refill gelg barg chewg mixg mixna capna bottleml'.split(' ');
+var STARTER_IDS='weight insurance bike tyres width pedals cages bottleml wetsuit transport swimpace biketime runtime carbrate sources caffeine cafmg sweat salt mixbottles refill gelname gelg barname barg chewg mixname mixg mixna capna'.split(' ');
 function starterQuestion(q){return STARTER_IDS.indexOf(q.id)>=0;}
+// Related questions share one screen. Members must sit next to each other in the same step.
+var GROUPS=[
+ {ids:['tyres','width'],title:'What tyres are you racing on?'},
+ {ids:['cages','bottleml'],title:'How much water can your bike carry?'},
+ {ids:['swimpace','biketime','runtime'],title:'Your race times',kind:'times'},
+ {ids:['gelname','gelg'],title:'Your gel',preset:'gel'},
+ {ids:['barname','barg'],title:'Your bar',preset:'bar'},
+ {ids:['mixname','mixg','mixna'],title:function(a){return has(a,'sources','mix')?'Your drink mix':'Your electrolyte powder';},preset:'mix'},
+ {ids:['capna'],title:'Your sodium capsules',preset:'caps'}
+];
+function groupOf(id){return GROUPS.find(function(g){return g.ids.indexOf(id)>=0;})||null;}
+// Label values checked on the makers' own product pages, 29 September 2026. Region and flavour can change them.
+var PRESETS={
+ gel:[['Maurten Gel 100',{gelg:25}],['Maurten Gel 100 CAF 100 · 100 mg caffeine',{gelg:25}],['Maurten Gel 160',{gelg:40}],['SiS GO Isotonic Energy Gel',{gelg:22}],['SiS GO Energy + Caffeine Gel · 75 mg caffeine',{gelg:22}],['SiS Beta Fuel Energy Gel',{gelg:40}],['Precision Fuel & Hydration PF 30 Gel',{gelg:30}],['PF 30 Caffeine Gel · 100 mg caffeine',{gelg:30}],['Precision Fuel & Hydration PF 90 Gel',{gelg:90}]],
+ bar:[['Maurten Solid 160',{barg:41}]],
+ mix:[['Maurten Drink Mix 160 · 1 sachet',{mixg:41,mixna:210}],['Maurten Drink Mix 320 · 1 sachet',{mixg:80,mixna:245}],['SiS Beta Fuel 80 · 1 sachet (maker says 600 ml)',{mixg:80,mixna:0}],['PF&H Carb & Electrolyte · 2 scoops (500 ml)',{mixg:30,mixna:500}],['PF&H Carb & Electrolyte · 3 scoops (750 ml)',{mixg:45,mixna:750}],['PF&H PH 1500 drink mix · 1 packet',{mixg:15,mixna:752}],['PF&H PH 1000 tablet · 1 tablet',{mixna:500},'elec'],['PF&H PH 1500 tablet · 1 tablet',{mixna:750},'elec']],
+ caps:[['Precision Fuel & Hydration Electrolyte Capsules',{capna:250}],['SaltStick Caps',{capna:215}],['SaltStick Caps Plus · 30 mg caffeine',{capna:190}]]
+};
+var PRESET_NAME={gel:'gelname',bar:'barname',mix:'mixname'};
 function pendingAnswers(){return pendingQuestions(state,answers());}
 function pendingQuestions(raw,a){
   return allQs().filter(function(q){
@@ -2323,8 +2378,10 @@ function renderFeedKey(P){
 // ---------------- survey UI: paginated modal gate ----------------
 // One question per page, with saved drafts and a review before completion.
 var gate={mode:null, key:null, pos:null, reviewing:false, opener:null};
-function qHtml(q,a){
-  var v=state.answers[q.id]===undefined?(q.type==='multi'?[]:q.type==='choice'?null:a[q.id]):a[q.id], id='q-'+q.id, h='<div class="q" data-q="'+q.id+'">';
+function qHtml(q,a,sub){
+  var unset=state.answers[q.id]===undefined, v=unset?(q.type==='multi'?[]:q.type==='choice'?null:(q.type==='number'||q.type==='select')?'':a[q.id]):a[q.id], id='q-'+q.id, h='<div class="q" data-q="'+q.id+'">';
+  var lb=sub?id+'-l':'gate-title';
+  if(sub) h+='<h3 class="q-sub" id="'+lb+'">'+q.label+'</h3>';
   if(q.help) h+='<p class="qhelp" id="'+id+'-h">'+q.help+'</p>';
   var desc=q.help?' aria-describedby="'+id+'-h"':'';
   if(q.type==='fields'||q.type==='inventory'){
@@ -2341,20 +2398,22 @@ function qHtml(q,a){
     if(q.type==='inventory')h+='</details>';
     h+='</div>';
   } else if(q.type==='choice'||q.type==='multi'){
-    h+='<div class="opts'+(q.type==='multi'?' multi':'')+'" role="'+(q.type==='choice'?'radiogroup':'group')+'" aria-labelledby="gate-title"'+desc+'>';
-    q.options.forEach(function(o){ var on=q.type==='multi'?(v||[]).indexOf(o[0])>=0:String(v)===o[0];
+    h+='<div class="opts'+(q.type==='multi'?' multi':'')+'" role="'+(q.type==='choice'?'radiogroup':'group')+'" aria-labelledby="'+lb+'"'+desc+'>';
+    q.options.filter(function(o){return o[2]!=='hide';}).forEach(function(o){ var on=q.type==='multi'?(v||[]).indexOf(o[0])>=0:String(v)===o[0];
       h+='<label class="opt'+(on?' on':'')+'"><input type="'+(q.type==='choice'?'radio':'checkbox')+'" name="'+id+'" value="'+o[0]+'"'+(on?' checked':'')+'><span>'+o[1]+'</span></label>'; });
     h+='</div>';
+    if(q.warn) h+='<p class="g-warn" data-warn-for="'+q.id+'"'+(String(v)===q.warn.value?'':' hidden')+'>'+q.warn.text+'</p>';
   } else if(q.type==='select'){
-    h+='<select name="'+id+'" aria-labelledby="gate-title"'+desc+'>'+q.options.map(function(o){ return '<option value="'+o[0]+'"'+(String(v)===o[0]?' selected':'')+'>'+o[1]+'</option>'; }).join('')+'</select>';
+    h+='<select name="'+id+'" aria-labelledby="'+lb+'"'+desc+'>'+(v===''?'<option value="" selected>Choose…</option>':'')+q.options.map(function(o){ return '<option value="'+o[0]+'"'+(String(v)===o[0]?' selected':'')+'>'+o[1]+'</option>'; }).join('')+'</select>';
   } else if(q.type==='number'){
-    h+='<div class="numrow"><input type="number" inputmode="decimal" name="'+id+'" min="'+q.min+'" max="'+q.max+'" required step="'+q.step+'" value="'+esc(v)+'" aria-labelledby="gate-title"'+desc+'><span>'+q.unit+'</span></div>';
+    h+='<div class="numrow"><input type="number" inputmode="decimal" name="'+id+'" min="'+q.min+'" max="'+q.max+'" required step="'+q.step+'" value="'+esc(v)+'" aria-labelledby="'+lb+'"'+desc+'><span>'+q.unit+'</span></div>';
   } else {
-    h+='<input type="text" name="'+id+'" value="'+esc(v)+'" aria-labelledby="gate-title"'+desc+' autocomplete="'+(q.id==='name'?'given-name':'off')+'" maxlength="40" placeholder="'+esc(q.placeholder||'Your name')+'">';
+    h+='<input type="text" name="'+id+'" value="'+esc(v)+'" aria-labelledby="'+lb+'"'+desc+' autocomplete="'+(q.id==='name'?'given-name':'off')+'" maxlength="40" placeholder="'+esc(q.placeholder||'Your name')+'">';
   }
-  if(state.answers[q.id]===undefined&&(q.type==='number'||q.type==='select')) h+='<p class="g-note">Suggested value · check this before continuing.</p>';
+  if(TIME_IDS.indexOf(q.id)>=0) h+='<p class="q-feedback" data-fb="'+q.id+'" aria-live="polite"></p>';
   return h+'</div>';
 }
+var TIME_IDS=['swimpace','biketime','runtime'];
 function summaryLine(key,a){
   if(key==='kit'){ return [{own:'Own gravel bike',rental:'Rental bike',mtb:'MTB'}[a.bike], {tubeless:'tubeless',tubes:'tubes',unsure:'tyres tbc'}[a.tyres], {clip:'clipless',flat:'flat pedals'}[a.pedals], a.cages+' cage'+(a.cages!=='1'?'s':''), 'check-in '+(a.checkin==='fri'?'Fri':'Sat')]; }
   var P=compute(a); return ['Swim '+Math.round(P.swim)+' min','bike '+hm(P.B),'run '+hm(P.R),a.carbrate+' g/h', {light:'light',avg:'average',heavy:'heavy'}[a.sweat]+' sweat'];
@@ -2379,18 +2438,28 @@ function gatePages(){
   if(gate.mode==='onboard') pages.push({id:'intro',kind:'intro'});
   keys.forEach(function(key,ki){
     if(gate.mode==='onboard' && ki>0) pages.push({id:'mid-'+key,kind:'mid',key:key});
-    SURVEYS[key].steps.forEach(function(st){ visibleQs(st,a).filter(function(q){return gate.mode==='unknown'?gate.queue.indexOf(q.id)>=0:gate.mode!=='onboard'||state.setupMode==='full'||starterQuestion(q);}).forEach(function(q){ pages.push({id:q.id,kind:'q',key:key,step:st,q:q}); }); });
+    SURVEYS[key].steps.forEach(function(st){
+      var qs=visibleQs(st,a).filter(function(q){return gate.mode==='unknown'?gate.queue.indexOf(q.id)>=0:gate.mode!=='onboard'||(q.id!=='name'&&(state.setupMode==='full'||starterQuestion(q)));}), used={};
+      qs.forEach(function(q){
+        if(used[q.id])return;
+        var g=gate.mode==='unknown'?null:groupOf(q.id), members=g?qs.filter(function(x){return g.ids.indexOf(x.id)>=0;}):[q];
+        members.forEach(function(m){used[m.id]=true;});
+        pages.push({id:q.id,kind:'q',key:key,step:st,q:q,qs:members,group:g});
+      });
+    });
   });
   if(gate.mode==='unknown')pages.sort(function(x,y){return gate.queue.indexOf(x.id)-gate.queue.indexOf(y.id);});
   pages.push({id:'end',kind:'end'});
   return pages;
 }
 function visibleQs(step,a){ return step.qs.filter(function(q){ return !q.when||q.when(a); }); }
-function gateIndex(pages){ for(var i=0;i<pages.length;i++) if(pages[i].id===gate.pos) return i; return 0; }
+function gateIndex(pages){ for(var i=0;i<pages.length;i++) if(pages[i].id===gate.pos||(pages[i].qs&&pages[i].qs.some(function(q){return q.id===gate.pos;}))) return i; return 0; }
+function pageCount(mode){ var saved={mode:gate.mode,help:gate.help,setup:state.setupMode}; gate.mode='onboard'; gate.help=false; state.setupMode=mode; var n=gatePages().filter(function(p){return p.kind==='q';}).length; gate.mode=saved.mode; gate.help=saved.help; state.setupMode=saved.setup; return n; }
 function setInert(on){ document.querySelectorAll('.wrap,dialog').forEach(function(el){ if(on) el.setAttribute('inert',''); else el.removeAttribute('inert'); }); }
 function openGate(mode,key){
   gate.opener=document.activeElement; gate.help=false; gate.reviewing=false; gate.mode=mode; gate.key=key||null;
-  if(mode==='onboard'){ gate.pos=state.pos||'intro'; if(!gatePages().some(function(p){return p.id===gate.pos;}))gate.pos='intro'; } else { gate.pos=mode==='import'?'import':'end'; }
+  gate.resumed=false;
+  if(mode==='onboard'){ gate.pos=state.pos||'intro'; if(!gatePages().some(function(p){return p.id===gate.pos||(p.qs&&p.qs.some(function(q){return q.id===gate.pos;}));}))gate.pos='intro'; gate.resumed=gate.pos!=='intro'; } else { gate.pos=mode==='import'?'import':'end'; }
   if(mode==='unknown'){gate.queue=pendingAnswers().map(function(q){return q.id;});gate.pos=gate.queue[0]||'end';}
   var g=document.getElementById('gate'); g.hidden=false; document.body.classList.add('gate-open');
   document.body.classList.toggle('gated',mode==='onboard');
@@ -2407,19 +2476,33 @@ function renderGate(focus){
   var pages=gatePages(), i=gateIndex(pages), pg=pages[i], a=answers(), body=document.getElementById('gate-body');
   var qPages=pages.filter(function(p){ return p.kind==='q'; }), qi=qPages.indexOf(pg);
   document.getElementById('gate-bar').style.width=(pg.kind==='end'?100:pages.slice(0,i).filter(function(p){return p.kind==='q';}).length/(qPages.length||1)*100)+'%';
-  document.getElementById('gate-prog').textContent=pg.kind==='q'?(qi+1)+' / '+qPages.length:'';
-  document.getElementById('gate-close').hidden=false;
+  document.getElementById('gate-prog').textContent='';
+  document.getElementById('gate-close').hidden=pg.kind==='intro'&&!gate.help&&freshState();
   var h='';
   document.getElementById('gate-close').setAttribute('aria-label',gate.help?'Back to welcome':'Save progress and close');
   document.getElementById('gate-close').title=gate.help?'Back to welcome':'Save progress and close';
   if(pg.kind==='guide'){
     h='<p class="g-kicker">A one-minute guide</p><h2 id="gate-title" tabindex="-1">How it works</h2><div class="quick-guide">'+document.getElementById('how-it-works-content').innerHTML+'</div><div class="g-nav"><button type="button" class="primary" data-g="guide-back">Back to welcome</button></div>';
   } else if(pg.kind==='complete'){
-    h='<p class="g-kicker">Plan updated</p><h2 id="gate-title" tabindex="-1">Your working plan</h2><p>'+pendingAnswers().length+' details still need confirmation. You can return to them whenever you are ready.</p>'+nextActions(a,compute(a))+'<div class="g-nav"><button type="button" data-unknown-review>Review my unknowns</button><button type="button" class="primary" data-g="close">View my plan</button></div>';
+    var pend=pendingAnswers(), flagged=pend.filter(function(q){var v=state.answers[q.id];return (state.unknown||{})[q.id]||v==='unknown'||v==='unsure';}), notAsked=pend.filter(function(q){return flagged.indexOf(q)<0;});
+    var reviewFirst=flagged.length>=3;
+    h='<p class="g-kicker">Plan updated</p><h2 id="gate-title" tabindex="-1">Your working plan</h2>'+
+      (pend.length?'<p>'+pend.length+' detail'+(pend.length===1?'':'s')+' still use'+(pend.length===1?'s':'')+' an estimate. The plan works now; check these when you can.</p><ul class="pend-list">'+
+        (flagged.length?'<li><b>'+flagged.length+' you marked as not sure</b><span>'+shortList(flagged)+'</span></li>':'')+
+        (notAsked.length?'<li><b>'+notAsked.length+' not asked in '+(state.setupMode==='full'?'this setup':'the essentials')+'</b><span>Typical values for now: '+shortList(notAsked)+'</span></li>':'')+'</ul>'
+      :'<p>Every answer is confirmed.</p>')+
+      '<label class="name-field" for="plan-name"><span>Put your name on the plan <small>optional</small></span><input id="plan-name" type="text" maxlength="40" autocomplete="given-name" value="'+esc(state.answers.name||'')+'"></label>'+
+      nextActions(a,compute(a))+'<div class="g-nav g-nav-end"><button type="button"'+(reviewFirst?' data-g="close"':' data-unknown-review')+'>'+(reviewFirst?'View my plan':'Review what’s not sure')+'</button><button type="button" class="primary"'+(reviewFirst?' data-unknown-review':' data-g="close"')+'>'+(reviewFirst?'Review what’s not sure':'View my plan')+'</button></div>';
   } else if(pg.kind==='import'){
     h='<p class="g-kicker">Someone shared a plan</p><h2 id="gate-title" tabindex="-1">Keep yours, or use these answers?</h2><p class="g-lede">This link contains another set of personal answers'+(incoming&&incoming.answers.name?' for <b>'+esc(incoming.answers.name)+'</b>':'')+'. Opening it has not changed your saved plan.</p><p>Use them only if you want to replace your answers in this browser. Your previous answers and checklist will be kept as a recovery backup.</p><div class="g-nav"><button type="button" data-g="keep">Keep my plan</button><button type="button" class="primary" data-g="import">Use shared answers</button></div>';
   } else if(pg.kind==='intro'){
-    h='<p class="g-kicker">SGRAIL 100 · 18 October 2026</p><h2 id="gate-title" tabindex="-1">Your race.<br>Your plan.</h2><p class="g-lede">Turn your kit, pace and familiar fuel into a packing list and race-day plan.</p><div class="welcome-route" aria-label="Swim 1.5 km, bike 86.4 km, run 10.4 km"><span><b>1.5</b> km swim</span><span><b>86.4</b> km bike</span><span><b>10.4</b> km run</span></div><div class="welcome-choice"><button type="button" class="start-card primary" data-g="start-short"><span class="eyebrow">Recommended · about 5–7 min</span><b>Start with the essentials</b><span>Your setup, race times and fuel. Add weekend details and training later.</span></button><button type="button" class="start-card" data-g="start-full"><span class="eyebrow">About 10–15 min · plus product labels</span><b>Build the detailed plan</b><span>Your setup, race times and fuel, plus travel, readiness and training.</span></button></div><p class="g-note">No account. Progress saves in this browser. Unsure of an answer? Choose “I don’t know yet” and come back to it.</p><div class="welcome-links"><button type="button" class="g-link" data-g="preview">Explore a sample plan</button><button type="button" class="g-link" data-g="guide">How it works</button></div><p class="small">Independent planning tool · check final details with the organiser.</p>';
+    var nE=pageCount('essentials'), nF=pageCount('full'), cd=countdown(), sample=compute(defaultAnswers()).scen[1];
+    h='<p class="g-kicker">SGRAIL 100 · Sunday 18 October 2026</p><h2 id="gate-title" tabindex="-1">Your race day, planned from your own answers</h2>'+
+      (cd?'<p class="countdown"><b>'+cd.days+'</b> '+(cd.days===1?'day':'days')+' to go'+(cd.next?'<span>Next: '+cd.next+'</span>':'')+'</p>':'')+
+      '<ul class="welcome-out"><li><b>Feed clock</b>What to eat and drink, and when, on the bike and the run</li><li><b>Finish estimate</b>Best, base and slow cases against the cut-offs</li><li><b>Pack list</b>T1 and T2 bag contents and bike checks</li><li><b>To-do list</b>What to test, book and confirm, with deadlines</li></ul>'+
+      '<div class="welcome-choice"><button type="button" class="start-card primary" data-g="start-short"><span class="eyebrow">Recommended · '+nE+' quick questions · about '+Math.max(3,Math.round(nE/3))+' min</span><b>Start with the essentials</b><span>Your bike, race times and fuel. Add weekend details and training later.</span></button><button type="button" class="start-card" data-g="start-full"><span class="eyebrow">'+nF+' questions · about '+Math.round(nF/2.2)+' min · keep product labels handy</span><b>Build the detailed plan</b><span>Everything in the essentials, plus travel, readiness, recent training and your exact fuel inventory.</span></button></div>'+
+      '<button type="button" class="sample-card" data-g="preview"><span class="eyebrow">Not ready to answer?</span><b>See a sample plan</b><span>A sample rider with a '+dur(sample.bk)+' ride finishes ≈ '+clock(sample.fin)+'</span></button>'+
+      '<p class="g-note">1.5 km swim · 86.4 km gravel · 10.4 km trail. No account: answers stay in this browser. Not sure of something? Mark it and come back.</p><div class="welcome-links"><button type="button" class="g-link" data-g="guide">How it works</button></div><p class="small">Independent planning tool · check final details with the organiser.</p>';
   } else if(pg.kind==='mid'){
     h='<p class="g-kicker">01 · Kit &amp; logistics · saved</p><h2 id="gate-title" tabindex="-1">Now fuel and pacing</h2><p class="g-lede">Your times, what you eat and drink, and how much you sweat. This builds your feed clock, sodium, fluid and finish-time scenarios.</p>'+
       '<div class="g-nav"><button type="button" data-g="back">Back</button><button type="button" class="primary" data-g="next">Continue</button></div>';
@@ -2430,62 +2513,113 @@ function renderGate(focus){
       (editing&&gate.key!=='all'?'<p class="g-note"><button type="button" class="g-link" data-edit-scope="all">Show all answers from both surveys</button></p>':'')+reviewHtml(pages,a)+
       '<div class="g-nav">'+(editing?'<button type="button" data-g="close">Close</button>':'<button type="button" data-g="back">Back</button>')+'<button type="button" class="primary" data-g="finish">'+(gate.mode==='unknown'?'Update my plan':editing?'Save and update my plan':'Build my plan')+'</button></div>';
   } else {
-    var S=SURVEYS[pg.key], q=pg.q;
-    h='<p class="g-kicker">'+S.n+' · '+S.title+' · '+pg.step.title+'</p><h2 id="gate-title" tabindex="-1">'+q.label+'</h2>'+(pg.step.note&&pg.step.qs.filter(function(x){ return !x.when||x.when(a); })[0]===q?'<p class="g-note">'+pg.step.note+'</p>':'')+
-      '<div class="chapter-track" aria-label="Setup stages"><span class="'+(pg.key==='kit'?'active':'')+'">1 · Kit</span><span class="'+(pg.key==='fuel'?'active':'')+'">2 · Fuel &amp; pace</span><span>3 · Review</span></div><form class="g-form" novalidate>'+qHtml(q,a)+
-      '<p id="q-error" class="g-error" role="alert" hidden></p><div class="g-nav">'+(i>0?'<button type="button" data-g="back">Back</button>':'')+'<button type="submit" class="primary">'+(gate.reviewing?'Save and return to review':q.id==='name'&&!a.name?'Skip name':'Continue')+'</button></div><button type="button" class="g-link g-later" data-g="unknown">I don’t know yet · add a reminder</button></form>'+
-      '<p class="g-hint">'+(q.type==='multi'?'Select all that apply. ':q.type==='choice'?'Choose one answer. ':'')+'You can go back to change an answer.</p>';
+    var S=SURVEYS[pg.key], qs=pg.qs||[pg.q], q=qs[0], grp=pg.group, grouped=!!grp||qs.length>1;
+    var title=grp?(typeof grp.title==='function'?grp.title(a):grp.title):q.label;
+    var askable=qs.some(function(x){return !x.optional&&x.type!=='text';});
+    var typical=qs.filter(function(x){return (x.type==='number'||x.type==='select')&&present(x.def);});
+    var later=!askable?'':typical.length?'Not sure · use '+(qs.length===1?fmtDef(q):'typical values')+' for now and remind me':'I don’t know yet · add a reminder';
+    var firstInStep=visibleQs(pg.step,a)[0];
+    h=(gate.resumed?'<p class="resume-note">Welcome back. You’re on question '+(qi+1)+' of '+qPages.length+'. <button type="button" class="g-link" data-g="to-welcome">Go to the welcome screen</button></p>':'')+
+      '<p class="g-kicker">'+S.n+' · '+S.title+' · '+pg.step.title+'</p><h2 id="gate-title" tabindex="-1">'+title+'</h2>'+(pg.step.note&&qs.indexOf(firstInStep)>=0?'<p class="g-note">'+pg.step.note+'</p>':'')+
+      '<form class="g-form" novalidate>'+(grp&&grp.preset?presetHtml(grp.preset,qs):'')+qs.map(function(x){return qHtml(x,a,grouped);}).join('')+(grp&&grp.kind==='times'?'<div class="times-sum" id="times-sum" aria-live="polite"></div>':'')+
+      '<p id="q-error" class="g-error" role="alert" hidden></p><div class="g-nav">'+(i>0?'<button type="button" data-g="back">Back</button>':'')+'<button type="submit" class="primary">'+(gate.reviewing?'Save and return to review':'Continue')+'</button></div>'+(later?'<button type="button" class="g-link g-later" data-g="unknown">'+later+'</button>':'')+'</form>';
   }
-  body.innerHTML=h+'<p class="g-save" role="status">'+(storageOK?'Progress saves in this browser.':'This browser cannot save progress. Keep this tab open until you finish.')+'</p>';
+  body.innerHTML=h+'<p class="g-save'+(pg.kind==='q'||pg.kind==='intro'?' sr-only':'')+'" role="status">'+(storageOK?'Progress saves in this browser.':'This browser cannot save progress. Keep this tab open until you finish.')+'</p>';
+  timesFeedback();
   if(focus){ var t=document.getElementById('gate-title'); if(t) t.focus({preventScroll:true}); document.getElementById('gate').scrollTop=0; }
+}
+function freshState(){ return !Object.keys(state.answers||{}).length&&!(state.done&&(state.done.kit||state.done.fuel)); }
+function defaultAnswers(){ var a={}; allQs().forEach(function(q){ a[q.id]=Array.isArray(q.def)?q.def.slice():q.def; }); a._unknown={}; return a; }
+function fmtDef(q){ if(q.type==='select'){ var o=q.options.find(function(o){return o[0]===String(q.def);}); return o?o[1]:String(q.def); } return q.def+(q.unit?' '+q.unit:''); }
+function shortList(qs){ var names=qs.map(function(q){ var g=groupOf(q.id); return (g&&g.kind==='times'?q.label.split(' · ')[0]:q.label).replace(/\?$/,'').replace(/ \(optional\)$/,''); }); return esc(names.slice(0,3).join(' · ')+(names.length>3?' · and '+(names.length-3)+' more':'')); }
+// Milestones from the organiser timetable (checked 26 September 2026).
+function countdown(){
+  var now=new Date(), today=Date.UTC(now.getFullYear(),now.getMonth(),now.getDate()), race=Date.UTC(2026,9,18), days=Math.round((race-today)/864e5);
+  if(days<1) return null;
+  var next=[[Date.UTC(2026,9,16),'check-in Fri 16 Oct, 17:30–19:30'],[Date.UTC(2026,9,17),'bike and bag drop Sat 17 Oct, 12:00–16:00']].find(function(m){return m[0]>=today;});
+  return {days:days,next:next?next[1]:''};
+}
+function presetHtml(kind,qs){
+  var ids=qs.map(function(q){return q.id;}), nameId=PRESET_NAME[kind], current=nameId?state.answers[nameId]:null;
+  var list=PRESETS[kind].map(function(p,i){return [i,p];}).filter(function(x){var p=x[1];return Object.keys(p[1]).every(function(k){return ids.indexOf(k)>=0;})&&!(p[2]==='elec'&&ids.indexOf('mixg')>=0);});
+  if(!list.length) return '';
+  return '<label class="preset"><span>Pick your product</span><select data-preset="'+kind+'"><option value="">Choose a product, or enter values below</option>'+list.map(function(x){return '<option value="'+x[0]+'"'+(current===x[1][0]?' selected':'')+'>'+esc(x[1][0])+'</option>';}).join('')+'<option value="other">Other · enter from the label</option></select></label><p class="g-note preset-note">Values from each maker’s product page, checked 29 September 2026. Check your own packet: flavour and region can change them.</p>';
+}
+function applyPreset(sel){
+  var kind=sel.dataset.preset, p=PRESETS[kind][+sel.value], f=sel.closest('form'); if(!p||!f) return;
+  var nameInput=PRESET_NAME[kind]&&f.querySelector('[name="q-'+PRESET_NAME[kind]+'"]'); if(nameInput) nameInput.value=p[0];
+  Object.keys(p[1]).forEach(function(k){ var el=f.querySelector('[name="q-'+k+'"]'); if(el) el.value=p[1][k]; });
+}
+function marginText(m,label){ m=Math.round(m); return '<span class="'+(m<0?'late':m<30?'tight':'ok')+'">'+(m>=0?m+' min inside':(-m)+' min past')+' the '+label+'</span>'; }
+function timesFeedback(){
+  if(!document.querySelector('#gate-body [data-fb]')) return;
+  var a=answers(), set=function(id){return state.answers[id]!==undefined&&state.answers[id]!=='';};
+  function fb(id,t){ var el=document.querySelector('#gate-body [data-fb="'+id+'"]'); if(el) el.innerHTML=t; }
+  var sw=15*(+a.swimpace)/60;
+  fb('swimpace',set('swimpace')?'≈ '+Math.round(sw)+' min · out of the water ≈ '+clock(sw)+' · '+marginText(COURSE.cutSwim-sw,'09:59 cut-off'):'');
+  fb('biketime',set('biketime')?'≈ '+(COURSE.bikeKm/(+a.biketime/60)).toFixed(1)+' km/h average over '+COURSE.bikeKm+' km':'');
+  var secs=Math.round(+a.runtime*60/10.4);
+  fb('runtime',set('runtime')?'≈ '+Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0')+' /km average over 10.4 km':'');
+  var box=document.getElementById('times-sum'); if(!box) return;
+  if(!(set('swimpace')&&set('biketime')&&set('runtime'))){ box.innerHTML='<p>Choose all three to see your finish against the cut-offs.</p>'; return; }
+  var s=compute(a).scen[1];
+  box.innerHTML='<p class="ts-k">Your base case</p><dl><div><dt>Off the bike</dt><dd><b>'+clock(s.t2Out)+'</b> '+marginText(COURSE.cutT2-s.t2Out,'15:49 gravel cut-off')+'</dd></div><div><dt>Finish</dt><dd><b>'+clock(s.fin)+'</b> '+marginText(COURSE.cutFin1-s.fin,'16:59 trail limit')+' · '+marginText(COURSE.cutFin2-s.fin,'17:59 overall limit')+'</dd></div></dl><p class="small">Includes '+s.t1+' min T1 and '+s.t2+' min T2'+(a.timebasis==='moving'?', plus your stop allowances':'')+'. The organiser hasn’t confirmed whether 16:59 or 17:59 applies. Best and slow cases are in your plan.</p>';
 }
 function reviewHtml(pages,a){
   var h='', group='';
-  pages.filter(function(p){return p.kind==='q';}).forEach(function(p){
+  pages.filter(function(p){return p.kind==='q';}).forEach(function(pg){ (pg.qs||[pg.q]).forEach(function(q){ var p={key:pg.key,step:pg.step,q:q};
     var title=SURVEYS[p.key].title+' · '+p.step.title;
     if(title!==group){ if(group) h+='</dl></details>'; group=title; h+='<details class="g-review"'+(gate.mode==='onboard'?' open':'')+'><summary>'+esc(title)+'</summary><dl>'; }
-    var q=p.q,v=a[q.id], label;
+    var v=a[q.id], label;
     if(q.type==='fields'||q.type==='inventory'){ label=(q.fields||[]).filter(function(f){return (!f.when||f.when(a))&&v[f.id]!==undefined&&v[f.id]!=='';}).map(function(f){var x=v[f.id]; if(f.options){var o=f.options.find(function(o){return o[0]===x;});x=o?o[1]:x;} return f.label+': '+x+(f.unit?' '+f.unit:'');}).join(' · ')||'Details not entered'; }
     else if(q.options){ var values=Array.isArray(v)?v:[String(v)]; label=q.options.filter(function(o){return values.indexOf(o[0])>=0;}).map(function(o){return o[1];}).join(', '); }
     else label=String(v)+(q.unit?' '+q.unit:'');
     if(q.options&&!label&&!Array.isArray(v)&&present(v))label='Earlier answer: '+String(v)+' · review current choices';
-    h+='<div><dt>'+esc(q.label)+'</dt><dd>'+esc(label||(q.type==='text'?'Not provided':'None selected'))+((state.unknown||{})[q.id]?' <small>Undecided · follow-up task added</small>':state.answers[q.id]===undefined?' <small>Not confirmed</small>':'')+'</dd><button type="button" data-review="'+q.id+'" aria-label="Change: '+esc(q.label)+'">Change</button></div>';
-  });
+    h+='<div><dt>'+esc(q.label)+'</dt><dd>'+esc(label||(q.type==='text'?'Not provided':'None selected'))+((state.unknown||{})[q.id]?' <small>Not sure · typical value used · reminder added</small>':state.answers[q.id]===undefined?' <small>Not confirmed</small>':'')+'</dd><button type="button" data-review="'+q.id+'" aria-label="Change: '+esc(q.label)+'">Change</button></div>';
+  }); });
   return h+(group?'</dl></details>':'');
 }
 function readQ(form,validate){
-  var el=form.querySelector('.q'); if(!el) return true;
+  var els=Array.from(form.querySelectorAll('.q')), ok=true, first=null;
+  els.forEach(function(el){ var r=readOne(form,el); if(r.error){ ok=false; if(!first) first=r; } });
+  var msg=form.querySelector('#q-error');
+  if(first){
+    if(validate&&msg){ msg.textContent=first.error; msg.hidden=false; if(first.f){ first.f.setAttribute('aria-invalid','true'); first.f.setAttribute('aria-describedby','q-error'); var disclosure=first.f.closest('details'); if(disclosure)disclosure.open=true; first.f.focus(); } }
+    return false;
+  }
+  if(msg) msg.hidden=true;
+  return ok;
+}
+function readOne(form,el){
   var id=el.dataset.q, q=allQs().filter(function(x){return x.id===id;})[0], n='q-'+id;
   var f=form.querySelector('[name="'+n+'"]'), v, error='';
   if(q.type==='fields'||q.type==='inventory'){
     v={};
     (q.fields||[]).filter(function(x){return !x.when||x.when(answers());}).forEach(function(field){
-      var input=form.querySelector('[data-field="'+field.id+'"]'); if(!f)f=input;
+      var input=el.querySelector('[data-field="'+field.id+'"]'); if(!f)f=input;
       if(!input||input.value==='')return;
       if(!input.validity.valid){if(!error){error='Check '+field.label+(field.type==='number'?' · enter '+field.min+'–'+field.max+' '+field.unit+' in increments of '+field.step:'.');f=input;}return;}
       v[field.id]=field.type==='number'?Number(input.value):input.value.trim();
     });
   } else if(q.type==='multi'){
-    v=Array.from(form.querySelectorAll('input:checked')).map(function(i){return i.value;});
+    v=Array.from(el.querySelectorAll('input:checked')).map(function(i){return i.value;});
     if(id==='sources'&&!v.length) error='Select at least one carbohydrate source to build your feed schedule.';
     if(id==='salt'&&!v.length) error='Select at least one option, or “Nothing extra”.';
   } else if(q.type==='choice'){
-    var c=form.querySelector('input:checked'); if(c) v=c.value; else error='Choose an answer to continue.';
+    var c=el.querySelector('input:checked'); if(c) v=c.value; else { error='Choose an answer to continue.'; f=el.querySelector('input'); }
   } else {
     v=f.value;
     if(q.type==='number'){
-      if(v===''||!Number.isFinite(Number(v))||Number(v)<q.min||Number(v)>q.max) error='Enter a number from '+q.min+' to '+q.max+' '+q.unit+'.';
+      if(v==='') error='Enter a number in '+q.unit+', or tap “Not sure” below.';
+      else if(!Number.isFinite(Number(v))||Number(v)<q.min||Number(v)>q.max) error='Enter a number from '+q.min+' to '+q.max+' '+q.unit+'.';
       else if(!f.validity.valid) error='Use increments of '+q.step+' '+q.unit+'.';
       else v=Number(v);
     }
   }
-  if(error){
-    if(validate){ var msg=form.querySelector('#q-error'); msg.textContent=error; msg.hidden=false; f.setAttribute('aria-invalid','true'); f.setAttribute('aria-describedby','q-error'); var disclosure=f.closest('details'); if(disclosure)disclosure.open=true; f.focus(); }
-    return false;
-  }
+  if(q.type==='select'&&v==='') error='Choose from the list, or tap “Not sure” below.';
+  if(error) return {error:error,f:f};
   if(f) f.removeAttribute('aria-invalid');
-  var msg=form.querySelector('#q-error'); if(msg) msg.hidden=true;
-  state.answers[id]=v; if(state.unknown)delete state.unknown[id]; return true;
+  state.answers[id]=v; if(state.unknown)delete state.unknown[id]; return {};
 }
 function gateMove(d){
   var form=document.querySelector('#gate-body form');
@@ -2493,7 +2627,7 @@ function gateMove(d){
   if(gate.mode==='unknown')pendingAnswers().forEach(function(q){if(gate.queue.indexOf(q.id)<0)gate.queue.push(q.id);});
   var pages=gatePages(), i=gateIndex(pages);
   gate.pos=gate.reviewing?'end':pages[Math.max(0,Math.min(pages.length-1,i+d))].id;
-  gate.reviewing=false;
+  gate.reviewing=false; gate.resumed=false;
   if(gate.mode==='onboard') state.pos=gate.pos;
   save(); renderGate(true);
 }
@@ -2523,15 +2657,22 @@ function bindGate(){
     else if(b.dataset.g==='import'){
       lsSet('recovery',{state:state,checks:lsGet('checks',{})});var importedChecks=incoming.checks||{};delete incoming.checks;state=incoming;incoming=null;lsSet('checks',importedChecks);save();closeGate();renderSurveys();renderAll();if(!(state.done.kit&&state.done.fuel))openGate('onboard');
     } else if(b.dataset.g==='unknown'){
-      var pages=gatePages(),i=gateIndex(pages),q=pages[i].q;
-      state.unknown=state.unknown||{}; state.unknown[q.id]=true;
+      var pages=gatePages(),i=gateIndex(pages),pqs=pages[i].qs||[pages[i].q],uf=document.querySelector('#gate-body form');
+      if(uf) readQ(uf,false);
+      state.unknown=state.unknown||{};
+      var targets=pqs.filter(function(x){return x.type!=='text'&&!x.optional&&state.answers[x.id]===undefined;});
+      if(!targets.length) targets=pqs.filter(function(x){return x.type!=='text'&&!x.optional;});
+      targets.forEach(function(x){ state.unknown[x.id]=true; });
+      gate.resumed=false;
       gate.pos=gate.reviewing?'end':pages[Math.min(i+1,pages.length-1)].id; gate.reviewing=false;
       if(gate.mode==='onboard')state.pos=gate.pos;
       save();renderGate(true);
-    } else if(b.dataset.g==='next') gateMove(1);
+    } else if(b.dataset.g==='to-welcome'){ gate.pos='intro'; state.pos='intro'; gate.resumed=false; save(); renderGate(true); }
+    else if(b.dataset.g==='next') gateMove(1);
     else if(b.dataset.g==='back') gateMove(-1);
     else if(b.dataset.g==='finish'){
-      var missing=gate.mode==='unknown'?null:gatePages().find(function(p){return p.kind==='q'&&state.answers[p.q.id]===undefined&&p.q.type!=='text'&&p.q.type!=='multi'&&!p.q.optional&&!(state.unknown||{})[p.q.id];});
+      var missing=null;
+      if(gate.mode!=='unknown') gatePages().some(function(p){ if(p.kind!=='q') return false; missing=(p.qs||[p.q]).find(function(x){return state.answers[x.id]===undefined&&x.type!=='text'&&x.type!=='multi'&&!x.optional&&!(state.unknown||{})[x.id];})||null; return !!missing; });
       if(missing){gate.pos=missing.id; gate.reviewing=true; renderGate(true); return;}
       (gate.mode==='unknown'?[]:gate.mode==='edit'&&gate.key!=='all'?[gate.key]:['kit','fuel']).forEach(function(k){state.done[k]=true;});
       delete state.pos; closeGate(); renderSurveys(); renderAll(); window.scrollTo(0,0);
@@ -2540,13 +2681,16 @@ function bindGate(){
     } else if(b.dataset.g==='close') pauseGate();
   });
   function persist(e){
+    if(e.target.id==='plan-name'){ var nm=e.target.value.trim(); if(nm) state.answers.name=nm; else delete state.answers.name; save(); if(e.type==='change'){ renderAll(); if(window.PLAN_AFTER) window.PLAN_AFTER(); } return; }
     var f=e.target.closest('form'); if(!f) return;
+    if(e.target.dataset.preset){ if(e.type!=='change') return; applyPreset(e.target); }
     var opts=e.target.closest('.opts');
     // sodium: "Nothing extra" excludes the other options, and vice versa
     if(opts&&e.target.name==='q-salt'&&e.target.checked) opts.querySelectorAll('input').forEach(function(i){ if(i!==e.target&&((e.target.value==='none')!==(i.value==='none'))) i.checked=false; });
     if(opts) opts.querySelectorAll('.opt').forEach(function(l){l.classList.toggle('on',l.querySelector('input').checked);});
     var valid=readQ(f,false); if(valid) save();
-    if(e.target.name==='q-name'&&!gate.reviewing) f.querySelector('button[type=submit]').textContent=e.target.value.trim()?'Continue':'Skip name';
+    f.querySelectorAll('[data-warn-for]').forEach(function(w){ var wq=allQs().find(function(x){return x.id===w.dataset.warnFor;}), c=f.querySelector('input[name="q-'+w.dataset.warnFor+'"]:checked'); w.hidden=!(wq&&c&&c.value===wq.warn.value); });
+    timesFeedback();
     var status=g.querySelector('.g-save'); if(status) status.textContent=!valid?'This answer is incomplete. Previous answers are saved.':storageOK?'Progress saved in this browser.':'This browser cannot save progress. Keep this tab open until you finish.';
   }
   g.addEventListener('change',persist); g.addEventListener('input',persist);
@@ -2867,7 +3011,7 @@ function bindTools(){
 
 // Resume unfinished setup on reload; closing it reveals the clearly labelled draft plan.
 window.PLAN_INIT=function(){ renderSurveys(); bindGate(); renderAll(); bindTools(); if(incoming)openGate('import');else if(!(state.done.kit&&state.done.fuel))openGate('onboard');if(importError)document.getElementById('tool-status').textContent=importError; };
-window.PLAN_TEST={inventorySchedule:inventorySchedule,packRows:packRows,renderActualFuel:renderActualFuel,pendingQuestions:pendingQuestions,compute:compute,answers:answers,SURVEYS:SURVEYS,pressure:pressure,inventoryData:inventoryData,weekendEvents:weekendEvents,planningActions:planningActions,renderWater:renderWater,renderTimeEvidence:renderTimeEvidence,cleanState:cleanState,starterQuestion:starterQuestion};
+window.PLAN_TEST={inventorySchedule:inventorySchedule,packRows:packRows,renderActualFuel:renderActualFuel,pendingQuestions:pendingQuestions,compute:compute,answers:answers,SURVEYS:SURVEYS,pressure:pressure,inventoryData:inventoryData,weekendEvents:weekendEvents,planningActions:planningActions,renderWater:renderWater,renderTimeEvidence:renderTimeEvidence,cleanState:cleanState,starterQuestion:starterQuestion,GROUPS:GROUPS,PRESETS:PRESETS};
 })();
 
 PLAN_INIT();
