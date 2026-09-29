@@ -1247,6 +1247,9 @@ body.sample-mode :target{scroll-margin-top:120px}
 body.sample-mode section,body.sample-mode #course details.planblock{scroll-margin-top:134px}
 @media(max-width:360px){.sample-bar .sb-label{display:none}}
 @media print{.sample-bar{display:none!important}body.sample-mode{padding-top:0}}
+
+.gate .more-line{margin:4px 0 16px;font-size:14px;color:var(--muted)}.gate .more-line .g-link{min-height:44px}.gate .more-line span{display:block}
+.sv-more{margin:12px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}.sv-more .small{color:var(--muted)}
 </style>
 <script>
 /* Theme resolves before paint so a dark start does not flash white. auto = follow the device. */
@@ -1377,7 +1380,7 @@ body.sample-mode section,body.sample-mode #course details.planblock{scroll-margi
 
 <section id="openitems">
   <h2>Before Girona <span class="tag">bags · pack · bike · sort out</span><button type="button" class="edit-inline" data-edit="kit">Edit kit answers ✎</button></h2>
-  <div class="preview-note" data-needs="kit fuel" hidden><span>Draft plan · unanswered questions use suggested values.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
+  <div class="preview-note" data-needs="kit fuel" hidden><span>Draft plan · unanswered questions use typical values.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
   <div class="pk-head">Bags · pack → drop → use</div>
   <div class="card rail-flag bagscard">
     <p class="small">Bags come from check-in · Saturday: black with the bike · Sunday: white + personal travel with you.</p>
@@ -1500,7 +1503,7 @@ body.sample-mode section,body.sample-mode #course details.planblock{scroll-margi
   </details>
 
   
-  <div class="preview-note" data-needs="fuel" hidden><span>Draft plan · unanswered questions use suggested values.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
+  <div class="preview-note" data-needs="fuel" hidden><span>Draft plan · unanswered questions use typical values.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
   <details class="planblock p-bike" id="feedblock" data-mobile-chart="true" open><summary class="plan-head" style="margin-top:0"><span class="pn">Feeding chart</span><span class="pd">graph · your feed times on the bike profile</span><span class="graph-cue">Show graph</span></summary>
     <div class="clock-scroll" tabindex="0" role="region" aria-label="Scrollable feed chart"><div class="clock" id="feedchart"></div></div>
     <p class="swipe-cue" aria-hidden="true">Swipe for the whole ride <b>→</b></p>
@@ -1545,14 +1548,14 @@ body.sample-mode section,body.sample-mode #course details.planblock{scroll-margi
 
 <section id="fuel">
   <h2>Fuel &amp; salt <span class="tag">from survey 02</span><button type="button" class="edit-inline" data-edit="fuel">Edit answers ✎</button></h2>
-  <div class="preview-note" data-needs="fuel" hidden><span>Draft plan · unanswered questions use suggested values.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
+  <div class="preview-note" data-needs="fuel" hidden><span>Draft plan · unanswered questions use typical values.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
   <details class="reference-details" open><summary>Day totals &amp; estimates</summary><div class="inner" id="fuel-body"></div></details>
   <p class="caveat">Rates come from common endurance-nutrition ranges scaled by your answers. They are starting points, not medical advice — your rehearsal rides decide.</p>
 </section>
 
 <section id="pacing">
   <h2>Pacing <span class="tag">Planning scenarios · not predictions</span><button type="button" class="edit-inline" data-edit="fuel">Edit times ✎</button></h2>
-  <div class="preview-note" data-needs="fuel" hidden><span>Draft plan · unanswered questions use suggested values.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
+  <div class="preview-note" data-needs="fuel" hidden><span>Draft plan · unanswered questions use typical values.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
   <div class="cutoff" id="pace-bars"></div>
   <p class="cutoff-note">Plan against <b>16:59</b> until the finish limit is confirmed at check-in. Published overall limit: <b>17:59</b>.</p>
   <details class="reference-details"><summary>Exact splits &amp; clock checks</summary><div class="inner">
@@ -2444,6 +2447,8 @@ function renderSurveys(){
     return '<article class="survey'+(done?' done':'')+'" id="survey-'+key+'"><div class="sv-head"><span class="sv-n">'+S.n+'</span><div><h3>'+S.title+'</h3><p class="small">'+S.builds+'</p></div><button type="button" class="sv-go'+(done?'':' primary')+'" data-sv-open="'+key+'">'+(done?'Edit answers':state.pos?'Resume setup':'Start setup')+'</button></div>'+
       (done?'<div class="sv-sum">'+summaryLine(key,a).map(function(x){ return '<i>'+esc(x)+'</i>'; }).join('')+'</div>':'')+'</article>';
   }).join('');
+  var mq=state.done.kit&&state.done.fuel?moreQueue().length:0;
+  if(mq) host.insertAdjacentHTML('beforeend','<p class="sv-more"><button type="button" class="insight-edit" data-add-details>Add the detailed parts</button> <span class="small">'+mq+' questions the essentials skipped: travel, readiness, recent training and your exact fuel.</span></p>');
   document.getElementById('plan-tools').hidden=false;
 }
 // page list for the current gate mode; question pages are keyed by id so hidden questions drop out cleanly
@@ -2457,7 +2462,7 @@ function gatePages(){
   keys.forEach(function(key,ki){
     if(gate.mode==='onboard' && ki>0) pages.push({id:'mid-'+key,kind:'mid',key:key});
     SURVEYS[key].steps.forEach(function(st){
-      var qs=visibleQs(st,a).filter(function(q){return gate.mode==='unknown'?gate.queue.indexOf(q.id)>=0:gate.mode!=='onboard'||(q.id!=='name'&&(state.setupMode==='full'||starterQuestion(q)));}), used={};
+      var qs=visibleQs(st,a).filter(function(q){return gate.mode==='unknown'||gate.mode==='more'?gate.queue.indexOf(q.id)>=0:gate.mode!=='onboard'||(q.id!=='name'&&(state.setupMode==='full'||starterQuestion(q)));}), used={};
       qs.forEach(function(q){
         if(used[q.id])return;
         var g=gate.mode==='unknown'?null:groupOf(q.id), members=g?qs.filter(function(x){return g.ids.indexOf(x.id)>=0;}):[q];
@@ -2479,6 +2484,7 @@ function openGate(mode,key){
   gate.resumed=false;
   if(mode==='onboard'){ gate.pos=state.pos||'intro'; if(!gatePages().some(function(p){return p.id===gate.pos||(p.qs&&p.qs.some(function(q){return q.id===gate.pos;}));}))gate.pos='intro'; gate.resumed=gate.pos!=='intro'; } else { gate.pos=mode==='import'?'import':'end'; }
   if(mode==='unknown'){gate.queue=pendingAnswers().map(function(q){return q.id;});gate.pos=gate.queue[0]||'end';}
+  if(mode==='more'){gate.queue=moreQueue();gate.pos=gate.queue[0]||'end';}
   var g=document.getElementById('gate'); g.hidden=false; document.body.classList.add('gate-open');
   document.body.classList.toggle('gated',mode==='onboard');
   setInert(true); renderGate(true); updateSampleBar();
@@ -2524,16 +2530,17 @@ function renderGate(focus){
         (flagged.length?'<li><b>'+flagged.length+' you marked as not sure</b><span>'+shortList(flagged)+'</span></li>':'')+
         (notAsked.length?'<li><b>'+notAsked.length+' not asked in '+(state.setupMode==='full'?'this setup':'the essentials')+'</b><span>Typical values for now: '+shortList(notAsked)+'</span></li>':'')+'</ul>'
       :'<p>Every answer is confirmed.</p>')+
+      (state.setupMode!=='full'&&moreQueue().length?'<p class="more-line"><button type="button" class="g-link" data-add-details>Add the detailed parts · '+moreQueue().length+' more questions</button> <span>travel, readiness, recent training, your exact fuel</span></p>':'')+
       '<label class="name-field" for="plan-name"><span>Put your name on the plan <small>optional</small></span><input id="plan-name" type="text" maxlength="40" autocomplete="given-name" value="'+esc(state.answers.name||'')+'"></label>'+
       nextActions(a,compute(a))+'<div class="g-nav g-nav-end"><button type="button"'+(reviewFirst?' data-g="close"':' data-unknown-review')+'>'+(reviewFirst?'View my plan':'Review what’s not sure')+'</button><button type="button" class="primary"'+(reviewFirst?' data-unknown-review':' data-g="close"')+'>'+(reviewFirst?'Review what’s not sure':'View my plan')+'</button></div>';
   } else if(pg.kind==='import'){
     h='<p class="g-kicker">Someone shared a plan</p><h2 id="gate-title" tabindex="-1">Keep yours, or use these answers?</h2><p class="g-lede">This link contains another set of personal answers'+(incoming&&incoming.answers.name?' for <b>'+esc(incoming.answers.name)+'</b>':'')+'. Opening it has not changed your saved plan.</p><p>Use them only if you want to replace your answers in this browser. Your previous answers and checklist will be kept as a recovery backup.</p><div class="g-nav"><button type="button" data-g="keep">Keep my plan</button><button type="button" class="primary" data-g="import">Use shared answers</button></div>';
   } else if(pg.kind==='intro'){
-    var nE=pageCount('essentials'), nF=pageCount('full'), cd=countdown(), sample=compute(defaultAnswers()).scen[1];
+    var nE=pageCount('essentials'), nF=pageCount('full'), cd=countdown(), sample=compute(defaultAnswers()).scen[1], resumeAt=resumeInfo();
     h='<p class="g-kicker">SGRAIL 100 · Sunday 18 October 2026</p><h2 id="gate-title" tabindex="-1">Your race day, planned from your own answers</h2>'+
       (cd?'<p class="countdown"><b>'+cd.days+'</b> '+(cd.days===1?'day':'days')+' to go'+(cd.next?'<span>Next: '+cd.next+'</span>':'')+'</p>':'')+
       '<ul class="welcome-out"><li><b>Feed clock</b>What to eat and drink, and when, on the bike and the run</li><li><b>Finish estimate</b>Best, base and slow cases against the cut-offs</li><li><b>Pack list</b>T1 and T2 bag contents and bike checks</li><li><b>To-do list</b>What to test, book and confirm, with deadlines</li></ul>'+
-      '<div class="welcome-choice"><button type="button" class="start-card primary" data-g="start-short"><span class="eyebrow">Recommended · '+nE+' quick questions · about '+Math.max(3,Math.round(nE/3))+' min</span><b>Start with the essentials</b><span>Your bike, race times and fuel. Add weekend details and training later.</span></button><button type="button" class="start-card" data-g="start-full"><span class="eyebrow">'+nF+' questions · about '+Math.round(nF/2.2)+' min · keep product labels handy</span><b>Build the detailed plan</b><span>Everything in the essentials, plus travel, readiness, recent training and your exact fuel inventory.</span></button></div>'+
+      '<div class="welcome-choice">'+(resumeAt?'<button type="button" class="start-card primary" data-g="resume"><span class="eyebrow">Your answers are saved · question '+resumeAt.n+' of '+resumeAt.of+'</span><b>Continue where you left off</b><span>'+esc(resumeAt.title)+'</span></button>':'')+'<button type="button" class="start-card'+(resumeAt?'':' primary')+'" data-g="start-short"><span class="eyebrow">'+(resumeAt?'':'Recommended · ')+nE+' quick questions · about '+Math.max(3,Math.round(nE/3))+' min</span><b>Start with the essentials</b><span>Your bike, race times and fuel. Add weekend details and training later.</span></button><button type="button" class="start-card" data-g="start-full"><span class="eyebrow">'+nF+' questions · about '+Math.round(nF/2.2)+' min · keep product labels handy</span><b>Build the detailed plan</b><span>Everything in the essentials, plus travel, readiness, recent training and your exact fuel inventory.</span></button></div>'+
       '<button type="button" class="sample-card" data-g="preview"><span class="eyebrow">Not ready to answer?</span><b>See a sample plan</b><span>A sample rider with a '+dur(sample.bk)+' ride finishes ≈ '+clock(sample.fin)+'</span></button>'+
       '<p class="g-note">1.5 km swim · 86.4 km gravel · 10.4 km trail. No account: answers stay in this browser. Not sure of something? Mark it and come back.</p><div class="welcome-links"><button type="button" class="g-link" data-g="guide">How it works</button></div><p class="small">Independent planning tool · check final details with the organiser.</p>';
   } else if(pg.kind==='mid'){
@@ -2542,9 +2549,10 @@ function renderGate(focus){
   } else if(pg.kind==='end'){
     var editing=gate.mode==='edit', scope=editing?(gate.key==='all'?'All answers':SURVEYS[gate.key].n+' · '+SURVEYS[gate.key].title):'Review your answers';
     if(gate.mode==='unknown')scope='Unknowns review · '+pendingAnswers().length+' still open';
-    h='<p class="g-kicker">'+scope+'</p><h2 id="gate-title" tabindex="-1">'+(gate.mode==='unknown'?'Your unknowns review':editing?'Edit your answers':'Your first plan is ready to review')+'</h2><p class="g-lede">'+(editing?'Tap <b>Change</b> on any answer. Your checklists, feed chart and pacing rebuild when you save.':'These are the answers you entered. Other details still use estimates: review them in Your plan before relying on the race-day schedule.')+'</p>'+
+    if(gate.mode==='more')scope='Detailed plan';
+    h='<p class="g-kicker">'+scope+'</p><h2 id="gate-title" tabindex="-1">'+(gate.mode==='unknown'?'Your unknowns review':gate.mode==='more'?'Details added':editing?'Edit your answers':'Your first plan is ready to review')+'</h2><p class="g-lede">'+(editing?'Tap <b>Change</b> on any answer. Your checklists, feed chart and pacing rebuild when you save.':'These are the answers you entered. Other details still use estimates: review them in Your plan before relying on the race-day schedule.')+'</p>'+
       (editing&&gate.key!=='all'?'<p class="g-note"><button type="button" class="g-link" data-edit-scope="all">Show all answers from both surveys</button></p>':'')+reviewHtml(pages,a)+
-      '<div class="g-nav">'+(editing?'<button type="button" data-g="close">Close</button>':'<button type="button" data-g="back">Back</button>')+'<button type="button" class="primary" data-g="finish">'+(gate.mode==='unknown'?'Update my plan':editing?'Save and update my plan':'Build my plan')+'</button></div>';
+      '<div class="g-nav">'+(editing?'<button type="button" data-g="close">Close</button>':'<button type="button" data-g="back">Back</button>')+'<button type="button" class="primary" data-g="finish">'+(gate.mode==='unknown'||gate.mode==='more'?'Update my plan':editing?'Save and update my plan':'Build my plan')+'</button></div>';
   } else {
     var S=SURVEYS[pg.key], qs=pg.qs||[pg.q], q=qs[0], grp=pg.group, grouped=!!grp||qs.length>1;
     var title=grp?(typeof grp.title==='function'?grp.title(a):grp.title):q.label;
@@ -2561,6 +2569,15 @@ function renderGate(focus){
   timesFeedback();
   if(focus){ var t=document.getElementById('gate-title'); if(t) t.focus({preventScroll:true}); document.getElementById('gate').scrollTop=0; }
 }
+function resumeInfo(){
+  if(freshState()||!state.pos||state.pos==='intro'||(state.done.kit&&state.done.fuel)) return null;
+  var saved={mode:gate.mode,help:gate.help,pos:gate.pos}; gate.mode='onboard'; gate.help=false; gate.pos=state.pos;
+  var pages=gatePages(), qp=pages.filter(function(p){return p.kind==='q';}), pg=pages[gateIndex(pages)], out=null;
+  if(pg&&pg.kind==='q'){ var g=pg.group; out={pos:pg.id,n:qp.indexOf(pg)+1,of:qp.length,title:g?(typeof g.title==='function'?g.title(answers()):g.title):pg.q.label}; }
+  else if(pg&&(pg.kind==='mid'||pg.kind==='end')) out={pos:pg.id,n:pg.kind==='end'?qp.length:qp.filter(function(p){return p.key==='kit';}).length,of:qp.length,title:pg.kind==='end'?'Review your answers and build your plan':'Next: fuel and pacing'};
+  gate.mode=saved.mode; gate.help=saved.help; gate.pos=saved.pos; return out;
+}
+function moreQueue(){ var a=answers(); return allQs().filter(function(q){ return q.id!=='name'&&!starterQuestion(q)&&(!q.when||q.when(a))&&state.answers[q.id]===undefined; }).map(function(q){return q.id;}); }
 function freshState(){ return !Object.keys(state.answers||{}).length&&!(state.done&&(state.done.kit||state.done.fuel)); }
 function defaultAnswers(){ var a={}; allQs().forEach(function(q){ a[q.id]=Array.isArray(q.def)?q.def.slice():q.def; }); a._unknown={}; return a; }
 function fmtDef(q){ if(q.type==='select'){ var o=q.options.find(function(o){return o[0]===String(q.def);}); return o?o[1]:String(q.def); } return q.def+(q.unit?' '+q.unit:''); }
@@ -2658,6 +2675,8 @@ function gateMove(d){
   var form=document.querySelector('#gate-body form');
   if(form&&!readQ(form,d>0)&&d>0) return;
   if(gate.mode==='unknown')pendingAnswers().forEach(function(q){if(gate.queue.indexOf(q.id)<0)gate.queue.push(q.id);});
+  // newly revealed follow-up questions (e.g. rental pickup) join the detailed walk-through
+  if(gate.mode==='more')moreQueue().forEach(function(id){if(gate.queue.indexOf(id)<0)gate.queue.push(id);});
   var pages=gatePages(), i=gateIndex(pages);
   gate.pos=gate.reviewing?'end':pages[Math.max(0,Math.min(pages.length-1,i+d))].id;
   gate.reviewing=false; gate.resumed=false;
@@ -2681,8 +2700,12 @@ function bindGate(){
     var edit=e.target.closest('[data-review]');
     if(edit){gate.pos=edit.dataset.review; gate.reviewing=true; renderGate(true); return;}
     var b=e.target.closest('[data-g]'); if(!b) return;
+    if(b.dataset.g==='resume'){ var ri=resumeInfo(); gate.pos=ri?ri.pos:'intro'; gate.resumed=false; renderGate(true); return; }
     if(b.dataset.g==='start-short'||b.dataset.g==='start-full'){
-      state.setupMode=b.dataset.g==='start-full'?'full':'essentials';gate.pos='intro';gateMove(1);
+      state.setupMode=b.dataset.g==='start-full'?'full':'essentials';
+      // Answers are kept: continue from the first screen in this mode that still has a question open.
+      var open=gatePages().find(function(p){return p.kind==='q'&&p.qs.some(function(x){return state.answers[x.id]===undefined&&!(state.unknown||{})[x.id]&&x.type!=='text';});});
+      if(open&&!freshState()){ gate.pos=open.id; state.pos=open.id; gate.resumed=false; save(); renderGate(true); } else { gate.pos='intro'; gateMove(1); }
     } else if(b.dataset.g==='preview'){pauseGate();}
     else if(b.dataset.g==='guide'){gate.help=true;renderGate(true);}
     else if(b.dataset.g==='guide-back'){pauseGate();}
@@ -2700,14 +2723,15 @@ function bindGate(){
       gate.pos=gate.reviewing?'end':pages[Math.min(i+1,pages.length-1)].id; gate.reviewing=false;
       if(gate.mode==='onboard')state.pos=gate.pos;
       save();renderGate(true);
-    } else if(b.dataset.g==='to-welcome'){ gate.pos='intro'; state.pos='intro'; gate.resumed=false; save(); renderGate(true); }
+    } else if(b.dataset.g==='to-welcome'){ gate.pos='intro'; gate.resumed=false; renderGate(true); }
     else if(b.dataset.g==='next') gateMove(1);
     else if(b.dataset.g==='back') gateMove(-1);
     else if(b.dataset.g==='finish'){
       var missing=null;
-      if(gate.mode!=='unknown') gatePages().some(function(p){ if(p.kind!=='q') return false; missing=(p.qs||[p.q]).find(function(x){return state.answers[x.id]===undefined&&x.type!=='text'&&x.type!=='multi'&&!x.optional&&!(state.unknown||{})[x.id];})||null; return !!missing; });
+      if(gate.mode!=='unknown'&&gate.mode!=='more') gatePages().some(function(p){ if(p.kind!=='q') return false; missing=(p.qs||[p.q]).find(function(x){return state.answers[x.id]===undefined&&x.type!=='text'&&x.type!=='multi'&&!x.optional&&!(state.unknown||{})[x.id];})||null; return !!missing; });
       if(missing){gate.pos=missing.id; gate.reviewing=true; renderGate(true); return;}
-      (gate.mode==='unknown'?[]:gate.mode==='edit'&&gate.key!=='all'?[gate.key]:['kit','fuel']).forEach(function(k){state.done[k]=true;});
+      if(gate.mode==='more') state.setupMode='full';
+      (gate.mode==='unknown'||gate.mode==='more'?[]:gate.mode==='edit'&&gate.key!=='all'?[gate.key]:['kit','fuel']).forEach(function(k){state.done[k]=true;});
       delete state.pos; closeGate(); renderSurveys(); renderAll(); window.scrollTo(0,0);
       openGate('complete');
       if(window.PLAN_AFTER) window.PLAN_AFTER();
@@ -2780,7 +2804,7 @@ function renderInsights(a,P){
   EQUIPMENT.forEach(function(e){var v=(a.equipment||{})[e[0]],match=GEAR_STATUS.find(function(x){return x[0]===v;});h+='<li><b>'+e[1]+'</b><span>'+esc(match?match[1]:'Readiness not recorded')+'</span></li>';});
   h+='</ul>'+editDetail('equipment','Update equipment')+'</div></details>';
   var unknown=allQs().filter(function(q){return (!q.when||q.when(a))&&(state.unknown||{})[q.id];});
-  if(unknown.length)h+='<p class="insight-warning">'+unknown.length+' answers are undecided. Their previous or suggested values remain provisional in calculations.</p>';
+  if(unknown.length)h+='<p class="insight-warning">'+unknown.length+' answers are undecided. Their earlier or typical values remain provisional in calculations.</p>';
   setHTML('readiness-view',h);
 }
 function renderTimeEvidence(a,P){
@@ -2925,7 +2949,10 @@ function renderAll(){
   var who=(a.name||'').trim();
   setHTML('plan-eyebrow','Race plan'+(who?' · '+esc(who):'')+' · SGRAIL 100 · 2026');
   document.body.classList.toggle('plan-empty',!k&&!f);
-  var pending=pendingAnswers();setHTML('plan-assumptions','<b>'+(state.done.kit&&state.done.fuel?'Your working plan':'Sample / draft plan')+'</b><p>'+pending.length+' setup details still use suggested values or need confirmation. Check these before using the race-day schedule.</p><button type="button" class="insight-edit" data-unknown-review>Review my unknowns</button>');
+  var pending=pendingAnswers(), finished=state.done.kit&&state.done.fuel;
+  setHTML('plan-assumptions',finished?'<b>Your working plan</b><p>'+pending.length+' detail'+(pending.length===1?'':'s')+' still use'+(pending.length===1?'s':'')+' a typical value or need confirmation. Check them before relying on the race-day schedule.</p><button type="button" class="insight-edit" data-unknown-review>Review what’s not sure</button>'
+    :freshState()?'<b>This is a sample plan</b><p>Every number here comes from a typical rider. Answer the setup to replace them with yours.</p><button type="button" class="insight-edit" data-unknown-review>Start my plan</button>'
+    :'<b>Your draft plan</b><p>Setup isn’t finished: unanswered details still use typical values.</p><button type="button" class="insight-edit" data-unknown-review>Continue setup</button>');
   document.getElementById('plan-assumptions').hidden=!pending.length;
   // preview banners
   document.querySelectorAll('[data-needs]').forEach(function(el){ var need=el.dataset.needs.split(' '); var miss=need.filter(function(n){ return !state.done[n]; }); el.hidden=!miss.length; if(miss.length){ var b=el.querySelector('[data-sv-jump]'); if(b) b.dataset.svJump=miss[0]; var t=el.querySelector('.pv-which'); if(t) t.textContent=miss.map(function(m){ return SURVEYS[m].n+' · '+SURVEYS[m].title; }).join(' and '); } });
@@ -2981,6 +3008,8 @@ function bindChecks(checks){
 }
 function updateStatus(){
   setHTML('next-actions',nextActions(answers(),compute(answers())));
+  var rec=document.getElementById('recover-plan'); if(rec) rec.hidden=!lsGet('recovery',null);
+  var sp=document.getElementById('share-plan'); if(sp) sp.hidden=freshState();
   var boxes=Array.from(document.querySelectorAll('#task-body input[type=checkbox]'));
   var n=boxes.length, d=boxes.filter(function(b){ return b.checked; }).length, left=n-d;
   var c=document.getElementById('prep-count'); if(c) c.textContent=left+' open task'+(left===1?'':'s');
@@ -2998,7 +3027,8 @@ function bindTools(){
   function isHosted(){return /^https?:$/.test(location.protocol)&&!/(^localhost$|^127\.|^\[?::1\]?$)/.test(location.hostname);}
   function copy(url,message){if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(url).then(function(){status.textContent=message;},fallback);else fallback();function fallback(){status.innerHTML='Copy this link: <input aria-label="Link to copy" readonly value="'+esc(url)+'">';}}
   document.addEventListener('click',function(e){
-    var review=e.target.closest('[data-unknown-review]');if(review){openGate('unknown');return;}
+    var review=e.target.closest('[data-unknown-review]');if(review){if(state.done.kit&&state.done.fuel)openGate('unknown');else{if(gate.mode)closeGate();openGate('onboard');}return;}
+    var more=e.target.closest('[data-add-details]');if(more){if(gate.mode)closeGate();openGate('more');return;}
     var go=e.target.closest('[data-plan-go]');if(!go)return;
     if(gate.mode)closeGate();
     var race=go.dataset.planGo!=='openitems';document.querySelector('[data-view="'+(race?'race':'prepare')+'"]').click();
