@@ -3,6 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#F2F3EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#12181B" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="plan.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SGRAIL 100">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>SGRAIL 100 Planner</title>
 <meta name="description" content="Plan your SGRAIL 100: two guided surveys build your bags, pack list, bike checks, to-dos, feed schedule and pacing.">
 <style>
@@ -1299,6 +1308,36 @@ details.result-assumptions[open]>summary::after{content:"–"}
 details.result-assumptions>ul,details.result-assumptions>button{margin-left:16px;margin-right:16px}
 details.result-assumptions>button{margin-bottom:14px}
 #race-verification a,#setup .small a,.quick-guide a,a.txtlink{color:var(--sea)}
+
+/* app layer · 29 Sep */
+button,a,label,summary,select{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.standalone,.standalone body{overscroll-behavior-y:none}
+.tabbar[hidden]{display:none!important}
+@media (max-width:600px){
+ body.has-tabbar .dock,body.has-tabbar .modebar{display:none!important}
+ .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:48;display:flex;align-items:stretch;background:var(--card);border-top:1px solid var(--line);padding:0 max(4px,env(safe-area-inset-left)) env(safe-area-inset-bottom) max(4px,env(safe-area-inset-right));box-shadow:0 -8px 24px -18px rgba(0,0,0,.35)}
+ .tabbar button{flex:1 1 0;min-width:0;min-height:58px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:none;border:0;border-top:2px solid transparent;color:var(--muted);font:600 11px var(--body);letter-spacing:0;text-transform:none;padding:6px 0 4px;cursor:pointer}
+ .tabbar svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+ .tabbar [data-tab="more"] svg{fill:currentColor;stroke:none}
+ .tabbar button.on{color:var(--ink);border-top-color:var(--ink)}
+ body.race .tabbar button.on{border-top-color:var(--flag)}
+ .tabbar button:focus-visible{outline:2px solid var(--sea);outline-offset:-4px}
+ .tabbar .tab-sep{flex:none;width:1px;margin:14px 2px;background:var(--line)}
+ body.has-tabbar .sheet{bottom:calc(66px + env(safe-area-inset-bottom))}
+ body.has-tabbar,body.has-tabbar.race{padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+}
+.now-card{margin:12px 0 20px;padding:16px 18px;border-radius:10px;background:var(--strong);color:var(--on-strong)}
+.now-card[hidden]{display:none}
+body:not(.race) .now-card{display:none}
+.now-card .now-k{display:block;font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;opacity:.75;margin-bottom:6px}
+.now-card b{display:block;font:700 22px/1.25 var(--disp)}
+.now-card p{margin:6px 0 0;font-size:15px;line-height:1.45}
+.install-card{display:grid;gap:12px;margin:0 0 18px;padding:14px 16px;border:1px solid var(--line);border-left:4px solid var(--sea);border-radius:8px;background:var(--card)}
+.install-card[hidden]{display:none}
+.install-card>div>b{display:block;margin-bottom:4px}.install-card span{font-size:14px;color:var(--muted)}
+.install-card .install-note{margin:8px 0 0;font-size:14px}.install-card .install-note:empty{display:none}
+.install-actions{display:flex;gap:8px}.install-actions button{min-height:44px;padding:8px 16px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 14px var(--body);cursor:pointer}
+.install-actions button.primary{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 </style>
 <script>
 /* Theme resolves before paint so a dark start does not flash white. auto = follow the device. */
@@ -1315,6 +1354,7 @@ details.result-assumptions>button{margin-bottom:14px}
 
 <div class="modebar"><div class="modeseg" role="group" aria-label="Planner mode"><button type="button" data-view="prepare"><b>Prepare</b><span>until Sat 17</span></button><button type="button" data-view="race"><b>Race day</b><span>Sun 18</span></button></div></div>
 <header>
+<div class="now-card" id="now-card" role="status" aria-live="polite" hidden></div>
   <div class="eyebrow" id="plan-eyebrow">Race plan · SGRAIL 100 · 2026</div>
   <h1>SGRAIL&nbsp;100 <span class="yr">'26</span></h1>
   <div class="sub"><b>Sunday 18 October 2026 · 09:00</b><span class="sub2">Platja Gran, Cadaqués → Girona old town</span></div>
@@ -1389,7 +1429,16 @@ details.result-assumptions>button{margin-bottom:14px}
 </div>
 <div class="sheet" id="dock-sheet" hidden>
   <div class="sheet-list"></div>
-  <div class="sheet-tools"><button type="button" data-edit="all">Edit my answers ✎</button><button type="button" data-prog>Program · Fri–Sun ↗</button><button type="button" data-open>Open tasks ↗</button><button type="button" id="sh-theme">Theme</button><button type="button" id="sh-race">Race day</button></div>
+  <div class="sheet-tools"><button type="button" data-edit="all">Edit my answers ✎</button><button type="button" data-prog>Program · Fri–Sun ↗</button><button type="button" data-open>Open tasks ↗</button><button type="button" id="sh-theme">Theme</button><button type="button" id="sh-race">Race day</button><button type="button" id="sh-install" hidden>Install the app</button></div>
+</div>
+<div class="tabbar" id="tabbar" role="navigation" aria-label="Planner sections" hidden>
+ <button type="button" data-tab="setup" data-mode="prepare"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg><span>Plan</span></button>
+ <button type="button" data-tab="openitems" data-mode="prepare"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span>Pack</span></button>
+ <i class="tab-sep" aria-hidden="true"></i>
+ <button type="button" data-tab="course" data-mode="race"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 19l6-9 4 5 3-4 7 8H2Z"/></svg><span>Course</span></button>
+ <button type="button" data-tab="fuel" data-mode="race"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v3l-2 3v11a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9l-2-3V3"/><path d="M8 13h8"/></svg><span>Fuel</span></button>
+ <button type="button" data-tab="pacing" data-mode="race"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M10 2h4"/></svg><span>Pace</span></button>
+ <button type="button" data-tab="more" aria-controls="dock-sheet" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/></svg><span>More</span></button>
 </div>
 
 
@@ -3092,7 +3141,7 @@ function updateStatus(){
 function bindTools(){
   var share=document.getElementById('share-plan'), status=document.getElementById('tool-status'), reset=document.getElementById('reset-plan'), armed=false;
   function isHosted(){return /^https?:$/.test(location.protocol)&&!/(^localhost$|^127\.|^\[?::1\]?$)/.test(location.hostname);}
-  function copy(url,message){if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(url).then(function(){status.textContent=message;},fallback);else fallback();function fallback(){status.innerHTML='Copy this link: <input aria-label="Link to copy" readonly value="'+esc(url)+'">';}}
+  function copy(url,message){if(navigator.share&&matchMedia('(pointer:coarse)').matches){navigator.share({title:'SGRAIL 100 planner',url:url}).then(function(){status.textContent='Shared.';},function(){});return;}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(url).then(function(){status.textContent=message;},fallback);else fallback();function fallback(){status.innerHTML='Copy this link: <input aria-label="Link to copy" readonly value="'+esc(url)+'">';}}
   document.addEventListener('click',function(e){
     var review=e.target.closest('[data-unknown-review]');if(review){if(state.done.kit&&state.done.fuel)openGate('unknown');else{if(gate.mode)closeGate();openGate('onboard');}return;}
     var more=e.target.closest('[data-add-details]');if(more){if(gate.mode)closeGate();openGate('more');return;}
@@ -3142,6 +3191,7 @@ function bindTools(){
 // Resume unfinished setup on reload; closing it reveals the clearly labelled draft plan.
 window.PLAN_INIT=function(){ renderSurveys(); bindGate(); bindSampleBar(); renderAll(); bindTools(); updateSampleBar(); if(incoming)openGate('import');else if(!(state.done.kit&&state.done.fuel))openGate('onboard');if(importError)document.getElementById('tool-status').textContent=importError; };
 window.PLAN_TEST={inventorySchedule:inventorySchedule,packRows:packRows,renderActualFuel:renderActualFuel,pendingQuestions:pendingQuestions,compute:compute,answers:answers,SURVEYS:SURVEYS,pressure:pressure,inventoryData:inventoryData,weekendEvents:weekendEvents,planningActions:planningActions,renderWater:renderWater,renderTimeEvidence:renderTimeEvidence,cleanState:cleanState,starterQuestion:starterQuestion,GROUPS:GROUPS,PRESETS:PRESETS};
+window.PLAN_API={done:function(){return !!(state.done&&state.done.kit&&state.done.fuel);},answers:answers,compute:compute,kmAt:kmAt,timeAtKm:timeAtKm,COURSE:COURSE,clock:clock,dur:dur,esc:esc};
 })();
 
 PLAN_INIT();
@@ -3212,9 +3262,12 @@ document.querySelectorAll('nav a[href^="#"]').forEach(function(a){
     document.getElementById('view-description').textContent=on?'Race day: your plan, transitions and roadside actions.':'Prepare: your surveys, checklists and logistics.';
     try{ localStorage.setItem('sgplan26.race', on?'1':'0'); }catch(e){}
   }
-  var raceEve=Date.now()>=new Date("2026-10-17T20:00:00+02:00").getTime();
+  var raceEve=Date.now()>=new Date("2026-10-17T20:00:00+02:00").getTime()||/[?&]now=2026-10-18/.test(location.search);
   var saved=null; try{ saved=localStorage.getItem('sgplan26.race'); }catch(e){}
-  set(saved==='1' || (saved===null && raceEve));
+  // Race eve and race morning open in Race day once, even if Prepare was chosen earlier; after that the person's choice wins.
+  var preview=/[?&]now=2026-10-18/.test(location.search), autoDone=null; try{ autoDone=localStorage.getItem('sgplan26.raceAuto'); }catch(e){}
+  if(raceEve&&(preview||autoDone!=='1')){ set(true); if(!preview){ try{ localStorage.setItem('sgplan26.raceAuto','1'); }catch(e){} } }
+  else set(saved==='1' || (saved===null && raceEve));
   b.addEventListener('click',function(){ set(!document.body.classList.contains('race')); });
   document.querySelectorAll('[data-view]').forEach(function(x){x.addEventListener('click',function(){if((x.dataset.view==='race')!==document.body.classList.contains('race'))b.click();});});
 })();
@@ -3367,6 +3420,109 @@ document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener
   window.DOCK_BUILD=build;
 })();
 
+
+// ---------------- app layer: tab bar, install, offline, race-morning "now", screen awake ----------------
+(function(){
+  var bar=document.getElementById('tabbar'), menuBtn=document.querySelector('.dock .menu'), sheet=document.getElementById('dock-sheet');
+  if(!bar) return;
+  var tabs=Array.from(bar.querySelectorAll('[data-tab]'));
+  var mq=matchMedia('(max-width:600px)');
+  function isRace(){return document.body.classList.contains('race');}
+  function show(){ var on=mq.matches; bar.hidden=!on; document.body.classList.toggle('has-tabbar',on); spy(); }
+  function spy(){
+    if(bar.hidden) return;
+    var mode=isRace()?'race':'prepare', active=null;
+    tabs.forEach(function(t){ if(t.dataset.mode!==mode) return; var el=document.getElementById(t.dataset.tab); if(el&&el.getClientRects().length&&el.getBoundingClientRect().top<=140) active=t; });
+    if(!active) active=tabs.find(function(t){return t.dataset.mode===mode;});
+    tabs.forEach(function(t){ var on=t===active; t.classList.toggle('on',on); if(t.dataset.mode) t.setAttribute('aria-current',on?'page':'false'); });
+  }
+  function go(t){
+    var want=t.dataset.mode;
+    function scroll(){ var el=document.getElementById(t.dataset.tab); if(!el) return; var y=el.getBoundingClientRect().top+scrollY-(document.body.classList.contains('sample-mode')?64:8); window.scrollTo({top:Math.max(0,y),behavior:motionBehavior()}); }
+    if((want==='race')!==isRace()){ var mb=document.querySelector('[data-view="'+want+'"]'); if(mb) mb.click(); if(window.DOCK_BUILD) setTimeout(window.DOCK_BUILD,30); setTimeout(function(){scroll();spy();},60); }
+    else scroll();
+  }
+  bar.addEventListener('click',function(e){
+    var t=e.target.closest('[data-tab]'); if(!t) return;
+    if(t.dataset.tab==='more'){ e.stopPropagation(); if(menuBtn) menuBtn.click(); t.setAttribute('aria-expanded',String(!sheet.hidden)); return; }
+    if(!sheet.hidden&&menuBtn) menuBtn.click();
+    go(t);
+  });
+  var q=false; addEventListener('scroll',function(){ if(!q){q=true;requestAnimationFrame(function(){q=false;spy();});} },{passive:true});
+  (mq.addEventListener?mq.addEventListener('change',show):mq.addListener(show));
+  var rm=document.getElementById('rmbtn'); if(rm) rm.addEventListener('click',function(){setTimeout(spy,40);});
+  show();
+})();
+
+// Installable app + offline copy. Hosted pages only; the ZIP/file copy stays a plain page.
+var APP={deferred:null};
+(function(){
+  var hosted=(/^https:$/.test(location.protocol)&&!/(^localhost$|^127\.)/.test(location.hostname))||(location.hostname==='localhost'&&/[?&]swtest=1/.test(location.search));
+  var standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+  var ios=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  document.documentElement.classList.toggle('standalone',standalone);
+  if(hosted&&'serviceWorker' in navigator) addEventListener('load',function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
+  var btn=document.getElementById('sh-install');
+  function canInstall(){ return !standalone&&hosted&&(APP.deferred||ios); }
+  APP.install=function(status){
+    if(APP.deferred){ APP.deferred.prompt(); APP.deferred.userChoice.finally(function(){ APP.deferred=null; APP.refresh(); }); return; }
+    if(ios&&status) status.innerHTML='<b>On iPhone:</b> tap the Share button in Safari, then <b>Add to Home Screen</b>. The app keeps its own storage, so save a backup here first (Your plan → Save for another device) and restore it inside the app.';
+  };
+  APP.refresh=function(){
+    var ok=canInstall(); if(btn) btn.hidden=!ok;
+    var card=document.getElementById('install-card'); var dismissed=false; try{dismissed=localStorage.getItem('sgplan26.installDismissed')==='1';}catch(e){}
+    if(card) card.hidden=!ok||dismissed||!matchMedia('(max-width:600px)').matches;
+  };
+  addEventListener('beforeinstallprompt',function(e){ e.preventDefault(); APP.deferred=e; APP.refresh(); });
+  addEventListener('appinstalled',function(){ APP.deferred=null; APP.refresh(); });
+  if(btn) btn.addEventListener('click',function(){ APP.install(document.getElementById('tool-status')); });
+  var setup=document.getElementById('setup');
+  if(setup){ setup.insertAdjacentHTML('afterbegin','<div class="install-card" id="install-card" hidden><div><b>Put the planner on your home screen</b><span>Opens full screen and works offline on race morning, when signal on the course is patchy.</span><p class="install-note" id="install-note"></p></div><div class="install-actions"><button type="button" class="primary" id="install-go">Install</button><button type="button" id="install-no">Not now</button></div></div>');
+    document.getElementById('install-go').addEventListener('click',function(){ APP.install(document.getElementById('install-note')); });
+    document.getElementById('install-no').addEventListener('click',function(){ try{localStorage.setItem('sgplan26.installDismissed','1');}catch(e){} APP.refresh(); });
+  }
+  APP.refresh();
+})();
+
+// Race morning: what matters right now, from your own plan. ?now=2026-10-18T10:30 previews it.
+(function(){
+  var card=document.getElementById('now-card'); if(!card) return;
+  function now(){ var m=location.search.match(/[?&]now=([0-9T:-]+)/); if(m){ var d=new Date(m[1]); if(!isNaN(d)) return d; } return new Date(); }
+  var A=window.PLAN_API; if(!A) return; var answers=A.answers,compute=A.compute,kmAt=A.kmAt,timeAtKm=A.timeAtKm,COURSE=A.COURSE,clock=A.clock,dur=A.dur,esc=A.esc;
+  function render(){
+    var n=now(), raceDay=n.getFullYear()===2026&&n.getMonth()===9&&n.getDate()===18;
+    if(!raceDay||!A.done()){ card.hidden=true; return; }
+    var a=answers(), P=compute(a), s=P.scen[1], e=(n.getHours()*60+n.getMinutes())-540, hh=clock(e), title, lines=[];
+    var bikeStart=s.sw+s.t1;
+    function inMin(m){ m=Math.round(m); return m<=0?'now':m<60?'in '+m+' min':'in '+dur(m); }
+    if(e<0){ title='Start '+inMin(-e)+' · 09:00, Platja Gran';
+      if(e<-165&&a.transport==='bus') lines.push('First organiser bus 06:15 from La Copa, Girona.');
+      lines.push('White T1 bag to Cadaqués 08:00–08:45. Bottles on the bike before the wetsuit goes on.'); }
+    else if(e<s.sw){ title='Swim'; lines.push('Out of the water ≈ '+clock(s.sw)+' · cut-off 09:59'); }
+    else if(e<bikeStart){ title='T1 · Platja Gran'; lines.push('Mount outside T1. Planned time here: '+Math.round(s.t1)+' min.'); }
+    else if(e<s.t2Out){ var be=e-bikeStart, f=(P.feeds||[]).find(function(x){return x.t>be;});
+      title='Bike · ≈ km '+Math.round(kmAt(be,P.B))+' on your plan';
+      if(f) lines.push('Next: '+(f.label||(f.kind==='bar'?'½ bar':f.kind))+(f.caf?' (caffeine)':'')+' at '+clock(bikeStart+f.t)+' · '+inMin(f.t-be));
+      [[COURSE.w1,'W1 water stop'],[COURSE.w2,'W2 water stop']].forEach(function(w){ var t=timeAtKm(w[0],P.B); if(t>be&&lines.length<3) lines.push(w[1]+' (km '+w[0]+', mandatory) ≈ '+clock(bikeStart+t)); });
+      lines.push('Off the bike ≈ '+clock(s.t2Out)+' · cut-off 15:49'); }
+    else if(e<s.runStart){ title='T2 · Celrà'; lines.push('Black bag, flask filled with station water, trail bib to the front.'); }
+    else if(e<s.fin+30){ title='Run'; lines.push('Castle aid at km 4.4. Hike the climb, commit to the descent.'); lines.push('Finish ≈ '+clock(s.fin)+' · plan against 16:59'); }
+    else { title='Finished. Well done.'; lines.push('Collect your bike and bags in Girona.'); }
+    card.innerHTML='<span class="now-k">Now · '+hh.replace(/^0/,'')+'</span><b>'+title+'</b>'+lines.map(function(l){return '<p>'+esc(l)+'</p>';}).join('');
+    card.hidden=false;
+  }
+  render(); setInterval(render,60000);
+  window.addEventListener('focus',render);
+  var orig=window.PLAN_AFTER; window.PLAN_AFTER=function(){ if(orig) orig(); render(); };
+})();
+
+// Race day keeps the screen awake while the page is open (where the phone allows it).
+(function(){
+  if(!('wakeLock' in navigator)) return; var lock=null;
+  function want(){ return document.body.classList.contains('race')&&document.visibilityState==='visible'&&matchMedia('(max-width:600px)').matches; }
+  function sync(){ if(want()&&!lock){ navigator.wakeLock.request('screen').then(function(l){ lock=l; l.addEventListener('release',function(){lock=null;}); }).catch(function(){}); } else if(!want()&&lock){ lock.release().catch(function(){}); lock=null; } }
+  document.addEventListener('visibilitychange',sync); var rm=document.getElementById('rmbtn'); if(rm) rm.addEventListener('click',function(){setTimeout(sync,40);}); sync();
+})();
 
 window.PLAN_AFTER=function(){ if(window.DOCK_BUILD) window.DOCK_BUILD(); window.dispatchEvent(new Event('scroll')); window.dispatchEvent(new Event('resize')); };
 // Race-day graphs stay open on every screen size; the swipe cue fades once a chart has been scrolled.
