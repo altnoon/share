@@ -333,7 +333,7 @@ body:not(.race) #course,body:not(.race) #pacing,body:not(.race) #fuel,body:not(.
 .modeseg button{font:600 12.5px var(--body);padding:0 14px;min-height:38px;border:0;background:transparent;color:var(--muted);cursor:pointer;display:flex;align-items:center;white-space:nowrap}
 .modeseg button b{font-family:var(--body);font-weight:600;font-size:12.5px;color:inherit}.modeseg button span{display:none}
 .modeseg button[aria-pressed="true"]{background:var(--ink);color:var(--card)}
-.modeseg button[data-view="race"][aria-pressed="true"]{background:var(--flag);color:#fff}
+.modeseg button[data-view="race"][aria-pressed="true"]{background:var(--flag);color:var(--on-flag)}
 #open .card{margin:0;border:0;padding:0;background:transparent;display:grid;grid-template-columns:1fr 1fr;gap:0 24px;align-items:start}#open .card>.closedlist{grid-column:1/-1}#hide-completed{display:none}#openitems .pk-head{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin:22px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--ink)}#openitems .packgrid{margin-bottom:6px}#openitems .packgrid+p.small{margin:10px 0 0}@media(max-width:700px){#open .card{grid-template-columns:1fr}}
 .modeside{display:none}
 @media(min-width:1050px){
@@ -1032,7 +1032,7 @@ body.race #setup{display:none}
 #course .feedkey i{display:inline-block;width:10px;height:10px;margin-right:6px;vertical-align:-1px;border-radius:50%;background:var(--ink)}
 #course .feedkey i.bar{border-radius:2px;background:var(--track)}
 #course .feedkey i.chew{background:var(--card);border:2px solid var(--ink);width:8px;height:8px}
-#course .feedkey i.caf{background:var(--flag)}
+#course .feedkey i.caf{background:var(--ink);box-shadow:0 0 0 2px var(--card),0 0 0 3.4px var(--ink)}
 #course .feedkey i.stop{background:var(--flag);width:8px;height:8px}
 #course .reset-tr{margin:14px 0 0;font:600 13px var(--body);letter-spacing:0;text-transform:none;min-height:40px;padding:6px 12px;border-radius:6px}
 #pacing .cfin.late{color:var(--flag)}
@@ -1098,7 +1098,7 @@ body.gated .gate{background:var(--paper)}
 #course .feedkey i.b-mix,#course .feedkey i.b-elec,#course .feedkey i.b-station,#course .feedkey i.b-water{border-radius:2px;width:14px;height:9px}
 #course .feedkey i.b-mix{background:var(--track)}#course .feedkey i.b-elec{background:var(--sea)}#course .feedkey i.b-station{background:var(--track-soft);border:1px solid var(--track)}#course .feedkey i.b-water{background:var(--card);border:1px solid var(--muted)}
 #course .feedkey i.cap{border-radius:3px;width:12px;height:6px;background:var(--sea)}
-#course .feedkey i.cafonly{background:var(--card);border:2px solid var(--flag);width:8px;height:8px}
+#course .feedkey i.cafonly{background:var(--card);border:2px solid var(--ink);width:8px;height:8px;box-shadow:0 0 0 2px var(--card),0 0 0 3.4px var(--ink)}
 .edit-inline{display:block;width:max-content;margin:10px 0 0;font:600 13px var(--body);letter-spacing:0;text-transform:none;min-height:36px;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;white-space:nowrap}
 .edit-inline:hover{border-color:var(--ink)}
 .edit-inline:focus-visible,.gate .g-link:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
@@ -1205,7 +1205,7 @@ button,select,summary,.backup-label{min-height:44px}
 .gate .times-sum p{margin:0}.gate .times-sum .ts-k{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
 .gate .times-sum dl{margin:0 0 10px;display:grid;gap:8px}.gate .times-sum dt{font-size:13px;color:var(--muted)}.gate .times-sum dd{margin:2px 0 0}.gate .times-sum dd b{font:600 20px var(--mono);margin-right:6px}
 .gate .times-sum .small{font-size:13px;color:var(--muted)}
-.gate span.late{color:var(--flag);font-weight:600}.gate span.tight{color:var(--track);font-weight:600}
+.gate span.late{color:var(--flag);font-weight:600}.gate span.tight{color:var(--ink);font-weight:700}
 .gate .g-warn{color:var(--flag);background:var(--flag-soft);padding:12px 14px;border-radius:6px;margin:12px 0 0;font-size:15px;line-height:1.5}
 .gate .preset{display:grid;gap:6px;font-size:15px;font-weight:600}
 .gate .preset-note{margin:8px 0 4px;font-size:13px}
@@ -1275,6 +1275,30 @@ body.sample-mode section,body.sample-mode #course details.planblock{scroll-margi
  body.race{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 }
 .gate .times-sum .ts-late{margin-top:10px;color:var(--flag);font-weight:600;font-size:14px}
+
+/* information pass · 29 Sep */
+#pacing .cut-ladder{list-style:none;margin:10px 0 14px;padding:0;display:grid;gap:10px}
+#pacing .cut-ladder li{padding:12px 14px;background:var(--paper);border-radius:6px;border-left:4px solid var(--ink)}
+#pacing .cut-ladder li.late{border-left-color:var(--flag);background:var(--flag-soft)}
+#pacing .cut-ladder li.tight{border-left-color:var(--ink)}
+#pacing .cut-ladder li.ok{border-left-color:var(--line)}
+#pacing .cl-row{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+#pacing .cl-name{font-weight:600}
+#pacing .cl-m{font:600 16px var(--mono);white-space:nowrap}
+#pacing .late .cl-m{color:var(--flag)}
+#pacing .cl-bar{height:6px;background:var(--line-soft);border-radius:3px;margin:8px 0 6px;overflow:hidden}
+#pacing .cl-bar i{display:block;height:100%;background:var(--muted);border-radius:3px}
+#pacing .tight .cl-bar i{background:var(--ink)}#pacing .late .cl-bar i{background:var(--flag)}
+#pacing .cl-sub{font-size:13px;color:var(--muted)}#pacing .cl-sub b{color:var(--ink);font-family:var(--mono)}
+details.result-assumptions{padding:0}
+details.result-assumptions>summary{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:4px 12px;padding:12px 16px;min-height:44px;cursor:pointer;list-style:none;font:500 14px var(--body);text-transform:none;letter-spacing:0}
+details.result-assumptions>summary::-webkit-details-marker{display:none}
+details.result-assumptions>summary span{color:var(--muted);font-size:13px}
+details.result-assumptions>summary::after{content:"+";font-family:var(--mono);color:var(--muted);margin-left:auto}
+details.result-assumptions[open]>summary::after{content:"–"}
+details.result-assumptions>ul,details.result-assumptions>button{margin-left:16px;margin-right:16px}
+details.result-assumptions>button{margin-bottom:14px}
+#race-verification a,#setup .small a,.quick-guide a,a.txtlink{color:var(--sea)}
 </style>
 <script>
 /* Theme resolves before paint so a dark start does not flash white. auto = follow the device. */
@@ -1380,7 +1404,7 @@ body.sample-mode section,body.sample-mode #course details.planblock{scroll-margi
   <details class="quick-guide" id="device-guide"><summary>Save for another device</summary><div class="inner"><p>Your plan saves in this browser only. It does not sync automatically.</p><ol><li>Download a private backup below. It includes your answers and checklist ticks.</li><li>Send the JSON file to your other device using your own files app, AirDrop or another private transfer.</li><li>Open the same planner on that device and choose <b>Restore a backup</b>. Review the replacement prompt before importing.</li></ol><p>Changes on the two devices stay separate. Repeat the transfer whenever you want to move your latest plan.</p><button type="button" id="device-save">Download my plan backup</button></div></details>
   <div class="plan-tools" id="plan-tools"><button type="button" id="share-clean">Share blank planner</button><button type="button" id="share-plan">Share my answers…</button><button type="button" id="backup-plan">Save my backup</button><label class="backup-label">Restore a backup<input id="import-backup" type="file" accept=".json,application/json"></label><button type="button" id="recover-plan">Recover replaced plan</button><button type="button" id="reset-plan">Start over</button><div id="personal-share" class="card rail-flag" hidden><p>This link includes your name, weight, logistics and all other entered answers. Anyone with the link can read them. To let your friend start their own plan, use <b>Share blank planner</b>.</p><button id="copy-personal" type="button">Copy link with my answers</button></div><p id="tool-status" class="small" role="status"></p></div>
   <div id="plan-warn" class="card rail-flag" role="status" hidden></div>
-  <div id="plan-assumptions" class="card rail-flag" role="status"></div><div id="plan-built"></div><div id="readiness-view" class="insights"></div>
+  <div id="plan-assumptions" class="card rail-sea" role="status"></div><div id="plan-built"></div><div id="readiness-view" class="insights"></div>
 </section>
 <aside class="essentials" aria-labelledby="essentials-title">
 <div class="view-switch" role="group" aria-label="Planner view"><button type="button" data-view="prepare">Prepare</button><button type="button" data-view="race">Race day</button></div><p id="view-description" class="small" role="status"></p>
@@ -1393,7 +1417,7 @@ body.sample-mode section,body.sample-mode #course details.planblock{scroll-margi
   <li class="d-sun cut"><span class="day">Sun 18 · cutoffs</span><dl class="cutoff-times"><div><dt>Swim</dt><dd><b>09:59</b></dd></div><div><dt>Gravel</dt><dd><b>15:49</b></dd></div><div><dt>Overall</dt><dd><b>17:59</b></dd></div></dl><small>16:59 trail limit — unconfirmed</small></li>
  </ol>
  <p class="execution-line" hidden>Ride the technical sector conservatively. Draft the plain. Hike the run climb, then commit to the descent.</p>
-<details class="location-links"><summary>Locations · open in Maps</summary><div class="inner"><div class="location-grid"><a href="https://maps.app.goo.gl/pWEBKGYvxmqraSXi7" target="_blank" rel="noopener noreferrer"><b>Bus pickup</b><span>La Copa · Girona ↗</span></a><a href="https://goo.gl/maps/nLCEkdMFELrRGCeZA" target="_blank" rel="noopener noreferrer"><b>Check-in / bag collection</b><span>Plaça dels Jurats · Girona ↗</span></a><a href="https://goo.gl/maps/L45gj3vDsq5GAYmp8" target="_blank" rel="noopener noreferrer"><b>Bike drop / collection</b><span>GEiEG · Girona ↗</span></a><a href="https://goo.gl/maps/qJLCiSE9Zoi3cjkG6" target="_blank" rel="noopener noreferrer"><b>Start / T1</b><span>Platja Gran · Cadaqués ↗</span></a><a href="https://goo.gl/maps/quVMrmhNkhwMa3ax5" target="_blank" rel="noopener noreferrer"><b>T2</b><span>Torre Desvern · Celrà ↗</span></a></div><p class="small">Links from the <a href="https://sgrail100.com/timetable/">organiser’s timetable</a>, checked 9 September. Maps needs a connection unless the area is downloaded.</p></div></details>
+<details class="location-links"><summary>Locations · open in Maps</summary><div class="inner"><div class="location-grid"><a href="https://maps.app.goo.gl/pWEBKGYvxmqraSXi7" target="_blank" rel="noopener noreferrer"><b>Bus pickup</b><span>La Copa · Girona ↗</span></a><a href="https://goo.gl/maps/nLCEkdMFELrRGCeZA" target="_blank" rel="noopener noreferrer"><b>Check-in / bag collection</b><span>Plaça dels Jurats · Girona ↗</span></a><a href="https://goo.gl/maps/L45gj3vDsq5GAYmp8" target="_blank" rel="noopener noreferrer"><b>Bike drop / collection</b><span>GEiEG · Girona ↗</span></a><a href="https://goo.gl/maps/qJLCiSE9Zoi3cjkG6" target="_blank" rel="noopener noreferrer"><b>Start / T1</b><span>Platja Gran · Cadaqués ↗</span></a><a href="https://goo.gl/maps/quVMrmhNkhwMa3ax5" target="_blank" rel="noopener noreferrer"><b>T2</b><span>Torre Desvern · Celrà ↗</span></a></div><p class="small">Links from the <a class="txtlink" href="https://sgrail100.com/timetable/" target="_blank" rel="noopener noreferrer">organiser’s timetable</a>, checked 9 September. Maps needs a connection unless the area is downloaded.</p></div></details>
 
  
 </aside>
@@ -1909,7 +1933,8 @@ function assumptionNote(ids,extra){
   var a=answers(),pending=pendingAnswers(),items=[];
   ids.forEach(function(id){var q=pending.find(function(q){return q.id===id;});if(!q)return;var v=a[id],value=Array.isArray(v)?v.join(', '):typeof v==='object'?'incomplete details':String(v);if(q.options&&!Array.isArray(v)){var option=q.options.find(function(o){return String(o[0])===String(v);});if(option)value=option[1];}items.push(esc(q.label)+' — '+esc(value)+(q.unit?' '+esc(q.unit):'')+' (provisional)');});
   (extra||[]).forEach(function(x){items.push(esc(x));});
-  return '<aside class="result-assumptions"><b>Basis of this result</b><ul>'+items.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul><button type="button" class="insight-edit" data-unknown-review>Review my unknowns</button></aside>';
+  var prov=items.length-(extra||[]).length;
+  return '<details class="result-assumptions"><summary><b>What this is based on</b><span>'+(prov?prov+' provisional answer'+(prov===1?'':'s'):'')+(prov&&(extra||[]).length?' · ':'')+((extra||[]).length?(extra||[]).length+' assumption'+((extra||[]).length===1?'':'s'):'')+'</span></summary><ul>'+items.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>'+(prov?'<button type="button" class="insight-edit" data-unknown-review>Review what’s not sure</button>':'')+'</details>';
 }
 function nextActions(a,P){
   var checks=lsGet('checks',{}),items=[];tasks(a,P).forEach(function(g){g.items.forEach(function(it){if(!checks['task-'+it.k])items.push(it);});});
@@ -2401,10 +2426,10 @@ function renderFeedChart(P){
   var lastX=-99, row=0;
   P.feeds.forEach(function(f){
     var x=XT(f.t); row=(x-lastX<34)?(row+1)%2:0; lastX=x; var ly=row?46:28;
-    var col=f.kind==='bar'?'#8A5A2B':(f.caf?'#B3341F':'#1B2A32');
+    var col=f.kind==='bar'?'#8A5A2B':'#1B2A32';
     s+='<line x1="'+x.toFixed(1)+'" y1="'+(ly+10)+'" x2="'+x.toFixed(1)+'" y2="212" stroke="#D9DDD5" stroke-width="1"/>';
     if(f.kind==='bar') s+='<rect x="'+(x-5).toFixed(1)+'" y="'+(ly+5)+'" width="10" height="10" rx="2" fill="'+col+'"/>';
-    else s+='<circle cx="'+x.toFixed(1)+'" cy="'+(ly+10)+'" r="5" fill="'+(f.kind==='chew'||f.cafOnly?'#FFFFFF':col)+'" stroke="'+col+'" stroke-width="2"/>';
+    else s+='<circle cx="'+x.toFixed(1)+'" cy="'+(ly+10)+'" r="5" fill="'+(f.kind==='chew'||f.cafOnly?'#FFFFFF':col)+'" stroke="'+col+'" stroke-width="2"/>'+(f.caf||f.cafOnly?'<circle cx="'+x.toFixed(1)+'" cy="'+(ly+10)+'" r="8.5" fill="none" stroke="#1B2A32" stroke-width="1.4"/>':'');
     s+='<text x="'+x.toFixed(1)+'" y="'+ly+'" font-size="10" '+mono+' fill="#1B2A32" text-anchor="middle">'+hm(f.t)+'</text>';
   });
   s+='</svg>';
@@ -2838,9 +2863,10 @@ function editDetail(id,label){return '<button type="button" class="insight-edit"
 function renderInsights(a,P){
   var c=a.confidence||{}, statuses=[['equipment','Equipment'],['transport','Travel'],['timing','Race times'],['nutrition','Nutrition']];
   var confirmed=statuses.filter(function(x){return c[x[0]]==='confirmed';}).length, actions=planningActions(a);
-  var h='<div class="insight-head"><div><span class="eyebrow">Your planning picture</span><h3>'+confirmed+' of 4 areas confirmed</h3></div>'+editDetail('confidence','Update confidence')+'</div><p class="small">Confirmation reflects your answers, not a safety assessment. '+actions.length+' planning follow-ups appear in Before Girona.</p><div class="readiness-grid">';
-  statuses.forEach(function(x){var v=c[x[0]]||'undecided';h+='<div class="readiness-cell '+v+'"><b>'+x[1]+'</b><span>'+({confirmed:'Confirmed',estimated:'Estimated',undecided:'Undecided'}[v]||'Undecided')+'</span></div>';});
-  h+='</div><details class="insight-panel"><summary>Equipment · '+EQUIPMENT.filter(function(e){return (a.equipment||{})[e[0]]==='tested';}).length+' of '+EQUIPMENT.length+' in hand and tested</summary><div class="inner"><ul class="equipment-list">';
+  var recorded=statuses.some(function(x){return c[x[0]]&&c[x[0]]!=='undecided';});
+  var h='<div class="insight-head"><div><span class="eyebrow">Your planning picture</span><h3>'+(recorded?confirmed+' of 4 areas confirmed':'Not rated yet')+'</h3></div>'+editDetail('confidence',recorded?'Update confidence':'Rate your plan')+'</div><p class="small">'+(recorded?'Confirmation reflects your answers, not a safety assessment. ':'Rate how settled your equipment, travel, times and nutrition are. ')+actions.length+' planning follow-ups appear in Before Girona.</p>';
+  if(recorded){ h+='<div class="readiness-grid">'; statuses.forEach(function(x){var v=c[x[0]]||'undecided';h+='<div class="readiness-cell '+v+'"><b>'+x[1]+'</b><span>'+({confirmed:'Confirmed',estimated:'Estimated',undecided:'Undecided'}[v]||'Undecided')+'</span></div>';}); h+='</div>'; }
+  h+='<details class="insight-panel"><summary>Equipment · '+EQUIPMENT.filter(function(e){return (a.equipment||{})[e[0]]==='tested';}).length+' of '+EQUIPMENT.length+' in hand and tested</summary><div class="inner"><ul class="equipment-list">';
   EQUIPMENT.forEach(function(e){var v=(a.equipment||{})[e[0]],match=GEAR_STATUS.find(function(x){return x[0]===v;});h+='<li><b>'+e[1]+'</b><span>'+esc(match?match[1]:'Readiness not recorded')+'</span></li>';});
   h+='</ul>'+editDetail('equipment','Update equipment')+'</div></details>';
   var unknown=allQs().filter(function(q){return (!q.when||q.when(a))&&(state.unknown||{})[q.id];});
@@ -2854,9 +2880,10 @@ function renderTimeEvidence(a,P){
     var stops=present(x[2])?x[2]:null, moving=stops==null?null:x[1]-stops;
     h+='<div><b>'+x[0]+' · '+dur(x[1])+' elapsed</b><span>'+(moving==null?'Moving / stopped split not entered':moving<0?'Check: stopped time exceeds elapsed time':dur(moving)+' moving + '+dur(stops)+' stopped')+'</span></div>';
   });
-  h+='<div><b>Transitions · '+dur(base.t1+base.t2)+'</b><span>T1 '+dur(base.t1)+' + T2 '+dur(base.t2)+'</span></div></div><p class="small">'+(a.timebasis==='moving'?'Entered stops are added to your moving estimates. Missing stop allowances currently add 0 min and need checking.':'Your leg estimates are treated as elapsed time; entered stops are already included.')+'</p><div class="cutoff-grid">';
-  [['Swim exit',base.sw,COURSE.cutSwim],['Bike arrival',base.t2Out,COURSE.cutT2],['Earlier finish limit · unconfirmed',base.fin,COURSE.cutFin1],['Overall limit',base.fin,COURSE.cutFin2]].forEach(function(x){var m=Math.round(x[2]-x[1]);h+='<div class="'+(m<0?'insight-warning':'')+'"><span>'+x[0]+' · '+clock(x[2])+'</span><b>'+Math.abs(m)+' min '+(m<0?'over':'margin')+'</b><small>Base arrival '+clock(x[1])+'</small></div>';});
-  h+='</div><p class="small">Timetable checked 26 September 2026. The organiser still lists conflicting finish limits; confirm which applies.</p>'+editDetail('allowances','Edit time allowances')+'<h4>Recent sessions</h4>';
+  h+='<div><b>Transitions · '+dur(base.t1+base.t2)+'</b><span>T1 '+dur(base.t1)+' + T2 '+dur(base.t2)+'</span></div></div><p class="small">'+(a.timebasis==='moving'?'Entered stops are added to your moving estimates. Missing stop allowances currently add 0 min and need checking.':'Your leg estimates are treated as elapsed time; entered stops are already included.')+'</p><h4>Your base case against each cut-off</h4><ul class="cut-ladder">';
+  [['Out of the water',base.sw,COURSE.cutSwim,''],['Off the bike · Celrà',base.t2Out,COURSE.cutT2,''],['Finish',base.fin,COURSE.cutFin1,'trail limit · unconfirmed'],['Finish',base.fin,COURSE.cutFin2,'overall limit']].forEach(function(x){var m=Math.round(x[2]-x[1]),cls=m<0?'late':m<15?'tight':'ok';
+    h+='<li class="'+cls+'"><div class="cl-row"><span class="cl-name">'+x[0]+'</span><span class="cl-m">'+(m<0?(-m)+' min late':m+' min spare')+'</span></div><div class="cl-bar" aria-hidden="true"><i style="width:'+Math.max(3,Math.min(100,Math.abs(m)/120*100)).toFixed(0)+'%"></i></div><div class="cl-sub">You ≈ <b>'+clock(x[1])+'</b> · cut-off '+clock(x[2])+(x[3]?' ('+x[3]+')':'')+'</div></li>';});
+  h+='</ul><p class="small">Timetable checked 26 September 2026. The organiser still lists conflicting finish limits; confirm which applies.</p>'+editDetail('allowances','Edit time allowances')+'<h4>Recent sessions</h4>';
   if(!(a.sessions||[]).length)h+='<p class="small">No training references entered.</p>'+editDetail('sessions','Add a session');
   (a.sessions||[]).forEach(function(k){var v=a['session_'+k]||{},label={swim:'Open water',bike:'Gravel',run:'Trail'}[k];var rate=v.distance>0&&v.moving>0?v.moving/v.distance:null;var target={swim:1.5,bike:86.4,run:10.4}[k];
     h+='<article class="session-evidence"><b>'+label+(v.date?' · '+esc(v.date):'')+'</b><p>'+[present(v.distance)?v.distance+' km':'Distance unknown',present(v.ascent)?v.ascent+' m ascent':'Ascent unknown',present(v.moving)?dur(v.moving)+' moving':'Time unknown',present(v.stops)?dur(v.stops)+' stopped':'Stops unknown'].join(' · ')+'</p><span class="small">'+esc(v.effort||'Effort unknown')+' · '+(v.similar==='similar'?'Similar conditions':v.similar==='different'?'Different conditions':'Similarity unknown')+'</span>'+(rate?'<p>Same pace over the race distance: <b>'+dur(rate*target)+'</b> moving.</p><p class="small">Distance-only comparison; no adjustment for terrain, weather, fatigue or race effort.</p>':'<p class="small">Add distance and moving time to compare pace.</p>')+editDetail('session_'+k,'Edit session')+'</article>';
