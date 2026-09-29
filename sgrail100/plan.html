@@ -1230,6 +1230,23 @@ button,select,summary,.backup-label{min-height:44px}
 .next-links button:hover{border-color:var(--sea)}
 @media(max-width:600px){.gate .welcome-out{grid-template-columns:minmax(0,1fr)}}
 .gate .g-nav-end button{flex:1 1 auto}
+
+/* sample / draft bar: the way back into setup */
+.sample-bar{position:fixed;top:0;left:0;right:0;z-index:60;height:56px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 max(16px,env(safe-area-inset-left));background:var(--ink);color:var(--paper);box-shadow:0 6px 18px -12px rgba(0,0,0,.5)}
+.sample-bar[hidden]{display:none}
+.sample-bar .sb-label{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.sample-bar .sb-actions{display:flex;gap:8px}
+.sample-bar button{font:600 14px var(--body);letter-spacing:0;text-transform:none;min-height:40px;padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.35);background:transparent;color:var(--paper);cursor:pointer;white-space:nowrap}
+.sample-bar button.primary{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.sample-bar button:focus-visible{outline:2px solid var(--paper);outline-offset:2px}
+body.sample-mode{padding-top:56px}
+body.sample-mode nav{top:56px}
+body.sample-mode :target{scroll-margin-top:120px}
+@media(min-width:601px){.sample-bar{padding:0 24px}}
+@media(min-width:1050px){body.sample-mode nav{top:80px}}
+body.sample-mode section,body.sample-mode #course details.planblock{scroll-margin-top:134px}
+@media(max-width:360px){.sample-bar .sb-label{display:none}}
+@media print{.sample-bar{display:none!important}body.sample-mode{padding-top:0}}
 </style>
 <script>
 /* Theme resolves before paint so a dark start does not flash white. auto = follow the device. */
@@ -1558,6 +1575,7 @@ button,select,summary,.backup-label{min-height:44px}
 
 </div>
 
+<div class="sample-bar" id="sample-bar" role="region" aria-label="Setup" hidden><span class="sb-label" id="sb-label">Sample plan</span><span class="sb-actions"><button type="button" id="sb-welcome">Back to welcome</button><button type="button" class="primary" id="sb-continue" hidden>Continue setup</button></span></div>
 <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" hidden><div class="gate-card"><div class="gate-top"><span class="gate-brand">SGRAIL 100 · race planner</span><span class="gate-prog" id="gate-prog"></span><button type="button" class="gate-x" id="gate-close" data-g="close" aria-label="Save progress and close" title="Save progress and close">×</button></div><div class="gate-bar" aria-hidden="true"><i id="gate-bar"></i></div><div id="gate-body"></div></div></div>
 <dialog id="progdlg" class="modal" aria-label="Event program, Friday to Sunday">
   <div class="mhead"><b>Event program · Fri 16 → Sun 18</b><button type="button" class="mclose" aria-label="Close">×</button></div>
@@ -2463,13 +2481,28 @@ function openGate(mode,key){
   if(mode==='unknown'){gate.queue=pendingAnswers().map(function(q){return q.id;});gate.pos=gate.queue[0]||'end';}
   var g=document.getElementById('gate'); g.hidden=false; document.body.classList.add('gate-open');
   document.body.classList.toggle('gated',mode==='onboard');
-  setInert(true); renderGate(true);
+  setInert(true); renderGate(true); updateSampleBar();
 }
 function closeGate(){
   var g=document.getElementById('gate'); g.hidden=true;
   document.body.classList.remove('gate-open','gated'); setInert(false);
-  gate.mode=null; save();
+  gate.mode=null; save(); updateSampleBar();
   if(gate.opener&&gate.opener.isConnected) gate.opener.focus();
+}
+// Outside the setup, anyone without a finished plan keeps a way back to the welcome screen and their place in the questions.
+function updateSampleBar(){
+  var bar=document.getElementById('sample-bar'); if(!bar) return;
+  var show=document.getElementById('gate').hidden&&!(state.done.kit&&state.done.fuel);
+  bar.hidden=!show; document.body.classList.toggle('sample-mode',show); if(!show) return;
+  var started=!freshState(), mid=started&&state.pos&&state.pos!=='intro';
+  document.getElementById('sb-label').textContent=started?'Your draft plan':'Sample plan';
+  document.getElementById('sb-welcome').textContent=mid?'Welcome':'Back to welcome';
+  document.getElementById('sb-welcome').classList.toggle('primary',!mid);
+  document.getElementById('sb-continue').hidden=!mid;
+}
+function bindSampleBar(){
+  document.getElementById('sb-welcome').addEventListener('click',function(){ openGate('onboard'); gate.pos='intro'; gate.resumed=false; renderGate(true); });
+  document.getElementById('sb-continue').addEventListener('click',function(){ openGate('onboard'); });
 }
 function nq(key){ var a=answers(), n=0; SURVEYS[key].steps.forEach(function(st){ n+=visibleQs(st,a).filter(function(q){return state.setupMode==='full'||starterQuestion(q);}).length; }); return n; }
 function renderGate(focus){
@@ -3010,7 +3043,7 @@ function bindTools(){
 }
 
 // Resume unfinished setup on reload; closing it reveals the clearly labelled draft plan.
-window.PLAN_INIT=function(){ renderSurveys(); bindGate(); renderAll(); bindTools(); if(incoming)openGate('import');else if(!(state.done.kit&&state.done.fuel))openGate('onboard');if(importError)document.getElementById('tool-status').textContent=importError; };
+window.PLAN_INIT=function(){ renderSurveys(); bindGate(); bindSampleBar(); renderAll(); bindTools(); updateSampleBar(); if(incoming)openGate('import');else if(!(state.done.kit&&state.done.fuel))openGate('onboard');if(importError)document.getElementById('tool-status').textContent=importError; };
 window.PLAN_TEST={inventorySchedule:inventorySchedule,packRows:packRows,renderActualFuel:renderActualFuel,pendingQuestions:pendingQuestions,compute:compute,answers:answers,SURVEYS:SURVEYS,pressure:pressure,inventoryData:inventoryData,weekendEvents:weekendEvents,planningActions:planningActions,renderWater:renderWater,renderTimeEvidence:renderTimeEvidence,cleanState:cleanState,starterQuestion:starterQuestion,GROUPS:GROUPS,PRESETS:PRESETS};
 })();
 
