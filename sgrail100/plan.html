@@ -1274,6 +1274,7 @@ body.sample-mode section,body.sample-mode #course details.planblock{scroll-margi
  body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
  body.race{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 }
+.gate .times-sum .ts-late{margin-top:10px;color:var(--flag);font-weight:600;font-size:14px}
 </style>
 <script>
 /* Theme resolves before paint so a dark start does not flash white. auto = follow the device. */
@@ -1655,9 +1656,9 @@ function has(a,k,v){ return (a[k]||[]).indexOf(v)>=0; }
 
 // ---------------- survey definitions ----------------
 function range(from,to,step,fmt){ var o=[]; for(var v=from; v<=to; v+=step) o.push([String(v),fmt(v)]); return o; }
-var paceOpts=range(85,165,5,function(s){ return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')+' /100 m'; });
-var bikeOpts=range(210,345,15,function(m){ return dur(m); });
-var runOpts=range(55,120,5,function(m){ return dur(m); });
+var paceOpts=range(70,240,5,function(s){ return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')+' /100 m'; });
+var bikeOpts=range(180,420,15,function(m){ return dur(m); });
+var runOpts=range(45,180,5,function(m){ return dur(m); });
 
 var SURVEYS={
  kit:{ n:'01', title:'Kit & logistics', builds:'Builds your bags, pack list, bike checks and to-do list', steps:[
@@ -1876,11 +1877,11 @@ var GROUPS=[
 function groupOf(id){return GROUPS.find(function(g){return g.ids.indexOf(id)>=0;})||null;}
 // Label values from the makers' own sites (Maurten, 226ERS, Precision Fuel & Hydration), checked 29 September 2026, rounded to the nearest gram. Sodium from EU salt values = salt ÷ 2.5.
 var PRESETS={
- gel:[['Maurten Gel 100',{gelg:25}],['Maurten Gel 100 CAF 100 · 100 mg caffeine',{gelg:25}],['Maurten Gel 160',{gelg:40}],
-  ['226ERS High Energy Gel 76 g',{gelg:50}],['226ERS High Energy Gel 76 g · salted flavours, 250 mg sodium',{gelg:50}],['226ERS High Energy Gel 76 g · Cereza or Lima, 160 mg caffeine',{gelg:50}],['226ERS High Energy Gel 76 g · Café Expreso, 80 mg caffeine',{gelg:50}],['226ERS High Energy Gel XS 45 g',{gelg:30}],
-  ['226ERS High Fructose Gel 80 g',{gelg:55}],['226ERS High Fructose Gel 80 g · Cereza, 160 mg caffeine',{gelg:55}],['226ERS High Fructose Gel 80 g · Cola, 100 mg caffeine',{gelg:55}],['226ERS High Fructose Gel XS 44 g',{gelg:30}],
-  ['226ERS Isotonic Gel 68 g',{gelg:22}],['226ERS Isotonic Gel 68 g · Cola, 100 mg caffeine',{gelg:22}],
-  ['Precision Fuel & Hydration PF 30 Gel',{gelg:30}],['PF 30 Caffeine Gel · 100 mg caffeine',{gelg:30}],['Precision Fuel & Hydration PF 90 Gel',{gelg:90}]],
+ gel:[['Maurten Gel 100',{gelg:25}],['Maurten Gel 100 CAF 100 · 100 mg caffeine',{gelg:25},null,100],['Maurten Gel 160',{gelg:40}],
+  ['226ERS High Energy Gel 76 g',{gelg:50}],['226ERS High Energy Gel 76 g · salted flavours, 250 mg sodium',{gelg:50}],['226ERS High Energy Gel 76 g · Cereza or Lima, 160 mg caffeine',{gelg:50},null,160],['226ERS High Energy Gel 76 g · Café Expreso, 80 mg caffeine',{gelg:50},null,80],['226ERS High Energy Gel XS 45 g',{gelg:30}],
+  ['226ERS High Fructose Gel 80 g',{gelg:55}],['226ERS High Fructose Gel 80 g · Cereza, 160 mg caffeine',{gelg:55},null,160],['226ERS High Fructose Gel 80 g · Cola, 100 mg caffeine',{gelg:55},null,100],['226ERS High Fructose Gel XS 44 g',{gelg:30}],
+  ['226ERS Isotonic Gel 68 g',{gelg:22}],['226ERS Isotonic Gel 68 g · Cola, 100 mg caffeine',{gelg:22},null,100],
+  ['Precision Fuel & Hydration PF 30 Gel',{gelg:30}],['PF 30 Caffeine Gel · 100 mg caffeine',{gelg:30},null,100],['Precision Fuel & Hydration PF 90 Gel',{gelg:90}]],
  bar:[['Maurten Solid 160',{barg:41}],['226ERS Endurance Fuel Bar Choco Bits 60 g',{barg:37}],['226ERS Race Day Bar Choco Bits 40 g',{barg:25}],['226ERS Race Day Bar BCAA 40 g · Plátano y Jengibre',{barg:25}],['226ERS Race Day Bar Salty Trail 40 g · Cacahuetes',{barg:17}],['226ERS High Fructose Gummy Bar 60 g',{barg:46}]],
  chew:[['226ERS Vegan Gummy Bar 30 g',{chewg:17}],['226ERS High Fructose Gummy Bar 60 g',{chewg:46}]],
  mix:[['Maurten Drink Mix 160 · 1 sachet',{mixg:41,mixna:210}],['Maurten Drink Mix 320 · 1 sachet',{mixg:80,mixna:245}],
@@ -2632,6 +2633,12 @@ function applyPreset(sel){
   var kind=sel.dataset.preset, p=PRESETS[kind][+sel.value], f=sel.closest('form'); if(!p||!f) return;
   var nameInput=PRESET_NAME[kind]&&f.querySelector('[name="q-'+PRESET_NAME[kind]+'"]'); if(nameInput) nameInput.value=p[0];
   Object.keys(p[1]).forEach(function(k){ var el=f.querySelector('[name="q-'+k+'"]'); if(el) el.value=p[1][k]; });
+  // A caffeinated gel also sets the caffeine dose asked earlier, so the two can't disagree.
+  var note=f.querySelector('.preset-caf'); if(note) note.remove();
+  if(p[3]){ var a=answers(), msg;
+    if(a.caffeine==='no') msg='This gel has '+p[3]+' mg caffeine, but you chose no caffeine. <button type="button" class="g-link" data-review="caffeine">Change caffeine</button>';
+    else { state.answers.cafmg=p[3]; if(state.unknown) delete state.unknown.cafmg; save(); msg='Caffeine per dose set to '+p[3]+' mg from this gel.'; }
+    sel.closest('.preset').insertAdjacentHTML('afterend','<p class="g-note preset-caf" role="status">'+msg+'</p>'); }
 }
 function marginText(m,label){ m=Math.round(m); return '<span class="'+(m<0?'late':m<30?'tight':'ok')+'">'+(m>=0?m+' min inside':(-m)+' min past')+' the '+label+'</span>'; }
 function timesFeedback(){
@@ -2646,7 +2653,7 @@ function timesFeedback(){
   var box=document.getElementById('times-sum'); if(!box) return;
   if(!(set('swimpace')&&set('biketime')&&set('runtime'))){ box.innerHTML='<p>Choose all three to see your finish against the cut-offs.</p>'; return; }
   var s=compute(a).scen[1];
-  box.innerHTML='<p class="ts-k">Your base case</p><dl><div><dt>Off the bike</dt><dd><b>'+clock(s.t2Out)+'</b> '+marginText(COURSE.cutT2-s.t2Out,'15:49 gravel cut-off')+'</dd></div><div><dt>Finish</dt><dd><b>'+clock(s.fin)+'</b> '+marginText(COURSE.cutFin1-s.fin,'16:59 trail limit')+' · '+marginText(COURSE.cutFin2-s.fin,'17:59 overall limit')+'</dd></div></dl><p class="small">Includes '+s.t1+' min T1 and '+s.t2+' min T2'+(a.timebasis==='moving'?', plus your stop allowances':'')+'. The organiser hasn’t confirmed whether 16:59 or 17:59 applies. Best and slow cases are in your plan.</p>';
+  box.innerHTML='<p class="ts-k">Your base case</p><dl><div><dt>Off the bike</dt><dd><b>'+clock(s.t2Out)+'</b> '+marginText(COURSE.cutT2-s.t2Out,'15:49 gravel cut-off')+'</dd></div><div><dt>Finish</dt><dd><b>'+clock(s.fin)+'</b> '+marginText(COURSE.cutFin1-s.fin,'16:59 trail limit')+' · '+marginText(COURSE.cutFin2-s.fin,'17:59 overall limit')+'</dd></div></dl><p class="small">Includes '+s.t1+' min T1 and '+s.t2+' min T2'+(a.timebasis==='moving'?', plus your stop allowances':'')+'. The organiser hasn’t confirmed whether 16:59 or 17:59 applies. Best and slow cases are in your plan.</p>'+(s.sw>COURSE.cutSwim||s.t2Out>COURSE.cutT2||s.fin>COURSE.cutFin2?'<p class="ts-late">These times miss a cut-off. Check them against a recent session, and if they hold, talk to the organiser before race day.</p>':'');
 }
 function reviewHtml(pages,a){
   var h='', group='';
