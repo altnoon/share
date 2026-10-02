@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>aishopper · prototipo</title>
+<meta name="robots" content="noindex,nofollow"/>
+<meta name="description" content="Dime qué quieres cocinar y comparo la cesta en 7 supermercados."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: oklch(0.985 0.004 85);
+    --bg-panel: oklch(0.995 0.003 85);
+    --bg-sunk: oklch(0.965 0.006 85);
+    --ink: oklch(0.20 0.012 60);
+    --ink-2: oklch(0.42 0.012 60);
+    --ink-3: oklch(0.52 0.010 60);
+    --ink-4: oklch(0.82 0.008 60);
+    --line: oklch(0.91 0.006 70);
+    --line-2: oklch(0.94 0.005 70);
+    --accent: oklch(0.55 0.18 255);
+    --accent-soft: oklch(0.94 0.04 255);
+    --sage: oklch(0.58 0.10 150);
+    --sage-soft: oklch(0.93 0.05 150);
+    --warn: oklch(0.68 0.14 55);
+    --warn-soft: oklch(0.94 0.05 55);
+    --radius: 10px;
+    --sage-ink: oklch(0.40 0.10 150); --sage-line: oklch(0.85 0.05 150);
+    --warn-ink: oklch(0.42 0.11 45); --warn-line: oklch(0.85 0.06 55);
+    --danger-ink: oklch(0.52 0.15 28);
+    --accent-ink: oklch(0.40 0.14 255); --accent-line: oklch(0.88 0.05 255);
+    --person-bg: oklch(0.93 0.045 20); --person-ink: oklch(0.38 0.10 20); --person-line: oklch(0.87 0.05 20);
+    --mark-bg-l: 0.96; --mark-line-l: 0.88; --mark-ink-l: 0.35;
+    color-scheme: light;
+  }
+  [data-theme="dark"] {
+    --bg: oklch(0.19 0.008 60); --bg-panel: oklch(0.225 0.008 60); --bg-sunk: oklch(0.17 0.008 60);
+    --ink: oklch(0.95 0.006 85); --ink-2: oklch(0.82 0.008 85); --ink-3: oklch(0.70 0.008 85); --ink-4: oklch(0.42 0.008 60);
+    --line: oklch(0.33 0.008 60); --line-2: oklch(0.28 0.008 60);
+    --accent: oklch(0.70 0.15 255); --accent-soft: oklch(0.32 0.06 255);
+    --sage: oklch(0.70 0.12 150); --sage-soft: oklch(0.30 0.05 150);
+    --warn: oklch(0.75 0.13 60); --warn-soft: oklch(0.31 0.05 55);
+    --sage-ink: oklch(0.82 0.11 150); --sage-line: oklch(0.42 0.06 150);
+    --warn-ink: oklch(0.85 0.10 65); --warn-line: oklch(0.45 0.07 55);
+    --danger-ink: oklch(0.76 0.14 28);
+    --accent-ink: oklch(0.84 0.09 255); --accent-line: oklch(0.42 0.07 255);
+    --glow: 0.07;
+    --person-bg: oklch(0.32 0.06 20); --person-ink: oklch(0.86 0.08 20); --person-line: oklch(0.42 0.07 20);
+    --mark-bg-l: 0.30; --mark-line-l: 0.42; --mark-ink-l: 0.88;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background: var(--bg); color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif; font-size: 14px; line-height: 1.45;
+    -webkit-font-smoothing: antialiased; }
+  body { min-height: 100vh; overflow: hidden; }
+  .serif { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.01em; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+  input, textarea { font: inherit; color: inherit; }
+  ::selection { background: var(--accent-soft); }
+  a { color: var(--accent); } a:hover { color: oklch(0.45 0.18 255); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+  button:disabled { cursor: default; }
+  button { transition: transform 120ms cubic-bezier(.2,.7,.3,1); }
+  button:not(:disabled):active { transform: scale(0.97); }
+  @keyframes badgePop { 0% { transform: scale(1) } 40% { transform: scale(1.35) } 100% { transform: scale(1) } }
+  @keyframes tabIn { from { opacity: 0; transform: translateY(6px) } to { opacity: 1; transform: none } }
+  .fx-tab { animation: tabIn 220ms cubic-bezier(.2,.7,.3,1) both; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .fx-noscroll { scrollbar-width: none; } .fx-noscroll::-webkit-scrollbar { display: none; }
+  @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+  @keyframes sheetUp { from { transform: translateY(100%) } to { transform: none } }
+  @keyframes riseIn { from { transform: translateY(12px); opacity: 0 } to { transform: none; opacity: 1 } }
+  @keyframes drawerIn { from { transform: translateX(40px); opacity: 0 } to { transform: none; opacity: 1 } }
+  @keyframes toastIn { from { opacity: 0; transform: translateY(12px) } to { opacity: 1 } }
+  @keyframes micPulse { 0% { box-shadow: 0 0 0 0 oklch(0.55 0.15 255 / .35) } 100% { box-shadow: 0 0 0 12px oklch(0.55 0.15 255 / 0) } }
+  @keyframes shimmer { from { background-position: -200px 0 } to { background-position: 200px 0 } }
+  @keyframes scan { from { top: 0 } to { top: calc(100% - 3px) } }
+  .fx-shimmer { background: linear-gradient(90deg, var(--bg-sunk) 0, var(--line) 50%, var(--bg-sunk) 100%); background-size: 400px 100%; animation: shimmer 1.1s linear infinite; }
+  .fx-scan { position: absolute; left: 0; right: 0; height: 3px; background: var(--accent); box-shadow: 0 0 18px 6px oklch(0.55 0.18 255 / 0.35); animation: scan 850ms ease-in-out infinite alternate; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; scroll-behavior: auto !important; } }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#f7f5f0">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#f7f5f0"/>
+    <circle cx="600" cy="340" r="120" fill="none" stroke="#5b86d9" stroke-width="14"/>
+    <path d="M600 250 v60 M600 370 v60 M510 340 h60 M630 340 h60 M540 280 l42 42 M660 400 l-42-42 M540 400 l42-42 M660 280 l-42 42" stroke="#5b86d9" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="600" cy="340" r="44" fill="#5b86d9"/>
+    <text x="600" y="560" font-family="Georgia, serif" font-size="92" fill="#2b2723" text-anchor="middle">AI Shopper</text>
+    <text x="600" y="620" font-family="system-ui, sans-serif" font-size="34" fill="#8a8278" text-anchor="middle">Tu concierge de la compra</text>
+  </svg>
+</template>
+<div id="root"></div>
+
+<script>
+  // Tweakable defaults — host persists these when edit mode changes keys.
+  window.__TWEAKS = /*EDITMODE-BEGIN*/{
+    "entryMode": "chat",
+    "language": "es",
+    "compareView": "shelf",
+    "accent": "indigo",
+    "density": "comfortable",
+    "viewMode": "mobile",
+    "storeLogos": "favicons",
+    "handoff": "cart"
+  }/*EDITMODE-END*/;
+</script>
+
+<script type="text/babel" src="src/data.jsx"></script>
+<script type="text/babel" src="src/i18n.jsx"></script>
+<script type="text/babel" src="src/ui.jsx"></script>
+<script type="text/babel" src="src/features-data.jsx"></script>
+<script type="text/babel" src="src/catalog-xl.jsx"></script>
+<script type="text/babel" src="src/features-ui.jsx"></script>
+<script type="text/babel" src="src/features-sheets.jsx"></script>
+<script type="text/babel" src="src/features-you.jsx"></script>
+<script type="text/babel" src="src/features-browse.jsx"></script>
+<script type="text/babel" src="src/ux.jsx"></script>
+<script type="text/babel" src="src/ux2.jsx"></script>
+<script type="text/babel" src="src/ux3.jsx"></script>
+<script type="text/babel" src="src/ux4.jsx"></script>
+<script type="text/babel" src="src/ux5.jsx"></script>
+<script type="text/babel" src="src/ux6.jsx"></script>
+<script type="text/babel" src="src/chat.jsx"></script>
+<script type="text/babel" src="src/basket.jsx"></script>
+<script type="text/babel" src="src/compare.jsx"></script>
+<script type="text/babel" src="src/checkout.jsx"></script>
+<script type="text/babel" src="src/tweaks.jsx"></script>
+<script type="text/babel" src="src/tour.jsx"></script>
+<script type="text/babel" src="src/mobile.jsx"></script>
+<script type="text/babel" src="src/web.jsx"></script>
+<script type="text/babel" src="src/app.jsx"></script>
+</body>
+</html>
