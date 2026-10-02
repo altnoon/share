@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>aishopper · Dime qué vas a cocinar</title>
+<meta name="description" content="Dime qué vas a cocinar. Te digo dónde sale más barato. 7 supers comparados en tu código postal, envío incluido.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:oklch(0.985 0.004 85);--bg-panel:oklch(0.995 0.003 85);--bg-sunk:oklch(0.965 0.006 85);--ink:oklch(0.20 0.012 60);--ink-2:oklch(0.42 0.012 60);--ink-3:oklch(0.52 0.010 60);--line:oklch(0.91 0.006 70);--line-2:oklch(0.94 0.005 70);--accent:oklch(0.55 0.18 255);--accent-ink:oklch(0.40 0.14 255);--sage:oklch(0.58 0.10 150);--sage-soft:oklch(0.93 0.05 150);--sage-ink:oklch(0.40 0.10 150);--sage-line:oklch(0.85 0.05 150)}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.015em}.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+a{color:var(--accent-ink)}a:hover{color:var(--accent)}p{margin:0;text-wrap:pretty}h1,h2{margin:0;text-wrap:balance}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0;transition:transform 120ms cubic-bezier(.2,.7,.3,1)}button:active{transform:scale(.97)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{font-size:17px;font-weight:600;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--bg-panel);gap:2px}
+.seg button{padding:5px 12px;border-radius:999px;font-size:12.5px;color:var(--ink-3);font-weight:500}.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:48px;align-items:center;padding:28px 0 72px}
+.kick{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3)}
+h1{font-size:clamp(40px,5.4vw,66px);line-height:1.0;margin-top:12px}h1 i{color:var(--ink-3)}
+.lead{font-size:19px;color:var(--ink-2);margin-top:22px;max-width:30em}
+.cta{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--bg);text-decoration:none;padding:15px 22px;border-radius:14px;font-weight:500;font-size:16px;min-height:52px}.cta:hover{color:var(--bg);background:oklch(0.28 0.012 60)}
+.ctarow{display:flex;align-items:center;gap:16px;margin-top:30px;flex-wrap:wrap}.sub{font-size:13.5px;color:var(--ink-3)}
+.phone{position:relative;width:330px;max-width:100%;aspect-ratio:330/680;border-radius:46px;background:oklch(0.17 0.01 60);padding:10px;box-shadow:0 30px 80px oklch(0.2 0.01 60/.22),inset 0 0 0 1.5px oklch(0.35 0.01 60);justify-self:end}
+.phone .scr{width:100%;height:100%;border-radius:38px;overflow:hidden;background:var(--bg);position:relative}
+.phone iframe{width:100%;height:100%;border:0;display:block}
+.phone .notch{position:absolute;top:18px;left:50%;transform:translateX(-50%);width:96px;height:26px;border-radius:999px;background:oklch(0.17 0.01 60);z-index:2}
+.live{position:absolute;bottom:-34px;left:0;right:0;text-align:center;font-size:12.5px;color:var(--ink-3)}.live b{color:var(--sage-ink);font-weight:500}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:0 0 72px}
+.fact{border:1px solid var(--line);border-radius:16px;padding:22px 24px;background:var(--bg-panel)}.fact .n{font-size:40px;line-height:1}.fact .l{color:var(--ink-2);margin-top:8px;font-size:15px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;padding:0 0 80px;align-items:start}
+h2{font-size:30px;line-height:1.1}
+.reply{margin-top:18px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,var(--bg-panel),var(--bg-sunk));padding:18px 20px;display:flex;flex-direction:column;gap:12px;font-size:15px;max-width:30em;position:relative;overflow:hidden}
+.reply::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(360px 140px at 90% 0%,oklch(0.96 0.04 150/.7),transparent 70%)}
+.reply>*{position:relative}.reply .k{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--sage-ink);font-weight:600}
+.reply .tot{font-size:30px;line-height:1.05}.reply .sv{color:var(--sage-ink);font-weight:500}.reply .ch{color:var(--ink-2);font-size:14px;border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:4px}
+.reply .ch span{display:block}.reply .run{font-size:13px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:10px}.reply .run b{color:var(--ink);font-weight:500}
+.ex{font-size:12px;color:var(--ink-3);margin-top:10px}
+ul{margin:16px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}li{color:var(--ink-2);display:flex;gap:12px;align-items:flex-start;font-size:16px}li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--sage);margin-top:9px}
+.gap{margin-top:36px}
+.close{border-top:1px solid var(--line);padding:56px 0 64px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:center}
+.close h2{font-size:clamp(30px,4vw,44px)}.alt{font-size:14px;color:var(--ink-3);margin-top:14px}
+footer{padding:0 0 40px;font-size:13px;color:var(--ink-3);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:900px){.hero{grid-template-columns:1fr;gap:56px;padding-bottom:88px}.phone{justify-self:center;width:300px}.facts{grid-template-columns:1fr}.two{grid-template-columns:1fr;gap:44px}.close{grid-template-columns:1fr}}
+@media(max-width:520px){.wrap{padding:0 18px}.lead{font-size:17px}.cta{width:100%;justify-content:center}}
+</style></head>
+<body>
+<div class="wrap">
+<nav><a class="logo" href="#">aishopper</a><div class="seg" role="group" aria-label="Idioma"><button data-lang="es" aria-pressed="true">ES</button><button data-lang="en" aria-pressed="false">EN</button></div></nav>
+
+<section class="hero">
+<div>
+<div class="kick" data-es="aishopper · prueba de 4 semanas" data-en="aishopper · 4-week trial">aishopper · prueba de 4 semanas</div>
+<h1 class="serif"><span data-es="Dime qué vas a cocinar." data-en="Tell me what you’re cooking.">Dime qué vas a cocinar.</span><br><i data-es="Te digo dónde sale más barato." data-en="I’ll tell you where it’s cheapest.">Te digo dónde sale más barato.</i></h1>
+<p class="lead" data-es="Dices lo que vas a cocinar, como te salga: «paella y lentejas esta semana». Te devuelvo el súper más barato para esa cesta, con el total exacto y qué cambiar para ahorrar. Tú compras donde quieras." data-en="Say what you’re cooking, any way you like: “paella and lentils this week”. I return the cheapest supermarket for that basket, with the exact total and what to swap to save. You buy wherever you want.">Dices lo que vas a cocinar, como te salga: «paella y lentejas esta semana». Te devuelvo el súper más barato para esa cesta, con el total exacto y qué cambiar para ahorrar. Tú compras donde quieras.</p>
+<div class="ctarow"><a class="cta" href="/aishopper-app" data-app><span data-es="Abrir la app" data-en="Open the app">Abrir la app</span> →</a><span class="sub" data-es="Nada que instalar. Sin registro." data-en="Nothing to install. No sign-up.">Nada que instalar. Sin registro.</span></div>
+</div>
+<div class="phone"><div class="notch"></div><div class="scr"><iframe title="aishopper app" src="/aishopper-app" data-app loading="eager"></iframe></div><div class="live"><b>●</b> <span data-es="La app, en vivo. Pruébala aquí mismo." data-en="The live app. Try it right here.">La app, en vivo. Pruébala aquí mismo.</span></div></div>
+</section>
+
+<section class="facts">
+<div class="fact"><div class="n serif">7</div><div class="l" data-es="supers comparados en tu código postal, envío incluido" data-en="supermarkets compared in your postcode, delivery included">supers comparados en tu código postal, envío incluido</div></div>
+<div class="fact"><div class="n serif" data-es="Al momento" data-en="Instant">Al momento</div><div class="l" data-es="la respuesta, siempre con el mismo formato" data-en="answers, always in the same format">la respuesta, siempre con el mismo formato</div></div>
+<div class="fact"><div class="n serif">0 €</div><div class="l" data-es="durante 4 semanas, a cambio de tu opinión" data-en="for 4 weeks, in exchange for your opinion">durante 4 semanas, a cambio de tu opinión</div></div>
+</section>
+
+<section class="two">
+<div>
+<h2 class="serif" data-es="Así es una respuesta" data-en="What an answer looks like">Así es una respuesta</h2>
+<div class="reply" aria-label="Ejemplo de respuesta">
+<div class="k" data-es="Tu cesta · 14 productos" data-en="Your basket · 14 items">Tu cesta · 14 productos</div>
+<div><div class="tot serif"><span data-es="Mejor opción: Lidl · 47,30 €" data-en="Best option: Lidl · 47,30 €">Mejor opción: Lidl · 47,30 €</span></div><div class="sub" data-es="envío incluido" data-en="delivery included">envío incluido</div></div>
+<div class="sv" data-es="6,15 € menos que en Mercadona" data-en="6,15 € less than at Mercadona">6,15 € menos que en Mercadona</div>
+<div class="ch"><span data-es="Cambios que he hecho (dime si no):" data-en="Swaps I made (tell me if not):">Cambios que he hecho (dime si no):</span><span data-es="· Leche entera → marca blanca (−0,84 €)" data-en="· Whole milk → own brand (−0,84 €)">· Leche entera → marca blanca (−0,84 €)</span><span data-es="· Arroz: 2 paquetes para 6 comensales" data-en="· Rice: 2 packs for 6 people">· Arroz: 2 paquetes para 6 comensales</span></div>
+<div class="run" data-es="Llevas <b>18,40 €</b> ahorrados desde que empezaste." data-en="You’ve saved <b>18,40 €</b> since you started.">Llevas <b>18,40 €</b> ahorrados desde que empezaste.</div>
+</div>
+<div class="ex" data-es="Ejemplo. Los precios reales dependen de tu cesta y tu código postal." data-en="Example. Real prices depend on your basket and postcode.">Ejemplo. Los precios reales dependen de tu cesta y tu código postal.</div>
+</div>
+<div>
+<h2 class="serif" data-es="Para quién" data-en="Who it’s for">Para quién</h2>
+<ul>
+<li data-es="Vives en Madrid (28004 o cercano) y compras al menos una vez por semana." data-en="You live in Madrid (28004 or nearby) and shop at least once a week.">Vives en Madrid (28004 o cercano) y compras al menos una vez por semana.</li>
+<li data-es="Miras precios en más de un súper, aunque sea a veces." data-en="You check prices at more than one supermarket, even if only sometimes.">Miras precios en más de un súper, aunque sea a veces.</li>
+<li data-es="Si prefieres WhatsApp, también vale como canal." data-en="If you prefer WhatsApp, that works as a channel too.">Si prefieres WhatsApp, también vale como canal.</li>
+</ul>
+<h2 class="serif gap" data-es="Qué te pedimos" data-en="What we ask">Qué te pedimos</h2>
+<ul>
+<li data-es="Mandar la lista cuando toque comprar, sin cambiar tus hábitos." data-en="Send the list when it’s time to shop, without changing your habits.">Mandar la lista cuando toque comprar, sin cambiar tus hábitos.</li>
+<li data-es="Una llamada de 10 minutos al final." data-en="One 10-minute call at the end.">Una llamada de 10 minutos al final.</li>
+</ul>
+</div>
+</section>
+
+<section class="close">
+<div><h2 class="serif"><span data-es="Dime qué vas a cocinar." data-en="Tell me what you’re cooking.">Dime qué vas a cocinar.</span></h2><p class="alt" data-es="O responde «me apunto» al mensaje · aishopper.es" data-en="Or reply “me apunto” to the message · aishopper.es">O responde «me apunto» al mensaje · aishopper.es</p></div>
+<a class="cta" href="/aishopper-app" data-app><span data-es="Abrir la app" data-en="Open the app">Abrir la app</span> →</a>
+</section>
+<footer><span>aishopper · Madrid</span><span class="mono">aishopper.es</span></footer>
+</div>
+<script>
+(function(){
+var local=/\.html$/.test(location.pathname)||location.protocol==='file:'||!/alternoon/.test(location.host);
+if(local)document.querySelectorAll('[data-app]').forEach(function(e){if(e.tagName==='IFRAME')e.src='AI Shopper.html';else e.href='AI Shopper.html';});
+var key='aishopper-home-lang',lang=localStorage.getItem(key)||'es';
+function apply(l){lang=l;document.documentElement.lang=l;document.querySelectorAll('[data-es]').forEach(function(e){e.innerHTML=e.getAttribute('data-'+l);});document.querySelectorAll('[data-lang]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.lang===l));});localStorage.setItem(key,l);}
+document.querySelectorAll('[data-lang]').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang);});});
+if(lang!=='es')apply(lang);
+})();
+</script>
+</body></html>
