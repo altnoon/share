@@ -437,7 +437,7 @@ function App() {
           {content}
         </div>
       )}
-      {!useWeb && <ViewToggle tweaks={tweaks} setTweaks={setTweaks}/>}
+      {!useWeb && vw >= 720 && <ViewToggle tweaks={tweaks} setTweaks={setTweaks}/>}
       <TweaksPanel open={tweaksOpen} tweaks={tweaks} setTweaks={setTweaks}/>
     </>
   );
