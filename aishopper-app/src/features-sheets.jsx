@@ -475,6 +475,8 @@ function FeatureOverlays({ variant }) {
     if (o.type === 'micprime') el = <MicPrimeSheet {...props}/>;
     if (o.type === 'shortcuts') el = <ShortcutsSheet {...props}/>;
     if (o.type === 'handoff') el = <HandoffSheet {...props}/>;
+    if (o.type === 'feedback') el = <FeedbackSheet {...props}/>;
+    if (o.type === 'missing') el = <MissingSheet {...props}/>;
     if (o.type === 'you' && variant === 'web') el = <WebYouDrawer onClose={close}/>;
   }
   return <>{el}<OfflineBanner variant={variant}/><FxToast variant={variant}/></>;

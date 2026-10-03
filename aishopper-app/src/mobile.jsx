@@ -198,6 +198,7 @@ function MobileTopBar({ lang, tab, winner, basket, onRestart, started, calculati
         })()}
         {tab === 'chat' && !started && <SavingsPill onOpen={() => window.dispatchEvent(new Event('ai-go-you'))}/>}
         {tab !== 'you' && <InboxButton size={34} radius={12}/>}
+        {tab !== 'you' && <FeedbackButton compact/>}
         {started && (
           <button onClick={onRestart} title={tr('restart', lang)} aria-label={tr('restart', lang)} style={{
             width: 34, height: 34, borderRadius: 12,
@@ -311,6 +312,7 @@ function MobileChatView({
         display:'flex', flexDirection:'column', gap: 12,
       }}>
         {!started && <WeeklyCard/>}
+        {!started && <ReturnCard onSend={onUserSend}/>}
         {!started && <FirstRunCoach onSend={onUserSend}/>}
         {!started && <MobileEmptyState lang={lang} onStart={onStartScenario} onUserSend={onUserSend} onTour={onTour}/>}
         {messages.map((m, i) => <Message key={i} msg={m} lang={lang} onQuickReply={onQuickReply}/>)}
@@ -585,7 +587,7 @@ function MobileStoreLadder({ lang, storeTotals, winner, basket, appliedSubs, cal
                     </div>
                     <div style={{ fontSize: 11.5, color:'var(--ink-3)', marginTop: 1, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>
                       {store.eta} · {s.shipping === 0 ? tr('freeShipping', lang) : `+${eur(s.shipping)} ${tr('shipping', lang)}`}
-                      {missing.length > 0 && <span style={{ color:'var(--warn-ink)' }}> · {L(lang, `faltan ${missing.length}`, `${missing.length} missing`)}</span>}
+                      {missing.length > 0 && <span role="button" tabIndex={0} onClick={e => { e.stopPropagation(); track('delivery_checked', { missing_n: missing.length, store: s.id }); ctx.openOverlay('missing', { storeId: s.id }); }} onKeyDown={e => { if (e.key === 'Enter') { e.stopPropagation(); ctx.openOverlay('missing', { storeId: s.id }); } }} style={{ color:'var(--warn-ink)', textDecoration:'underline', textDecorationStyle:'dotted', textUnderlineOffset: 2, cursor:'pointer' }}> · {L(lang, `faltan ${missing.length}`, `${missing.length} missing`)}</span>}
                     </div>
                   </div>
                   {loading ? <div className="fx-shimmer" style={{ width: 64, height: 22, borderRadius: 6 }}></div> : (

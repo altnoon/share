@@ -228,6 +228,7 @@ function WebTopBar({ lang, started, basket, onRestart, pref, winner, onSwitchVie
         <ActiveOrderPill/>
         <SavingsPill onOpen={() => ctx.openOverlay('you')}/>
         <InboxButton/>
+        <FeedbackButton/>
         <button onClick={onTour} style={{
           height: 32, padding: '0 12px 0 6px', borderRadius: 8,
           background:'var(--bg-sunk)', border:'1px solid var(--line-2)', color:'var(--ink)',
@@ -324,6 +325,7 @@ function WebEmptyCenter({ lang, onStart, started }) {
         )}
 
         <div style={{ marginTop: 20, textAlign:'left', display:'flex', flexDirection:'column', gap: 14 }}>
+          <ReturnCard/>
           <FirstRunCoach onSend={(t) => window.__aiSend && window.__aiSend(t)}/>
           <TeachEmpty/>
         </div>

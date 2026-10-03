@@ -63,6 +63,7 @@ function App() {
         if (saved.alerts) setAlerts(saved.alerts);
       }
       if (!(saved && saved.profile && saved.profile.onboarded)) setOverlay({ type: 'onboarding', data: { quick: true } });
+      track('app_opened', { first_ever: !saved, source: new URLSearchParams(location.search).get('from') || 'organic' });
     } catch(e){}
   }, []);
   useEffect(() => {
@@ -108,6 +109,7 @@ function App() {
       return [...prev, it];
     });
   };
+  const updateProfileSilently = () => { setProfile(p => ({ ...p, onboarded: true })); setOverlay(null); };
   const notify = (text, undo) => setNotice(text ? { text, undo, k: Date.now() } : null);
   // Undo instead of confirm: snapshot → apply → toast with Deshacer.
   const snapB = () => ({ basket, appliedSubs });
@@ -182,6 +184,7 @@ function App() {
       setMessages([]); setBasket([]); setAppliedSubs([]); setPref(null); setMemory([]); setScenarioIdx(0); setRunning(true);
     },
     handleUserSend: (text, fromQueue) => {
+      track('request_sent', { input: 'text', queued_offline: !!(offline && !fromQueue) });
       if (offline && !fromQueue) { setMessages(m => [...m, { type:'user', text:{ es:text, en:text }, queued: true }]); return; }
       setMessages(m => [...(fromQueue ? m.map(x => x.queued && x.text.es === text ? { ...x, queued: false } : x) : [...m, { type:'user', text:{ es:text, en:text } }]), { type:'parsing' }]);
       setTimeout(() => {
@@ -319,6 +322,9 @@ function App() {
 
   const state = { messages, basket, appliedSubs, pref, memory, calculating, storeTotals, winner, started };
   window.__aiSend = actions.handleUserSend;
+  // pick_shown once per basket change; landing handoff (?say=) after onboarding is done
+  useEffect(() => { if (winner) track('pick_shown', { store: winner.id, total: winner.total, saving_vs_next: storeTotals[1] ? Math.round((storeTotals[1].total - winner.total) * 100) / 100 : 0 }); }, [winner && winner.id, basket.length]);
+  useLandingHandoff((t) => { if (!profile.onboarded) updateProfileSilently(); actions.handleUserSend(t); }, true);
 
   const tg = (arr, v) => arr.includes(v) ? arr.filter(x => x !== v) : [...arr, v];
   const ctx = {
@@ -352,6 +358,7 @@ function App() {
     inviteMember: (name) => {
       const hue = (name.length * 47) % 360;
       setShared(s => ({ ...s, on: true, members: [...(s.members || []), { name, joined: false, hue }] }));
+      track('household_invited', { context: 'share_sheet' });
       notify(L(lang, `Invitación enviada a ${name}`, `Invite sent to ${name}`), () => setShared(s => ({ ...s, members: (s.members || []).filter(m => m.name !== name) })));
       setTimeout(() => setShared(s => ({ ...s, members: (s.members || []).map(m => m.name === name ? { ...m, joined: true } : m) })), 3000);
     },
@@ -378,6 +385,7 @@ function App() {
       const saved = Math.round((basketAt(items, usual) - (total - slot.fee)) * 100) / 100;
       const rules = Object.fromEntries(items.map(b => [b.id, oosRuleOf(profile, b.id)]));
       const o = { id: 'o-' + Math.random().toString(36).slice(2, 6), date: { es: 'Hoy', en: 'Today' }, stores, total, slot, items, placedAt: Date.now(), usual, saved, rules };
+      track('checkout_handed_off', { stores, total, split: stores.length > 1, saving_vs_usual: saved });
       setActiveOrder(o); setNow(Date.now());
       setOrders(os => [o, ...os]);
       setBasket([]); setAppliedSubs([]);

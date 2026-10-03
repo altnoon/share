@@ -4,7 +4,7 @@
 function FirstRunCoach({ onSend }) {
   const ctx = React.useContext(AppCtx); const lang = ctx.lang;
   const asked = ctx.profile.asked || {};
-  if (!ctx.profile.onboarded || asked.firstHint || ctx.state.started) return null;
+  if (!ctx.profile.onboarded || asked.firstHint || ctx.state.started || (ctx.orders || []).some(o => o.placedAt)) return null;
   const n = ctx.profile.household || 4;
   const ex = L(lang, `Paella para ${n}`, `Paella for ${n}`);
   return (
