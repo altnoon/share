@@ -241,6 +241,8 @@ function ShareSheet({ variant, onClose }) {
   const msg = (ctx.basket.length ? ctx.basket.map(b => `• ${CATALOG[b.id].name[lang]} ×${b.qty}`).join('\n') : L(lang,'(cesta vacía)','(empty basket)'));
   const copy = () => { try { navigator.clipboard.writeText('https://' + link); } catch (e) {} setCopied(true); setTimeout(() => setCopied(false), 1800); };
   const sh = ctx.shared;
+  const [who, setWho] = useState('');
+  const invite = () => { const n = who.trim(); if (!n) return; ctx.inviteMember(n); setWho(''); };
   return (
     <Sheet variant={variant} onClose={onClose} kicker={L(lang,'Compartir','Share')} title={L(lang,'Cesta familiar','Household basket')}>
       <div style={{ display:'flex', alignItems:'center', gap: 12, padding:'12px 14px', borderRadius: 12, border:'1px solid var(--line-2)', marginBottom: 14 }}>
@@ -262,6 +264,10 @@ function ShareSheet({ variant, onClose }) {
               <MemberRole m={m}/>
             </div>
           ))}
+          <form onSubmit={e => { e.preventDefault(); invite(); }} style={{ display:'flex', gap: 8, marginTop: 8 }}>
+            <input value={who} onChange={e => setWho(e.target.value)} placeholder={L(lang,'Nombre o móvil','Name or phone')} aria-label={L(lang,'Invitar a alguien','Invite someone')} style={{ flex: 1, minHeight: 40, padding:'0 12px', borderRadius: 10, border:'1px solid var(--line)', background:'var(--bg-sunk)', fontSize: 13, outline:'none' }}/>
+            <button type="submit" disabled={!who.trim()} style={{ ...fxBtnGhost, minHeight: 40, opacity: who.trim() ? 1 : 0.5 }}>{L(lang,'Invitar','Invite')}</button>
+          </form>
         </div>
       )}
       <div style={{ ...fxKicker, marginBottom: 6 }}>{L(lang,'Vista previa en WhatsApp','WhatsApp preview')}</div>

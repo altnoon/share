@@ -349,6 +349,12 @@ function App() {
       if (r) notify(L(lang, `Le digo a ${r.by} que esta vez no`, `I’ll tell ${r.by} not this time`), () => setShared(s => ({ ...s, pending: [...(s.pending || []), r] })));
     },
     setMemberRole: (name, role) => setShared(s => ({ ...s, members: (s.members || []).map(m => m.name === name ? { ...m, role } : m) })),
+    inviteMember: (name) => {
+      const hue = (name.length * 47) % 360;
+      setShared(s => ({ ...s, on: true, members: [...(s.members || []), { name, joined: false, hue }] }));
+      notify(L(lang, `Invitación enviada a ${name}`, `Invite sent to ${name}`), () => setShared(s => ({ ...s, members: (s.members || []).filter(m => m.name !== name) })));
+      setTimeout(() => setShared(s => ({ ...s, members: (s.members || []).map(m => m.name === name ? { ...m, joined: true } : m) })), 3000);
+    },
     markAsked: (k) => setProfile(p => ({ ...p, asked: { ...(p.asked || {}), [k]: true } })),
     openHistory: (id) => setOverlay({ type: 'history', data: { id } }),
     addAlert: (id, threshold) => {

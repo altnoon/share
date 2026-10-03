@@ -44,7 +44,8 @@ function TweaksPanel({ open, tweaks, setTweaks }) {
       </TweakRow>
 
       <TweakRow label={tr('compareView', lang)}>
-        <Segment size="sm" value={tweaks.compareView} onChange={v => set('compareView', v)} options={[
+        <Segment size="sm" value={tweaks.compareView || 'ladder'} onChange={v => set('compareView', v)} options={[
+          { value:'ladder', label: lang === 'es' ? 'Ranking' : 'Ranking' },
           { value:'shelf', label: tr('shelf', lang) },
           { value:'bars', label: tr('bars', lang) },
           { value:'table', label: tr('table', lang) },

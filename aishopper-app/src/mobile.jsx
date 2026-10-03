@@ -549,20 +549,20 @@ function MobileWinnerCard({ lang, winner, storeTotals, onCheckout }) {
 }
 
 // Ranked ladder: every store visible at a glance, price bar inline, tap a row for detail.
-function MobileStoreLadder({ lang, storeTotals, winner, basket, appliedSubs, calculating }) {
+function MobileStoreLadder({ lang, storeTotals, winner, basket, appliedSubs, calculating, bare }) {
   const ctx = React.useContext(AppCtx);
   const fav = (ctx.profile && ctx.profile.fav) || [];
-  const [all, setAll] = useState(false);
+  const [all, setAll] = useState(!!bare);
   const [sel, setSel] = useState(null);
   const min = storeTotals[0].total, max = storeTotals[storeTotals.length - 1].total;
   const rows = all ? storeTotals : storeTotals.slice(0, 3);
   const rest = storeTotals.length - 3;
   return (
-    <div style={{ marginTop: 18 }}>
-      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom: 8 }}>
+    <div style={{ marginTop: bare ? 0 : 18 }}>
+      {!bare && <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom: 8 }}>
         <div style={{ fontSize: 13, fontWeight: 600, letterSpacing:'-0.005em' }}>{L(lang, `Los ${storeTotals.length} supers`, `All ${storeTotals.length} stores`)}</div>
         <div style={{ fontSize: 11, color:'var(--ink-3)' }}>{L(lang, 'misma cesta · con envío', 'same basket · incl. delivery')}</div>
-      </div>
+      </div>}
       <div role="list" style={{ display:'flex', flexDirection:'column', gap: 6 }}>
         {rows.map((s, i) => {
           const store = STORES.find(x => x.id === s.id);
@@ -622,7 +622,7 @@ function MobileStoreLadder({ lang, storeTotals, winner, basket, appliedSubs, cal
           );
         })}
       </div>
-      {rest > 0 && (
+      {rest > 0 && !bare && (
         <button onClick={() => setAll(a => !a)} aria-expanded={all} style={{ ...fxBtnGhost, background:'transparent', width:'100%', justifyContent:'center', marginTop: 6, minHeight: 44 }}>
           <span style={{ display:'inline-flex', transform: all ? 'rotate(180deg)' : 'none', transition:'transform 160ms' }}><Icon name="down" size={12}/></span>
           {all ? L(lang, 'Ver menos', 'Show less') : L(lang, `Ver los ${rest} restantes`, `See the other ${rest}`)}
@@ -1023,4 +1023,4 @@ function MobileCheckoutSheet({ lang, winner, basket, storeTotals, appliedSubs, o
   );
 }
 
-Object.assign(window, { MobileApp, MobileYouView });
+Object.assign(window, { MobileApp, MobileYouView, MobileStoreLadder });

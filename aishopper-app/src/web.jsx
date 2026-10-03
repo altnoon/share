@@ -6,18 +6,18 @@ function WebApp({ tweaks, setTweaks, state, actions }) {
   const lang = tweaks.language;
   const [checkout, setCheckout] = useState(false);
   const [tour, setTour] = useState(false);
-  const [compareView, setCompareView] = useState(tweaks.compareView || 'shelf');
+  const [compareView, setCompareView] = useState(tweaks.compareView || 'ladder');
   useEffect(() => { const k = () => setCheckout(true); window.addEventListener('ai-open-checkout', k); return () => window.removeEventListener('ai-open-checkout', k); }, []);
 
   // Keep compareView in sync with tweaks
-  useEffect(() => { setCompareView(tweaks.compareView || 'shelf'); }, [tweaks.compareView]);
+  useEffect(() => { setCompareView(tweaks.compareView || 'ladder'); }, [tweaks.compareView]);
 
   const { messages, basket, appliedSubs, pref, memory, calculating, storeTotals, winner, started } = state;
 
   const [cw, setCw] = useState(typeof window !== 'undefined' ? window.innerWidth : 1400);
   useEffect(() => { const on = () => setCw(window.innerWidth); window.addEventListener('resize', on); return () => window.removeEventListener('resize', on); }, []);
   const narrow = cw < 1200;
-  const views = ['shelf', 'bars', 'table'];
+  const views = ['ladder', 'shelf', 'bars', 'table'];
   useWebShortcuts({ onCycleView: () => setCompareView(v => views[(views.indexOf(v) + 1) % views.length]), onCheckout: () => setCheckout(true) });
 
   return (

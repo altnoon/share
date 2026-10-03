@@ -2,7 +2,7 @@
 // Bar race on recalculation. Signature savings reveal uses AnimatedNumber + serif numerals.
 
 function ComparePane({ lang, basket, pref, appliedSubs, storeTotals, winner, compareView, calculating, onCheckout, onViewChange }) {
-  const [open, setOpen] = useState(false);
+  const view = compareView || 'ladder';
   return (
     <div style={{ display:'flex', flexDirection:'column', gap: 14 }}>
       {calculating && !winner && (
@@ -17,24 +17,27 @@ function ComparePane({ lang, basket, pref, appliedSubs, storeTotals, winner, com
         </>
       )}
 
-      {basket.length > 0 && (
-        <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap: 12, flexWrap:'wrap' }}>
-          <OthersToggle open={open} onToggle={() => setOpen(o => !o)} count={storeTotals.length - 1}/>
-          {open && (
-            <Segment value={compareView} onChange={onViewChange} size="sm" options={[
-              { value: 'shelf', label: tr('shelf', lang) },
-              { value: 'bars',  label: tr('bars', lang) },
-              { value: 'table', label: tr('table', lang) },
-            ]}/>
-          )}
+      {winner && basket.length > 0 && (
+        <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', gap: 12, flexWrap:'wrap', marginTop: 4 }}>
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 600 }}>{L(lang, `Los ${storeTotals.length} supers`, `All ${storeTotals.length} stores`)}</div>
+            <div style={{ fontSize: 11, color:'var(--ink-3)', marginTop: 1 }}>{L(lang, 'misma cesta · con envío · tu CP', 'same basket · incl. delivery · your postcode')}</div>
+          </div>
+          <Segment value={view} onChange={onViewChange} size="sm" options={[
+            { value: 'ladder', label: L(lang, 'Ranking', 'Ranking') },
+            { value: 'shelf', label: tr('shelf', lang) },
+            { value: 'bars',  label: tr('bars', lang) },
+            { value: 'table', label: tr('table', lang) },
+          ]}/>
         </div>
       )}
 
-      {basket.length > 0 && open && (
+      {winner && basket.length > 0 && (
         <>
-          {compareView === 'shelf' && <ShelfView lang={lang} storeTotals={storeTotals} winner={winner} calculating={calculating}/>}
-          {compareView === 'bars'  && <BarsView  lang={lang} storeTotals={storeTotals} winner={winner} calculating={calculating}/>}
-          {compareView === 'table' && <TableView lang={lang} storeTotals={storeTotals} winner={winner} basket={basket} appliedSubs={appliedSubs}/>}
+          {view === 'ladder' && <MobileStoreLadder lang={lang} storeTotals={storeTotals} winner={winner} basket={basket} appliedSubs={appliedSubs} calculating={calculating} bare/>}
+          {view === 'shelf' && <ShelfView lang={lang} storeTotals={storeTotals} winner={winner} calculating={calculating}/>}
+          {view === 'bars'  && <BarsView  lang={lang} storeTotals={storeTotals} winner={winner} calculating={calculating}/>}
+          {view === 'table' && <TableView lang={lang} storeTotals={storeTotals} winner={winner} basket={basket} appliedSubs={appliedSubs}/>}
         </>
       )}
       {winner && basket.length > 0 && <StoresAsk/>}
