@@ -9,9 +9,9 @@ function classNames(...xs) { return xs.filter(Boolean).join(' '); }
 
 // Official logos are loaded from logos/<store-id>.(svg|png|jpg|webp) when present; falls back to the letter mark.
 // Add a store here once its official file is in logos/, e.g. { merc: 'merc.svg' }. Others use the site favicon.
-const LOCAL_LOGOS = {};
+const LOCAL_LOGOS = { merc:'merc.png', carr:'carr.png', lidl:'lidl.png', dia:'dia.png', eci:'eci.png', amz:'amz.png', sco:'sco.png' };
 const STORE_DOMAINS = { merc:'mercadona.es', carr:'carrefour.es', lidl:'lidl.es', dia:'dia.es', eci:'elcorteingles.es', amz:'amazon.es', sco:'supercor.es' };
-const logoChain = (id) => [LOCAL_LOGOS[id] && `logos/${LOCAL_LOGOS[id]}`, window.__storeLogos === 'favicons' && `https://www.google.com/s2/favicons?domain=${STORE_DOMAINS[id]}&sz=256`].filter(Boolean);
+const logoChain = (id) => [LOCAL_LOGOS[id] && `assets/logos/${LOCAL_LOGOS[id]}`, window.__storeLogos === 'favicons' && `https://www.google.com/s2/favicons?domain=${STORE_DOMAINS[id]}&sz=256`].filter(Boolean);
 const logoCache = {};
 // Letter mark always renders underneath; the logo image sits on top only once it has actually loaded,
 // so a slow, blocked or broken image never shows alt text or a broken-image glyph.
@@ -33,7 +33,7 @@ function StoreMark({ store, size = 28 }) {
       {!showImg && <span className="serif" aria-hidden="true" style={{ color: `oklch(var(--mark-ink-l) 0.08 ${store.hue})`, fontSize: size * 0.55, lineHeight: 1 }}>{store.mark}</span>}
       {!failed && (
         <img src={chain[idx]} alt="" aria-hidden="true"
-          onLoad={(e) => { if (!chain[idx].startsWith('logos/') && e.currentTarget.naturalWidth < 24) { logoCache[store.id] = -1; setIdx(-1); return; } logoCache[store.id] = idx; setLoaded(true); }}
+          onLoad={(e) => { if (!chain[idx].startsWith('assets/logos/') && e.currentTarget.naturalWidth < 24) { logoCache[store.id] = -1; setIdx(-1); return; } logoCache[store.id] = idx; setLoaded(true); }}
           onError={() => { const n = idx + 1; if (n >= chain.length) logoCache[store.id] = -1; setLoaded(false); setIdx(n >= chain.length ? -1 : n); }}
           style={{ position: 'absolute', inset: '9%', width: '82%', height: '82%', objectFit: 'contain', display: 'block', opacity: loaded ? 1 : 0 }}/>
       )}
