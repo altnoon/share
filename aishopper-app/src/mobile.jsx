@@ -590,10 +590,10 @@ function MobileStoreLadder({ lang, storeTotals, winner, basket, appliedSubs, cal
                   </div>
                   {loading ? <div className="fx-shimmer" style={{ width: 64, height: 22, borderRadius: 6 }}></div> : (
                     <div style={{ textAlign:'right', flexShrink: 0 }}>
-                      <div className="serif" style={{ fontSize: 20, lineHeight: 1, color: isWinner ? 'var(--ink)' : 'var(--ink-2)', whiteSpace:'nowrap' }}>
-                        <AnimatedNumber value={s.total} decimals={2}/><span style={{ fontSize: 13, color:'var(--ink-3)', marginLeft: 2 }}>€</span>
+                      <div className="serif" style={{ fontSize: bare ? 26 : 22, lineHeight: 1, color:'var(--ink)', whiteSpace:'nowrap', fontVariantNumeric:'tabular-nums' }}>
+                        <AnimatedNumber value={s.total} decimals={2}/><span style={{ fontSize: bare ? 17 : 14, color:'var(--ink-2)', marginLeft: 3 }}>€</span>
                       </div>
-                      <div className="mono" style={{ fontSize: 11, marginTop: 4, color: isWinner ? 'var(--sage-ink)' : 'var(--ink-3)' }}>
+                      <div className="mono" style={{ display:'inline-block', fontSize: 11, marginTop: 5, padding:'2px 7px', borderRadius: 999, color: isWinner ? 'var(--sage-ink)' : 'var(--ink-2)', background: isWinner ? 'var(--sage-soft)' : 'var(--bg-panel)', border:`1px solid ${isWinner ? 'var(--sage-line)' : 'var(--line)'}` }}>
                         {isWinner ? L(lang, 'la más barata', 'cheapest') : '+' + eur(s.total - winner.total)}
                       </div>
                     </div>
