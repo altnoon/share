@@ -420,9 +420,9 @@ function RecipeCard({ recipeId, initialServings, src, lang, onReply }) {
             display:'flex', alignItems:'center', gap: 10,
             padding: '10px 14px', borderTop:'1px solid var(--line-2)', background:'var(--bg-sunk)',
           }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 11, color:'var(--ink-3)', textTransform:'uppercase', letterSpacing:'0.06em' }}>
-                {tr('estCost', lang)}
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: 11, color:'var(--ink-3)', textTransform:'uppercase', letterSpacing:'0.06em', whiteSpace:'nowrap' }}>
+                {L(lang, 'Aprox.', 'Approx.')}
               </div>
               <div className="serif" style={{ fontSize: 18, lineHeight: 1.1, marginTop: 1 }}>{eur(estCost)}</div>
             </div>
@@ -431,7 +431,7 @@ function RecipeCard({ recipeId, initialServings, src, lang, onReply }) {
               background: added ? 'var(--sage-soft)' : 'var(--ink)',
               color: added ? 'var(--sage-ink)' : 'var(--bg)',
               border: added ? '1px solid var(--sage-line)' : 'none',
-              fontSize: 13, fontWeight: 500,
+              fontSize: 13, fontWeight: 500, whiteSpace:'nowrap', flexShrink: 0, minHeight: 40,
               display:'inline-flex', alignItems:'center', gap: 7,
             }}>
               <Icon name={added ? 'check' : 'plus'} size={12}/>
