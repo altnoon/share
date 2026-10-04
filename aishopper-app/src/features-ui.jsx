@@ -1,7 +1,7 @@
 // Shared feature UI: sheet shell, quick tools, stock gaps, split basket, delivery slots, store status, toasts.
 const fxKicker = { fontSize: 11, color:'var(--ink-3)', textTransform:'uppercase', letterSpacing:'0.08em' };
-const fxBtnPrimary = { minHeight: 44, padding:'0 16px', borderRadius: 12, background:'var(--ink)', color:'var(--bg)', fontSize: 13, fontWeight: 500, display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 8 };
-const fxBtnGhost = { minHeight: 40, padding:'0 13px', borderRadius: 12, background:'var(--bg-panel)', color:'var(--ink)', border:'1px solid var(--line)', fontSize: 13, fontWeight: 500, display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 7 };
+const fxBtnPrimary = { minHeight: 44, padding:'0 16px', whiteSpace:'nowrap', borderRadius: 12, background:'var(--ink)', color:'var(--bg)', fontSize: 13, fontWeight: 500, display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 8 };
+const fxBtnGhost = { minHeight: 40, padding:'0 13px', whiteSpace:'nowrap', borderRadius: 12, background:'var(--bg-panel)', color:'var(--ink)', border:'1px solid var(--line)', fontSize: 13, fontWeight: 500, display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 7 };
 const fxCard = { padding: 16, borderRadius: 12, background:'var(--bg-panel)', border:'1px solid var(--line-2)' };
 
 function Sheet({ variant, onClose, kicker, title, children, footer, width = 560 }) {
@@ -95,7 +95,7 @@ function CoverageNote({ winner, basket, appliedSubs }) {
           const alt = STORES.filter(s => !(MISSING[s.id] || []).includes(b.id)).map(s => ({ s, c: itemCost(b, s.id, appliedSubs) })).sort((a, z) => a.c - z.c)[0];
           return (
             <div key={b.id} style={{ display:'flex', alignItems:'center', gap: 8, fontSize: 12, color:'var(--ink-2)' }}>
-              <span aria-hidden="true">{p.emoji}</span>
+              <PThumb id={b.id} size={24} radius={6}/>
               <span style={{ flex: 1, minWidth: 0 }}>{p.name[lang]}</span>
               {alt && <span style={{ whiteSpace:'nowrap' }}>{L(lang,'en','at')} <b style={{ fontWeight: 500, color:'var(--ink)' }}>{alt.s.name}</b> <span className="mono">{eur(alt.c)}</span></span>}
             </div>
@@ -147,7 +147,7 @@ function SplitCard({ winner, basket, appliedSubs, variant }) {
                 </div>
                 {part.lines.map(b => (
                   <div key={b.id} style={{ display:'flex', gap: 6, fontSize: 12, color:'var(--ink-2)', padding:'2px 0' }}>
-                    <span aria-hidden="true">{CATALOG[b.id].emoji}</span>
+                    <PThumb id={b.id} size={22} radius={5}/>
                     <span style={{ flex: 1, minWidth: 0 }}>{CATALOG[b.id].name[lang]} <span className="mono" style={{ color:'var(--ink-3)' }}>×{b.qty}</span></span>
                   </div>
                 ))}

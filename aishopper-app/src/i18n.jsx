@@ -1,7 +1,7 @@
 const T = {
   // Product name lives here only — rename once the naming brief lands.
   appName:        { es: 'aishopper',                           en: 'aishopper' },
-  tagline:        { es: 'Tu concierge de la compra',           en: 'Your grocery concierge' },
+  tagline:        { es: 'Dime un plato. Te digo dónde sale más barato.', en: 'Name a dish. I’ll tell you where it’s cheapest.' },
   postal:         { es: 'Código postal',                       en: 'Postal code' },
   stores:         { es: 'supers disponibles',                  en: 'stores available' },
   placeholder:    { es: 'Pide un plato o dicta tu lista',  en: 'Name a dish or dictate your list' },
@@ -32,7 +32,7 @@ const T = {
   applyAll:       { es: 'Aplicar todas',                       en: 'Apply all' },
   apply:          { es: 'Aplicar',                             en: 'Apply' },
   applied:        { es: 'Aplicado',                            en: 'Applied' },
-  checkout:       { es: 'Elegir franja',                       en: 'Pick a slot' },
+  checkout:       { es: 'Pedir',                               en: 'Order' },
   openCart:       { es: 'Abrir carrito en',                    en: 'Open cart in' },
   export:         { es: 'Exportar PDF',                        en: 'Export PDF' },
   whatsapp:       { es: 'Enviar WhatsApp',                     en: 'Send WhatsApp' },
@@ -85,8 +85,8 @@ const T = {
   step2:          { es: 'Comparación',                         en: 'Compare' },
   step3:          { es: 'Optimización',                        en: 'Optimize' },
   step4:          { es: 'Checkout',                            en: 'Checkout' },
-  nothingYet:     { es: 'Dile a tu concierge qué necesitas. Empezará a construir la cesta y a comparar supers en tiempo real.',
-                    en: 'Tell your concierge what you need. It will build your basket and compare stores in real time.' },
+  nothingYet:     { es: 'Dime un plato o una lista. Te digo el súper más barato para esa cesta, envío incluido.',
+                    en: 'Name a dish or a list. I’ll tell you the cheapest supermarket for that basket, delivery included.' },
   startScenario:  { es: 'Probar demo guiada',                  en: 'Try guided demo' },
   addProduct:     { es: 'Añadir producto',                     en: 'Add product' },
   category:       { es: 'Categoría',                           en: 'Category' },

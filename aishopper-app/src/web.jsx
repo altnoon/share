@@ -211,7 +211,7 @@ function WebTopBar({ lang, started, basket, onRestart, pref, winner, onSwitchVie
             {tr('appName', lang)}
           </div>
           <div className="wtb-tagline" style={{ fontSize: 11, color:'var(--ink-3)', lineHeight: 1.1, marginTop: 1 }}>
-            {tr('tagline', lang)}
+            {lang === 'es' ? 'Dónde sale más barato' : 'Where it’s cheapest'}
           </div>
         </div>
       </div>

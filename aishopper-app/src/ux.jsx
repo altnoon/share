@@ -63,30 +63,31 @@ function HeroCard({ winner, storeTotals, basket, appliedSubs, variant, onCheckou
           <div className="serif" style={{ fontSize: mobile ? 26 : 32, lineHeight: 1.08, letterSpacing:'-0.02em', marginTop: 2, opacity: busy ? 0.4 : 1, transition:'opacity 200ms' }}>
             {store.name} · <AnimatedNumber value={winner.total} decimals={2} suffix=" €"/>
           </div>
-          {gap > 0.004 && nextStore && (
+          {(() => { const uId = usualStoreId(ctx.profile); const d = uId !== winner.id ? basketAt(basket, uId) - winner.total : 0;
+            if (mobile && d > 0.05) return <div style={{ fontSize: 13, color:'var(--sage-ink)', fontWeight: 500, marginTop: 3 }}>{L(lang, `${eur(d)} menos que en ${STORES.find(s => s.id === uId).name}, tu súper`, `${eur(d)} less than ${STORES.find(s => s.id === uId).name}, your usual`)}</div>;
+            return gap > 0.004 && nextStore ? (
             <div style={{ fontSize: 13, color:'var(--sage-ink)', fontWeight: 500, marginTop: 3 }}>
               {L(lang, `${eur(gap)} más barato que ${nextStore.name}`, `${eur(gap)} cheaper than ${nextStore.name}`)}
-            </div>
-          )}
+            </div>) : null; })()}
         </div>
       </div>
-      <div style={{ position:'relative' }}>
+      {!mobile && <div style={{ position:'relative' }}>
         <div style={{ fontSize: 12, color:'var(--ink-3)', marginBottom: 6 }}>{L(lang, 'Por qué', 'Why')}</div>
         <div role="list" style={{ display:'flex', flexWrap:'wrap', gap:'4px 14px' }}>
           {reasons.map(r => <span role="listitem" key={r} style={uxInfo}><span style={{ color:'var(--sage)' }}><Icon name="check" size={10}/></span>{r}</span>)}
         </div>
-      </div>
+      </div>}
       <HeroSlotLine winner={winner} storeTotals={storeTotals}/>
       {busy ? <div style={{ position:'relative', display:'flex', alignItems:'center', gap: 8, fontSize: 12, color:'var(--ink-3)' }}><DotsLoader/>{L(lang, 'Actualizando precios…', 'Refreshing prices…')}</div> : <PriceFresh/>}
-      <div style={{ position:'relative', display:'flex', flexWrap:'wrap', gap:'4px 14px', fontSize: 12, color:'var(--ink-3)' }}>
+      {!mobile && <div style={{ position:'relative', display:'flex', flexWrap:'wrap', gap:'4px 14px', fontSize: 12, color:'var(--ink-3)' }}>
         {winner.shipping > 0 && <span>{eur(winner.shipping)} {tr('shipping', lang)}</span>}
         {(() => { const uId = usualStoreId(ctx.profile); if (uId === winner.id) return null; const d = basketAt(basket, uId) - winner.total; return d > 0.05 ? <span style={{ color:'var(--sage-ink)', fontWeight: 500 }}>{L(lang, `${eur(d)} menos que en ${STORES.find(s => s.id === uId).name}, tu súper`, `${eur(d)} less than ${STORES.find(s => s.id === uId).name}, your usual`)}</span> : null; })()}
         {window.LoyaltyNote && <LoyaltyNote storeId={store.id}/>}
-      </div>
+      </div>}
       <span className="sr-only" aria-live="polite">{L(lang, `Recomendación: ${store.name}, ${eur(winner.total)}`, `Pick: ${store.name}, ${eur(winner.total)}`)}</span>
       {onCheckout && (
         <button onClick={onCheckout} style={{ ...fxBtnPrimary, position:'relative', width:'100%' }}>
-          {L(lang, 'Elegir franja', 'Pick a slot')} · {eur(winner.total)} <Icon name="arrow" size={13}/>
+          {L(lang, 'Pedir', 'Order')} · {eur(winner.total)} <Icon name="arrow" size={13}/>
         </button>
       )}
     </div>
@@ -387,7 +388,7 @@ function MobileBasketSheet({ onClose, onCheckout, onCompare }) {
         {w && (
           <div style={{ padding:'10px 16px 16px', borderTop:'1px solid var(--line-2)', display:'flex', gap: 8 }}>
             <button onClick={onCompare} style={{ ...fxBtnGhost, minHeight: 48 }}>{L(lang, 'Comparar', 'Compare')}</button>
-            <button onClick={onCheckout} style={{ ...fxBtnPrimary, flex: 1, minHeight: 48 }}>{L(lang, 'Elegir franja', 'Pick a slot')} · {eur(w.total)} <Icon name="arrow" size={13}/></button>
+            <button onClick={onCheckout} style={{ ...fxBtnPrimary, flex: 1, minHeight: 48 }}>{L(lang, 'Pedir', 'Order')} · {eur(w.total)} <Icon name="arrow" size={13}/></button>
           </div>
         )}
       </div>
@@ -447,7 +448,7 @@ function MobileVoiceInput({ onSend, draft, setDraft }) {
             <span style={{ display:'flex', alignItems:'center', gap: 2, height: 16 }}>{[0,1,2,3,4].map(k => <span key={k} style={{ width: 3, height: 16, borderRadius: 2, background:'oklch(0.50 0.15 255)', animation:`wave 700ms ${k*110}ms ease-in-out infinite` }}></span>)}</span>
             <span style={{ color: heard ? 'var(--ink)' : 'var(--ink-3)', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{heard || L(lang, 'Escuchando…', 'Listening…')}</span>
           </>
-        ) : <span style={{ fontSize: 12, color:'var(--ink-3)' }}>{miss ? <span style={{ color:'var(--warn-ink)', fontWeight: 500 }}>{L(lang, 'No te he entendido. Prueba otra vez o escribe.', 'I didn’t catch that. Try again or type it.')}</span> : L(lang, 'Mantén pulsado para hablar · toca para dictar', 'Hold to talk · tap to dictate')}</span>}
+        ) : <span style={{ fontSize: 12, color:'var(--ink-3)' }}>{miss ? <span style={{ color:'var(--warn-ink)', fontWeight: 500 }}>{L(lang, 'No te he entendido. Prueba otra vez o escribe.', 'I didn’t catch that. Try again or type it.')}</span> : L(lang, 'Mantén pulsado y habla', 'Hold and talk')}</span>}
       </div>
       <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap: 28, width:'100%' }}>
         <button onClick={() => setMode('type')} aria-label={L(lang, 'Escribir', 'Type instead')} style={side}>{kb}</button>

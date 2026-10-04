@@ -38,6 +38,7 @@ function MobileApp({ tweaks, setTweaks, state, actions }) {
   const go = (t) => { setTab(t); setToast(null); if (scrollBox.current) scrollBox.current.scrollTop = 0; };
   useEffect(() => { const on = () => go('chat'); window.addEventListener('ai-go-chat', on); return () => window.removeEventListener('ai-go-chat', on); }, []);
   useEffect(() => { const on = () => go('you'); window.addEventListener('ai-go-you', on); return () => window.removeEventListener('ai-go-you', on); }, []);
+  useEffect(() => { const on = (e) => go(e.detail); window.addEventListener('ai-go-tab', on); return () => window.removeEventListener('ai-go-tab', on); }, []);
   useEffect(() => { const c = () => go('compare'), k = () => setCheckout(true); window.addEventListener('ai-go-compare', c); window.addEventListener('ai-open-checkout', k); return () => { window.removeEventListener('ai-go-compare', c); window.removeEventListener('ai-open-checkout', k); }; }, []);
 
   return (
@@ -90,7 +91,7 @@ function MobileApp({ tweaks, setTweaks, state, actions }) {
 
       {/* Bottom tab bar (glass) */}
       {toast && !(appCtx.notice) && (
-        <MobileToast key={toast.k} lang={lang} toast={toast} winner={winner} onUndo={undo} onView={() => { setToast(null); setBasketSheet(true); }}/>
+        <MobileToast key={toast.k} lang={lang} toast={toast} winner={winner} top={tab === 'chat'} onUndo={undo} onView={() => { setToast(null); setBasketSheet(true); }}/>
       )}
       <MobileTabBar tab={tab} setTab={go} lang={lang} basket={basket} bumpKey={count}/>
 
@@ -108,22 +109,22 @@ function MobileApp({ tweaks, setTweaks, state, actions }) {
   );
 }
 
-function MobileToast({ lang, toast, winner, onUndo, onView }) {
+function MobileToast({ lang, toast, winner, onUndo, onView, top }) {
   const store = winner ? STORES.find(s => s.id === winner.id) : null;
   const n = toast.n;
   const title = toast.removed
     ? (lang === 'es' ? `${CATALOG[toast.removed].name.es} eliminado` : `${CATALOG[toast.removed].name.en} removed`)
-    : (lang === 'es' ? `${n} añadido${n>1?'s':''} a la cesta` : `${n} added to basket`);
-  const tbtn = { padding:'8px 11px', borderRadius: 8, background:'oklch(1 0 0 / 0.14)', color:'var(--bg)', fontSize: 12, fontWeight: 500 };
+    : (lang === 'es' ? `${n} en la cesta` : `${n} in basket`);
+  const tbtn = { padding:'8px 11px', borderRadius: 8, background:'oklch(1 0 0 / 0.14)', color:'var(--bg)', fontSize: 12, fontWeight: 500, flex:'none', whiteSpace:'nowrap' };
   return (
-    <div style={{ position:'absolute', left: 12, right: 12, bottom: 78, zIndex: 50, animation:'toastIn 260ms cubic-bezier(.2,.7,.3,1)' }}>
+    <div style={{ position:'absolute', left: 12, right: 12, ...(top ? { top: 66 } : { bottom: 78 }), zIndex: 50, animation:'toastIn 260ms cubic-bezier(.2,.7,.3,1)' }}>
       <div style={{ display:'flex', alignItems:'center', gap: 10, padding:'10px 10px 10px 14px', borderRadius: 12, background:'var(--ink)', color:'var(--bg)', boxShadow:'0 10px 30px oklch(0.2 0.01 60 / 0.25)' }}>
-        <Icon name="check" size={13}/>
+        <Icon name="check" size={13} style={{ flex:'none' }}/>
         <div style={{ flex: 1, minWidth: 0, fontSize: 13, lineHeight: 1.3 }}>
           <div style={{ fontWeight: 500, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{title}</div>
-          {store && <div style={{ opacity: 0.7, fontSize: 12 }}>{lang === 'es' ? 'Mejor en' : 'Best at'} {store.name} · {eur(winner.total)}</div>}
+          {store && <div style={{ opacity: 0.7, fontSize: 12, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{store.name} · {eur(winner.total)}</div>}
         </div>
-        <button onClick={onUndo} style={{ ...tbtn, background:'transparent', textDecoration:'underline', textUnderlineOffset: 3 }}>
+        <button onClick={onUndo} style={{ ...tbtn, background:'transparent', textDecoration:'underline', textUnderlineOffset: 3, padding:'8px 6px' }}>
           {lang === 'es' ? 'Deshacer' : 'Undo'}
         </button>
         {onView && !toast.removed && <button onClick={onView} style={tbtn}>{lang === 'es' ? 'Ver' : 'View'}</button>}
@@ -166,8 +167,7 @@ function MobileTopBar({ lang, tab, winner, basket, onRestart, started, calculati
           {tab === 'chat' && (
             <div style={{ fontSize: 12, color: 'var(--ink-3)', display:'flex', alignItems:'center', gap: 5, marginTop: 2, whiteSpace:'nowrap' }}>
               <span style={{ width: 5, height: 5, borderRadius:'50%', background:'var(--sage)' }}/>
-              <span className="mono">{ctx.profile.cp}</span>
-              <span>· 7 supers</span>
+              <span>{lang === 'es' ? '7 supers · entrega en' : '7 stores · delivering to'} <span className="mono">{ctx.profile.cp}</span></span>
             </div>
           )}
           {tab === 'compare' && winner && basket.length > 0 && (
@@ -198,7 +198,6 @@ function MobileTopBar({ lang, tab, winner, basket, onRestart, started, calculati
         })()}
         {tab === 'chat' && !started && <SavingsPill onOpen={() => window.dispatchEvent(new Event('ai-go-you'))}/>}
         {tab !== 'you' && <InboxButton size={34} radius={12}/>}
-        {tab !== 'you' && <FeedbackButton compact/>}
         {started && (
           <button onClick={onRestart} title={tr('restart', lang)} aria-label={tr('restart', lang)} style={{
             width: 34, height: 34, borderRadius: 12,
@@ -306,9 +305,9 @@ function MobileChatView({
   }, [messages.length]);
 
   return (
-    <div className="fx-tab" style={{ display:'flex', flexDirection:'column', minHeight:'100%' }}>
+    <div className="fx-tab" style={{ display:'flex', flexDirection:'column', height:'100%' }}>
       <div ref={scrollRef} style={{
-        flex: 1, overflowY:'auto', padding: '14px 16px 10px',
+        flex: 1, minHeight: 0, overflowY:'auto', padding: '14px 16px 10px',
         display:'flex', flexDirection:'column', gap: 12,
       }}>
         {!started && <WeeklyCard/>}
@@ -328,9 +327,9 @@ function MobileChatView({
 
       {/* Sticky input */}
       <div style={{
-        position:'sticky', bottom: 0, zIndex: 2,
-        padding: '10px 12px 14px',
-        background: 'linear-gradient(180deg, transparent 0%, var(--bg-panel) 30%)',
+        flexShrink: 0, zIndex: 2,
+        padding: '10px 12px 12px',
+        background: 'var(--bg-panel)',
         borderTop: '1px solid var(--line-2)',
       }}>
         {entryMode === 'form' ? (
@@ -361,8 +360,8 @@ function MobileEmptyState({ lang, onStart, onUserSend, onTour }) {
         </div>
         <div style={{ fontSize: 13, color:'var(--ink-2)', marginTop: 10, lineHeight: 1.5 }}>
           {lang === 'es'
-            ? 'Pídeme un plato y saco los ingredientes (ajusta comensales), o dicta productos sueltos. Aviso de temporada y sugiero marca blanca.'
-            : 'Ask for a dish and I pull the ingredients (tune servings), or dictate loose items. I flag seasonal picks and suggest store brands.'}
+            ? 'Un plato o productos sueltos. Yo comparo los 7 supers.'
+            : 'A dish or loose items. I compare all 7 stores.'}
         </div>
       </div>
       <div style={{ display:'flex', flexDirection:'column', gap: 7 }}>
@@ -458,7 +457,7 @@ function MobileCompareView({ lang, storeTotals, winner, basket, appliedSubs, cal
         <div style={{ position:'sticky', bottom: 10, marginTop: 18, zIndex: 3, display:'flex', gap: 8 }}>
           <button onClick={onOpenBasket} style={{ ...fxBtnGhost, minHeight: 50, boxShadow:'0 8px 24px oklch(0.2 0.01 60 / 0.12)' }}>{L(lang, 'Cesta', 'Basket')} · {basket.length}</button>
           <button onClick={onCheckout} style={{ ...fxBtnPrimary, flex: 1, minHeight: 50, boxShadow:'0 8px 24px oklch(0.2 0.01 60 / 0.18)' }}>
-            {L(lang, 'Elegir franja', 'Pick a slot')} · {eur(winner.total)} <Icon name="arrow" size={13}/>
+            {L(lang, 'Pedir', 'Order')} · {eur(winner.total)} <Icon name="arrow" size={13}/>
           </button>
         </div>
       )}
@@ -725,44 +724,11 @@ function MobileYouView({ lang, memory, pref, basket, onLoadList, onTour }) {
   const alerts = ctx.alerts || [];
   const upd = (id, patch) => ctx.updateAlert(id, patch);
   return (
-    <div className="fx-tab" style={{ padding: '14px 16px 100px', display:'flex', flexDirection:'column', gap: 14 }}>
+    <div className="fx-tab" style={{ padding: '14px 16px 100px', display:'flex', flexDirection:'column', gap: 12 }}>
       <ActiveOrderCard/>
       <SavingsCard/>
       {onTour && <TourCard lang={lang} onOpen={onTour}/>}
-      <ProfileCard/>
-      <PrefsCard/>
-      <NotificationsCard/>
-      <div style={{
-        padding: '16px', borderRadius: 12,
-        background:'var(--bg-panel)', border:'1px solid var(--line-2)',
-      }}>
-        <div style={{ display:'flex', alignItems:'center', gap: 10, marginBottom: 8 }}>
-          <div style={{ color:'var(--ink-3)' }}><Icon name="memory" size={14}/></div>
-          <div style={{ fontSize: 11, color:'var(--ink-3)', textTransform:'uppercase', letterSpacing:'0.08em' }}>
-            {tr('memory', lang)}
-          </div>
-        </div>
-        {memory && memory.length > 0 ? (
-          <div style={{ display:'flex', flexDirection:'column', gap: 4 }}>
-            {memory.map((m, i) => (
-              <div key={i} style={{ fontSize: 13, color:'var(--ink)' }}>· {m[lang]}</div>
-            ))}
-          </div>
-        ) : (
-          <div style={{ fontSize: 12, color:'var(--ink-3)' }}>
-            {lang === 'es' ? 'Aún no hay preferencias guardadas. La IA aprende mientras hablas.' : 'No preferences yet. The AI learns as you chat.'}
-          </div>
-        )}
-        {pref && (
-          <div style={{ marginTop: 10 }}>
-            <Pill tone="accent" size="md">
-              <Icon name="sparkle" size={11}/>
-              {tr('pref' + pref[0].toUpperCase() + pref.slice(1), lang)}
-            </Pill>
-          </div>
-        )}
-      </div>
-
+      <YouSection lang={lang} title={L(lang,'Guardado','Saved')}/>
       <div style={{
         padding: '16px', borderRadius: 12,
         background:'var(--bg-panel)', border:'1px solid var(--line-2)',
@@ -781,9 +747,7 @@ function MobileYouView({ lang, memory, pref, basket, onLoadList, onTour }) {
         </div>
       </div>
       <OrdersCard/>
-      <HouseholdCard/>
-
-      <div style={{
+      {alerts.length > 0 && <div style={{
         padding: '16px', borderRadius: 12,
         background:'var(--bg-panel)', border:'1px solid var(--line-2)',
       }}>
@@ -791,16 +755,48 @@ function MobileYouView({ lang, memory, pref, basket, onLoadList, onTour }) {
           {lang === 'es' ? 'Alertas activas' : 'Active alerts'}
         </div>
         <div style={{ display:'flex', flexDirection:'column', gap: 8 }}>
-          {alerts.length === 0 && <div style={{ fontSize: 12, color:'var(--ink-3)' }}>{L(lang,'Toca la gráfica de cualquier producto para crear una alerta.','Tap any product’s chart to create an alert.')}</div>}
           {alerts.map(a => (
             <AlertRow key={a.id} lang={lang} a={a} onOpen={() => ctx.openHistory(a.id)}
               onToggle={() => upd(a.id, { on: !a.on })}
               onThreshold={(v) => upd(a.id, { threshold: Math.max(1, v) })}/>
           ))}
         </div>
-      </div>
+      </div>}
+      <YouSection lang={lang} title={L(lang,'Tú','You')}/>
+      <ProfileCard/>
+      <HouseholdCard/>
+      <PrefsCard/>
+      <NotificationsCard/>
+      {memory && memory.length > 0 && <div style={{
+        padding: '16px', borderRadius: 12,
+        background:'var(--bg-panel)', border:'1px solid var(--line-2)',
+      }}>
+        <div style={{ display:'flex', alignItems:'center', gap: 10, marginBottom: 8 }}>
+          <div style={{ color:'var(--ink-3)' }}><Icon name="memory" size={14}/></div>
+          <div style={{ fontSize: 11, color:'var(--ink-3)', textTransform:'uppercase', letterSpacing:'0.08em' }}>
+            {tr('memory', lang)}
+          </div>
+        </div>
+        <div style={{ display:'flex', flexDirection:'column', gap: 4 }}>
+          {memory.map((m, i) => (
+            <div key={i} style={{ fontSize: 13, color:'var(--ink)' }}>· {m[lang]}</div>
+          ))}
+        </div>
+        {pref && (
+          <div style={{ marginTop: 10 }}>
+            <Pill tone="accent" size="md">
+              <Icon name="sparkle" size={11}/>
+              {tr('pref' + pref[0].toUpperCase() + pref.slice(1), lang)}
+            </Pill>
+          </div>
+        )}
+      </div>}
     </div>
   );
+}
+
+function YouSection({ title }) {
+  return <div style={{ fontSize: 11, color:'var(--ink-3)', textTransform:'uppercase', letterSpacing:'0.08em', padding:'10px 2px 0' }}>{title}</div>;
 }
 
 function SavedListRow({ lang, name, items, last, watching, onLoad }) {
@@ -844,7 +840,7 @@ function AlertRow({ lang, a, onToggle, onThreshold, onOpen }) {
     }}>
       <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
         <button onClick={onOpen} style={{ flex: 1, minWidth: 0, display:'flex', alignItems:'center', gap: 10, textAlign:'left', minHeight: 40 }}>
-          <span aria-hidden="true" style={{ fontSize: 18 }}>{p.emoji}</span>
+          <PThumb id={a.id} size={34} radius={8}/>
           <span style={{ flex: 1, minWidth: 0 }}>
             <span style={{ display:'block', fontSize: 13, fontWeight: 500 }}>{p.name[lang]}</span>
             <span style={{ display:'block', fontSize: 12, color: down ? 'var(--sage-ink)' : 'var(--danger-ink)', marginTop: 1 }}>
@@ -900,6 +896,7 @@ function MobileCheckoutSheet({ lang, winner, basket, storeTotals, appliedSubs, o
   const [savedAs, setSavedAs] = useState('');
   const [slot, setSlot] = useState(null);
   const [taken, setTaken] = useState(null);
+  const [more, setMore] = useState(false);
   const trapRef = useRef(null); useFocusTrap(trapRef);
   const confirm = () => { if (!slot) return; if (slotRace(slot)) { setTaken(slot); setSlot(null); return; } ctx.placeOrder({ stores: [winner.id], total: winner.total + slot.fee, slot, items: basket }); onClose(); };
 
@@ -945,10 +942,8 @@ function MobileCheckoutSheet({ lang, winner, basket, storeTotals, appliedSubs, o
         </div>
 
         <div style={{ padding: '14px 18px' }}>
-          <PriceChangeNote basket={basket} storeId={winner.id}/>
-          <div style={{ marginTop: 14 }}><SlotPicker value={slot} onChange={setSlot}/></div>
+          <SlotPicker value={slot} onChange={setSlot}/>
           {taken && <SlotTakenNote slot={taken} onPick={(s) => { setSlot(s); setTaken(null); }}/>}
-          <div style={{ marginTop: 14 }}><SubRulesCard basket={basket}/></div>
           <button onClick={confirm} disabled={!slot} style={{
             marginTop: 12, width:'100%', minHeight: 48, padding: '12px 14px', borderRadius: 12,
             background: 'var(--ink)', color:'var(--bg)', opacity: slot ? 1 : 0.5,
@@ -958,7 +953,14 @@ function MobileCheckoutSheet({ lang, winner, basket, storeTotals, appliedSubs, o
             <Icon name="truck" size={13}/>
             {slot ? <>{L(lang,'Confirmar','Confirm')} · {slotLabel(slot, lang)} · {eur(winner.total + slot.fee)}</> : L(lang,'Elige una franja para confirmar','Pick a slot to confirm')}
           </button>
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 8, marginTop: 8 }}>
+          <button onClick={() => setMore(m => !m)} aria-expanded={more} style={{ marginTop: 10, width:'100%', minHeight: 44, display:'flex', alignItems:'center', justifyContent:'space-between', fontSize: 13, color:'var(--ink-2)' }}>
+            <span>{L(lang,'Cambios de precio, sustituciones y más','Price changes, substitutions and more')}</span>
+            <span style={{ display:'inline-block', transform: more ? 'rotate(180deg)' : 'none', transition:'transform 160ms' }}><Icon name="down" size={14}/></span>
+          </button>
+          {more && <div style={{ display:'flex', flexDirection:'column', gap: 12 }}>
+          <PriceChangeNote basket={basket} storeId={winner.id}/>
+          <SubRulesCard basket={basket}/>
+          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 8 }}>
             <button style={actionBtn} onClick={() => ctx.openOverlay('handoff', { storeId: winner.id })}><Icon name="cart" size={12}/>{L(lang,'Abrir en','Open in')} {store.name}</button>
             <button style={actionBtn} onClick={() => ctx.openOverlay('share')}><Icon name="wa" size={12}/>{tr('whatsapp', lang)}</button>
           </div>
@@ -980,7 +982,7 @@ function MobileCheckoutSheet({ lang, winner, basket, storeTotals, appliedSubs, o
                 const sub = appliedSubs.includes(b.id);
                 return (
                   <div key={b.id} style={{ display:'flex', alignItems:'center', gap: 8, fontSize: 12 }}>
-                    <span style={{ fontSize: 14 }}>{p.emoji}</span>
+                    <PThumb id={b.id} size={24} radius={6}/>
                     <span style={{ flex: 1, color:'var(--ink-2)' }}>
                       {sub && p.whiteLabel ? p.whiteLabel.name[lang] : p.name[lang]}
                       <span className="mono" style={{ color:'var(--ink-3)', marginLeft: 6 }}>×{b.qty}</span>
@@ -1017,6 +1019,7 @@ function MobileCheckoutSheet({ lang, winner, basket, storeTotals, appliedSubs, o
               </button>
             )}
           </div>
+          </div>}
         </div>
 
         <div style={{ height: 16 }}/>

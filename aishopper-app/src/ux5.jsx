@@ -8,13 +8,13 @@ function FirstRunCoach({ onSend }) {
   const n = ctx.profile.household || 4;
   const ex = L(lang, `Paella para ${n}`, `Paella for ${n}`);
   return (
-    <div role="status" style={{ display:'flex', alignItems:'center', gap: 10, padding:'10px 12px', borderRadius: 12, background:'var(--accent-soft)', border:'1px solid var(--accent-line)', animation:'riseIn 300ms cubic-bezier(.2,.7,.3,1)' }}>
+    <div role="status" style={{ display:'flex', alignItems:'center', flexWrap:'wrap', gap: '8px 10px', padding:'10px 12px', borderRadius: 12, background:'var(--accent-soft)', border:'1px solid var(--accent-line)', animation:'riseIn 300ms cubic-bezier(.2,.7,.3,1)' }}>
       <span style={{ color:'var(--accent-ink)', display:'inline-flex' }}><Icon name="sparkle" size={14}/></span>
-      <div style={{ flex: 1, minWidth: 0, fontSize: 13, color:'var(--accent-ink)' }}>
-        {L(lang, 'Empieza con un plato. Yo saco la lista y el súper más barato.', 'Start with a dish. I pull the list and the cheapest store.')}
+      <div style={{ flex: '1 1 120px', minWidth: 0, fontSize: 13, color:'var(--accent-ink)' }}>
+        {L(lang, 'Prueba a pedirme:', 'Try asking me:')}
       </div>
-      <button onClick={() => { ctx.markAsked('firstHint'); onSend(ex); }} style={{ ...fxBtnPrimary, minHeight: 36, padding:'0 12px', fontSize: 12, whiteSpace:'nowrap' }}>«{ex}»</button>
-      <button onClick={() => ctx.markAsked('firstHint')} aria-label={L(lang,'Cerrar','Dismiss')} style={{ width: 32, height: 32, display:'inline-flex', alignItems:'center', justifyContent:'center', color:'var(--accent-ink)', flexShrink: 0 }}><Icon name="x" size={12}/></button>
+      <button onClick={() => ctx.markAsked('firstHint')} aria-label={L(lang,'Cerrar','Dismiss')} style={{ width: 32, height: 32, display:'inline-flex', alignItems:'center', justifyContent:'center', color:'var(--accent-ink)', flexShrink: 0, order: 3 }}><Icon name="x" size={12}/></button>
+      <button onClick={() => { ctx.markAsked('firstHint'); onSend(ex); }} style={{ ...fxBtnPrimary, minHeight: 36, padding:'0 12px', fontSize: 12, whiteSpace:'nowrap', flex:'1 1 auto', justifyContent:'center', order: 4 }}>«{ex}»</button>
     </div>
   );
 }

@@ -43,8 +43,10 @@ function App() {
     return () => window.removeEventListener('message', onMsg);
   }, []);
 
-  // Persist
+  // Persist (skipped in ?demo=1 embeds so landing showcases never touch the tester's data)
+  const DEMO = new URLSearchParams(location.search).get('demo') === '1';
   useEffect(() => {
+    if (DEMO) return;
     try {
       const saved = JSON.parse(localStorage.getItem('ai-shopper-v2') || 'null');
       if (saved) {
@@ -67,6 +69,7 @@ function App() {
     } catch(e){}
   }, []);
   useEffect(() => {
+    if (DEMO) return;
     try { localStorage.setItem('ai-shopper-v2', JSON.stringify({ basket, messages, appliedSubs, pref, memory, scenarioIdx, pantry, diet, profile, orders, activeOrder, shared, alerts })); } catch(e){}
   }, [basket, messages, appliedSubs, pref, memory, scenarioIdx, pantry, diet, profile, orders, activeOrder, shared, alerts]);
   useEffect(() => {
@@ -324,7 +327,11 @@ function App() {
   window.__aiSend = actions.handleUserSend;
   // pick_shown once per basket change; landing handoff (?say=) after onboarding is done
   useEffect(() => { if (winner) track('pick_shown', { store: winner.id, total: winner.total, saving_vs_next: storeTotals[1] ? Math.round((storeTotals[1].total - winner.total) * 100) / 100 : 0 }); }, [winner && winner.id, basket.length]);
-  useLandingHandoff((t) => { if (!profile.onboarded) updateProfileSilently(); actions.handleUserSend(t); }, true);
+  useLandingHandoff((t) => { if (!profile.onboarded) updateProfileSilently(); actions.handleUserSend(t); }, true, (t) => {
+    const dish = matchDish(t); if (!dish) return;
+    const sv = t.toLowerCase().match(/(?:para|for|x)\s*(\d{1,2})/);
+    actions.addRecipe(dish.id, sv ? +sv[1] : dish.serves);
+  });
 
   const tg = (arr, v) => arr.includes(v) ? arr.filter(x => x !== v) : [...arr, v];
   const ctx = {
@@ -401,7 +408,12 @@ function App() {
     window.addEventListener('resize', on);
     return () => window.removeEventListener('resize', on);
   }, []);
-  const viewMode = tweaks.viewMode || 'auto';
+  // Embedded (landing phone) or a narrow viewport always wins over a saved viewMode.
+  // Forced mobile only for real phone-sized embeds (landing hero/demo iframes) or narrow viewports; from=landing resets a saved toggle.
+  const embedded = window.self !== window.top && vw < 500;
+  const fromLanding = React.useMemo(() => new URLSearchParams(window.location.search).get('from') === 'landing', []);
+  useEffect(() => { if (fromLanding && tweaks.viewMode && tweaks.viewMode !== 'auto') setTweaks(t => ({ ...t, viewMode: 'auto' })); }, [fromLanding]);
+  const viewMode = embedded ? 'mobile' : (fromLanding ? 'auto' : (tweaks.viewMode || 'auto'));
   const useMobile = viewMode === 'mobile' || (viewMode === 'auto' && vw < 768);
   const useWeb = viewMode === 'web' || (viewMode === 'auto' && vw >= 768);
   const showDeviceFrame = useMobile && vw >= 720;
@@ -541,57 +553,30 @@ function DeviceFrame({ children }) {
 }
 
 function PromoSidebar({ lang, onStart, started }) {
+  const es = lang === 'es';
+  const landing = window.location.hostname === 'localhost' || /claudeusercontent|\.local/.test(window.location.hostname) ? 'Landing.html' : '/aishopper-home';
   return (
-    <div style={{
-      position:'relative', maxWidth: 340, marginRight: 48,
-      display:'flex', flexDirection:'column', gap: 18,
-    }}>
-      <div style={{ pointerEvents:'auto' }}>
-        <div style={{ fontSize: 11, color:'var(--ink-3)', textTransform:'uppercase', letterSpacing:'0.12em', marginBottom: 10 }}>
-          {tr('appName', lang)} · {lang === 'es' ? 'Prototipo móvil' : 'Mobile prototype'}
-        </div>
-        <div className="serif" style={{ fontSize: 44, lineHeight: 1.05, letterSpacing:'-0.02em' }}>
-          {lang === 'es' ? <>El concierge<br/><span style={{ fontStyle:'italic', color:'var(--ink-3)' }}>de tu cesta.</span></>
-                         : <>The concierge<br/><span style={{ fontStyle:'italic', color:'var(--ink-3)' }}>for your basket.</span></>}
-        </div>
-        <div style={{ fontSize: 14, color:'var(--ink-2)', marginTop: 14, lineHeight: 1.5, maxWidth: 320 }}>
-          {lang === 'es'
-            ? 'Dicta, compara 7 supers en tu CP, sustituye por marca blanca y abre el carrito listo — todo en un pulgar.'
-            : 'Dictate, compare 7 stores in your ZIP, swap to store brand, and open the ready cart — all one-thumb.'}
-        </div>
-        {!started && (
-          <button onClick={onStart} style={{
-            marginTop: 20, padding: '10px 14px', borderRadius: 10,
-            background: 'var(--ink)', color: 'var(--bg)',
-            fontSize: 12.5, fontWeight: 500,
-            display:'inline-flex', alignItems:'center', gap: 8,
-          }}>
-            <Icon name="sparkle" size={11}/>
-            {lang === 'es' ? 'Probar demo guiada →' : 'Try guided demo →'}
-          </button>
-        )}
+    <div style={{ position:'relative', maxWidth: 360, marginRight: 48, display:'flex', flexDirection:'column', gap: 18, pointerEvents:'auto' }}>
+      <div style={{ fontSize: 11, color:'var(--ink-3)', textTransform:'uppercase', letterSpacing:'0.12em' }}>
+        {tr('appName', lang)} · {es ? 'Madrid · 28004' : 'Madrid · 28004'}
       </div>
-
-      <div style={{
-        pointerEvents:'auto',
-        padding: '14px 16px', borderRadius: 12,
-        background: 'var(--bg-panel)', border:'1px solid var(--line)',
-        display:'flex', flexDirection:'column', gap: 8, maxWidth: 340,
-      }}>
-        <div style={{ fontSize: 10.5, color:'var(--ink-3)', textTransform:'uppercase', letterSpacing:'0.08em' }}>
-          {lang === 'es' ? 'Flujo' : 'Flow'}
-        </div>
-        {[
-          { es:'Conversación — NLP + contexto + memoria', en:'Chat — NLP + context + memory' },
-          { es:'Comparar 7 supers — envío incluido', en:'Compare 7 stores — shipping included' },
-          { es:'Optimizar — sustituciones marca blanca', en:'Optimize — store-brand swaps' },
-          { es:'Cerrar — deeplink · PDF · WhatsApp', en:'Close — deeplink · PDF · WhatsApp' },
-        ].map((s, i) => (
-          <div key={i} style={{ display:'flex', gap: 10, alignItems:'flex-start', fontSize: 12, color:'var(--ink-2)' }}>
-            <span className="mono" style={{ color:'var(--ink-3)', fontSize: 11 }}>0{i+1}</span>
-            <span>{s[lang]}</span>
-          </div>
-        ))}
+      <div className="serif" style={{ fontSize: 46, lineHeight: 1.0, letterSpacing:'-0.02em' }}>
+        {es ? <>Dime un plato.<br/><span style={{ fontStyle:'italic', color:'var(--ink-3)' }}>Te digo dónde sale más barato.</span></>
+            : <>Name a dish.<br/><span style={{ fontStyle:'italic', color:'var(--ink-3)' }}>I’ll tell you where it’s cheapest.</span></>}
+      </div>
+      <div style={{ fontSize: 15, color:'var(--ink-2)', lineHeight: 1.5, maxWidth: 330 }}>
+        {es ? 'Compara los 7 supers de tu código postal, envío incluido, y te deja en la caja del más barato.'
+            : 'Compares the 7 supermarkets in your postcode, delivery included, and hands you to the cheapest one’s checkout.'}
+      </div>
+      {!started && (
+        <button onClick={onStart} style={{ alignSelf:'flex-start', marginTop: 6, padding: '11px 16px', borderRadius: 10, background: 'var(--ink)', color: 'var(--bg)', fontSize: 13, fontWeight: 500, display:'inline-flex', alignItems:'center', gap: 8 }}>
+          <Icon name="sparkle" size={11}/>
+          {es ? 'Ver demo guiada →' : 'Watch guided demo →'}
+        </button>
+      )}
+      <div style={{ fontSize: 12.5, color:'var(--ink-3)', marginTop: 8 }}>
+        {es ? 'Prototipo en prueba · ' : 'Prototype in testing · '}
+        <a href={landing} style={{ color:'var(--ink-2)', textDecoration:'underline', textUnderlineOffset: 3 }}>{es ? 'Qué es aishopper' : 'What is aishopper'}</a>
       </div>
     </div>
   );

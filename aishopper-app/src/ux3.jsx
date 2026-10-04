@@ -209,8 +209,14 @@ function ProductThumb({ id }) {
   const p = CATALOG[id]; if (!p) return null;
   const meta = CATEGORY_META[p.category];
   const tint = meta ? `color-mix(in oklch, ${meta.dot} 16%, var(--bg-panel))` : 'var(--bg-sunk)';
-  if (src && !bad) return <img src={src} alt="" loading="lazy" referrerPolicy="no-referrer" onError={() => setBad(true)} style={{ width:'100%', height:'100%', objectFit:'cover', display:'block', background:'#fff' }}/>;
-  return <span aria-hidden="true" style={{ width:'100%', height:'100%', display:'flex', alignItems:'center', justifyContent:'center', background: tint, fontSize: 'clamp(12px, 55cqw, 22px)', containerType:'inline-size' }}>{p.emoji}</span>;
+  const tile = { width:'100%', height:'100%', display:'flex', alignItems:'center', justifyContent:'center', background: tint, boxShadow:'inset 0 0 0 1px oklch(0.2 0.01 60 / 0.04)', containerType:'inline-size' };
+  const dark = typeof document !== 'undefined' && document.documentElement.getAttribute('data-theme') === 'dark';
+  if (src && !bad) return <span aria-hidden="true" style={tile}><img src={src} alt="" loading="lazy" referrerPolicy="no-referrer" onError={() => setBad(true)} style={{ width:'82%', height:'82%', objectFit:'contain', display:'block', filter:'drop-shadow(0 2px 3px oklch(0.2 0.01 60 / 0.18))', mixBlendMode: dark ? 'normal' : 'multiply', borderRadius: dark ? 4 : 0 }}/></span>;
+  return <span aria-hidden="true" style={{ ...tile, fontSize: 'clamp(12px, 55cqw, 22px)' }}>{p.emoji}</span>;
+}
+// Inline thumb for rows that used a bare emoji: fixed square tile, same visual language everywhere.
+function PThumb({ id, size = 28, radius = 7, style }) {
+  return <span style={{ width: size, height: size, borderRadius: radius, overflow:'hidden', flexShrink: 0, display:'inline-flex', border:'1px solid var(--line-2)', ...style }}><ProductThumb id={id}/></span>;
 }
 
 // ─── Price freshness ───
@@ -423,6 +429,7 @@ function launch(emoji) {
     { transform:`translate(${dx}px, ${dy}px) scale(0.35)`, opacity: 0.4 },
   ], { duration: 620, easing:'cubic-bezier(.3,.6,.4,1)' });
   a.onfinish = () => { el.remove(); tgt.animate([{ transform:'scale(1)' }, { transform:'scale(1.12)' }, { transform:'scale(1)' }], { duration: 260, easing:'ease-out' }); };
+  setTimeout(() => el.remove(), 1500);
 }
 
 // ─── Larger text ───
@@ -439,4 +446,4 @@ function TextSizeRow() {
   );
 }
 
-Object.assign(window, { PRODUCT_IMG, ProductThumb, PriceFresh, agoLabel, savingsTotal, SavingsPill, ShareSavingsButton, HouseholdInvite, BasketHelpers, OOS_RULES, oosRuleOf, OosItemRow, SubRulesCard, STORE_NEXT, HeroSlotLine, BudgetBar, BasketTools, InStoreSheet, DeliveryCheck, ThinkingSteps, flyToBasket, FlyLayer, TextSizeRow });
+Object.assign(window, { PRODUCT_IMG, ProductThumb, PThumb, PriceFresh, agoLabel, savingsTotal, SavingsPill, ShareSavingsButton, HouseholdInvite, BasketHelpers, OOS_RULES, oosRuleOf, OosItemRow, SubRulesCard, STORE_NEXT, HeroSlotLine, BudgetBar, BasketTools, InStoreSheet, DeliveryCheck, ThinkingSteps, flyToBasket, FlyLayer, TextSizeRow });

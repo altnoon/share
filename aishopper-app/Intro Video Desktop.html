@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>AI Shopper — Intro video (desktop)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html,body{margin:0;background:#1d1b19;font-family:Inter,system-ui,sans-serif;color:oklch(0.20 0.012 60);-webkit-font-smoothing:antialiased}
+a{color:oklch(0.55 0.18 255)}a:hover{color:oklch(0.45 0.18 255)}
+:root{--sage-ink:oklch(0.40 0.10 150);--sage-line:oklch(0.85 0.05 150);--warn-ink:oklch(0.42 0.11 45);--warn-line:oklch(0.85 0.06 55);--danger-ink:oklch(0.52 0.15 28);--accent-ink:oklch(0.40 0.14 255);--accent-line:oklch(0.88 0.05 255);--sage-soft:oklch(0.93 0.05 150);--warn-soft:oklch(0.94 0.05 55)}
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#f7f5f0"><svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#f7f5f0"/><circle cx="600" cy="360" r="140" fill="#2b2723"/><path d="M560 290 L560 430 L680 360 Z" fill="#f7f5f0"/><text x="600" y="610" font-family="Georgia, serif" font-size="80" fill="#2b2723" text-anchor="middle">AI Shopper · Intro</text></svg></template>
+<div id="root"></div>
+<script>window.OM_SCENES = '[{"name":"Intro","dur":4,"desc":"Title card; the browser window rises into frame"},{"name":"Voice","dur":7,"desc":"Step 1: click the mic and say a dish"},{"name":"Recipe","dur":7,"desc":"Step 2: recipe card appears, servings go 4 to 6"},{"name":"Add","dur":5,"desc":"Step 3: add everything; ingredients fly into the basket pane"},{"name":"Compare","dur":8,"desc":"Step 4: the center pane compares 7 stores"},{"name":"Swap","dur":6,"desc":"Step 5: apply store-brand swaps in the basket pane"},{"name":"Checkout","dur":6,"desc":"Step 6: checkout modal opens the cart on the winning store"},{"name":"Alerts","dur":5,"desc":"Step 7: open alerts from the bell and set a threshold"},{"name":"Extras","dur":9,"desc":"Bonus: weekly menu, photo of list, split basket, order tracking"},{"name":"Outro","dur":4,"desc":"The window sinks away; tagline"}]';</script>
+<script>window.OM_PLAYBACK = '{"mode":"loop"}';</script>
+<script>window.INTRO_TWEAKS = /*EDITMODE-BEGIN*/{"language":"es","motionEditor":true}/*EDITMODE-END*/;</script>
+<script type="text/babel" src="/aishopper-app/src/data.jsx"></script>
+<script type="text/babel" src="/aishopper-app/src/ui.jsx"></script>
+<script type="text/babel" src="/aishopper-app/video/animations-v3.jsx"></script>
+<script type="text/babel" src="/aishopper-app/video/tweaks-panel.jsx"></script>
+<script type="text/babel" src="/aishopper-app/src/features-data.jsx"></script>
+<script type="text/babel" src="/aishopper-app/video/intro-screens.jsx"></script>
+<script type="text/babel" src="/aishopper-app/video/intro-extras.jsx"></script>
+<script type="text/babel">
+const W = 1920, H = 1080, WW = 1172, WH = 38 + 56 + 707, WX = 668, WY = (H - WH) / 2, ANCHOR = { x: 1260, y: 560 };
+const PANE_Y = 94, PANE_X = [0, 391, 782];
+const px = (i, x) => PANE_X[i] + x, py = (y) => PANE_Y + y - 47;
+
+function Pointer({ T, K }) {
+  const V = K.Voice, R = K.Recipe, A = K.Add, Cm = K.Compare, Sw = K.Swap, Ck = K.Checkout, Al = K.Alerts;
+  const f = vtrack(T, [
+    { v: { x: 700, y: 520, o: 0 } },
+    { t: V + 0.2, d: 0.3, v: { o: 1 } },
+    { t: V + 0.3, d: 1.0, v: { x: px(0, 351), y: py(717) } },
+    { t: V + 2.2, d: 0.9, v: { x: 300, y: 560 } },
+    { t: R + 1.8, d: 1.0, v: { x: px(0, 346), y: py(293) } },
+    { t: R + 5.0, d: 1.0, v: { x: 320, y: 480 } },
+    { t: A + 0.0, d: 0.8, v: { x: px(0, 309), y: py(554) } },
+    { t: A + 1.6, d: 1.0, v: { x: 700, y: 560 } },
+    { t: Cm + 0.6, d: 1.2, v: { x: px(1, 250), y: py(300) } },
+    { t: Cm + 3.4, d: 1.6, v: { x: px(1, 300), y: py(560) } },
+    { t: Sw + 0.4, d: 1.1, v: { x: px(2, 305), y: py(164) } },
+    { t: Sw + 3.0, d: 0.9, v: { x: px(2, 290), y: py(360) } },
+    { t: Ck - 0.8, d: 1.1, v: { x: px(2, 195), y: py(702) } },
+    { t: Ck + 1.2, d: 0.8, v: { x: 700, y: 440 } },
+    { t: Ck + 2.3, d: 0.9, v: { x: 586, y: 212 + 358 } },
+    { t: Ck + 3.8, d: 0.8, v: { x: 700, y: 440 } },
+    { t: Al - 0.8, d: 1.0, v: { x: WW - 38, y: 66 } },
+    { t: Al + 1.0, d: 0.9, v: { x: px(2, 329), y: py(278) } },
+    { t: Al + 2.5, d: 0.7, v: { x: px(2, 262), y: py(329) } },
+    { t: Al + 4.0, d: 0.5, v: { x: 900, y: 500, o: 0 } },
+  ]);
+  const taps = [V + 1.5, R + 3.2, R + 4.2, A + 0.95, Sw + 2.4, Ck + 0.7, Ck + 3.3, Al + 0.6, Al + 2.0, Al + 3.5];
+  let ring = -1, press = 0;
+  taps.forEach(t => { const d = T - t; if (d >= 0 && d < 0.5) ring = d / 0.5; if (d >= -0.1 && d < 0.18) press = 1; });
+  if (f.o <= 0.01) return null;
+  return (
+    <div style={{ position: 'absolute', left: f.x, top: f.y, opacity: f.o, pointerEvents: 'none', zIndex: 20 }}>
+      {ring >= 0 && <div style={{ position: 'absolute', left: -14 - 16 * ring, top: -14 - 16 * ring, width: 28 + 32 * ring, height: 28 + 32 * ring,
+        borderRadius: '50%', background: `oklch(0.55 0.18 255 / ${0.25 * (1 - ring)})`, border: `1.5px solid oklch(0.55 0.18 255 / ${0.7 * (1 - ring)})` }}></div>}
+      <svg width="24" height="30" viewBox="0 0 24 30" style={{ position: 'absolute', left: -3, top: -2, transform: `scale(${press ? 0.88 : 1})`, transformOrigin: '3px 2px', filter: 'drop-shadow(0 2px 3px rgba(0,0,0,0.3))' }}>
+        <path d="M3 2 L3 24 L8.5 18.5 L12.5 27 L16 25.4 L12 17 L19.5 17 Z" fill="#111" stroke="#fff" strokeWidth="1.6" strokeLinejoin="round"></path>
+      </svg>
+    </div>
+  );
+}
+
+function AppBar({ T, K, lang }) {
+  const L = (es, en) => lang === 'es' ? es : en;
+  const steps = [L('Dicta', 'Dictate'), L('Compara', 'Compare'), L('Optimiza', 'Optimize'), L('Cierra', 'Close')];
+  const act = [T >= K.Voice + 4.3, T >= K.Compare + 1.0, T >= K.Swap + 2.5, T >= K.Checkout + 3.4];
+  const bellOn = T >= K.Alerts + 0.7;
+  return (
+    <div style={{ position: 'absolute', left: 0, top: 38, width: WW, height: 56, background: VC.panel, borderBottom: `1px solid ${VC.line}`,
+      display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 18px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
+        <div style={{ width: 30, height: 30, borderRadius: 8, background: VC.ink, color: VC.bg, fontFamily: VF.serif, fontSize: 15, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>ai</div>
+        <div>
+          <div style={{ fontSize: 14, fontWeight: 600, lineHeight: 1.1 }}>AI Shopper</div>
+          <div style={{ fontSize: 11, color: VC.ink3 }}>{L('Tu concierge de la compra', 'Your grocery concierge')}</div>
+        </div>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        {steps.map((s, i) => (
+          <React.Fragment key={i}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11.5, color: act[i] ? VC.ink : VC.ink3, fontWeight: act[i] ? 500 : 400 }}>
+              <span style={{ width: 18, height: 18, borderRadius: 9, fontSize: 10, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                background: act[i] ? VC.ink : VC.sunk, color: act[i] ? VC.bg : VC.ink3, border: `1px solid ${act[i] ? VC.ink : VC.line}` }}>{i + 1}</span>{s}
+            </div>
+            {i < 3 && <span style={{ width: 22, height: 1, background: VC.line }}></span>}
+          </React.Fragment>
+        ))}
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <div style={{ padding: '5px 10px', borderRadius: 7, background: VC.sunk, border: `1px solid ${VC.line2}`, fontSize: 11.5, display: 'flex', alignItems: 'center', gap: 6 }}>
+          <span style={{ width: 6, height: 6, borderRadius: 3, background: VC.sage }}></span>
+          <span style={{ color: VC.ink3 }}>{L('Código postal', 'Postal code')}</span><b style={{ fontFamily: VF.mono, fontWeight: 500 }}>28004</b>
+        </div>
+        <div style={{ width: 40, height: 32, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center',
+          background: bellOn ? VC.ink : VC.sunk, color: bellOn ? VC.bg : VC.ink2, border: `1px solid ${bellOn ? VC.ink : VC.line2}` }}><Icon name="bell" size={14}/></div>
+      </div>
+    </div>
+  );
+}
+
+function Pane({ i, children }) {
+  return (
+    <div style={{ position: 'absolute', left: PANE_X[i], top: PANE_Y, width: 390, height: 707, overflow: i === 0 ? 'visible' : 'hidden', zIndex: i === 0 ? 3 : 1 }}>
+      <div style={{ position: 'absolute', left: 0, top: -47, width: 390, height: 844 }}>{children}</div>
+    </div>
+  );
+}
+
+function Browser({ T, K, lang }) {
+  const tYou = K.Alerts + 0.7;
+  const Ck = K.Checkout;
+  const sheetP = MOTION.enter(T, Ck + 0.8, 0.55) * (1 - MOTION.glide(T, Ck + 5.3, 0.5));
+  return (
+    <div style={{ position: 'absolute', inset: 0, borderRadius: 14, overflow: 'hidden', background: VC.bg, fontFamily: VF.sans, color: VC.ink,
+      boxShadow: '0 40px 90px oklch(0.2 0.01 60 / 0.25), 0 0 0 1px oklch(0.2 0.01 60 / 0.1)' }}>
+      <div style={{ position: 'absolute', left: 0, top: 0, width: WW, height: 38, background: 'oklch(0.94 0.006 80)', borderBottom: `1px solid ${VC.line}`, display: 'flex', alignItems: 'center', padding: '0 14px', gap: 8 }}>
+        {['#ff5f57', '#febc2e', '#28c840'].map(c => <span key={c} style={{ width: 12, height: 12, borderRadius: 6, background: c }}></span>)}
+        <div style={{ margin: '0 auto', width: 360, height: 24, borderRadius: 7, background: VC.panel, border: `1px solid ${VC.line2}`, fontSize: 12, color: VC.ink3, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+          <span style={{ width: 8, height: 8, borderRadius: 2, border: `1.5px solid ${VC.ink3}` }}></span>aishopper.app</div>
+        <span style={{ width: 52 }}></span>
+      </div>
+      <AppBar T={T} K={K} lang={lang}/>
+      <div style={{ position: 'absolute', left: 390, top: PANE_Y, width: 1, height: 707, background: VC.line }}></div>
+      <div style={{ position: 'absolute', left: 781, top: PANE_Y, width: 1, height: 707, background: VC.line }}></div>
+      <Pane i={1}>
+        <div style={{ position: 'absolute', inset: 0, opacity: 1 - MOTION.enter(T, K.Extras, 0.3) }}><VCompare T={T} K={K} lang={lang} desk/></div>
+        {T >= K.Extras && <div style={{ position: 'absolute', inset: 0, opacity: MOTION.enter(T, K.Extras, 0.3) }}><VExtras T={T} X={K.Extras} lang={lang}/></div>}
+      </Pane>
+      <Pane i={2}>
+        <div style={{ position: 'absolute', inset: 0, opacity: 1 - MOTION.enter(T, tYou, 0.25) }}><VBasket T={T} K={K} lang={lang} revealAt={K.Add + 1.8}/></div>
+        <div style={{ position: 'absolute', inset: 0, opacity: MOTION.enter(T, tYou, 0.25), visibility: T >= tYou ? 'visible' : 'hidden', background: VC.bg }}><VYou T={T} K={K} lang={lang}/></div>
+      </Pane>
+      <Pane i={0}>
+        <VChat T={T} K={K} lang={lang} fly={{ x: 782 + 35, y: 290, arc: 140 }}/>
+        <VToast T={T} K={K} lang={lang} y={626}/>
+      </Pane>
+      {sheetP > 0.001 && <div style={{ position: 'absolute', left: 0, top: PANE_Y, width: WW, height: 707, background: `oklch(0.20 0.01 60 / ${0.4 * sheetP})`, zIndex: 4 }}></div>}
+      <div style={{ position: 'absolute', left: (WW - 390) / 2, top: 212, width: 390, height: 470, zIndex: 5 }}><VSheet T={T} K={K} lang={lang} modal/></div>
+      <Pointer T={T} K={K}/>
+    </div>
+  );
+}
+
+const STEPS = [
+  ['Voice', 'Di un plato', 'Say a dish', 'Pulsa el micro y habla, o escríbelo.', 'Click the mic and speak, or type it.'],
+  ['Recipe', 'Ajusta comensales', 'Set the servings', 'Los ingredientes se recalculan solos.', 'Ingredients rescale on their own.'],
+  ['Add', 'Añade todo', 'Add it all', 'Un clic y todo pasa a tu cesta.', 'One click and it lands in your basket.'],
+  ['Compare', 'Compara 7 supers', 'Compare 7 stores', 'El total más barato, envío incluido.', 'Cheapest total, delivery included.'],
+  ['Swap', 'Pasa a marca blanca', 'Swap to store brands', 'Mismo producto, menos precio.', 'Same product, lower price.'],
+  ['Checkout', 'Abre tu carrito', 'Open your cart', 'Listo en la web del súper.', "Ready on the store's own site."],
+  ['Alerts', 'Activa alertas', 'Turn on price alerts', 'Te avisamos cuando baje.', "We'll tell you when it drops."],
+];
+
+function Piece({ lang }) {
+  const { T, CUES: K } = useComposition();
+  const es = lang === 'es';
+  const rise = MOTION.glide(T, 2.2, 1.6);
+  const sink = MOTION.glide(T, K.Outro + 0.6, 1.4);
+  const dy = (1 - rise) * 1100 + sink * 1100;
+  const cam = vtrack(T, [
+    { v: { z: 1, fx: 586, fy: 400 } },
+    { t: K.Voice + 0.4, d: 1.1, v: { z: 1.4, fx: 220, fy: 560 } },
+    { t: K.Voice + 4.2, d: 1.3, v: { z: 1.4, fx: 200, fy: 320 } },
+    { t: K.Recipe + 0.2, d: 1.2, v: { z: 1.55, fx: 210, fy: 440 } },
+    { t: K.Add + 0.1, d: 0.8, v: { z: 1.45, fx: 250, fy: 580 } },
+    { t: K.Add + 1.1, d: 1.1, v: { z: 1, fx: 586, fy: 420 } },
+    { t: K.Compare + 0.6, d: 1.2, v: { z: 1.5, fx: 586, fy: 290 } },
+    { t: K.Compare + 3.6, d: 1.8, v: { z: 1.35, fx: 586, fy: 560 } },
+    { t: K.Swap - 0.3, d: 0.8, v: { z: 1, fx: 586, fy: 420 } },
+    { t: K.Swap + 0.9, d: 1.1, v: { z: 1.5, fx: 977, fy: 230 } },
+    { t: K.Swap + 2.9, d: 1.4, v: { z: 1.35, fx: 977, fy: 580 } },
+    { t: K.Checkout + 0.3, d: 0.8, v: { z: 1, fx: 586, fy: 420 } },
+    { t: K.Checkout + 1.4, d: 1.2, v: { z: 1.3, fx: 586, fy: 440 } },
+    { t: K.Alerts - 0.7, d: 0.9, v: { z: 1, fx: 586, fy: 400 } },
+    { t: K.Alerts + 0.9, d: 1.0, v: { z: 1.5, fx: 1000, fy: 290 } },
+    { t: K.Extras - 0.4, d: 0.9, v: { z: 1.45, fx: 586, fy: 380 } },
+    { t: K.Outro, d: 0.8, v: { z: 1, fx: 586, fy: 400 } },
+  ]);
+  const base = { x: WX + cam.fx, y: WY + cam.fy };
+  const k = vcl((cam.z - 1) / 0.5);
+  const target = { x: vmix(base.x, ANCHOR.x, k), y: vmix(base.y, ANCHOR.y, k) };
+  const ox = target.x - cam.z * cam.fx, oy = target.y - cam.z * cam.fy + dy;
+  const titleO = T < K.Voice ? 1 - MOTION.enter(T, 2.6, 0.7) : MOTION.enter(T, K.Outro + 1.6, 0.7);
+  const titleY = T < K.Voice ? -60 * MOTION.enter(T, 2.6, 0.7) : 40 * (1 - MOTION.enter(T, K.Outro + 1.6, 0.7));
+  const capBand = T < K.Voice ? MOTION.enter(T, 3.0, 0.6) : 1 - MOTION.enter(T, K.Outro + 0.6, 0.6);
+  const caps = STEPS.map(([sec, te, tn, se, sn], i) => ({
+    at: K[sec] + (i === 0 ? 0 : 0.15),
+    until: i === STEPS.length - 1 ? K.Extras : undefined,
+    text: (
+      <div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, fontFamily: VF.mono, fontSize: 24, color: VC.accent, fontWeight: 500 }}>
+          <span style={{ width: 48, height: 48, borderRadius: 24, background: VC.accentSoft, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{i + 1}</span>
+          <span style={{ color: VC.ink3 }}>/ 7</span>
+        </div>
+        <div style={{ fontFamily: VF.serif, fontSize: 84, lineHeight: 1, letterSpacing: '-0.02em', marginTop: 22, color: VC.ink, textWrap: 'balance' }}>{es ? te : tn}</div>
+        <div style={{ fontSize: 30, lineHeight: 1.35, color: VC.ink2, marginTop: 16, textWrap: 'pretty' }}>{es ? se : sn}</div>
+      </div>
+    ),
+  }));
+  return (
+    <div data-screen-label={`t=${Math.floor(T)}s`} style={{ position: 'absolute', inset: 0, overflow: 'hidden', fontFamily: VF.sans,
+      background: `radial-gradient(900px 700px at 90% 0%, oklch(0.95 0.03 255), transparent 70%), radial-gradient(900px 700px at 0% 100%, oklch(0.95 0.03 150), transparent 70%), ${VC.bg}` }}>
+      <div style={{ position: 'absolute', left: 0, top: 0, width: WW, height: WH, transformOrigin: '0 0', transform: `translate(${ox}px, ${oy}px) scale(${cam.z})` }}>
+        <Browser T={T} K={K} lang={lang}/>
+      </div>
+      <div style={{ position: 'absolute', left: 0, top: 0, width: 760, height: H, pointerEvents: 'none', opacity: capBand,
+        background: `linear-gradient(90deg, ${VC.bg} 0%, ${VC.bg} 75%, oklch(0.985 0.004 85 / 0) 100%)` }}></div>
+      <Captions items={[...caps, ...vxCaptions(K.Extras, lang, K.Outro, { num: 24, chip: 48, title: 84, sub: 30 })]} style={{ top: 330, bottom: 'auto', left: 96, right: 'auto', width: 500, textAlign: 'left', textShadow: 'none', color: VC.ink, font: `400 30px ${VF.sans}` }}/>
+      <div style={{ position: 'absolute', left: 0, right: 0, top: 360 + titleY, textAlign: 'center', opacity: titleO }}>
+        <div style={{ display: 'inline-flex', width: 80, height: 80, borderRadius: 24, background: VC.accentSoft, color: 'oklch(0.40 0.15 255)', alignItems: 'center', justifyContent: 'center' }}>
+          <Icon name="sparkle" size={40}/>
+        </div>
+        <div style={{ fontFamily: VF.serif, fontSize: 150, lineHeight: 1, letterSpacing: '-0.02em', marginTop: 22 }}>AI Shopper</div>
+        <div style={{ fontSize: 36, color: VC.ink2, marginTop: 16 }}>
+          {es ? <>Dime un plato. <i style={{ fontFamily: VF.serif, fontSize: 46 }}>Te digo dónde sale más barato.</i></> : <>Name a dish. <i style={{ fontFamily: VF.serif, fontSize: 46 }}>I'll tell you where it's cheapest.</i></>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  const [t, setTweak] = useTweaks(window.INTRO_TWEAKS);
+  const qlang = new URLSearchParams(location.search).get('lang');
+  return (
+    <>
+      <CompositionStage width={W} height={H} bg={VC.bg} scenes={window.OM_SCENES} playback={window.OM_PLAYBACK}>
+        <Piece lang={qlang || t.language}/>
+      </CompositionStage>
+      <TweaksPanel>
+        <TweakSection label="Video"/>
+        <TweakRadio label="Language" value={t.language} options={['es', 'en']} onChange={(v) => setTweak('language', v)}/>
+        <TweakToggle label="Motion editor" value={t.motionEditor} onChange={(v) => setTweak('motionEditor', v)}/>
+      </TweaksPanel>
+    </>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

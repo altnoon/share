@@ -107,7 +107,7 @@ function CheckoutModal({ lang, winner, basket, storeTotals, appliedSubs, onClose
                     display:'flex', alignItems:'center', gap: 10,
                     fontSize: 12, color:'var(--ink-2)',
                   }}>
-                    <span style={{ fontSize: 14 }}>{p.emoji}</span>
+                    <PThumb id={b.id} size={24} radius={6}/>
                     <span style={{ flex: 1 }}>
                       {substituted && p.whiteLabel ? p.whiteLabel.name[lang] : p.name[lang]}
                       <span className="mono" style={{ color:'var(--ink-3)', marginLeft: 6 }}>×{b.qty}</span>

@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>AI Shopper — Intro video</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html,body{margin:0;background:#1d1b19;font-family:Inter,system-ui,sans-serif;color:oklch(0.20 0.012 60);-webkit-font-smoothing:antialiased}
+a{color:oklch(0.55 0.18 255)}a:hover{color:oklch(0.45 0.18 255)}
+:root{--sage-ink:oklch(0.40 0.10 150);--sage-line:oklch(0.85 0.05 150);--warn-ink:oklch(0.42 0.11 45);--warn-line:oklch(0.85 0.06 55);--danger-ink:oklch(0.52 0.15 28);--accent-ink:oklch(0.40 0.14 255);--accent-line:oklch(0.88 0.05 255);--sage-soft:oklch(0.93 0.05 150);--warn-soft:oklch(0.94 0.05 55)}
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#f7f5f0"><svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#f7f5f0"/><circle cx="600" cy="360" r="140" fill="#2b2723"/><path d="M560 290 L560 430 L680 360 Z" fill="#f7f5f0"/><text x="600" y="610" font-family="Georgia, serif" font-size="80" fill="#2b2723" text-anchor="middle">AI Shopper · Intro</text></svg></template>
+<div id="root"></div>
+<script>window.OM_SCENES = '[{"name":"Intro","dur":4,"desc":"Title card; the phone rises into frame"},{"name":"Voice","dur":7,"desc":"Step 1: tap the mic and say a dish"},{"name":"Recipe","dur":7,"desc":"Step 2: recipe card appears, servings go 4 to 6 and quantities rescale"},{"name":"Add","dur":5,"desc":"Step 3: add everything; ingredients fly into the basket"},{"name":"Compare","dur":8,"desc":"Step 4: compare 7 stores, savings dial fills"},{"name":"Swap","dur":6,"desc":"Step 5: apply store-brand swaps, total drops"},{"name":"Checkout","dur":6,"desc":"Step 6: open the cart on the winning store"},{"name":"Alerts","dur":5,"desc":"Step 7: turn on a price alert and set the threshold"},{"name":"Extras","dur":9,"desc":"Bonus: weekly menu, photo of list, split basket, order tracking"},{"name":"Outro","dur":4,"desc":"Tagline; the phone sinks back out of frame"}]';</script>
+<script>window.OM_PLAYBACK = '{"mode":"loop"}';</script>
+<script>window.INTRO_TWEAKS = /*EDITMODE-BEGIN*/{"language":"es","motionEditor":true}/*EDITMODE-END*/;</script>
+<script type="text/babel" src="/aishopper-app/src/data.jsx"></script>
+<script type="text/babel" src="/aishopper-app/src/ui.jsx"></script>
+<script type="text/babel" src="/aishopper-app/video/animations-v3.jsx"></script>
+<script type="text/babel" src="/aishopper-app/video/tweaks-panel.jsx"></script>
+<script type="text/babel" src="/aishopper-app/src/features-data.jsx"></script>
+<script type="text/babel" src="/aishopper-app/video/intro-screens.jsx"></script>
+<script type="text/babel" src="/aishopper-app/video/intro-extras.jsx"></script>
+<script type="text/babel">
+const W = 1080, H = 1920, S0 = 1.72, PX = (W - 414 * S0) / 2, PY = 392, ANCHOR = { x: 540, y: 1180 };
+
+function Finger({ T, K }) {
+  const V = K.Voice, R = K.Recipe, A = K.Add, Cm = K.Compare, Sw = K.Swap, Ck = K.Checkout, Al = K.Alerts;
+  const f = vtrack(T, [
+    { v: { x: 250, y: 560, o: 0 } },
+    { t: V + 0.3, d: 0.3, v: { o: 1 } },
+    { t: V + 0.5, d: 0.9, v: { x: 351, y: 717 } },
+    { t: V + 2.0, d: 0.9, v: { x: 300, y: 610 } },
+    { t: V + 3.8, d: 0.4, v: { o: 0 } },
+    { t: R + 1.5, d: 0.01, v: { x: 290, y: 430 } },
+    { t: R + 1.6, d: 0.3, v: { o: 1 } },
+    { t: R + 2.0, d: 0.9, v: { x: 346, y: 293 } },
+    { t: R + 5.0, d: 1.0, v: { x: 320, y: 470 } },
+    { t: A + 0.0, d: 0.8, v: { x: 309, y: 554 } },
+    { t: A + 1.4, d: 0.8, v: { x: 280, y: 620 } },
+    { t: Cm - 0.4, d: 1.0, v: { x: 195, y: 778 } },
+    { t: Cm + 1.3, d: 0.8, v: { x: 270, y: 610 } },
+    { t: Cm + 2.0, d: 0.4, v: { o: 0 } },
+    { t: Sw - 0.6, d: 0.01, v: { x: 300, y: 690 } },
+    { t: Sw - 0.5, d: 0.3, v: { o: 1 } },
+    { t: Sw - 0.4, d: 0.9, v: { x: 339, y: 76 } },
+    { t: Sw + 1.3, d: 0.9, v: { x: 305, y: 164 } },
+    { t: Sw + 2.9, d: 0.8, v: { x: 290, y: 330 } },
+    { t: Ck - 0.9, d: 1.1, v: { x: 195, y: 702 } },
+    { t: Ck + 1.0, d: 0.8, v: { x: 270, y: 480 } },
+    { t: Ck + 2.3, d: 0.9, v: { x: 195, y: 594 } },
+    { t: Ck + 3.8, d: 0.8, v: { x: 270, y: 480 } },
+    { t: Al - 0.8, d: 1.0, v: { x: 325, y: 778 } },
+    { t: Al + 1.0, d: 0.9, v: { x: 329, y: 278 } },
+    { t: Al + 2.5, d: 0.7, v: { x: 262, y: 329 } },
+    { t: Al + 4.0, d: 0.5, v: { x: 300, y: 430, o: 0 } },
+  ]);
+  const taps = [V + 1.5, R + 3.2, R + 4.2, A + 0.95, Cm + 0.8, Sw + 0.7, Sw + 2.4, Ck + 0.7, Ck + 3.3, Al + 0.6, Al + 2.0, Al + 3.5];
+  let press = 0, ring = -1;
+  taps.forEach(t => { const d = T - t; if (d >= -0.12 && d < 0.2) press = Math.max(press, 1 - Math.abs(d - 0.04) / 0.16); if (d >= 0 && d < 0.5) ring = d / 0.5; });
+  if (f.o <= 0.01) return null;
+  return (
+    <div style={{ position: 'absolute', left: f.x, top: f.y, opacity: f.o, pointerEvents: 'none' }}>
+      {ring >= 0 && <div style={{ position: 'absolute', left: -22 - 20 * ring, top: -22 - 20 * ring, width: 44 + 40 * ring, height: 44 + 40 * ring,
+        borderRadius: '50%', border: '2px solid oklch(0.55 0.18 255)', opacity: 0.6 * (1 - ring) }}></div>}
+      <div style={{ position: 'absolute', left: -21, top: -21, width: 42, height: 42, borderRadius: '50%',
+        background: 'oklch(0.25 0.02 60 / 0.28)', border: '2.5px solid rgba(255,255,255,0.95)',
+        boxShadow: '0 6px 18px oklch(0.2 0.01 60 / 0.3)', transform: `scale(${1 - 0.18 * Math.max(0, press)})` }}></div>
+    </div>
+  );
+}
+
+function Screen({ T, K, lang }) {
+  const tCmp = K.Compare + 0.9, tBsk = K.Swap + 0.8, tYou = K.Alerts + 0.7;
+  const active = T >= K.Extras ? VX_TAB(T, K.Extras) : T >= tYou ? 'you' : T >= tBsk ? 'compare' : T >= tCmp ? 'compare' : 'chat';
+  const layer = (o, el) => <div style={{ position: 'absolute', inset: 0, opacity: o, visibility: o > 0.001 ? 'visible' : 'hidden' }}>{el}</div>;
+  return (
+    <div style={{ position: 'absolute', left: 12, top: 12, width: 390, height: 844, borderRadius: 48, overflow: 'hidden', background: VC.bg, fontFamily: VF.sans, color: VC.ink }}>
+      {layer(1 - MOTION.enter(T, tCmp, 0.2), <VChat T={T} K={K} lang={lang}/>)}
+      {layer(win(T, tCmp, tBsk), <VCompare T={T} K={K} lang={lang}/>)}
+      {layer(win(T, tBsk, tYou), <VBasket T={T} K={K} lang={lang}/>)}
+      {layer(win(T, tYou, K.Extras + 0.3), <VYou T={T} K={K} lang={lang}/>)}
+      {layer(MOTION.enter(T, K.Extras, 0.25), <VExtras T={T} X={K.Extras} lang={lang}/>)}
+      <VToast T={T} K={K} lang={lang}/>
+      <VStatus/>
+      <VTabBar T={T} lang={lang} active={active} count={T >= K.Add + 1.9 ? VCOUNT : 0} bump={K.Add + 1.9}/>
+      <VSheet T={T} K={K} lang={lang}/>
+      <Finger T={T} K={K}/>
+    </div>
+  );
+}
+
+const STEPS = [
+  ['Voice', 'Di un plato', 'Say a dish', 'Toca el micro y habla.', 'Tap the mic and speak.'],
+  ['Recipe', 'Ajusta comensales', 'Set the servings', 'Los ingredientes se recalculan solos.', 'Ingredients rescale on their own.'],
+  ['Add', 'Añade todo', 'Add it all', 'Un toque y a comparar.', 'One tap, straight to the comparison.'],
+  ['Compare', 'Compara 7 supers', 'Compare 7 stores', 'El total más barato, envío incluido.', 'Cheapest total, delivery included.'],
+  ['Swap', 'Pasa a marca blanca', 'Swap to store brands', 'Mismo producto, menos precio.', 'Same product, lower price.'],
+  ['Checkout', 'Abre tu carrito', 'Open your cart', 'Listo en la web del súper.', "Ready on the store's own site."],
+  ['Alerts', 'Activa alertas', 'Turn on price alerts', 'Te avisamos cuando baje.', "We'll tell you when it drops."],
+];
+
+function Piece({ lang }) {
+  const { T, CUES: K } = useComposition();
+  const es = lang === 'es';
+  // Phone entrance / exit
+  const rise = MOTION.glide(T, 0.5, 1.8);
+  const sink = MOTION.glide(T, K.Outro + 2.0, 1.4);
+  const dy = (1 - rise) * 1700 + sink * 1700;
+  // Camera — damped zoom that follows the action (phone-space focus)
+  const cam = vtrack(T, [
+    { v: { z: 1, fx: 207, fy: 434 } },
+    { t: K.Voice + 0.6, d: 1.0, v: { z: 1.28, fx: 207, fy: 660 } },
+    { t: K.Voice + 4.2, d: 1.3, v: { z: 1.12, fx: 207, fy: 320 } },
+    { t: K.Recipe + 0.2, d: 1.2, v: { z: 1.32, fx: 212, fy: 420 } },
+    { t: K.Add + 0.2, d: 0.8, v: { z: 1.28, fx: 212, fy: 580 } },
+    { t: K.Add + 2.0, d: 1.0, v: { z: 1.12, fx: 207, fy: 640 } },
+    { t: K.Compare + 0.2, d: 0.7, v: { z: 1, fx: 207, fy: 434 } },
+    { t: K.Compare + 1.2, d: 1.0, v: { z: 1.3, fx: 207, fy: 250 } },
+    { t: K.Compare + 3.6, d: 1.8, v: { z: 1.18, fx: 207, fy: 600 } },
+    { t: K.Swap - 0.3, d: 0.8, v: { z: 1, fx: 207, fy: 434 } },
+    { t: K.Swap + 1.2, d: 1.0, v: { z: 1.3, fx: 207, fy: 250 } },
+    { t: K.Swap + 2.9, d: 1.4, v: { z: 1.18, fx: 207, fy: 600 } },
+    { t: K.Checkout + 0.2, d: 0.8, v: { z: 1, fx: 207, fy: 434 } },
+    { t: K.Checkout + 1.5, d: 1.2, v: { z: 1.22, fx: 207, fy: 560 } },
+    { t: K.Alerts - 0.6, d: 0.9, v: { z: 1, fx: 207, fy: 434 } },
+    { t: K.Alerts + 0.9, d: 1.0, v: { z: 1.35, fx: 207, fy: 310 } },
+    { t: K.Extras - 0.4, d: 0.9, v: { z: 1.1, fx: 207, fy: 400 } },
+    { t: K.Outro, d: 1.0, v: { z: 1, fx: 207, fy: 434 } },
+  ]);
+  const fx = cam.fx + 12, fy = cam.fy + 12;
+  const base = { x: PX + fx * S0, y: PY + fy * S0 };
+  const k = vcl((cam.z - 1) / 0.35);
+  const target = { x: vmix(base.x, ANCHOR.x, k), y: vmix(base.y, ANCHOR.y, k) };
+  const sc = cam.z * S0;
+  const ox = (W - 414 * sc) / 2;
+  const oy = Math.max(Math.min(PY, H - 868 * sc), Math.min(PY, target.y - sc * fy)) + dy;
+  // Title card (intro + outro, mirrored so the loop seam matches)
+  const tIn = MOTION.glide(T, 0.9, 1.4), tOut = MOTION.enter(T, 3.75, 0.4);
+  const oIn = MOTION.enter(T, K.Outro + 0.3, 0.6), oDown = MOTION.glide(T, K.Outro + 2.0, 1.4);
+  const titleY = T < K.Voice ? vmix(760, 70, tIn) : vmix(70, 760, oDown);
+  const titleO = T < K.Voice ? 1 - tOut : oIn;
+  const stepCaps = STEPS.map(([sec, te, tn, se, sn], i) => ({
+    at: K[sec] + (i === 0 ? 0 : 0.15),
+    until: i === STEPS.length - 1 ? K.Extras : undefined,
+    text: (
+      <div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontFamily: VF.mono, fontSize: 28, color: VC.accent, fontWeight: 500 }}>
+          <span style={{ width: 54, height: 54, borderRadius: 27, background: VC.accentSoft, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{i + 1}</span>
+          <span style={{ color: VC.ink3 }}>/ 7</span>
+        </div>
+        <div style={{ fontFamily: VF.serif, fontSize: 96, lineHeight: 1, letterSpacing: '-0.02em', marginTop: 22, color: VC.ink }}>{es ? te : tn}</div>
+        <div style={{ fontSize: 34, color: VC.ink2, marginTop: 14 }}>{es ? se : sn}</div>
+      </div>
+    ),
+  }));
+  return (
+    <div data-screen-label={`t=${Math.floor(T)}s`} style={{ position: 'absolute', inset: 0, overflow: 'hidden', fontFamily: VF.sans,
+      background: `radial-gradient(900px 700px at 85% 10%, oklch(0.95 0.03 255), transparent 70%), radial-gradient(900px 800px at 0% 100%, oklch(0.95 0.03 150), transparent 70%), ${VC.bg}` }}>
+      <div style={{ position: 'absolute', left: 0, top: 0, width: 414, height: 868, transformOrigin: '0 0', transform: `translate(${ox}px, ${oy}px) scale(${sc})` }}>
+        <div style={{ position: 'absolute', inset: 0, borderRadius: 60, background: '#1b1917', boxShadow: '0 40px 80px oklch(0.2 0.01 60 / 0.28), inset 0 0 0 2px #3a3633' }}></div>
+        <Screen T={T} K={K} lang={lang}/>
+      </div>
+      <div style={{ position: 'absolute', left: 0, top: 0, width: W, height: 470, pointerEvents: 'none',
+        background: `linear-gradient(180deg, ${VC.bg} 0%, ${VC.bg} 68%, oklch(0.985 0.004 85 / 0) 100%)`, opacity: T < K.Voice ? tIn : 1 - oDown }}></div>
+      <Captions items={[...stepCaps, ...vxCaptions(K.Extras, lang, K.Outro)]} style={{ top: 92, bottom: 'auto', left: 72, right: 72, textAlign: 'left', textShadow: 'none', color: VC.ink, font: `400 30px ${VF.sans}` }}/>
+      <div style={{ position: 'absolute', left: 0, right: 0, top: titleY, textAlign: 'center', opacity: titleO }}>
+        <div style={{ display: 'inline-flex', width: 72, height: 72, borderRadius: 22, background: VC.accentSoft, color: 'oklch(0.40 0.15 255)', alignItems: 'center', justifyContent: 'center' }}>
+          <Icon name="sparkle" size={36}/>
+        </div>
+        <div style={{ fontFamily: VF.serif, fontSize: 120, lineHeight: 1, letterSpacing: '-0.02em', marginTop: 18 }}>AI Shopper</div>
+        <div style={{ fontSize: 34, color: VC.ink2, marginTop: 12 }}>
+          {(es ? <>Dime un plato. <i style={{ fontFamily: VF.serif, fontSize: 44 }}>Te digo dónde sale más barato.</i></> : <>Name a dish. <i style={{ fontFamily: VF.serif, fontSize: 44 }}>I'll tell you where it's cheapest.</i></>)}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  const [t, setTweak] = useTweaks(window.INTRO_TWEAKS);
+  const qlang = new URLSearchParams(location.search).get('lang');
+  return (
+    <>
+      <CompositionStage width={W} height={H} bg={VC.bg} scenes={window.OM_SCENES} playback={window.OM_PLAYBACK}>
+        <Piece lang={qlang || t.language}/>
+      </CompositionStage>
+      <TweaksPanel>
+        <TweakSection label="Video"/>
+        <TweakRadio label="Language" value={t.language} options={['es', 'en']} onChange={(v) => setTweak('language', v)}/>
+        <TweakToggle label="Motion editor" value={t.motionEditor} onChange={(v) => setTweak('motionEditor', v)}/>
+      </TweaksPanel>
+    </>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

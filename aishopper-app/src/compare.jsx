@@ -301,7 +301,7 @@ function TableView({ lang, storeTotals, winner, basket, appliedSubs }) {
                 <tr key={b.id} style={{ borderTop:'1px solid var(--line-2)' }}>
                   <td style={thTdBase('left')}>
                     <div style={{ display:'flex', alignItems:'center', gap: 6 }}>
-                      <span style={{ fontSize: 14 }}>{p.emoji}</span>
+                      <PThumb id={b.id} size={22} radius={5}/>
                       <span style={{ fontWeight: 500 }}>{p.name[lang]}</span>
                       <span className="mono" style={{ color:'var(--ink-3)', fontSize: 10 }}>×{b.qty}</span>
                     </div>
@@ -401,7 +401,7 @@ function OptimizerPane({ lang, basket: allBasket, appliedSubs, onApply, onApplyA
               border: `1px solid ${applied ? 'var(--sage-line)' : 'var(--line-2)'}`,
               transition: 'background 200ms',
             }}>
-              <span style={{ fontSize: 16 }}>{p.emoji}</span>
+              <PThumb id={b.id} size={30}/>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontSize: 13, fontWeight: 500, display:'flex', alignItems:'center', gap: 6 }}>
                   <span style={{ color:'var(--ink-3)', textDecoration: applied ? 'none' : 'line-through' }}>

@@ -16,7 +16,7 @@ function PriceHistorySheet({ variant, id, onClose }) {
   const has = (ctx.alerts || []).some(a => a.id === id);
   return (
     <Sheet variant={variant} onClose={onClose} kicker={L(lang,'Historial de precio · 6 meses','Price history · 6 months')}
-      title={<><span aria-hidden="true">{p.emoji}</span> {p.name[lang]}</>}
+      title={<span style={{ display:'inline-flex', alignItems:'center', gap: 10 }}><PThumb id={p.id} size={34} radius={8}/>{p.name[lang]}</span>}
       footer={
         <div style={{ display:'flex', alignItems:'center', gap: 10, flexWrap:'wrap' }}>
           <span style={{ fontSize: 13, color:'var(--ink-2)', flex: '1 1 auto' }}>{L(lang,'Avisarme por debajo de','Alert me under')}</span>
@@ -158,7 +158,7 @@ function WeeklyMenuSheet({ variant, data, onClose }) {
       <div style={{ ...fxKicker, marginBottom: 6 }}>{L(lang,'Lista combinada','Combined list')}</div>
       {merged.items.map(i => (
         <div key={i.id} style={{ display:'flex', alignItems:'center', gap: 10, padding:'6px 0', fontSize: 13, borderTop:'1px solid var(--line-2)', color: i.home ? 'var(--ink-3)' : 'var(--ink)' }}>
-          <span aria-hidden="true">{CATALOG[i.id].emoji}</span>
+          <PThumb id={i.id} size={26} radius={6}/>
           <span style={{ flex: 1, textDecoration: i.home ? 'line-through' : 'none' }}>{CATALOG[i.id].name[lang]}</span>
           {i.shared && !i.home && <Pill size="sm" title={i.shared.map(r => RECIPES[r].name[lang]).join(' + ')}>{L(lang,'para','for')} {i.shared.map(r => RECIPES[r].emoji).join(' ')}</Pill>}
           {i.home && <Pill tone="sage" size="sm"><Icon name="home" size={9}/>{L(lang,'en casa','at home')}</Pill>}
@@ -220,7 +220,7 @@ function PhotoListSheet({ variant, onClose }) {
         return (
           <label key={l.id} style={{ display:'flex', alignItems:'center', gap: 10, minHeight: 48, padding:'4px 0', borderTop:'1px solid var(--line-2)', cursor:'pointer' }}>
             <input type="checkbox" checked={on} onChange={() => setSel(s => on ? s.filter(x => x !== l.id) : [...s, l.id])} style={{ width: 18, height: 18, accentColor:'var(--ink)' }}/>
-            <span aria-hidden="true" style={{ fontSize: 17 }}>{CATALOG[l.id].emoji}</span>
+            <PThumb id={l.id} size={30}/>
             <span style={{ flex: 1, minWidth: 0 }}>
               <span style={{ fontSize: 13, fontWeight: 500 }}>{CATALOG[l.id].name[lang]} <span className="mono" style={{ color:'var(--ink-3)', fontWeight: 400 }}>×{l.qty}</span></span>
               <span style={{ display:'block', fontSize: 12, color: low ? 'var(--warn-ink)' : 'var(--ink-3)' }}>“{l.raw}” {low ? L(lang,'· ¿seguro? revisa','· not sure, check') : ''}</span>

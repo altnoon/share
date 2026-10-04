@@ -79,7 +79,7 @@ function MissingSheet({ variant, onClose, data }) {
       <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 8 }}>
         {missing.map(b => { const p = CATALOG[b.id]; const a = alt(b.id); return (
           <li key={b.id} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 12px', borderRadius: 12, background: 'var(--bg-sunk)', border: '1px solid var(--line-2)' }}>
-            <span aria-hidden="true" style={{ fontSize: 18 }}>{p.emoji}</span>
+            <PThumb id={b.id} size={34} radius={8}/>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: 13.5, fontWeight: 500 }}>{p.name[lang]} <span style={{ color: 'var(--ink-3)', fontWeight: 400 }}>× {b.qty}</span></div>
               <div style={{ fontSize: 12, color: a ? 'var(--ink-2)' : 'var(--warn-ink)', marginTop: 1 }}>{a ? L(lang, `Alternativa: ${a}`, `Alternative: ${a}`) : L(lang, 'Sin alternativa en este súper', 'No alternative at this store')}</div>
@@ -112,17 +112,18 @@ function ReturnCard({ onSend }) {
 }
 
 // ─── Landing handoff: /aishopper-app?say=paella%20para%204 pre-sends the first message. ───
-function useLandingHandoff(send, ready) {
+function useLandingHandoff(send, ready, accept) {
   const done = useRef(false);
   useEffect(() => {
     if (done.current || !ready) return;
     const q = new URLSearchParams(window.location.search);
-    const say = q.get('say'); const from = q.get('from');
-    if (from) track('app_opened', { source: from });
+    const say = q.get('say'); const from = q.get('from'); const demo = q.get('demo') === '1'; const tab = q.get('tab');
+    if (from && !demo) track('app_opened', { source: from });
     if (!say) return;
     done.current = true;
-    setTimeout(() => send(say), 500);
-    try { history.replaceState(null, '', window.location.pathname); } catch (e) {}
+    setTimeout(() => send(say), demo ? 50 : 500);
+    if (tab) { setTimeout(() => { window.__aiSkipToast = true; accept && accept(say); }, 1800); setTimeout(() => window.dispatchEvent(new CustomEvent('ai-go-tab', { detail: tab })), 2400); }
+    if (!demo) try { history.replaceState(null, '', window.location.pathname); } catch (e) {}
   }, [ready]);
 }
 

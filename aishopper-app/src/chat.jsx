@@ -167,7 +167,7 @@ function AIBubble({ children, tone = 'default' }) {
     <div style={{ display:'flex', gap: 8, alignItems:'flex-start' }}>
       <ConciergeAvatar/>
       <div style={{
-        flex: 1, background: tone === 'accent' ? 'var(--accent-soft)' : 'var(--bg-sunk)',
+        flex: 1, minWidth: 0, background: tone === 'accent' ? 'var(--accent-soft)' : 'var(--bg-sunk)',
         border: `1px solid ${tone === 'accent' ? 'var(--accent-line)' : 'var(--line-2)'}`,
         padding: '10px 12px', borderRadius: '3px 14px 14px 14px',
         fontSize: 13, lineHeight: 1.5, color: 'var(--ink)',
@@ -219,7 +219,7 @@ function ParsedItems({ items, guess, lang }) {
               background: unsure ? 'var(--warn-soft)' : 'var(--bg-panel)', border: unsure ? '1px dashed var(--warn-line)' : '1px solid var(--line)',
               fontSize: 12, animation: `popIn 300ms ${ix * 110}ms both`,
             }}>
-              <span style={{ fontSize: 14 }}>{p.emoji}</span>
+              <PThumb id={p.id} size={22} radius={5}/>
               <span style={{ fontWeight: 500 }}>{p.name[lang]}</span>
               {unsure ? <span style={{ color:'var(--warn-ink)', fontWeight: 600 }} title={L(lang,'Por confirmar','To confirm')}>?</span>
                       : <span style={{ color:'var(--ink-3)', fontSize: 12 }} className="mono">{p.unit[lang]}</span>}

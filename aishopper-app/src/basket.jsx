@@ -90,6 +90,7 @@ function BasketRow({ b, lang, onRemove, onQtyChange, substituted, appliedSubs })
     if (dx < -90) { setDx(-400); setTimeout(onRemove, 180); } else setDx(0);
   };
 
+  const mobile = !window.__aiWeb;
   return (
     <div style={{ position:'relative', overflow:'hidden', borderBottom: '1px solid var(--line-2)' }}>
     <div style={{ position:'absolute', inset: 0, background:'oklch(0.58 0.17 28)', color:'#fff', display:'flex', alignItems:'center', justifyContent:'flex-end', paddingRight: 18, fontSize: 12, fontWeight: 500, opacity: dx < 0 ? 1 : 0 }}>
@@ -116,15 +117,16 @@ function BasketRow({ b, lang, onRemove, onQtyChange, substituted, appliedSubs })
           {b.by && <Pill size="sm" style={{ background:'var(--person-bg)', color:'var(--person-ink)', borderColor:'var(--person-line)' }}>{b.by}</Pill>}
           {substituted && <Pill tone="sage" size="sm"><Icon name="check" size={9}/>{tr('applied', lang)}</Pill>}
           {(ctx.profile.lockBrand || []).includes(b.id) && <Pill size="sm">{L(lang,'Siempre esta marca','Always this brand')}</Pill>}
-          {p.seasonal && !substituted && <Pill tone="sage" size="sm">{tr('seasonNow', lang)}</Pill>}
+          {p.seasonal && !substituted && !mobile && <Pill tone="sage" size="sm">{tr('seasonNow', lang)}</Pill>}
           {p.offer && !substituted && <Pill tone="accent" size="sm">{p.offer[lang]}</Pill>}
         </div>
-        <div style={{ fontSize: 12, color:'var(--ink-3)', display:'flex', alignItems:'center', gap:'2px 6px', marginTop: 2, flexWrap:'wrap', minWidth: 0 }}>
+        <div style={{ fontSize: 12, color:'var(--ink-3)', display:'flex', alignItems:'center', gap:'2px 6px', marginTop: 2, flexWrap: mobile ? 'nowrap' : 'wrap', minWidth: 0, overflow:'hidden' }}>
           <span className="mono" style={{ whiteSpace:'nowrap' }}>{p.unit[lang]}</span>
+          {mobile ? <><span>·</span><span className="mono" style={{ whiteSpace:'nowrap' }}>{eur(p.prices[cheap.id] * b.qty)}</span>{why && <span style={{ color:'var(--sage-ink)', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>· {why.replace(' vs media', '').replace(' vs avg', '')}</span>}</> : <>
           <span>·</span>
           <span style={{ minWidth: 0, overflowWrap:'anywhere' }}>{tr('cheapestAt', lang)} <b style={{ color:'var(--ink-2)', fontWeight: 500 }}>{cheap.name}</b>{why && <span style={{ color:'var(--sage-ink)' }}> · {why}</span>}</span>
           {unitPrice(b.id, cheap.id, lang) && <span className="mono" style={{ minWidth: 0, overflowWrap:'anywhere' }}>{unitPrice(b.id, cheap.id, lang)}</span>}
-          <button onClick={() => ctx.openHistory && ctx.openHistory(b.id)} aria-label={L(lang,'Historial de precio','Price history')} style={{ padding: '4px 2px' }}><Sparkline values={p.history} trend={p.trend}/></button>
+          <button onClick={() => ctx.openHistory && ctx.openHistory(b.id)} aria-label={L(lang,'Historial de precio','Price history')} style={{ padding: '4px 2px' }}><Sparkline values={p.history} trend={p.trend}/></button></>}
         </div>
       </div>
       <QtyStepper qty={b.qty} onChange={onQtyChange}/>

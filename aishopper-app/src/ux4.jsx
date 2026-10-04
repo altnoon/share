@@ -212,7 +212,7 @@ function NextStepCard({ msg }) {
         </div>
         <div style={{ display:'flex', gap: 8 }}>
           {!window.__aiWeb && <button onClick={() => window.dispatchEvent(new Event('ai-go-compare'))} style={{ ...fxBtnGhost, flex: 1 }}>{L(lang, 'Ver por qué', 'See why')}</button>}
-          <button onClick={() => window.dispatchEvent(new Event('ai-open-checkout'))} style={{ ...fxBtnPrimary, flex: 1.4, minHeight: 40 }}>{L(lang, 'Elegir franja', 'Pick a slot')} <Icon name="arrow" size={12}/></button>
+          <button onClick={() => window.dispatchEvent(new Event('ai-open-checkout'))} style={{ ...fxBtnPrimary, flex: 1.4, minHeight: 40 }}>{L(lang, 'Pedir', 'Order')} <Icon name="arrow" size={12}/></button>
         </div>
       </div>
     </div>
