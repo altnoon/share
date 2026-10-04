@@ -5,7 +5,8 @@ function PlayGlyph({ size = 10 }) {
 
 function TourModal({ lang, variant, onClose }) {
   const sa = /standalone/i.test(decodeURIComponent(location.pathname));
-  const src = (variant === 'mobile' ? 'Intro Video' : 'Intro Video Desktop') + (sa ? ' (standalone)' : '') + '.html?lang=' + lang + '&restart=1';
+  const local = /\.html$/i.test(location.pathname) || location.protocol === 'file:';
+  const src = (local ? '' : '/aishopper-app/') + (variant === 'mobile' ? 'Intro Video' : 'Intro Video Desktop') + (sa ? ' (standalone)' : '') + '.html?lang=' + lang + '&restart=1';
   useEffect(() => {
     const k = (e) => { if (e.key === 'Escape') onClose(); };
     window.addEventListener('keydown', k);
