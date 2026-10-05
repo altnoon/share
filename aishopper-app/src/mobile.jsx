@@ -894,11 +894,11 @@ function MobileCheckoutSheet({ lang, winner, basket, storeTotals, appliedSubs, o
   const savings = vsUsual ? basketAt(basket, uId) - winner.total : avg - winner.total;
   const savingsSub = vsUsual ? L(lang, `vs. ${STORES.find(s => s.id === uId).name}, tu súper`, `vs. ${STORES.find(s => s.id === uId).name}, your usual`) : tr('vsTypical', lang);
   const [savedAs, setSavedAs] = useState('');
-  const [slot, setSlot] = useState(null);
-  const [taken, setTaken] = useState(null);
+  const [pick, setPick] = useState(() => defaultFulfil(storeTotals, winner.id));
+  const sel = STORES.find(s => s.id === (pick ? pick.store : winner.id));
   const [more, setMore] = useState(false);
   const trapRef = useRef(null); useFocusTrap(trapRef);
-  const confirm = () => { if (!slot) return; if (slotRace(slot)) { setTaken(slot); setSlot(null); return; } ctx.placeOrder({ stores: [winner.id], total: winner.total + slot.fee, slot, items: basket }); onClose(); };
+  const confirm = () => { if (!pick) return; onClose(); ctx.openOverlay('handoff', { storeId: pick.store }); };
 
   return (
     <div role="dialog" aria-modal="true" aria-label={tr('cartReady', lang)} style={{
@@ -929,8 +929,8 @@ function MobileCheckoutSheet({ lang, winner, basket, storeTotals, appliedSubs, o
               {tr('cartReady', lang)}
             </div>
             <div className="serif" style={{ fontSize: 24, letterSpacing:'-0.015em', lineHeight: 1.15, marginTop: 2 }}>
-              {lang === 'es' ? <>Tu pedido en <span style={{ fontStyle:'italic' }}>{store.name}</span></>
-                             : <>Your order at <span style={{ fontStyle:'italic' }}>{store.name}</span></>}
+              {lang === 'es' ? <>Tu cesta en <span style={{ fontStyle:'italic' }}>{sel.name}</span></>
+                             : <>Your basket at <span style={{ fontStyle:'italic' }}>{sel.name}</span></>}
             </div>
           </div>
           <button onClick={onClose} aria-label="Cerrar / Close" style={{ width: 44, height: 44, display:'inline-flex', alignItems:'center', justifyContent:'center', color:'var(--ink-3)' }}><Icon name="x" size={16}/></button>
@@ -942,16 +942,15 @@ function MobileCheckoutSheet({ lang, winner, basket, storeTotals, appliedSubs, o
         </div>
 
         <div style={{ padding: '14px 18px' }}>
-          <SlotPicker value={slot} onChange={setSlot}/>
-          {taken && <SlotTakenNote slot={taken} onPick={(s) => { setSlot(s); setTaken(null); }}/>}
-          <button onClick={confirm} disabled={!slot} style={{
+          <DeliveryChooser storeTotals={storeTotals} value={pick} onChange={setPick}/>
+          <button onClick={confirm} disabled={!pick} style={{
             marginTop: 12, width:'100%', minHeight: 48, padding: '12px 14px', borderRadius: 12,
-            background: 'var(--ink)', color:'var(--bg)', opacity: slot ? 1 : 0.5,
+            background: 'var(--ink)', color:'var(--bg)', opacity: pick ? 1 : 0.5,
             fontSize: 13, fontWeight: 500,
             display:'inline-flex', alignItems:'center', justifyContent:'center', gap: 8,
           }}>
-            <Icon name="truck" size={13}/>
-            {slot ? <>{L(lang,'Confirmar','Confirm')} · {slotLabel(slot, lang)} · {eur(winner.total + slot.fee)}</> : L(lang,'Elige una franja para confirmar','Pick a slot to confirm')}
+            <Icon name="cart" size={13}/>
+            {pick ? <>{L(lang,'Abrir cesta en','Open basket at')} {sel.name} · {eur(pick.total)} <Icon name="arrow" size={12}/></> : L(lang,'Elige cómo te llega','Pick how it reaches you')}
           </button>
           <button onClick={() => setMore(m => !m)} aria-expanded={more} style={{ marginTop: 10, width:'100%', minHeight: 44, display:'flex', alignItems:'center', justifyContent:'space-between', fontSize: 13, color:'var(--ink-2)' }}>
             <span>{L(lang,'Cambios de precio, sustituciones y más','Price changes, substitutions and more')}</span>
@@ -961,8 +960,7 @@ function MobileCheckoutSheet({ lang, winner, basket, storeTotals, appliedSubs, o
           <PriceChangeNote basket={basket} storeId={winner.id}/>
           <SubRulesCard basket={basket}/>
           <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 8 }}>
-            <button style={actionBtn} onClick={() => ctx.openOverlay('handoff', { storeId: winner.id })}><Icon name="cart" size={12}/>{L(lang,'Abrir en','Open in')} {store.name}</button>
-            <button style={actionBtn} onClick={() => ctx.openOverlay('share')}><Icon name="wa" size={12}/>{tr('whatsapp', lang)}</button>
+            <button style={{ ...actionBtn, gridColumn:'1 / -1' }} onClick={() => ctx.openOverlay('share')}><Icon name="wa" size={12}/>{tr('whatsapp', lang)}</button>
           </div>
 
           <CartPeek n={basket.length}>

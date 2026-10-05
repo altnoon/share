@@ -8,11 +8,11 @@ function CheckoutModal({ lang, winner, basket, storeTotals, appliedSubs, onClose
   const [savedAs, setSavedAs] = useState('');
   const [watching, setWatching] = useState([]);
   const ctx = React.useContext(AppCtx);
-  const [slot, setSlot] = useState(null);
-  const [taken, setTaken] = useState(null);
+  const [pick, setPick] = useState(() => defaultFulfil(storeTotals, winner.id));
+  const sel = STORES.find(s => s.id === (pick ? pick.store : winner.id));
   const trapRef = useRef(null); useFocusTrap(trapRef);
   useEffect(() => { const k = e => { if (e.key === 'Escape') onClose(); }; window.addEventListener('keydown', k); return () => window.removeEventListener('keydown', k); }, []);
-  const confirm = () => { if (!slot) return; if (slotRace(slot)) { setTaken(slot); setSlot(null); return; } ctx.placeOrder({ stores: [winner.id], total: winner.total + slot.fee, slot, items: basket }); onClose(); };
+  const confirm = () => { if (!pick) return; onClose(); ctx.openOverlay('handoff', { storeId: pick.store }); };
 
   return (
     <div role="dialog" aria-modal="true" aria-label={tr('cartReady', lang)} onClick={e => { if (e.target === e.currentTarget) onClose(); }} style={{ position:'fixed', inset: 0, background: 'oklch(0.20 0.01 60 / 0.4)',
@@ -41,7 +41,7 @@ function CheckoutModal({ lang, winner, basket, storeTotals, appliedSubs, onClose
               {tr('cartReady', lang)}
             </div>
             <div className="serif" style={{ fontSize: 28, lineHeight: 1.1, letterSpacing:'-0.015em', marginTop: 2 }}>
-              {lang === 'es' ? <>Tu pedido en <span style={{ fontStyle:'italic' }}>{store.name}</span></> : <>Your order at <span style={{ fontStyle:'italic' }}>{store.name}</span></>}
+              {lang === 'es' ? <>Tu cesta en <span style={{ fontStyle:'italic' }}>{sel.name}</span></> : <>Your basket at <span style={{ fontStyle:'italic' }}>{sel.name}</span></>}
             </div>
           </div>
           <button onClick={onClose} aria-label="Cerrar / Close" style={{ width: 44, height: 44, display:'inline-flex', alignItems:'center', justifyContent:'center', color:'var(--ink-3)', borderRadius: 8 }}><Icon name="x" size={16}/></button>
@@ -51,23 +51,19 @@ function CheckoutModal({ lang, winner, basket, storeTotals, appliedSubs, onClose
         <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap: 0, borderBottom:'1px solid var(--line-2)' }}>
           <SummaryStat lang={lang} label={tr('totalBasket', lang)} value={eur(winner.total)} serif/>
           <SummaryStat lang={lang} label={tr('savings', lang)} value={eur(savings)} serif tone="sage" subtitle={savingsSub}/>
-          <SummaryStat lang={lang} label={tr('delivery', lang)} value={store.eta} subtitle={`${Math.round(store.coverage*100)}% ${tr('coverage', lang)}`}/>
+          <SummaryStat lang={lang} label={L(lang,'Con entrega','With delivery')} value={pick ? eur(pick.total) : '—'} serif subtitle={pick ? sel.name : ''}/>
         </div>
 
         {/* Mock deeplink preview */}
         <div style={{ padding: '18px 24px' }}>
           <PriceChangeNote basket={basket} storeId={winner.id}/>
-          <div style={{ marginTop: 16 }}><SlotPicker value={slot} onChange={setSlot}/></div>
-          {taken && <SlotTakenNote slot={taken} onPick={(s) => { setSlot(s); setTaken(null); }}/>}
+          <div style={{ marginTop: 16 }}><DeliveryChooser storeTotals={storeTotals} value={pick} onChange={setPick}/></div>
           <div style={{ marginTop: 16 }}><SubRulesCard basket={basket}/></div>
           {/* Actions */}
           <div style={{ display:'flex', gap: 8, marginTop: 16, flexWrap:'wrap' }}>
-            <button onClick={confirm} disabled={!slot} style={{ ...actionBtn, minHeight: 44, background:'var(--ink)', color:'var(--bg)', flex: '1 1 260px', opacity: slot ? 1 : 0.5 }}>
-              <Icon name="truck" size={13}/>
-              {slot ? <>{lang === 'es' ? 'Confirmar' : 'Confirm'} · {slotLabel(slot, lang)} · {eur(winner.total + slot.fee)}</> : (lang === 'es' ? 'Elige una franja para confirmar' : 'Pick a slot to confirm')}
-            </button>
-            <button style={actionBtn} onClick={() => ctx.openOverlay('handoff', { storeId: winner.id })}>
-              <Icon name="cart" size={13}/>{lang === 'es' ? 'Abrir en' : 'Open in'} {store.name}
+            <button onClick={confirm} disabled={!pick} style={{ ...actionBtn, minHeight: 44, background:'var(--ink)', color:'var(--bg)', flex: '1 1 260px', opacity: pick ? 1 : 0.5 }}>
+              <Icon name="cart" size={13}/>
+              {pick ? <>{L(lang,'Abrir cesta en','Open basket at')} {sel.name} · {eur(pick.total)} <Icon name="arrow" size={12}/></> : L(lang,'Elige cómo te llega','Pick how it reaches you')}
             </button>
             <button style={actionBtn}>
               <Icon name="pdf" size={13}/>{tr('export', lang)}
