@@ -3,11 +3,6 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/",
-      "destination": "/alt/ai-offer",
-      "permanent": false
-    },
-    {
       "source": "/aishopper",
       "destination": "/aishopper-app",
       "permanent": false

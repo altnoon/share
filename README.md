@@ -4,7 +4,7 @@ Client-facing pages for alternoon, served at share.alternoon.com. Static, one fo
 
 | Path | What |
 |---|---|
-| `/alt/ai-offer` | The AI Prescription offer (root redirects here) |
+| `/alt/ai-offer` | The AI Prescription offer |
 | `/aishopper-app` | AI Shopper · grocery concierge prototype (Des) |
 | `/aishopper-home` | AI Shopper · landing (Des) |
 | `/sgrail100/planning` | SGRAIL 100 · 2026 race dossier (Des) |
