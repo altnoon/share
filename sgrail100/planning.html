@@ -588,8 +588,13 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 .bagflow .chiprow{display:flex;flex-wrap:wrap;gap:5px}
 .bagflow .chiprow i{font-style:normal;font-size:13px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:3px 8px}
 body[data-sodium="caps"] .sod-sachets,body[data-sodium="sachets"] .sod-caps,body:not([data-sodium]) .sod-caps{display:none!important}
-.sod-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0 14px}
-.sod-controls>span{font-size:14px;font-weight:600;color:var(--ink)}
+.race-settings{display:grid;gap:12px;margin:10px 0 0;padding-top:12px;border-top:1px solid var(--line)}
+.race-settings .rs-label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.race-settings .sodtog{max-width:none;flex:none}
+.race-settings .sodtog button{white-space:nowrap;padding:8px 6px}
+@media (min-width:601px) and (max-width:1049px){nav .race-settings{grid-template-columns:auto auto;border-top:0;margin:0;padding-top:0;align-items:end}}
+.sheet .race-settings{grid-template-columns:1fr 1fr;padding-top:12px;margin-top:12px}
+@media print{.race-settings{display:none!important}}
 .sodtog{display:flex;gap:4px;background:var(--line-soft);padding:4px;border-radius:9px;flex:1 1 260px;max-width:440px}
 .sodtog button{flex:1;min-height:44px;padding:9px 10px;font-family:var(--body);font-size:14px;border:1px solid transparent;background:transparent;color:var(--muted);border-radius:6px;cursor:pointer;white-space:nowrap}
 .sodtog button.on{background:var(--strong);color:var(--on-strong);border-color:var(--ink)}
@@ -1043,7 +1048,7 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
   <a href="#fuel">Fuel</a>
   <a href="#pacing">Pacing</a>
   <a href="#risks">Risks</a>
-</div><button type="button" class="rmbtn" id="navprog" data-prog>Program · Fri–Sun ↗</button><button type="button" class="rmbtn" id="navopen" data-open>Open tasks ↗</button><button type="button" class="rmbtn" id="thbtn" aria-label="Colour theme">Theme · auto</button><button type="button" class="rmbtn" id="rmbtn">Race day</button></nav>
+</div><button type="button" class="rmbtn" id="navprog" data-prog>Program · Fri–Sun ↗</button><button type="button" class="rmbtn" id="navopen" data-open>Open tasks ↗</button><button type="button" class="rmbtn" id="thbtn" aria-label="Colour theme">Theme · auto</button><div class="race-settings" role="group" aria-label="Race settings"><div><span class="rs-label">Fuel plan</span><div class="sodtog plantog" role="group" aria-label="Fuel plan"><button type="button" data-p="b" aria-pressed="false" title="B · Pocket">Plan B</button><button type="button" data-p="a" aria-pressed="false" title="A · Bottle">Plan A</button></div></div><div><span class="rs-label">Bike sodium</span><div class="sodtog" role="group" aria-label="Bike sodium"><button type="button" data-s="sachets" class="on" aria-pressed="true">Sachets</button><button type="button" data-s="caps" aria-pressed="false">+ Sub9</button></div></div></div><button type="button" class="rmbtn" id="rmbtn">Race day</button></nav>
 <div class="phone-phases" role="group" aria-label="Race phase"><button type="button" data-phone-phase="ph-pre" aria-pressed="false">Pre<small>07:30</small></button><button type="button" data-phone-phase="ph-swim" aria-pressed="false">Swim<small>28–33′</small></button><button type="button" data-phone-phase="ph-t1" aria-pressed="false">T1<small>6–8′</small></button><button type="button" data-phone-phase="ph-bike" aria-pressed="false">Bike<small>4:00–4:45</small></button><button type="button" data-phone-phase="ph-t2" aria-pressed="false">T2<small>5–6′</small></button><button type="button" data-phone-phase="ph-run" aria-pressed="false">Run<small>1:10–1:20</small></button></div>
 <div class="dock" aria-label="Section navigation" hidden>
   <button class="prev" type="button" aria-label="Previous section"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3 5 8l5 5"/></svg></button>
@@ -1053,7 +1058,7 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
 </div>
 <div class="sheet" id="dock-sheet" hidden>
   <div class="sheet-list"></div>
-  <div class="sheet-tools"><button type="button" data-prog>Program · Fri–Sun ↗</button><button type="button" data-open>Open tasks ↗</button><button type="button" id="sh-theme">Theme</button><button type="button" id="sh-race">Race day</button></div>
+  <div class="sheet-tools"><button type="button" data-prog>Program · Fri–Sun ↗</button><button type="button" data-open>Open tasks ↗</button><button type="button" id="sh-theme">Theme</button><button type="button" id="sh-race">Race day</button></div><div class="race-settings" role="group" aria-label="Race settings"><div><span class="rs-label">Fuel plan</span><div class="sodtog plantog" role="group" aria-label="Fuel plan"><button type="button" data-p="b" aria-pressed="false" title="B · Pocket">Plan B</button><button type="button" data-p="a" aria-pressed="false" title="A · Bottle">Plan A</button></div></div><div><span class="rs-label">Bike sodium</span><div class="sodtog" role="group" aria-label="Bike sodium"><button type="button" data-s="sachets" class="on" aria-pressed="true">Sachets</button><button type="button" data-s="caps" aria-pressed="false">+ Sub9</button></div></div></div>
 </div>
 
 <aside class="essentials" aria-labelledby="essentials-title">
@@ -1081,7 +1086,7 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
   <h2>Before Girona <span class="tag">bags · pack · pickup · sort out</span></h2>
   <div class="pk-head">Bags · pack → drop → use</div>
   <div class="card rail-flag bagscard">
-    <p class="small">Bags come from Friday check-in · Saturday: black with the bike · Sunday bus: white + personal.</p><div class="sod-controls"><span>Bike sodium</span><div class="sodtog" role="group" aria-label="Bike sodium"><button type="button" data-s="sachets" class="on" aria-pressed="true">Sachets only</button><button type="button" data-s="caps" aria-pressed="false">Sachets + Sub9</button></div></div>
+    <p class="small">Bags come from Friday check-in · Saturday: black with the bike · Sunday bus: white + personal.</p>
     <ul class="check bag-journeys">
 <li class="bagrow b-black"><input type="checkbox" data-k="kit-3" aria-label="Black · T2 packed"><div class="bagflow"><b class="bagname">Black · T2</b><div class="stage"><em>Drop</em><strong>Sat 13:00–17:30</strong><span>GEiEG, Girona · with the bike</span></div><div class="stage"><em>Use</em><span>T2 Celrà · water into the flask</span></div><div class="contents"><em>Inside</em><div class="chiprow"><i>Trail bib</i><i>SkyFlask 350 + 1 NoordCode sachet</i><i>2 × GEL 100</i><i>1 spare NoordCode sachet</i><i>Dry Injinji socks</i></div><small>Pack Saturday morning. Nothing wet, nothing pre-mixed: it waits about 20 h. Helmet and gloves stay with the bike at T2.</small></div></div></li>
 <li class="bagrow b-white"><input type="checkbox" data-k="kit-4" aria-label="White · T1 packed"><div class="bagflow"><b class="bagname">White · T1</b><div class="stage"><em>Drop</em><strong>Sun 08:00–08:45</strong><span>T1, Cadaqués · on the bus with you</span></div><div class="stage"><em>Use</em><span>After the swim · bike kit on, wetsuit in</span></div><div class="contents"><em>Inside</em><div class="chiprow"><i>Helmet + glasses</i><i>Full-finger gloves</i><i>Arm sleeves</i><i>Vivobarefoot Primus Trail III</i><i>Shell or plastic bag · rain forecast</i><i>2 × Solid 160</i><i>1 × GEL 100</i><i>CAF 100</i><i class="sod-sachets">3 × NoordCode sachets · 2 at W1 + 1 at W2</i><i class="sod-caps">2 × NoordCode sachets · W1 + W2</i><i class="sod-caps">Sub9 pill vial · 8 caps</i><i>Phone + power bank</i></div><small>Pack Saturday night. Food, sachets and phone go into the trisuit pockets at T1; the wetsuit and goggles go into the bag and travel to Girona.</small></div></div></li>
@@ -1226,7 +1231,7 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
   </details>
 
   <button type="button" id="compare-plan">Compare plans</button><div class="phone-feed"><h3>Bike feed times</h3><p class="small">Elapsed bike time, from the existing feed chart. Water stops and sachet instructions remain in the phase plan.</p><div class="view-switch" role="group" aria-label="Mobile fuel comparison"><button type="button" data-phone-plan="a">A · Bottle</button><button type="button" data-phone-plan="b">B · Pocket</button></div><p class="phone-view-label" role="status"></p><ol class="feed-list" data-feed-plan="a"><li><time>0:20</time><span>Begin bottle window → W1</span></li><li><time>1:30</time><span>½ SOLID 160</span></li><li><time>1:55</time><span>½ SOLID 160</span></li><li><time>2:20</time><span>½ SOLID 160</span></li><li><time>2:45</time><span>½ SOLID 160</span></li><li><time>2:55</time><span>CAF 100</span></li><li><time>3:30</time><span>GEL 100</span></li></ol><ol class="feed-list" data-feed-plan="b"><li><time>0:20</time><span>GEL 100</span></li><li><time>0:50</time><span>GEL 100</span></li><li><time>1:15</time><span>½ SOLID 160</span></li><li><time>1:40</time><span>½ SOLID 160</span></li><li><time>2:05</time><span>½ SOLID 160</span></li><li><time>2:30</time><span>½ SOLID 160</span></li><li><time>2:55</time><span>CAF 100</span></li><li><time>3:30</time><span>GEL 100</span></li><li><time>4:00</time><span>GEL 100 · optional</span></li></ol><p class="small">For terrain and feed positions, open the chart below.</p></div>
-  <div class="plan-controls"><span>View fuel plan<small class="plan-indicator" role="status">Race plan: B · viewing B</small></span><div class="abtog" role="group" aria-label="Fuel plan view"><button type="button" data-m="a" aria-pressed="false">A · Bottle</button><button type="button" data-m="b" aria-pressed="false">B · Pocket</button><button type="button" class="on" data-m="both" aria-pressed="true">Both</button></div></div><div class="sod-controls"><span>Bike sodium</span><div class="sodtog" role="group" aria-label="Bike sodium"><button type="button" data-s="sachets" class="on" aria-pressed="true">Sachets only</button><button type="button" data-s="caps" aria-pressed="false">Sachets + Sub9</button></div></div>
+  <div class="plan-controls"><span>View fuel plan<small class="plan-indicator" role="status">Race plan: B · viewing B</small></span><div class="abtog" role="group" aria-label="Fuel plan view"><button type="button" data-m="a" aria-pressed="false">A · Bottle</button><button type="button" data-m="b" aria-pressed="false">B · Pocket</button><button type="button" class="on" data-m="both" aria-pressed="true">Both</button></div></div>
   <details class="planblock p-bike" data-mobile-chart="true" open><summary class="plan-head" style="margin-top:0"><span class="pn">Feeding chart</span><span class="pd">B · Pocket is the race plan · A kept for comparison</span></summary>
     <p class="mobile-chart-help">Swipe to compare feed times. For a vertical chart, expand Plan A or Plan B below.</p>
     <div class="clock-scroll" tabindex="0" role="region" aria-label="Scrollable feed chart" id="abwrap"><div class="clock">
@@ -1860,9 +1865,19 @@ document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener
 (function(){
  var mode='sachets';
  try{var v=localStorage.getItem('sgrail26.sodium');if(v==='caps'||v==='sachets')mode=v;}catch(e){}
- function apply(m){mode=m;document.body.dataset.sodium=m;document.querySelectorAll('.sodtog button').forEach(function(b){var on=b.dataset.s===m;b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on));});}
- document.querySelectorAll('.sodtog button').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();apply(b.dataset.s);try{localStorage.setItem('sgrail26.sodium',b.dataset.s);}catch(err){}});});
+ function apply(m){mode=m;document.body.dataset.sodium=m;document.querySelectorAll('.sodtog button[data-s]').forEach(function(b){var on=b.dataset.s===m;b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on));});}
+ document.querySelectorAll('.sodtog button[data-s]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();apply(b.dataset.s);try{localStorage.setItem('sgrail26.sodium',b.dataset.s);}catch(err){}});});
  apply(mode);
+})();
+
+// Fuel plan switch in Race settings: saves the race plan through the existing decision control.
+(function(){
+ var choice=document.getElementById('race-plan-choice'),save=document.getElementById('save-race-plan'),status=document.getElementById('race-plan-status');
+ if(!choice||!save||!status)return;
+ function sync(){var v=status.dataset.savedPlan||'';document.querySelectorAll('.plantog button[data-p]').forEach(function(b){var on=b.dataset.p===v;b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on));});}
+ document.querySelectorAll('.plantog button[data-p]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();choice.value=b.dataset.p;save.click();sync();});});
+ save.addEventListener('click',sync);
+ sync();
 })();
 
 // Transition reset and a compact print preview use only the current dossier state.
@@ -1949,7 +1964,7 @@ document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener
   dock.querySelector('.menu').addEventListener('click',function(){setOpen(!document.body.classList.contains('sheet-open'));});
   prevB.addEventListener('click',function(){goTo(idx-1);}); nextB.addEventListener('click',function(){goTo(idx+1);});
   list.addEventListener('click',function(e){ var a=e.target.closest('a'); if(!a) return; e.preventDefault(); setOpen(false); var el=document.getElementById(a.hash.slice(1)); if(el) el.scrollIntoView({block:'start',behavior:motionBehavior()}); });
-  document.addEventListener('click',function(e){ if(document.body.classList.contains('sheet-open')&&!sheet.contains(e.target)&&!dock.contains(e.target)) setOpen(false); });
+  document.addEventListener('click',function(e){ if(e.isTrusted!==false&&document.body.classList.contains('sheet-open')&&!sheet.contains(e.target)&&!dock.contains(e.target)) setOpen(false); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&document.body.classList.contains('sheet-open')) setOpen(false); });
   // tools mirror the sidebar buttons
   var th=document.getElementById('thbtn'),rm=document.getElementById('rmbtn'),shT=document.getElementById('sh-theme'),shR=document.getElementById('sh-race');
