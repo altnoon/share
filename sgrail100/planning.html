@@ -947,6 +947,11 @@ section .sec-label{font:600 13px var(--body);letter-spacing:.04em;text-transform
  .pickup .spec td[data-label="Status"]{grid-column:2;grid-row:1}
  .pickup .spec td[data-label="Specification"],.pickup .spec td[data-label="Action"]{grid-column:1/-1}
  .pickup .spec td[data-label="Action"]::before{content:'Action · ';color:var(--muted)}
+ /* Phone cards: the #openitems table rule re-adds cell borders; clear them and pad the rows. */
+ #openitems .pickup .spec td{border:0}
+ .pickup .spec tr:not(:first-child){padding:14px 16px}
+ .pickup .spec tr:last-child{border-bottom:0}
+ .pickup .spec td.no-action{display:none}
 }
 
 /* September 22: presentation refinement; existing race data retained. */
@@ -1189,11 +1194,11 @@ body[data-plan-saved="a"] [data-kit-plan="b"],body[data-plan-saved="b"] [data-ki
   <div class="card rail-track pickup">
     <div class="tblwrap" tabindex="0" role="region" aria-label="Scrollable data table"><table class="spec" style="min-width:460px">
       <tr><th>Item</th><th>Spec</th><th style="text-align:right">Status</th><th>Action</th></tr>
-      <tr><td data-label="Item">Tyres</td><td data-label="Specification"><b>45 mm, inner tubes</b> · not tubeless</td><td class="st" data-label="Status"><span class="stag ok">Confirmed</span></td><td data-label="Action">—</td></tr>
+      <tr><td data-label="Item">Tyres</td><td data-label="Specification"><b>45 mm, inner tubes</b> · not tubeless</td><td class="st" data-label="Status"><span class="stag ok">Confirmed</span></td><td data-label="Action" class="no-action">—</td></tr>
       <tr><td data-label="Item">Pressure</td><td data-label="Specification"><b>2.2 bar front · 2.4–2.5 rear</b> · at 74 kg · <b>floor 2.0</b></td><td class="st" data-label="Status"><span class="stag rec">Check</span></td><td data-label="Action">Set at pickup</td></tr>
-      <tr><td data-label="Item">Gearing</td><td data-label="Specification"><b>GRX 1×12 · 40T · 10–45 = 0.89:1</b></td><td class="st" data-label="Status"><span class="stag ok">Confirmed</span></td><td data-label="Action">—</td></tr>
+      <tr><td data-label="Item">Gearing</td><td data-label="Specification"><b>GRX 1×12 · 40T · 10–45 = 0.89:1</b></td><td class="st" data-label="Status"><span class="stag ok">Confirmed</span></td><td data-label="Action" class="no-action">—</td></tr>
       <tr><td data-label="Item">Pedals</td><td data-label="Specification"><b>Pinned flat pedals</b> · Vivobarefoot shoes · confirm at pickup</td><td class="st" data-label="Status"><span class="stag rec">Check</span></td><td data-label="Action">Confirm at pickup</td></tr>
-      <tr><td data-label="Item">Cages</td><td data-label="Specification"><b>Two</b>, bottle 1 water + bottle 2 <span data-loadout="a">DM320<span class="plan-tag"> (A)</span></span><span class="plan-or"> · </span><span data-loadout="b">NoordCode<span class="plan-tag"> (B)</span></span></td><td class="st" data-label="Status"><span class="stag ok">Confirmed</span></td><td data-label="Action">—</td></tr>
+      <tr><td data-label="Item">Cages</td><td data-label="Specification"><b>Two</b>, bottle 1 water + bottle 2 <span data-loadout="a">DM320<span class="plan-tag"> (A)</span></span><span class="plan-or"> · </span><span data-loadout="b">NoordCode<span class="plan-tag"> (B)</span></span></td><td class="st" data-label="Status"><span class="stag ok">Confirmed</span></td><td data-label="Action" class="no-action">—</td></tr>
       <tr><td data-label="Item">Seat roll</td><td data-label="Specification">Silca rail-mount BOA — fits any railed saddle; check clearance</td><td class="st" data-label="Status"><span class="stag rec">Check</span></td><td data-label="Action">Check clearance at pickup</td></tr>
       <tr><td data-label="Item">Repair kit</td><td data-label="Specification">Comes with the bike. Needs <b>tubes 700×38–47</b>, valves long enough for their rims, two levers, a pump not a lone CO2</td><td class="st" data-label="Status"><span class="stag rec">Check</span></td><td data-label="Action">Check contents</td></tr>
       <tr><td data-label="Item">GPS mount</td><td data-label="Specification">Fits head unit · test fit</td><td class="st" data-label="Status"><span class="stag rec">Check</span></td><td data-label="Action">Test at pickup</td></tr>
