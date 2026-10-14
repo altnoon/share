@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpxdata="http://www.cluetrust.com/XML/GPXDATA/1/0" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.cluetrust.com/XML/GPXDATA/1/0 http://www.cluetrust.com/Schemas/gpxdata10.xsd" version="1.1" creator="http://ridewithgps.com/">
+  <metadata>
+    <name>TRANSITION From Swimming to Gravel</name>
+    <link href="https://ridewithgps.com/routes/48693953">
+      <text>TRANSITION From Swimming to Gravel</text>
+    </link>
+    <time>2024-10-07T10:42:38Z</time>
+  </metadata>
+  <trk>
+    <name>TRANSITION From Swimming to Gravel</name>
+    <trkseg>
+      <trkpt lat="42.288842" lon="3.278887">
+        <ele>1.9</ele>
+      </trkpt>
+      <trkpt lat="42.289088" lon="3.278774">
+        <ele>1.9</ele>
+      </trkpt>
+      <trkpt lat="42.289022" lon="3.278476">
+        <ele>1.9</ele>
+      </trkpt>
+      <trkpt lat="42.288939" lon="3.278184">
+        <ele>1.9</ele>
+      </trkpt>
+      <trkpt lat="42.288883" lon="3.277993">
+        <ele>1.9</ele>
+      </trkpt>
+      <trkpt lat="42.28881" lon="3.277988">
+        <ele>1.9</ele>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

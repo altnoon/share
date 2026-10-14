@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpxdata="http://www.cluetrust.com/XML/GPXDATA/1/0" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.cluetrust.com/XML/GPXDATA/1/0 http://www.cluetrust.com/Schemas/gpxdata10.xsd" version="1.1" creator="http://ridewithgps.com/">
+  <metadata>
+    <name>SGRAIL 100 GIRONA (SWIM)</name>
+    <link href="https://ridewithgps.com/routes/48576811">
+      <text>SGRAIL 100 GIRONA (SWIM)</text>
+    </link>
+    <time>2024-09-26T09:53:42Z</time>
+  </metadata>
+  <trk>
+    <name>SGRAIL 100 GIRONA (SWIM)</name>
+    <trkseg>
+      <trkpt lat="42.288301" lon="3.277456">
+        <ele>0.4</ele>
+      </trkpt>
+      <trkpt lat="42.288301" lon="3.277456">
+        <ele>0.4</ele>
+      </trkpt>
+      <trkpt lat="42.287619" lon="3.277994">
+        <ele>0.4</ele>
+      </trkpt>
+      <trkpt lat="42.286938" lon="3.278533">
+        <ele>0.3</ele>
+      </trkpt>
+      <trkpt lat="42.286256" lon="3.279071">
+        <ele>0.2</ele>
+      </trkpt>
+      <trkpt lat="42.285574" lon="3.279609">
+        <ele>0.1</ele>
+      </trkpt>
+      <trkpt lat="42.285574" lon="3.279609">
+        <ele>0.1</ele>
+      </trkpt>
+      <trkpt lat="42.284935" lon="3.280372">
+        <ele>0.0</ele>
+      </trkpt>
+      <trkpt lat="42.284296" lon="3.281135">
+        <ele>0.0</ele>
+      </trkpt>
+      <trkpt lat="42.283657" lon="3.281897">
+        <ele>0.0</ele>
+      </trkpt>
+      <trkpt lat="42.283018" lon="3.28266">
+        <ele>0.0</ele>
+      </trkpt>
+      <trkpt lat="42.283417" lon="3.283259">
+        <ele>0.0</ele>
+      </trkpt>
+      <trkpt lat="42.284101" lon="3.282752">
+        <ele>0.0</ele>
+      </trkpt>
+      <trkpt lat="42.284784" lon="3.282244">
+        <ele>0.1</ele>
+      </trkpt>
+      <trkpt lat="42.285468" lon="3.281737">
+        <ele>0.3</ele>
+      </trkpt>
+      <trkpt lat="42.286151" lon="3.28123">
+        <ele>0.6</ele>
+      </trkpt>
+      <trkpt lat="42.286151" lon="3.28123">
+        <ele>0.6</ele>
+      </trkpt>
+      <trkpt lat="42.286824" lon="3.28064">
+        <ele>1.1</ele>
+      </trkpt>
+      <trkpt lat="42.287498" lon="3.280051">
+        <ele>1.4</ele>
+      </trkpt>
+      <trkpt lat="42.288171" lon="3.279461">
+        <ele>1.4</ele>
+      </trkpt>
+      <trkpt lat="42.288845" lon="3.278872">
+        <ele>1.4</ele>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

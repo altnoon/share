@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpxdata="http://www.cluetrust.com/XML/GPXDATA/1/0" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.cluetrust.com/XML/GPXDATA/1/0 http://www.cluetrust.com/Schemas/gpxdata10.xsd" version="1.1" creator="http://ridewithgps.com/">
+  <metadata>
+    <name>TRANSITION From Gravel to Trail Running</name>
+    <link href="https://ridewithgps.com/routes/48694005">
+      <text>TRANSITION From Gravel to Trail Running</text>
+    </link>
+    <time>2024-10-07T10:48:07Z</time>
+  </metadata>
+  <trk>
+    <name>TRANSITION From Gravel to Trail Running</name>
+    <trkseg>
+      <trkpt lat="42.022284" lon="2.883488">
+        <ele>109.6</ele>
+      </trkpt>
+      <trkpt lat="42.022232" lon="2.883461">
+        <ele>109.6</ele>
+      </trkpt>
+      <trkpt lat="42.022174" lon="2.883432">
+        <ele>109.6</ele>
+      </trkpt>
+      <trkpt lat="42.02211" lon="2.88333">
+        <ele>109.6</ele>
+      </trkpt>
+      <trkpt lat="42.022064" lon="2.883302">
+        <ele>109.6</ele>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
