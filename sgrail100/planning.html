@@ -1032,6 +1032,19 @@ body[data-plan-saved="a"] [data-kit-plan="b"],body[data-plan-saved="b"] [data-ki
  .sheet{max-height:min(62dvh,calc(100dvh - 94px - env(safe-area-inset-bottom)))}
  body.race .sheet{max-height:min(62dvh,calc(100dvh - 150px - env(safe-area-inset-bottom)))}
 }
+
+/* Narrow-phone phase navigation keeps timings readable and targets wide. */
+@media screen and (max-width:600px){
+ body{--phase-nav-height:calc(65px + env(safe-area-inset-bottom))}
+ body.race{padding-bottom:calc(var(--phase-nav-height) + 76px)}
+ body.race .modebar,body.race .race-menu{bottom:calc(var(--phase-nav-height) + 15px)}
+ body.race .sheet{bottom:calc(var(--phase-nav-height) + 69px);max-height:min(62dvh,calc(100dvh - var(--phase-nav-height) - 85px))}
+}
+@media screen and (max-width:360px){
+ body{--phase-nav-height:calc(119px + env(safe-area-inset-bottom))}
+ body.race .phone-phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .phone-phases button{min-width:0}
+}
 </style>
 <script>
 /* Theme resolves before paint so a dark start does not flash white. auto = follow the device. */
@@ -2107,7 +2120,7 @@ document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener
   if(plan){var feeds=[];document.querySelectorAll('#'+plan+' .bike-chart text').forEach(function(t){var m=/^(\d:\d\d)/.exec(t.textContent);if(m){var w=t.querySelector('tspan.wall');feeds.push(m[1]+(w?' ('+w.textContent.replace('·','')+')':''));}});if(feeds.length)content.appendChild(paragraph('Bike feeds (elapsed · clock, base): '+feeds.join(' · ')));}
   content.appendChild(heading('Bags'));document.querySelectorAll('.bag-journeys .bagrow').forEach(function(row){var name=row.querySelector('.bagname').textContent;var items=Array.from(row.querySelectorAll('.contents i')).filter(function(i){return getComputedStyle(i).display!=='none';}).map(function(i){return i.textContent;});content.appendChild(paragraph(name+': '+items.join(' · ')));});
   var transitions=document.createElement('div');transitions.className='card-transitions';
-  ['ph-t1','ph-t2'].forEach(function(id){var section=document.createElement('div');section.appendChild(heading(id==='ph-t1'?'T1 · white bag':'T2 · black bag'));var list=document.createElement('ol');document.querySelectorAll('#'+id+' [data-transition]').forEach(function(cb){var li=document.createElement('li');li.textContent=cb.nextElementSibling.textContent;list.appendChild(li);});section.appendChild(list);transitions.appendChild(section);});content.appendChild(transitions);
+  ['ph-t1','ph-t2'].forEach(function(id){var section=document.createElement('div');section.appendChild(heading(id==='ph-t1'?'T1 · white bag':'T2 · black bag'));var list=document.createElement('ol');document.querySelectorAll('#'+id+' [data-transition]').forEach(function(cb){var li=document.createElement('li');li.textContent=selectedSodiumText(cb.nextElementSibling);list.appendChild(li);});section.appendChild(list);transitions.appendChild(section);});content.appendChild(transitions);
   content.appendChild(heading('Confirm before race day'));
   content.appendChild(paragraph('Run cutoff 16:59 (overall 17:59). Feed cut-offs: 13:00 at km 34.3, 15:00 at km 68. Mechanical or accident: call the number on your bib — organisation +34 682 60 76 18 · emergencies 112.'));
   content.appendChild(paragraph('Timetable and briefing checked 13 Oct 2026 · sgrail100.com/timetable/ · general enquiries: info@sgrail100.com'));
@@ -2259,6 +2272,11 @@ document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener
  document.querySelectorAll('.sodtog button[data-s]').forEach(function(b){b.addEventListener('click',progress);});
  document.getElementById('save-race-plan').addEventListener('click',progress);
  progress();
+ // Keep floating tools clear when the phase bar grows on narrow screens or larger text.
+ if(typeof ResizeObserver==='function'){
+  var phaseNav=document.querySelector('.phone-phases');
+  new ResizeObserver(function(){var height=phaseNav.getBoundingClientRect().height;if(height>0)document.body.style.setProperty('--phase-nav-height',height+'px');}).observe(phaseNav);
+ }
 })();
 </script>
 </body>
