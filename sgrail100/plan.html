@@ -705,7 +705,7 @@ progress::-webkit-progress-bar{background:var(--line-soft)}progress::-webkit-pro
 @media print{.essentials{break-inside:avoid}.decision-actions{display:none}}
 
 .location-links{margin-top:16px}
-location-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.location-grid>a{display:block;min-height:48px;padding:12px;border:1px solid var(--line);border-radius:6px;text-decoration:none;color:var(--ink)}.location-grid b,.location-grid span{display:block}.location-grid span{font-size:14px;color:var(--sea)}
+.location-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.location-grid>a{display:block;min-height:48px;padding:12px;border:1px solid var(--line);border-radius:6px;text-decoration:none;color:var(--ink)}.location-grid b,.location-grid span{display:block}.location-grid span{font-size:14px;color:var(--sea)}
 .utility-actions,.card-actions{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.utility-actions button,.card-actions button{font:inherit;padding:10px 14px;min-height:48px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer}
 #essentials-card{margin:0;padding:4px 0 0;background:var(--card);color:var(--ink)}#carddlg .mhead span{display:flex;gap:8px;align-items:center}#carddlg .mhead .rmbtn{margin:0}#essentials-card h1{font-size:32px}#essentials-card h2{font-size:20px;margin:16px 0 8px;padding:0;border:0}#essentials-card li{margin:4px 0}#essentials-card ol{padding-left:22px}.card-transitions{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 @media(max-width:600px){.location-grid,.card-transitions{grid-template-columns:1fr}#essentials-card{margin:16px;padding:18px}}
@@ -757,11 +757,11 @@ location-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:
 
 .view-switch{display:flex;gap:6px;margin-bottom:12px}.view-switch button,#compare-plan{font:inherit;min-height:48px;padding:10px 16px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer}.view-switch button[aria-pressed="true"]{background:var(--strong);color:var(--on-strong)}
 .phase-brief>span{display:block;margin:5px 0}.phase-brief b{color:var(--ink);margin-right:6px}.detail-cue{font-size:13px;color:var(--sea);flex-basis:100%}details[open]>summary .detail-cue{display:none}
-.task-body{min-width:0}.task-body>p{margin:7px 0}.task-meta{font-size:14px;color:var(--muted)}#open .task-context{background:none;border:0;margin:8px 0 0}#open .task-body{position:relative;padding-right:34px;flex:1 1 auto;min-width:0}
+.task-body{min-width:0}.task-body>p{margin:7px 0}.task-meta{font-size:14px;color:var(--muted)}#open .task-context{background:none;border:0;margin:6px 0 0}#open .task-body{position:relative;padding-right:0;flex:1 1 auto;min-width:0}
 #open .task-body>b{display:block;min-height:24px}
-#open .task-context summary{position:absolute;right:0;top:-2px;width:28px;height:28px;padding:0;font-size:0;display:grid;place-items:center;border:1px solid var(--line);border-radius:6px;background:var(--card)}
-#open .task-context summary::after{content:"+";font-size:16px;font-family:var(--mono);color:var(--muted);float:none}
-#open .task-context[open] summary::after{content:"–"}
+#open #task-body .task-context>summary{position:static;width:max-content;max-width:100%;height:auto;min-height:44px;padding:8px 12px;font:500 14px/1.4 var(--body);display:flex;align-items:center;justify-content:space-between;gap:12px;white-space:nowrap;border:1px solid var(--line);border-radius:6px;background:var(--card)}
+#open #task-body .task-context>summary::after{content:"+";font:400 18px/1 var(--mono);color:var(--muted);float:none;flex:none;margin:0}
+#open #task-body .task-context[open]>summary::after{content:"–"}
 #open .task-context summary::-webkit-details-marker{display:none}#open .task-context>div{font-size:14px;padding:6px 0 2px;color:var(--muted)}#open .task-context>div .task-meta{margin:0 0 6px}.check li:has(input:checked)>.task-body>b{text-decoration:line-through;color:var(--muted)}
 #compare-plan,.phone-feed,.mobile-chart-help,#course .maphint{display:none!important}
 @media print{.view-switch,#compare-plan,.detail-cue{display:none!important}}
@@ -1263,12 +1263,6 @@ body.sample-mode section,body.sample-mode #course details.planblock{scroll-margi
 /* mobile pass · 29 Sep: tap targets, clipped controls, room above the floating bars */
 .task-sub-m{display:none}
 @media (max-width:600px){
- #open #task-body .task-body{padding-right:52px}
- #open #task-body .task-context>summary{position:absolute;right:0;top:-8px;width:44px;height:44px;min-height:44px;padding:0;font-size:0;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px;background:var(--card);gap:0}
- #open #task-body .task-context>summary{display:flex;align-items:center;justify-content:center;line-height:1}
- #open #task-body .task-context>summary::before{content:none;display:none}
- #open #task-body .task-context>summary::after{content:"+";display:block;font:500 18px/1 var(--mono);color:var(--muted);float:none;margin:0;padding:0;position:static;transform:none;width:auto;height:auto}
- #open #task-body .task-context[open]>summary::after{content:"–"}
  .pickup .spec tr:not(:first-child){padding:14px 16px}
  #open .task-sub-m{display:block;color:var(--ink);margin:0 0 6px}
  .packtbl tbody th{width:auto!important;justify-self:stretch}
@@ -1338,6 +1332,92 @@ body:not(.race) .now-card{display:none}
 .install-card .install-note{margin:8px 0 0;font-size:14px}.install-card .install-note:empty{display:none}
 .install-actions{display:flex;gap:8px}.install-actions button{min-height:44px;padding:8px 16px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 14px var(--body);cursor:pointer}
 .install-actions button.primary{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+/* October 14 · shared dossier language, inventory and phone controls. */
+.planner-home{display:none}
+.planner-pack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 32px;margin-bottom:20px}
+.planner-pack .pack-group{margin:0;min-width:0}
+.pack-group h3{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.pack-left{font:400 13px var(--body);color:var(--muted);white-space:nowrap}
+.planner-pack .check li{display:block;padding:0;border-bottom:1px solid var(--line-soft)}
+.planner-pack label{display:flex;align-items:flex-start;gap:12px;min-height:44px;padding:10px 0;cursor:pointer;font-size:15px}
+.planner-pack input{width:24px;height:24px;margin:1px 0 0;flex:none;accent-color:var(--track)}
+.planner-pack label>span{min-width:0;overflow-wrap:anywhere}
+.planner-pack small{display:block;font-size:13px;color:var(--muted)}
+.planner-pack input:checked+span{color:var(--muted);text-decoration:line-through}
+.bagname{cursor:pointer}.bagname:focus-visible{outline:2px solid var(--sea);outline-offset:4px}
+#hide-completed{display:inline-flex;font:inherit;padding:9px 14px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer}
+#open .task-body>b{font-weight:600}#task-body li{scroll-margin-top:100px}
+#task-body .task-title{display:flex;align-items:center;min-height:44px;cursor:pointer}
+#task-body .task-title b{font-weight:600}
+#task-body li:has(>input:checked) .task-title b{text-decoration:line-through;color:var(--muted)}
+.next-task-link{font:600 15px var(--body);text-align:left;min-height:44px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+#course .phase-brief{font-size:14px;line-height:1.5}
+#course .phase-brief>span{padding:4px 0;border-top:1px solid var(--line-soft)}
+#course .feedlist time small{display:block;font:400 12px var(--mono);color:var(--muted)}
+#course .feedzone .feedlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+#course .feedzone .feedlist li{grid-template-columns:80px minmax(0,1fr);padding:12px 0;font-size:16px}
+#course .feedzone .feedlist li>small{grid-column:2;white-space:normal}
+.track-downloads{margin:20px 0}.track-downloads p{margin-bottom:12px}
+.track-update{padding:12px;border-left:3px solid var(--flag);background:var(--flag-soft)}.track-update a{color:var(--sea)}
+.forecast-stamp{font-size:12px;color:var(--muted);margin:10px 0}
+.contingency-list dt{font-weight:600;margin:16px 0 4px}.contingency-list dd{margin:0}.contingency-list a{color:var(--sea)}
+.finish-actions{list-style:none;counter-reset:finish}.finish-actions>li{counter-increment:finish;position:relative;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 16px 16px 44px;margin:12px 0}
+.finish-actions>li::before{content:counter(finish) ".";position:absolute;left:16px;font-family:var(--mono);color:var(--muted)}
+body.race nav a[href="#after"],body.race nav a[href="#contingencies"]{display:block}
+body.race #navopen,body.race .sheet-tools [data-open]{display:block}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--sea);outline-offset:3px}
+@media (min-width:601px) and (max-width:1049px){nav{flex-wrap:wrap}nav .row{flex-basis:100%}}
+@media screen and (max-width:600px){
+ body{--bottom-ui-height:calc(60px + env(safe-area-inset-bottom));--tabbar-height:calc(60px + env(safe-area-inset-bottom))}
+ .planner-home{display:block;margin:18px 0 24px}
+ .planner-home p{font-size:14px;color:var(--muted)}
+ .planner-home button{font:500 15px var(--body);min-height:44px;padding:10px 14px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer}
+ .planner-home #planner-next{display:block;width:100%;text-align:left;margin:10px 0;min-height:48px}
+ .planner-home .utility-actions{display:flex;flex-wrap:wrap;gap:8px}
+ .planner-home #planner-overview{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+ body.race #planner-next{display:none}
+ body.overview-compact header,body.overview-compact .essentials,body.overview-compact .statusbar{display:none}
+ .planner-pack{grid-template-columns:minmax(0,1fr)}
+ .planner-pack label{font-size:16px}
+ #course #ph-swim .carry{grid-template-columns:1fr!important}
+ #course .feedzone .feedlist{grid-template-columns:1fr}
+ body.race .phone-phases{display:none;bottom:var(--tabbar-height);padding:8px}
+ body.race[data-active-tab="course"] .phone-phases{display:flex}
+ .phone-phases button{min-width:44px;min-height:48px}
+ .phone-phases button small{white-space:normal;max-width:100%;overflow-wrap:anywhere}
+ .fuel-sequence b small{display:block;font:400 12px var(--mono);color:var(--muted)}
+ body.has-tabbar,body.has-tabbar.race{padding-bottom:calc(var(--bottom-ui-height) + 32px)}
+ body.has-tabbar .sheet{z-index:50;bottom:calc(var(--bottom-ui-height) + 8px);max-height:min(62vh,calc(100vh - var(--bottom-ui-height) - 24px));max-height:min(62dvh,calc(100dvh - var(--bottom-ui-height) - 24px))}
+ .sheet .sheet-tools button{min-height:44px}
+ .sheet-list a{min-height:44px;display:flex;align-items:center}
+ .sample-bar{height:auto;min-height:56px;padding-top:6px;padding-bottom:6px;flex-wrap:wrap}
+ .sample-bar .sb-actions{flex-wrap:wrap}.sample-bar button{min-height:44px;white-space:normal}
+ body.sample-mode{padding-top:var(--sample-height,64px)}
+ body.sample-mode section,body.sample-mode #course details.planblock,#task-body li{scroll-margin-top:calc(var(--sample-height,0px) + 24px)}
+}
+@media screen and (max-width:360px){
+ body.race[data-active-tab="course"] .phone-phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .phone-phases button{min-width:0}
+ .tabbar .tab-sep{margin-left:0;margin-right:0}
+}
+@media print{.planner-home,.track-downloads{display:none!important}}
+
+
+/* October 15 · focused updates, explicit drinks and changed-item review. */
+.new-question-card{background:var(--sea-soft);border:1px solid var(--sea);border-radius:8px;padding:16px 18px;margin:0 0 18px}
+.new-question-card h3{margin-bottom:8px}.new-question-card p{font-size:15px}
+.new-question-card button,.task-edit button{font:600 14px var(--body);min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer}
+.task-edit{margin-top:10px}
+.recheck-review{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:8px 0;font-size:13px;color:var(--ink)}
+.bagflow>.recheck-review{grid-column:1/-1}
+.recheck-review>span{font-weight:600}.recheck-review button{font:500 14px var(--body);min-height:44px;padding:8px 12px;border:1px solid var(--sea);border-radius:6px;color:var(--sea);background:var(--card);cursor:pointer}
+.planner-pack .needs-recheck input:checked+span,#task-body li.needs-recheck .task-title b{color:var(--ink);text-decoration:none}
+#open.hide-completed #task-body li.needs-recheck{display:flex}
+.morning-drinks{list-style:none;padding:0;margin:10px 0}
+.morning-drinks li{display:grid;grid-template-columns:70px minmax(0,1fr);gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.morning-drinks b{font-family:var(--mono)}.morning-drinks small{display:block;color:var(--muted);font-size:13px}
+
 </style>
 <script>
 /* Theme resolves before paint so a dark start does not flash white. auto = follow the device. */
@@ -1358,6 +1438,7 @@ body:not(.race) .now-card{display:none}
   <div class="eyebrow" id="plan-eyebrow">Race plan · SGRAIL 100 · 2026</div>
   <h1>SGRAIL&nbsp;100 <span class="yr">'26</span></h1>
   <div class="sub"><b>Sunday 18 October 2026 · 09:00</b><span class="sub2">Platja Gran, Cadaqués → Girona old town</span></div>
+  <p class="forecast-stamp">Forecast snapshot: 13 Oct · re-check Fri 16. Provisional tracks: 13 Oct.</p>
   <p class="mobile-chart-caption">Course shape · climb early on the bike, then again at the start of the run.</p>
   <div class="profile" tabindex="0" role="region" aria-label="Course profile: swim, front-loaded bike climbing, trail run">
     <svg viewBox="0 0 760 190" xmlns="http://www.w3.org/2000/svg" role="img">
@@ -1386,7 +1467,7 @@ body:not(.race) .now-card{display:none}
       <!-- aid stations -->
       <line x1="296" y1="150" x2="296" y2="126" stroke="#B3341F" stroke-width="1.6"/>
       <circle cx="296" cy="123" r="3.2" fill="#B3341F"/>
-      <text class="m" x="296" y="166" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#B3341F">34.2</text>
+      <text class="m" x="296" y="166" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#B3341F">34.3</text>
       <line x1="518" y1="150" x2="518" y2="126" stroke="#B3341F" stroke-width="1.6"/>
       <circle cx="518" cy="123" r="3.2" fill="#B3341F"/>
       <text class="m" x="518" y="166" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#B3341F">68</text>
@@ -1400,7 +1481,7 @@ body:not(.race) .now-card{display:none}
             fill="#4A6741" opacity="0.12"/>
       <line x1="676" y1="150" x2="676" y2="96" stroke="#4A6741" stroke-width="0" />
       <circle cx="678" cy="96" r="3" fill="#B3341F"/>
-      <text x="678" y="88" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#B3341F">4.5</text>
+      <text x="678" y="88" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#B3341F">4.4</text>
       <text x="695" y="176" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10.5" fill="#4A6741">hike ↑ · descend ↓</text>
       <!-- finish -->
       <line x1="750" y1="118" x2="750" y2="150" stroke="#1B2A32" stroke-width="2.2"/>
@@ -1408,11 +1489,12 @@ body:not(.race) .now-card{display:none}
     </svg>
   </div>
   <div class="race-metrics" aria-label="Race distances">
-    <div class="metric sea"><span>01 / Swim</span><strong>1.5 <small>km</small></strong><p>Open sea · Cadaqués</p><div class="wx"><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 6.5c2 0 2-1.5 4-1.5s2 1.5 4 1.5 2-1.5 4-1.5M1.5 11c2 0 2-1.5 4-1.5s2 1.5 4 1.5 2-1.5 4-1.5"/></svg><i>Sea</i>~18.5 °C</span><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 9.6V3a1.5 1.5 0 0 1 3 0v6.6a2.5 2.5 0 1 1-3 0Z"/><path d="M8 7v3.5"/></svg><i>Air</i>~14 °C at 09:00</span><b class="wxbr"></b><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 2.5 8 4l2.5-1.5 3 1.5-1 3-1.5-.5V13h-6V6.5L3.5 7l-1-3z"/></svg><i>Suit</i>wetsuit on</span></div></div>
-    <div class="metric track"><span>02 / Gravel</span><strong>86.4 <small>km</small></strong><p>Elevation provisional · 93% unpaved</p><div class="wx"><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 9.6V3a1.5 1.5 0 0 1 3 0v6.6a2.5 2.5 0 1 1-3 0Z"/><path d="M8 7v3.5"/></svg><i>Air</i>14 → 20 °C</span><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5.5h7.5a1.75 1.75 0 1 0-1.75-1.75M2 8.5h10a2 2 0 1 1-2 2M2 11.5h5.5a1.5 1.5 0 1 1-1.5 1.5"/></svg><i>Wind</i>N · tramuntana</span><b class="wxbr"></b><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11.5" cy="4.5" r="2"/><path d="M1.5 13.5 6 6.5l2.5 4 1.5-2 4.5 5z"/></svg><i>Exposed</i>Cap de Creus · plain km 25–86</span></div></div>
-    <div class="metric trail"><span>03 / Trail</span><strong>10.4 <small>km</small></strong><p>+320 m · Girona finish</p><div class="wx"><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 9.6V3a1.5 1.5 0 0 1 3 0v6.6a2.5 2.5 0 1 1-3 0Z"/><path d="M8 7v3.5"/></svg><i>Air</i>~20–21 °C</span><b class="wxbr"></b><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 9.5A3 3 0 0 1 4 3.6a4 4 0 0 1 7.6.6A2.7 2.7 0 0 1 12 9.5H4.5z"/><path d="M5.5 11.5l-1 2M8.5 11.5l-1 2M11.5 11.5l-1 2"/></svg><i>Rain</i>~18% wet-day odds</span></div></div>
+    <div class="metric sea"><span>01 / Swim</span><strong>1.5 <small>km</small></strong><p>Open sea · Cadaqués</p><div class="wx"><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 6.5c2 0 2-1.5 4-1.5s2 1.5 4 1.5 2-1.5 4-1.5M1.5 11c2 0 2-1.5 4-1.5s2 1.5 4 1.5 2-1.5 4-1.5"/></svg><i>Sea</i>~20 °C</span><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 9.6V3a1.5 1.5 0 0 1 3 0v6.6a2.5 2.5 0 1 1-3 0Z"/><path d="M8 7v3.5"/></svg><i>Air</i>~15 °C · rain likely</span><b class="wxbr"></b><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 2.5 8 4l2.5-1.5 3 1.5-1 3-1.5-.5V13h-6V6.5L3.5 7l-1-3z"/></svg><i>Suit</i>wetsuit on</span></div></div>
+    <div class="metric track"><span>02 / Gravel</span><strong>86.4 <small>km</small></strong><p>+1,050 m · 93% unpaved</p><div class="wx"><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 9.6V3a1.5 1.5 0 0 1 3 0v6.6a2.5 2.5 0 1 1-3 0Z"/><path d="M8 7v3.5"/></svg><i>Air</i>12–17 °C · wet</span><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5.5h7.5a1.75 1.75 0 1 0-1.75-1.75M2 8.5h10a2 2 0 1 1-2 2M2 11.5h5.5a1.5 1.5 0 1 1-1.5 1.5"/></svg><i>Wind</i>NE 10–22 km/h</span><b class="wxbr"></b><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11.5" cy="4.5" r="2"/><path d="M1.5 13.5 6 6.5l2.5 4 1.5-2 4.5 5z"/></svg><i>Exposed</i>Cap de Creus · plain km 25–86</span></div></div>
+    <div class="metric trail"><span>03 / Trail</span><strong>10.4 <small>km</small></strong><p>+320 m · Girona finish</p><div class="wx"><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 9.6V3a1.5 1.5 0 0 1 3 0v6.6a2.5 2.5 0 1 1-3 0Z"/><path d="M8 7v3.5"/></svg><i>Air</i>~12–15 °C</span><b class="wxbr"></b><span><svg class="wxi" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 9.5A3 3 0 0 1 4 3.6a4 4 0 0 1 7.6.6A2.7 2.7 0 0 1 12 9.5H4.5z"/><path d="M5.5 11.5l-1 2M8.5 11.5l-1 2M11.5 11.5l-1 2"/></svg><i>Rain</i>60–80% · light</span></div></div>
   </div>
 </header>
+<aside class="planner-home" aria-label="Quick start"><p id="phone-plan-status" role="status"></p><button type="button" id="planner-next">Next preparation task</button><div class="utility-actions"><button type="button" data-edit="all">Edit my answers</button><button type="button" id="planner-overview" aria-expanded="true">Hide full overview</button><button type="button" data-open>Open tasks</button></div></aside>
 <nav aria-label="Planner contents"><label class="mobile-nav" for="mobile-section"><span class="sr-only">Jump to section</span><select id="mobile-section" aria-label="Jump to section"></select></label><span class="nav-label">Field notes / 2026</span><div class="modeside" role="group" aria-label="Planner mode"><button type="button" data-view="prepare"><b>Prepare</b><span>until Sat 17</span></button><button type="button" data-view="race"><b>Race day</b><span>Sun 18</span></button></div><div class="row">
   <a href="#setup">Your plan</a>
   <a href="#openitems">Before Girona</a>
@@ -1420,6 +1502,8 @@ body:not(.race) .now-card{display:none}
   <a href="#fuel">Fuel</a>
   <a href="#pacing">Pacing</a>
   <a href="#risks">Risks</a>
+  <a href="#contingencies">Help</a>
+  <a href="#after">After</a>
 </div><button type="button" class="rmbtn" id="navprog" data-prog>Program · Fri–Sun ↗</button><button type="button" class="rmbtn" id="navopen" data-open>Open tasks ↗</button><button type="button" class="rmbtn edit-answers" data-edit="all">Edit my answers ✎</button><button type="button" class="rmbtn" id="thbtn" aria-label="Colour theme">Theme · auto</button><button type="button" class="rmbtn" id="rmbtn">Race day</button></nav>
 <div class="dock" aria-label="Section navigation" hidden>
   <button class="prev" type="button" aria-label="Previous section"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3 5 8l5 5"/></svg></button>
@@ -1431,6 +1515,7 @@ body:not(.race) .now-card{display:none}
   <div class="sheet-list"></div>
   <div class="sheet-tools"><button type="button" data-edit="all">Edit my answers ✎</button><button type="button" data-prog>Program · Fri–Sun ↗</button><button type="button" data-open>Open tasks ↗</button><button type="button" id="sh-theme">Theme</button><button type="button" id="sh-race">Race day</button><button type="button" id="sh-install" hidden>Install the app</button></div>
 </div>
+<div class="phone-phases" role="group" aria-label="Race phases"><button type="button" data-phase="pre" aria-pressed="false"><b>Pre</b><small id="phone-time-pre">—</small></button><button type="button" data-phase="swim" aria-pressed="false"><b>Swim</b><small id="phone-time-swim">—</small></button><button type="button" data-phase="t1" aria-pressed="false"><b>T1</b><small id="phone-time-t1">—</small></button><button type="button" data-phase="bike" aria-pressed="false"><b>Bike</b><small id="phone-time-bike">—</small></button><button type="button" data-phase="t2" aria-pressed="false"><b>T2</b><small id="phone-time-t2">—</small></button><button type="button" data-phase="run" aria-pressed="false"><b>Run</b><small id="phone-time-run">—</small></button></div>
 <div class="tabbar" id="tabbar" role="navigation" aria-label="Planner sections" hidden>
  <button type="button" data-tab="setup" data-mode="prepare"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg><span>Plan</span></button>
  <button type="button" data-tab="openitems" data-mode="prepare"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span>Pack</span></button>
@@ -1447,7 +1532,7 @@ body:not(.race) .now-card{display:none}
   <p class="setup-lede">Everything on this page is built from these answers: <b>01</b> drives your bags, pack list, bike checks and to-dos; <b>02</b> drives your race-day feed clock, sodium and pacing. Edit either and the plan rebuilds.</p>
 
 <template id="how-it-works-content"><ol><li><b>Start with your own answers.</b> Choose the essentials first. This is a planning tool, not a test; “I don’t know yet” creates a reminder.</li><li><b>Review the estimates.</b> Anything you mark “Not sure” uses a typical value until you answer it. Your own numbers replace it; pick your product to fill in label values. Use “Review my unknowns” to visit unfinished decisions, or edit either survey to add travel, training and inventory details.</li><li><b>Prepare, then race.</b> Prepare holds bags and tasks. Race day holds the course, feed clock, water and pacing. Complete both fuel inventories, including reserves and your practiced timing, to use your products in the feed clock and packing list. Incomplete inventories remain drafts.</li><li><b>Save a backup.</b> Answers stay in this browser and do not sync automatically. Download a backup before changing browser or device. Local HTML previews on phones may not run scripts; open in a full browser.</li><li><b>Share the blank planner.</b> Your friend gets their own plan. Sharing answers is a separate, explicit action.</li></ol><p class="small">Fuel, fluid, caffeine and tyre figures are planning estimates, not individual prescriptions. Use values you have tested and review the final organiser briefing.</p></template>
-<details class="quick-guide" id="race-verification"><summary>Race information · checked 13 October 2026</summary><div class="inner"><p>The <a href="https://sgrail100.com/timetable/" target="_blank" rel="noopener">organiser timetable</a> confirms the 09:00 start, 09:59 swim cutoff, feed-zone cut-offs of 13:00 (km 34.3) and 15:00 (km 68), and the 15:49 bike cutoff. It still shows both 16:59 and 17:59 finish limits; the course page gives 17:59. The 2026 briefing and timetable agree on bags: drop the black T2 bag and bike at GEiEG on Saturday 13:00–17:30; collect bags and bike at GEiEG on Sunday 15:00–18:30.</p><p>The <a href="https://sgrail100.com/course/" target="_blank" rel="noopener">course page</a> currently lists a 10.4 km run, bike aid at 34.3 / 68 km and run aid at 4.4 km. Gravel is +1,050 m, trail +320 m. The drawing uses the same RideWithGPS routes the course page embeds; download the track from the organiser’s folder.</p><p>Check the <a href="https://sgrail100.com/rules-regulations/" target="_blank" rel="noopener">rules and latest briefing</a> before race day. Weather figures elsewhere are historical context, not a forecast. This planner is independent of the organiser.</p></div></details>
+<details class="quick-guide" id="race-verification"><summary>Race information · reconciled 14 October 2026</summary><div class="inner"><p>The 2026 briefing and <a href="https://sgrail100.com/timetable/" target="_blank" rel="noopener">organiser timetable</a> give a 09:00 start, 09:59 swim cutoff, feed cutoffs 13:00 at km 34.3 and 15:00 at km 68, and the 15:49 bike cutoff. Plan against the stricter 16:59 run limit; 17:59 is published separately as the overall limit.</p><p>Drop the bike and black T2 bag at GEiEG Saturday 13:00–17:30. Collect the bike and race bags there Sunday 15:00–18:30. Cloakroom collection is separate at Plaça dels Jurats, 15:00–18:00.</p><p>The <a href="https://sgrail100.com/course/" target="_blank" rel="noopener">course page</a> lists gravel 86.4 km / +1,050 m and trail 10.4 km / +320 m, with castle aid at km 4.4. It lists water, MAURTEN drink and sweet/salty food. Exact gels, bars, drink strength and refill method remain unconfirmed; record answers from the organiser in the survey.</p><p>The <a href="https://sgrail100.com/briefing-faq/" target="_blank" rel="noopener">14 October route notice</a> says rain may require gravel changes and expects the final track Thu 15 or Fri 16. The downloads are provisional files from 13 October. Replace the gravel GPX on both devices when the final route is released.</p><p>Forecast figures are the dossier’s 13 October snapshot; re-check Friday. Review the <a href="https://sgrail100.com/rules-regulations/" target="_blank" rel="noopener">latest rules and briefing</a>. This planner is independent of the organiser.</p></div></details>
   <div id="surveys"></div>
   <div id="next-actions"></div>
   <details class="quick-guide" id="device-guide"><summary>Save for another device</summary><div class="inner"><p>Your plan saves in this browser only. It does not sync automatically.</p><ol><li>Download a private backup below. It includes your answers and checklist ticks.</li><li>Send the JSON file to your other device using your own files app, AirDrop or another private transfer.</li><li>Open the same planner on that device and choose <b>Restore a backup</b>. Review the replacement prompt before importing.</li></ol><p>Changes on the two devices stay separate. Repeat the transfer whenever you want to move your latest plan.</p><button type="button" id="device-save">Download my plan backup</button></div></details>
@@ -1463,12 +1548,12 @@ body:not(.race) .now-card{display:none}
   <li class="d-sat"><span class="day">Sat 17</span><b>13:00–17:30</b><span class="what">Drop bike + black T2 bag</span><small>GEiEG de Sant Ponç · Canyon mechanics 13:00–17:00</small></li>
   <li class="d-sun"><span class="day">Sun 18</span><b>06:15–06:45</b><span class="what">Bus to Cadaqués · take an early one</span><small>La Copa, Girona</small></li>
   <li class="d-sun start"><span class="day">Sun 18</span><b>09:00</b><span class="what">Start</span><small>Platja Gran, Cadaqués</small></li>
-  <li class="d-sun cut"><span class="day">Sun 18 · cutoffs</span><dl class="cutoff-times"><div><dt>Swim</dt><dd><b>09:59</b></dd></div><div><dt>Feed 1 · km 34.3</dt><dd><b>13:00</b></dd></div><div><dt>Feed 2 · km 68</dt><dd><b>15:00</b></dd></div><div><dt>Gravel</dt><dd><b>15:49</b></dd></div><div><dt>Overall</dt><dd><b>17:59</b></dd></div></dl><small>16:59 trail limit still in the timetable — confirm Fri</small></li>
+  <li class="d-sun cut"><span class="day">Sun 18 · cutoffs</span><dl class="cutoff-times"><div><dt>Swim</dt><dd><b>09:59</b></dd></div><div><dt>Feed 1 · km 34.3</dt><dd><b>13:00</b></dd></div><div><dt>Feed 2 · km 68</dt><dd><b>15:00</b></dd></div><div><dt>Gravel</dt><dd><b>15:49</b></dd></div><div><dt>Overall</dt><dd><b>17:59</b></dd></div></dl><small>Plan against 16:59 for the run</small></li>
  </ol>
  <p class="execution-line" hidden>Ride the technical sector conservatively. Draft the plain. Hike the run climb, then commit to the descent.</p>
-<details class="location-links"><summary>Locations · open in Maps</summary><div class="inner"><div class="location-grid"><a href="https://maps.app.goo.gl/pWEBKGYvxmqraSXi7" target="_blank" rel="noopener noreferrer"><b>Bus pickup</b><span>La Copa · Girona ↗</span></a><a href="https://goo.gl/maps/nLCEkdMFELrRGCeZA" target="_blank" rel="noopener noreferrer"><b>Check-in / bag collection</b><span>Plaça dels Jurats · Girona ↗</span></a><a href="https://goo.gl/maps/L45gj3vDsq5GAYmp8" target="_blank" rel="noopener noreferrer"><b>Bike drop / collection</b><span>GEiEG · Girona ↗</span></a><a href="https://goo.gl/maps/qJLCiSE9Zoi3cjkG6" target="_blank" rel="noopener noreferrer"><b>Start / T1</b><span>Platja Gran · Cadaqués ↗</span></a><a href="https://goo.gl/maps/quVMrmhNkhwMa3ax5" target="_blank" rel="noopener noreferrer"><b>T2</b><span>Torre Desvern · Celrà ↗</span></a></div><p class="small">Links from the <a class="txtlink" href="https://sgrail100.com/timetable/" target="_blank" rel="noopener noreferrer">organiser’s timetable</a>, checked 9 September. Maps needs a connection unless the area is downloaded.</p></div></details>
+<details class="location-links"><summary>Locations · open in Maps</summary><div class="inner"><div class="location-grid"><a href="https://maps.app.goo.gl/pWEBKGYvxmqraSXi7" target="_blank" rel="noopener noreferrer"><b>Bus pickup</b><span>La Copa · Girona ↗</span></a><a href="https://goo.gl/maps/nLCEkdMFELrRGCeZA" target="_blank" rel="noopener noreferrer"><b>Check-in / cloakroom collection</b><span>Plaça dels Jurats · Girona ↗</span></a><a href="https://goo.gl/maps/L45gj3vDsq5GAYmp8" target="_blank" rel="noopener noreferrer"><b>Bike + race-bag drop / collection</b><span>GEiEG · Girona ↗</span></a><a href="https://goo.gl/maps/qJLCiSE9Zoi3cjkG6" target="_blank" rel="noopener noreferrer"><b>Start / T1</b><span>Platja Gran · Cadaqués ↗</span></a><a href="https://goo.gl/maps/quVMrmhNkhwMa3ax5" target="_blank" rel="noopener noreferrer"><b>T2</b><span>Torre Desvern · Celrà ↗</span></a></div><p class="small">Links from the <a class="txtlink" href="https://sgrail100.com/timetable/" target="_blank" rel="noopener noreferrer">organiser’s timetable</a>, reconciled 13 October. Maps needs a connection unless the area is downloaded.</p></div></details>
 
- 
+<div class="track-downloads" id="track-downloads"><h3>Track downloads</h3><p class="small">Organiser’s provisional tracks · 13 October 2026</p><p class="small track-update"><b>Final gravel GPX still pending.</b> The <a href="https://sgrail100.com/briefing-faq/">organiser’s 14 Oct notice</a> says rain may require route changes, with the final track expected Thu 15 or Fri 16. Download it and replace the provisional gravel track on both devices before race day.</p><div class="location-grid"><a href="tracks-2026/SWIM%20SGRAIL_100_GIRONA.gpx" download="SWIM SGRAIL_100_GIRONA.gpx"><b>Swim</b><span>Download GPX ↓</span></a><a href="tracks-2026/GRAVEL%20SGRAIL100_GIRONA_.gpx" download="GRAVEL SGRAIL100_GIRONA_.gpx"><b>Gravel</b><span>Download GPX ↓</span></a><a href="tracks-2026/TRAIL%20SGRAIL_100_GIRONA.gpx" download="TRAIL SGRAIL_100_GIRONA.gpx"><b>Trail run</b><span>Download GPX ↓</span></a><a href="tracks-2026/TRANSITION_From_Swimming_to_Gravel.gpx" download="TRANSITION_From_Swimming_to_Gravel.gpx"><b>T1 · Swim → gravel</b><span>Download GPX ↓</span></a><a href="tracks-2026/TRANSITION_From_Gravel_to_Trail_Running.gpx" download="TRANSITION_From_Gravel_to_Trail_Running.gpx"><b>T2 · Gravel → trail</b><span>Download GPX ↓</span></a></div></div>
 </aside>
 <aside class="statusbar rm-hide" aria-label="Race preparation">
   <div class="prep-head"><div><span class="eyebrow">Before the start line</span><button type="button" class="linkbtn" id="prep-count" data-open>— open tasks</button></div><button type="button" class="progbtn" data-prog>Event program ↗</button></div>
@@ -1479,18 +1564,20 @@ body:not(.race) .now-card{display:none}
 <section id="openitems">
   <h2>Before Girona <span class="tag">bags · pack · bike · sort out</span><button type="button" class="edit-inline" data-edit="kit">Edit kit answers ✎</button></h2>
   <div class="preview-note" data-needs="kit fuel" hidden><span>Draft plan · unanswered questions use typical values.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
+  <div id="recheck-notice" class="new-question-card recheck-notice" role="status" hidden><h3>Recheck changed items</h3><p></p><button type="button" data-recheck-go>Go to first changed item</button></div>
   <div class="pk-head">Bags · pack → drop → use</div>
   <div class="card rail-flag bagscard">
-    <p class="small">Bags come from check-in · Saturday: black with the bike · Sunday: white + personal travel with you.</p>
+    <p class="small" id="bag-travel-note">Bags come from check-in · black T2 bag to GEiEG Saturday · white + personal travel with you Sunday. Confirm bus and bike transport separately. Tick a bag once it is ready.</p>
     <ul class="check bag-journeys">
-<li class="bagrow b-black"><input type="checkbox" data-k="bag-t2" aria-label="Black · T2 packed"><div class="bagflow"><b class="bagname">Black · T2</b><div class="stage"><em>Drop</em><strong>Sat 13:00–17:30</strong><span>GEiEG, Girona · with the bike</span></div><div class="stage"><em>Use</em><span>T2 Celrà · run kit</span></div><div class="stage contents"><em>In it</em><div id="bag-t2"></div></div></div></li>
-<li class="bagrow b-white"><input type="checkbox" data-k="bag-t1" aria-label="White · T1 packed"><div class="bagflow"><b class="bagname">White · T1</b><div class="stage"><em>Drop</em><strong>Sun 08:00–08:45</strong><span>T1, Cadaqués · travels with you</span></div><div class="stage"><em>Use</em><span>After the swim · bike kit on, wetsuit in</span></div><div class="stage contents"><em>In it</em><div id="bag-t1"></div></div></div></li>
-<li class="bagrow b-pers"><input type="checkbox" data-k="bag-cl" aria-label="Personal · cloakroom packed"><div class="bagflow"><b class="bagname">Personal · cloakroom</b><div class="stage"><em>Drop</em><strong>Sun 08:00–08:45</strong><span>Cadaqués cloakroom · before the wetsuit</span></div><div class="stage"><em>Use</em><span>Warm until 09:00 · collect in Girona</span></div><div class="stage contents"><em>In it</em><div id="bag-cl"></div></div></div></li>
+<li class="bagrow b-black"><input type="checkbox" data-k="bag-t2" aria-label="Black · T2 ready"><div class="bagflow"><b class="bagname">Black · T2</b><div class="stage"><em>Drop</em><strong>Sat 13:00–17:30</strong><span id="bag-t2-drop">GEiEG, Girona · bike transport separately confirmed</span></div><div class="stage"><em>Use</em><span>T2 Celrà · run kit</span></div><div class="stage contents"><em>In it</em><div id="bag-t2"></div></div></div></li>
+<li class="bagrow b-white"><input type="checkbox" data-k="bag-t1" aria-label="White · T1 ready"><div class="bagflow"><b class="bagname">White · T1</b><div class="stage"><em>Drop</em><strong>Sun 08:00–08:45</strong><span>T1, Cadaqués · travels with you</span></div><div class="stage"><em>Use</em><span>After the swim · bike kit on, wetsuit in</span></div><div class="stage contents"><em>In it</em><div id="bag-t1"></div></div></div></li>
+<li class="bagrow b-pers"><input type="checkbox" data-k="bag-cl" aria-label="Personal · cloakroom ready"><div class="bagflow"><b class="bagname">Personal · cloakroom</b><div class="stage"><em>Drop</em><strong>Sun 08:00–08:45</strong><span>Cadaqués cloakroom · before the wetsuit</span></div><div class="stage"><em>Use</em><span>Warm until 09:00 · collect at Plaça dels Jurats</span></div><div class="stage contents"><em>In it</em><div id="bag-cl"></div></div></div></li>
 </ul>
   </div>
-  <div class="pk-head">Pack</div>
+  <div class="pk-head">Packing checklist</div>
+  <p class="small">Tick each item once it is packed. Bag checks mean ready; transition checks mean action done.</p>
   <div id="pack-assumptions"></div>
-  <div class="tblwrap transition-wrap" tabindex="0" role="region" aria-label="Pack list by discipline"><table class="transition-matrix packtbl"><thead><tr data-stage-count="0"><th>Pack</th><th>Swim</th><th>Bike</th><th>Run</th></tr></thead><tbody id="pack-body"></tbody></table></div>
+  <div id="pack-body" class="planner-pack" aria-label="Packing checklist"></div>
   <p class="small">Cold or rain: add the layer. Canyon mechanics at km 68 only (W2), plus roving mechanics on bikes — the backstop, not the plan.</p>
   <div id="bike-assumptions"></div>
   <div class="pk-head" id="bike-title">Bike setup</div>
@@ -1499,6 +1586,7 @@ body:not(.race) .now-card{display:none}
     <p class="small">Pressures are a starting point for your weight and tyre, not a prescription. Settle them on rough gravel before race week.</p>
   </div>
   <div class="pk-head">Sort out</div>
+  <p id="task-save-status" class="small" role="status"></p>
   <div id="open"><button type="button" id="hide-completed" aria-pressed="false">Hide completed</button>
   <div class="card" style="margin:0;border:0;padding:0;background:transparent"><div id="task-body"></div></div>
   </div>
@@ -1519,14 +1607,14 @@ body:not(.race) .now-card{display:none}
   <div class="course-timing" aria-label="Your discipline times and cutoffs">
     <div><b class="sea-label">Swim</b><strong id="ct-swim">—</strong><small>Cutoff 09:59</small></div>
     <div><b class="bike-label">Bike</b><strong id="ct-bike">—</strong><small>Cutoff 15:49</small></div>
-    <div><b class="run-label">Run</b><strong id="ct-run">—</strong><small class="unconfirmed">Cutoff unconfirmed<br>16:59 trail / 17:59 overall</small></div>
+    <div><b class="run-label">Run</b><strong id="ct-run">—</strong><small>Run limit 16:59<br>Overall 17:59</small></div>
   </div>
   <details class="full-course" data-mobile-chart="true" open><summary><span class="graph-label"><svg class="gicon" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 13 L5 6 L8 9 L11 3 L15 13 Z" fill="currentColor" opacity=".25"/><path d="M1 13 L5 6 L8 9 L11 3 L15 13" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Course profile · altitude and stations</span><span class="graph-cue">Show graph</span></summary>
   <figure class="course-figure" aria-label="Course profile and chart key">
   <div class="prof-scroll" tabindex="0" role="region" aria-label="Detailed course profile"><div class="prof-inner">
   <svg id="profsvg" viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" role="group" aria-labelledby="course-graph-title course-graph-desc">
     <text x="14" y="16" class="chart-axis-label">ALT. m</text><title id="course-graph-title">Course, timing and execution</title>
-    <desc id="course-graph-desc">Swim: 28–33 minutes, cutoff 09:59. Anti-clockwise rectangle at Platja Gran, approximately 18.5 degrees Celsius, wetsuit on. First 300 m easy; sight every 6–8 strokes. Bike: 86.4 km, 1,050 m ascent, 4:00–4:45, cutoff 15:49. First 25 km contain about 67 percent of climbing; ride carefully, then draft and fuel on the plain. Budget about 2 minutes across both water stops. Station drink does not replace the capsule plan. Run: 10.4 km, 320 m ascent, 1:10–1:20. Climb 250 m in 4.4 km, descend for 3 km, then 50 m and 20 m rises and 20 finish steps. Regroup at castle aid, km 4.4. Cutoff unconfirmed: 16:59 trail versus 17:59 overall.</desc>
+    <desc id="course-graph-desc">Swim: 1.5 km, cutoff 09:59. Anti-clockwise rectangle at Platja Gran; 13 October sea-temperature snapshot about 20 degrees Celsius. First 300 m easy; sight every 6–8 strokes. Bike: 86.4 km, 1,050 m ascent, cutoff 15:49. Most climbing is in the technical first 25 km. Water stops at km 34.3 and 68; use your generated feed schedule. Run: 10.4 km, 320 m ascent. Castle aid at km 4.4, followed by descent, late rises and finish steps. Plan against 16:59 for the run; overall limit 17:59. The track and profile remain provisional pending the final gravel update.</desc>
     <text x="84" y="20" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#8A5A2B">KM 0–25 · LOW Z3 / WALK PITCHES</text>
     <text x="360" y="95" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#8A5A2B">KM 25–86 · DRAFT + FUEL</text>
     <text x="360" y="112" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#5C6B72">EXPOSED PLAIN · WIND</text>
@@ -1602,18 +1690,13 @@ body:not(.race) .now-card{display:none}
 
   
   <div class="preview-note" data-needs="fuel" hidden><span>Draft plan · unanswered questions use typical values.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
-  <details class="planblock p-bike" id="feedblock" data-mobile-chart="true" open><summary class="plan-head" style="margin-top:0"><span class="pn">Feeding chart</span><span class="pd">graph · your feed times on the bike profile</span><span class="graph-cue">Show graph</span></summary>
-    <div class="clock-scroll" tabindex="0" role="region" aria-label="Scrollable feed chart"><div class="clock" id="feedchart"></div></div>
-    <p class="swipe-cue" aria-hidden="true">Swipe for the whole ride <b>→</b></p>
-    <div class="feedkey" id="feedkey" aria-label="Feeding chart key"></div>
-    <p class="small" id="feed-explanation">Clock time is the instruction; the km is where that time is likely to fall at your pace.</p>
-  </details>
+
 
   <div class="sec-label" style="margin-top:26px">Race phases · kit and instructions</div>
-  <div class="phasectl"><button type="button" data-ph="open">Expand all</button><button type="button" data-ph="close">Collapse all</button></div><div class="phasestrip"><a class="ph p-pre" href="#ph-pre"><b>Pre-swim</b><span id="strip-pre">—</span></a><a class="ph p-swim" href="#ph-swim"><b>Swim</b><span id="strip-swim">—</span></a><a class="ph p-t1" href="#ph-t1"><b>T1</b><span>6–8′</span></a><a class="ph p-bike" href="#ph-bike"><b>Bike</b><span id="strip-bike">—</span></a><a class="ph p-t2" href="#ph-t2"><b>T2</b><span>5–6′</span></a><a class="ph p-run" href="#ph-run"><b>Run</b><span id="strip-run">—</span></a></div>
+  <div class="phasectl"><button type="button" data-ph="open">Expand all</button><button type="button" data-ph="close">Collapse all</button></div><div class="phasestrip"><a class="ph p-pre" href="#ph-pre"><b>Pre-swim</b><span id="strip-pre">—</span></a><a class="ph p-swim" href="#ph-swim"><b>Swim</b><span id="strip-swim">—</span></a><a class="ph p-t1" href="#ph-t1"><b>T1</b><span id="strip-t1">—</span></a><a class="ph p-bike" href="#ph-bike"><b>Bike</b><span id="strip-bike">—</span></a><a class="ph p-t2" href="#ph-t2"><b>T2</b><span id="strip-t2">—</span></a><a class="ph p-run" href="#ph-run"><b>Run</b><span id="strip-run">—</span></a></div>
 
 <details class="planblock transblock p-pre" id="ph-pre"><summary class="plan-head"><span class="pn">Pre-swim</span><span class="pd"></span><span class="phase-brief"></span><span class="detail-cue">More detail</span></summary><div class="ph-body"></div></details>
-<details class="planblock transblock p-swim" id="ph-swim"><summary class="plan-head"><span class="pn">Swim · 1,500 m</span><span class="pd"></span><span class="phase-brief"></span><span class="detail-cue">More detail</span></summary><div class="carry" style="grid-template-columns:1fr 1fr"><div class="zone"><div class="zh">The course</div><svg class="swimmap" viewBox="0 0 420 152" role="img" aria-label="Swim course: 700 m out, 100 m across, 700 m back, anti-clockwise, to scale">
+<details class="planblock transblock p-swim" id="ph-swim"><summary class="plan-head"><span class="pn">Swim · 1,500 m</span><span class="pd"></span><span class="phase-brief"></span><span class="detail-cue">More detail</span></summary><div class="carry" style="grid-template-columns:1fr 1fr"><div class="zone"><div class="zh">Execution</div><ol class="rail"><li>Settle the first 300 m</li><li>Sight every 6–8 strokes — the turns</li><li>Take feet if a pair comes past</li><li>Steady IM effort</li><li>Out, up the beach, into T1</li></ol></div><div class="zone"><div class="zh">The course</div><svg class="swimmap" viewBox="0 0 420 152" role="img" aria-label="Swim course: 700 m out, 100 m across, 700 m back, anti-clockwise, to scale">
 <rect x="10" y="20" width="22" height="112" fill="#D9C9A8" opacity=".55"/><text x="24" y="130" transform="rotate(-90 24 130)" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#8A5A2B">PLATJA GRAN · start + exit</text>
 <path d="M40 48 H390" stroke="#0E6272" stroke-width="2.4" fill="none"/><path d="M390 48 V98" stroke="#0E6272" stroke-width="2.4" fill="none"/><path d="M390 98 H40" stroke="#0E6272" stroke-width="2.4" fill="none"/>
 <path d="M215 48 l-8 -5 v10z" fill="#0E6272"/><path d="M390 73 l-5 -8 h10z" fill="#0E6272"/><path d="M215 98 l8 -5 v10z" fill="#0E6272"/>
@@ -1623,10 +1706,15 @@ body:not(.race) .now-card{display:none}
 <text x="404" y="77" font-family="ui-monospace,Menlo,monospace" font-size="9" fill="#0E6272" transform="rotate(90 404 77)" text-anchor="middle">100 m</text>
 <text x="215" y="115" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#0E6272">700 m back</text>
 <text x="40" y="140" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5C6B72">anti-clockwise · red = turn buoys · to scale</text>
-</svg></div><div class="zone"><div class="zh">Execution</div><ol class="rail"><li>Settle the first 300 m</li><li>Sight every 6–8 strokes — the turns</li><li>Take feet if a pair comes past</li><li>Steady IM effort</li><li>Out, up the beach, into T1</li></ol></div></div>
+</svg></div></div>
 <div class="zone" style="margin-top:10px"><div class="zh">Your swim</div><div class="ph-note"></div></div></details>
 <details class="planblock transblock p-t1" id="ph-t1"><summary class="plan-head"><span class="pn">T1 · Platja Gran</span><span class="pd"></span><span class="phase-brief"></span><span class="detail-cue">More detail</span></summary><div class="ph-body"></div></details>
-<details class="planblock p-bike" id="ph-bike"><summary class="plan-head"><span class="pn">Bike</span><span class="pd"></span><span class="phase-brief"></span><span class="detail-cue">More detail</span></summary><div class="ph-body"></div></details>
+<details class="planblock p-bike" id="ph-bike"><summary class="plan-head"><span class="pn">Bike</span><span class="pd"></span><span class="phase-brief"></span><span class="detail-cue">More detail</span></summary><div class="ph-body"></div>  <details class="bike-chart" id="feedblock" data-mobile-chart="true" open><summary class="plan-head" style="margin-top:0"><span class="pn">Feeding chart</span><span class="pd">graph · your feed times on the bike profile</span><span class="graph-cue">Show graph</span></summary>
+    <div class="clock-scroll" tabindex="0" role="region" aria-label="Scrollable feed chart"><div class="clock" id="feedchart"></div></div>
+    <p class="swipe-cue" aria-hidden="true">Swipe for the whole ride <b>→</b></p>
+    <div class="feedkey" id="feedkey" aria-label="Feeding chart key"></div>
+    <p class="small" id="feed-explanation">Clock time is the instruction; the km is where that time is likely to fall at your pace.</p>
+  </details></details>
 <details class="planblock transblock p-t2" id="ph-t2"><summary class="plan-head"><span class="pn">T2 · Celrà</span><span class="pd"></span><span class="phase-brief"></span><span class="detail-cue">More detail</span></summary><div class="ph-body"></div></details>
 <details class="planblock p-run" id="ph-run"><summary class="plan-head"><span class="pn">Run</span><span class="pd"></span><span class="phase-brief"></span><span class="detail-cue">More detail</span></summary><div class="ph-body"></div></details>
   <button type="button" class="reset-tr" id="reset-transitions">Reset T1 / T2 checks</button>
@@ -1636,6 +1724,7 @@ body:not(.race) .now-card{display:none}
 
   <div class="card rail-flag">
     <h3 style="color:var(--flag)">Rules that carry penalties</h3>
+    <p class="small">Roads and paths remain open to traffic. Respect traffic rules and other users throughout the course.</p>
     <ul style="list-style:none">
       <li style="padding:3px 0"><span class="penalty">DQ</span> — course deviation or missed control point. <b>The gravel leg is unsigned: GPS only.</b> The trail leg <i>is</i> marked, red ribbons and blue arrows. Follow the track, not the rider ahead.</li>
       <li style="padding:3px 0"><span class="penalty">+30 min</span> — taking supplies outside an aid zone. Carry all fuel; anything taken <b>at</b> a station is legal — water refills at 34.3 / 68 are mandatory, course Maurten = emergency fallback.</li>
@@ -1655,7 +1744,7 @@ body:not(.race) .now-card{display:none}
   <h2>Pacing <span class="tag">Planning scenarios · not predictions</span><button type="button" class="edit-inline" data-edit="fuel">Edit times ✎</button></h2>
   <div class="preview-note" data-needs="fuel" hidden><span>Draft plan · unanswered questions use typical values.</span><button type="button" data-sv-jump="kit">Answer <span class="pv-which"></span></button></div>
   <div class="cutoff" id="pace-bars"></div>
-  <p class="cutoff-note">Plan against <b>16:59</b> until the finish limit is confirmed at check-in. Published overall limit: <b>17:59</b>.</p>
+  <p class="cutoff-note">Plan against the <b>16:59 run limit</b>. Published overall limit: <b>17:59</b>.</p>
   <details class="reference-details"><summary>Exact splits &amp; clock checks</summary><div class="inner">
   <div class="tblwrap" tabindex="0" role="region" aria-label="Scenario splits" id="pace-splits"></div>
   <div class="tblwrap" tabindex="0" role="region" aria-label="Clock checks" id="pace-clock"></div>
@@ -1668,9 +1757,12 @@ body:not(.race) .now-card{display:none}
   <div class="tblwrap" tabindex="0" role="region" aria-label="Risks table"><table role="table" data-mobile="cards" class="tight risktbl" style="min-width:560px"><tbody id="risk-body"></tbody></table></div>
 </section>
 
+<section id="contingencies"><h2>If something goes wrong</h2><div class="card"><dl class="contingency-list"><dt>GPS fails</dt><dd>Stop somewhere safe and open the downloaded GPX on your phone. Do not guess the route or follow another rider blindly.</dd><dt>Fuel is lost</dt><dd>Use an official aid station for replacement supplies. The station drink product/concentration remains unconfirmed; do not assume it replaces your planned mix gram for gram.</dd><dt>Mechanical issue or accident</dt><dd>Contact the organisation using the number on your bib: <a href="tel:+34682607618">+34 682 60 76 18</a>. Emergencies: <a href="tel:112">112</a>.</dd><dt>Withdraw</dt><dd>Tell race staff. The published rules require withdrawal at a checkpoint or aid station except in serious injury; organiser transport is provided only from points accessible by vehicle. Confirm pickup and destination with staff.</dd></dl><p class="small">Incident/withdrawal rules checked 14 Oct: <a href="https://sgrail100.com/wp-content/uploads/2023/11/RULES-REGULATION-SGRAIL100-Girona.pdf">organiser regulations, §§2, 6, 8</a>. Emergency numbers also appear in the 2026 briefing.</p></div></section>
+<section id="after"><h2>After the finish <span class="tag">Sunday 18 · Girona</span></h2><div id="after-body"></div></section>
+
 <footer><details class="prov"><summary>Sources &amp; verification</summary>
-  <p><b>Race facts</b>: sgrail100.com course, timetable and rules (checked 23 Aug 2026 — swim cutoff 09:59, T2 Torre Desvern), the 2024 race briefing and a 2024 finisher report (river crossing, gearing). Where the timetable and the briefing disagree, both are shown and flagged as a check-in question. Course profile from the organiser's embedded RideWithGPS routes (gravel 48660982 · trail 48576854, the same routes embedded on the 2026 course page).</p>
-  <p><b>Conditions</b> are October climatology, not a forecast — Cadaqués sea 18.5 °C October mean (16–21) and 14.7/20.2 °C air low/high; Girona ~11/21 °C around 18 October, wind predominantly north, ~18% wet-day chance. Check the real forecast on Friday.</p>
+  <p><b>Race facts</b>: reconciled with the 2026 briefing and organiser course, timetable, FAQ and regulations on 13–14 October. Plan against 16:59 for the run; 17:59 is the overall limit. The 13 October tracks and matching profile remain provisional pending the rain-related gravel update expected 15–16 October.</p>
+  <p><b>Conditions</b>: dossier forecast snapshot 13 October, not a live feed. Re-check Friday. Station drink strength, exact gel/bar stock and refill method are still unconfirmed.</p>
   <p><b>Your plan</b> is calculated in your browser from your answers and stored only on this device. The copy-link button puts your answers in the link itself.</p>
 </details></footer>
 
@@ -1683,7 +1775,7 @@ body:not(.race) .now-card{display:none}
   <div class="mbody">
   <ol class="chain" aria-label="The one chain that cannot break">
    <li><em>Fri</em><b>17:30–19:30</b><span>Check-in · Plaça dels Jurats</span><small>hands you bags + bibs</small></li>
-   <li><em>Sat</em><b>13:00–17:30</b><span>Drop bike + black bag · GEiEG</span><small>needs Friday's bag + bib</small></li>
+   <li><em>Sat</em><b>13:00–17:30</b><span>Drop bike + black bag · GEiEG</span><small>needs your check-in bag + bib</small></li>
    <li><em>Sun</em><b>08:00–08:45</b><span>White bag → T1 boxes · Cadaqués</span><small>on the bus with you</small></li>
   </ol>
   <div class="tblwrap" tabindex="0" role="region" aria-label="Scrollable data table"><table role="table" data-mobile="cards" class="tight" style="min-width:520px">
@@ -1747,12 +1839,12 @@ var SURVEYS={
    {id:'bottleml', type:'choice', label:'How much does each bike bottle hold?', def:'750', options:[['500','500 ml'],['620','600–620 ml'],['750','750 ml'],['950','950 ml']]},
    {id:'weight', type:'number', label:'What is your body weight?', unit:'kg', min:40, max:140, step:1, def:72, help:'Sets your tyre-pressure starting point and the caffeine reference.'},
    {id:'nav', type:'choice', label:'How will you follow the bike route?', help:'Choose the device you’ll use to follow the downloaded GPX route.', def:'unit', options:[['unit','Bike computer'],['watch','Watch only'],['phone','Phone on the bars']]},
-   {id:'storage', type:'multi', label:'Where can you carry food and spares?', help:'Select all that apply. Leave blank if you still need to arrange storage.', def:['saddle'], options:[['saddle','Saddle bag'],['toptube','Top-tube bag'],['pockets','Suit pockets']]}
+   {id:'storage', type:'multi', label:'Which carrying spaces do you have?', help:'Select all that apply. Next, assign food and repair kit separately; a saddle roll can be food-only.', def:['saddle'], options:[['saddle','Saddle bag'],['toptube','Top-tube bag'],['pockets','Suit pockets']]}
   ]},
   {title:'Kit', qs:[
    {id:'suit', type:'choice', label:'What will you wear under your wetsuit?', def:'tri', options:[['tri','Tri suit, all day'],['kit','Bike kit under the wetsuit']]},
    {id:'shoes', type:'choice', label:'Will you change shoes for the run?', when:function(a){ return a.pedals==='flat'; }, def:'same', options:[['same','Same shoes for bike and run'],['change','Change to run shoes at T2']]},
-   {id:'wetsuit', type:'choice', label:'Is your wetsuit arranged?', help:'Wetsuits are expected; sea around 18.5 °C in mid-October.', def:'own', options:[['own','I have one'],['rent','Renting or borrowing'],['need','Still to sort']]},
+   {id:'wetsuit', type:'choice', label:'Is your wetsuit arranged?', help:'Wetsuits are expected; the dossier’s 13 October sea-temperature snapshot is about 20 °C. Re-check the final briefing.', def:'own', options:[['own','I have one'],['rent','Renting or borrowing'],['need','Still to sort']]},
    {id:'extras', type:'multi', label:'Which of these are you bringing?', help:'Select everything you plan to bring. Items left blank become reminders to decide later.', def:['sleeves','glasses'],
     options:[['sleeves','Arm sleeves'],['gloves','Full-finger gloves'],['shell','Packable shell'],['glasses','Glasses'],['socks','Dry socks for T2']]},
    {id:'runcarry', type:'choice', label:'What do you carry on the run?', def:'flask', options:[['flask','Soft flask'],['bottle','Handheld bottle'],['belt','Belt or vest'],['none','Nothing — aid stations only']]}
@@ -1760,6 +1852,9 @@ var SURVEYS={
   {title:'Weekend', qs:[
    {id:'checkin', type:'choice', label:'When will you check in?', help:'Check-in hands you the bags and bibs you need for Saturday’s bike drop.', def:'fri', options:[['fri','Friday 17:30–19:30'],['sat','Saturday, 12:00–17:00']]},
    {id:'transport', type:'choice', label:'How do you get to the start?', def:'bus', options:[['bus','Organiser bus from Girona'],['own','Own transport to Cadaqués']]},
+   {id:'busBooking',type:'choice',optional:true,label:'Is your own bus place booked?',help:'The athlete bus and bike transport are separate bookings. Confirm each separately.',def:'unknown',when:function(a){return a.transport==='bus';},options:[['booked','Bus place booked'],['needed','Still to book'],['unknown','Not checked yet']]},
+   {id:'bikeTransport',type:'choice',optional:true,label:'How will your bike reach Cadaqués?',help:'Organiser bike transport requires its own booking. The black T2 bag still goes to GEiEG on Saturday if you bring the bike yourself.',def:'unknown',options:[['booked','Organiser bike transport booked'],['own','I will bring the bike to T1 on Sunday'],['needed','Still to arrange'],['unknown','Not checked yet']]},
+   {id:'paperwork',type:'choice',optional:true,label:'Is your check-in paperwork confirmed?',help:'Check your registration and disclaimer / fitness declaration. Online confirmation counts; keep the confirmation with your ID and insurance proof.',def:'unknown',options:[['confirmed','Confirmed online / completed'],['needed','Still to complete or check'],['unknown','Not checked yet']]},
    {id:'insurance', type:'choice', label:'Have you checked your event insurance cover?', help:'Cover is required to start. Not sure yet? Tap “I don’t know yet” and it goes on your to-do list.', def:'unsure',
     options:[['yes','Yes, verified'],['unsure','Not sure','hide'],['no','No']], warn:{value:'no',text:'<b>No insurance, no start.</b> Cover is checked at check-in. This goes to the top of your to-do list.'}},
    {id:'openwater', type:'choice', label:'Have you swum in open water in this wetsuit recently?', def:'yes', options:[['yes','Yes, recently'],['no','Not recently']]},
@@ -1828,7 +1923,7 @@ SURVEYS.kit.steps.push({title:'Your weekend',qs:[
   textField('arrival','Arrival time · local time','time'),
   numberField('travel','Minutes from accommodation to bus pickup / start','min',360),
   numberField('buffer','Extra departure buffer','min',180),
-  {id:'transportStatus',label:'Start transport',options:[['booked','Booked / arranged'],['needed','Still to arrange']]}
+  {id:'transportStatus',label:'Own transport to Cadaqués',when:function(a){return a.transport==='own';},options:[['booked','Arranged'],['needed','Still to arrange']]}
  ],null,'These details build your weekend timeline. Enter local times. The departure calculation uses the first bus at 06:15, or arrival at T1 by 08:00 for your own transport.'),
  detailQuestion('pickup','When and where will you collect the rental bike?',[
   textField('place','Rental shop / collection location'),
@@ -1877,11 +1972,11 @@ SURVEYS.fuel.steps.push({title:'Carrying water',qs:[
 ]});
 SURVEYS.fuel.steps.push({title:'What you will pack',qs:[
  {id:'inventoryMode',type:'choice',optional:true,label:'Do you want to check the fuel you plan to pack?',help:'Use your own products for packing and the feed clock. Complete both legs, including reserve quantities and timing, to activate your schedule. Until then the suggested schedule stays clearly labelled.',def:'later',options:[['later','Later · keep the suggested packing list'],['enter','Yes · enter my products by discipline']]}
-].concat(['bike','run'].map(function(leg){return detailQuestion('inventory_'+leg,'Your '+leg+' fuel inventory',[],function(a){return a.inventoryMode==='enter';},'Add up to four products per leg. Enter label amounts per serving, total packed and reserves (0 if none). Set the first serving and interval in minutes from the start of this leg. Drink servings are sipped across each interval. Blank values stay unknown. Only enter quantities and timing you have practised; this tool does not prescribe them.');}))});
+].concat(['bike','run'].map(function(leg){return detailQuestion('inventory_'+leg,'Your '+leg+' fuel inventory',[],function(a){return a.inventoryMode==='enter';},'Add up to six products per leg, including separate plain gels, caffeinated gels, solids, carb drink and electrolyte portions. Enter label amounts per serving, total packed and reserves (0 if none). Set your practiced first serving and interval in minutes from the start of this leg. Drink servings are sipped across each interval. Blank values stay unknown.');}))});
 ['bike','run'].forEach(function(leg){
  var q=SURVEYS.fuel.steps[SURVEYS.fuel.steps.length-1].qs.filter(function(q){return q.id==='inventory_'+leg;})[0];
  q.type='inventory';
- for(var i=1;i<=4;i++){
+ for(var i=1;i<=6;i++){
   q.fields.push(textField('name'+i,'Name and serving size'));
   q.fields.push(numberField('qty'+i,'Servings packed','servings',100,0.5));
   q.fields.push(numberField('carb'+i,'Carbohydrate per serving','g',200,0.1));
@@ -1900,6 +1995,79 @@ SURVEYS.fuel.steps.push({title:'What you will pack',qs:[
  step.qs[at].when=function(a){return a.inventoryMode==='enter'&&a['inventory_'+leg+'_none']!=='yes';};
  step.qs.splice(at,0,{id:'inventory_'+leg+'_none',type:'choice',optional:true,label:'Will you pack fuel for the '+leg+'?',help:'Choose no only if you deliberately plan no food, nutrient drinks or capsules on this leg. Plain water is separate.',def:'no',when:function(a){return a.inventoryMode==='enter';},options:[['no','Yes · enter my products'],['yes','No fuel on this leg']]});
 });
+
+// October reconciliation: answers are per athlete, never imported from the personal dossier.
+SURVEYS.kit.steps[1].qs.push(
+ {id:'foodStorage',type:'choice',optional:true,label:'Where will your bike food go?',help:'A Silca roll can hold food only if the repair kit has another bag. Test access with wet hands.',def:'unknown',options:[['saddle','Saddle roll · food only'],['toptube','Top-tube bag'],['pockets','Suit pockets'],['unknown','Still to decide']]},
+ {id:'repairStorage',type:'choice',optional:true,label:'Where will the repair kit and accessories go?',help:'Keep this separate from the food-only roll. Pack and test both on the bike.',def:'unknown',options:[['separate','Separate repair / accessory bag'],['saddle','Saddle bag · repair kit'],['pockets','Suit pockets'],['unknown','Still to decide']]}
+);
+SURVEYS.kit.steps.push({title:'Rental return',qs:[
+ detailQuestion('rentalReturn','How will you return the rental bike?',[
+  {id:'when',label:'Return arrangement',options:[['immediate','Immediately after the race'],['later','Later · record the deadline'],['unknown','Not confirmed']]},
+  textField('place','Return shop / location'),textField('deadline','Agreed return deadline'),
+  {id:'nearby',label:'Is the shop next to GEiEG bike collection?',options:[['yes','Yes'],['no','No · allow travel time'],['unknown','Not checked']]}
+ ],function(a){return a.bike==='rental';},'Use the arrangement agreed with your shop. The planner does not assume another athlete’s rental terms.')
+]});
+SURVEYS.fuel.steps.push({title:'Before the swim',qs:[
+ {id:'prefood',type:'choice',label:'Will you eat before the swim?',help:'Record your usual, tested routine. This does not move your bike feeds or change your drinks.',def:'unknown',options:[['none','No food before the swim'],['familiar','My familiar breakfast / food'],['unknown','Still to decide','hide']]},
+ detailQuestion('morning','Your pre-swim routine',[
+  Object.assign(textField('food','Foods and quantities'),{when:function(a){return a.prefood==='familiar';}}),
+  Object.assign(textField('time','Food time · local time','time'),{when:function(a){return a.prefood==='familiar';}}),
+  textField('drink','Drinks / coffee and timing · optional'),numberField('caffeine','Caffeine before the swim · optional','mg',500)
+ ],null,'No pre-swim food leaves the drink and bike-feed schedule intact. Enter coffee caffeine only if you know the amount; it is added to the race total.')
+]});
+SURVEYS.fuel.steps.push({title:'Station checks',qs:[
+ detailQuestion('stationDetails','What has the organiser confirmed at the stations?',[
+  textField('drink','Drink product'),numberField('carbsPerLitre','Confirmed drink carbohydrate concentration','g/L',300),
+  textField('food','Confirmed food, gels / bars · or explicitly unavailable'),
+  {id:'refills',label:'Refill method at W1 and W2',options:[['jugs','Jugs / refill containers'],['bottles','Handed bottles'],['other','Other · record below'],['unknown','Still unconfirmed']]},
+  textField('notes','Refill / station notes')
+ ],null,'The briefing confirms MAURTEN, but does not identify the drink model or strength. The course lists sweet/salty food; exact gels and bars remain unverified. Record only confirmed details. Leaving concentration blank keeps the 80 g/L calculation explicitly provisional.')
+]});
+SURVEYS.fuel.steps.push({title:'Energy reference',qs:[
+ detailQuestion('energyEstimate','Keep an energy-expenditure reference? (optional)',[
+  numberField('kcal','Your estimated race expenditure · swim + bike + run','kcal',15000),textField('basis','Source / basis of your estimate')
+ ],null,'Optional context from your own estimate or training data. Carbohydrate intake × 4 is calculated separately. The difference is not an intake target and does not change your feed clock.')
+]});
+
+SURVEYS.fuel.steps.push({title:'Pre-start drinks',qs:[
+ {id:'prestartDrinkMode',type:'choice',label:'What will you drink before the swim?',help:'Keep this separate from food and the drinks on your bike. Your entered plan replaces the earlier suggestion.',def:'unknown',options:[['planned','Record my familiar drinks and times'],['water','Plain water to thirst only'],['none','No pre-start drinks planned'],['unknown','Still to decide','hide']]},
+ detailQuestion('prestartDrink','Your pre-start drinks',[
+  textField('product1','Drink 1 · product / coffee'),numberField('amount1','Drink 1 · prepared amount','ml',2000),
+  textField('time1','Drink 1 · local time','time'),{id:'carry1',label:'Drink 1 · where from?',options:[['carry','Bring it with me'],['buy','Buy / prepare it on site']]},
+  textField('product2','Drink 2 · product / coffee (optional)'),numberField('amount2','Drink 2 · prepared amount','ml',2000),
+  textField('time2','Drink 2 · local time','time'),{id:'carry2',label:'Drink 2 · where from?',options:[['carry','Bring it with me'],['buy','Buy / prepare it on site']]}
+ ],function(a){return a.prestartDrinkMode==='planned';},'Use the prepared volume, with product and quantity in the name if needed (for example, water + your usual sachets). Complete the first drink; leave the second row blank if unused. Record total pre-swim caffeine in Your pre-swim routine, once for all drinks.')
+]});
+var UPDATE_IDS=['busBooking','bikeTransport','paperwork','foodStorage','repairStorage','prefood','morning','prestartDrinkMode','prestartDrink','rentalReturn','stationDetails','energyEstimate'];
+function newQuestionQueue(raw,a,includeHidden){
+ return UPDATE_IDS.filter(function(id){var q=allQs().find(function(q){return q.id===id;});return q&&(includeHidden||!q.when||q.when(a))&&raw.answers[id]===undefined&&!(raw.unknown||{})[id];});
+}
+function queuedMode(mode){return ['unknown','more','updates','target'].indexOf(mode)>=0;}
+function prestartPlan(a){
+ var mode=a.prestartDrinkMode,entry=a.prestartDrink||{},flag=(a._unknown||{}).prestartDrinkMode||(a._unknown||{}).prestartDrink;
+ if(mode==='none'||mode==='water')return {explicit:true,ready:!flag,mode:mode,entries:[],text:(flag?'Unconfirmed: ':'')+(mode==='none'?'No pre-start drinks planned':'Plain water to thirst before the swim')};
+ if(mode==='planned'){
+  var rows=[],ready=!flag;
+  for(var i=1;i<=2;i++){
+   var product=entry['product'+i],amount=entry['amount'+i],time=entry['time'+i],carry=entry['carry'+i];
+   if(![product,amount,time,carry].some(present))continue;
+   var complete=!!(product&&amount>0&&localMinutes(time)!=null&&(carry==='carry'||carry==='buy'));
+   if(!complete)ready=false;
+   rows.push({product:product||'Product not recorded',amount:amount,time:time,carry:carry,complete:complete});
+  }
+  if(!rows.length)ready=false;
+  return {explicit:true,ready:ready,mode:mode,entries:rows,text:rows.length?rows.map(function(r){return r.product+' · '+(present(r.amount)?r.amount+' ml':'amount not recorded')+' · '+(r.time||'time not recorded');}).join('; '):'Pre-start drinks not yet recorded'};
+ }
+ var suggestion=(a.sweat==='heavy'||a.salty==='yes'||has(a,'salt','mix'))?'500 ml with electrolyte at 07:30':'plain water to thirst';
+ return {explicit:false,ready:false,mode:'unknown',entries:[],text:'Provisional drink suggestion: '+suggestion+' · confirm or replace'};
+}
+function renderPrestart(a,P){
+ var d=P.prestart||prestartPlan(a);
+ if(!d.explicit)return '<p>'+esc(d.text)+'</p>'+((a.morning||{}).drink?'<p class="small"><b>Earlier saved drink note:</b> '+esc(a.morning.drink)+'</p>':'')+questionButton(['prestartDrinkMode','prestartDrink'],'Set my pre-start drinks');
+ if(!d.entries.length)return '<p>'+esc(d.text)+'</p>';
+ return '<ol class="morning-drinks">'+d.entries.map(function(r){return '<li><b>'+(r.time||'Time to record')+'</b><span>'+esc(r.product)+' · '+(present(r.amount)?r.amount+' ml':'amount to record')+'<small>'+({carry:'Bring with you',buy:'Buy / prepare on site'}[r.carry]||'Source to record')+'</small></span></li>';}).join('')+'</ol>'+(!d.ready?'<p class="small">Confirm this drink plan or complete missing details before using it.</p>':'');
+}
 
 // ---------------- state ----------------
 function cleanState(raw){
@@ -1924,6 +2092,13 @@ function cleanState(raw){
   allQs().forEach(function(q){if(raw.unknown&&raw.unknown[q.id]===true)out.unknown[q.id]=true;});
   if(typeof raw.pos==='string')out.pos=raw.pos;
   if(raw.checks&&typeof raw.checks==='object'){out.checks={};Object.keys(raw.checks).forEach(function(k){if(/^[a-z][a-z0-9-]{0,99}$/.test(k)&&k!=='constructor'&&k!=='prototype'&&typeof raw.checks[k]==='boolean')out.checks[k]=raw.checks[k];});}
+  ['checkBasis','rechecks'].forEach(function(name){
+    if(!raw[name]||typeof raw[name]!=='object'||Array.isArray(raw[name]))return;
+    out[name]={};Object.keys(raw[name]).slice(0,250).forEach(function(k){
+      if(!/^[a-z][a-z0-9-]{0,99}$/.test(k)||k==='constructor'||k==='prototype')return;
+      var v=raw[name][k];if(name==='checkBasis'&&typeof v==='string'&&/^[0-9a-f]{8}$/.test(v)||name==='rechecks'&&v===true)out[name][k]=v;
+    });
+  });
   return out;
 }
 var state=lsGet('state',{answers:{},done:{kit:false,fuel:false}}),incoming=null,importError='';
@@ -1934,7 +2109,7 @@ var state=lsGet('state',{answers:{},done:{kit:false,fuel:false}}),incoming=null,
   catch(e){importError='This answer link is invalid or incomplete. Your saved plan has not changed.';}
   history.replaceState(null,'',location.pathname+location.search);
 })();
-var STARTER_IDS='weight insurance bike tyres width pedals cages bottleml wetsuit transport swimpace biketime runtime carbrate sources caffeine cafmg sweat salt mixbottles refill gelname gelg barname barg chewg mixname mixg mixna capna'.split(' ');
+var STARTER_IDS='prestartDrinkMode prestartDrink prefood weight insurance bike tyres width pedals cages bottleml wetsuit transport swimpace biketime runtime carbrate sources caffeine cafmg sweat salt mixbottles refill gelname gelg barname barg chewg mixname mixg mixna capna'.split(' ');
 function starterQuestion(q){return STARTER_IDS.indexOf(q.id)>=0;}
 // Related questions share one screen. Members must sit next to each other in the same step.
 var GROUPS=[
@@ -1971,6 +2146,7 @@ function pendingQuestions(raw,a){
     var v=raw.answers[q.id],unknown=raw.unknown||{};
     if(unknown[q.id]||v==='unknown'||v==='unsure')return true;
     if(!q.optional&&q.type!=='text'&&v===undefined)return true;
+    if(q.id==='prestartDrink'&&a.prestartDrinkMode==='planned')return !prestartPlan(a).ready;
     if(q.type==='inventory'&&a.inventoryMode==='enter')return !inventorySchedule(a,q.id.slice(10),(q.id==='inventory_bike'?+a.biketime:+a.runtime)+(a.timebasis==='moving'?((a.allowances||{})[q.id.slice(10)+'Stops']||0):0)).ready;
     if(q.type==='fields'&&v&&Object.keys(v).length&&q.fields.some(function(f){return (!f.when||f.when(a))&&(v[f.id]==='unknown'||v[f.id]==='undecided');}))return true;
     if(q.id==='allowances')return !present((a.allowances||{}).t1)||!present((a.allowances||{}).t2)||(a.timebasis==='moving'&&(!present((a.allowances||{}).bikeStops)||!present((a.allowances||{}).runStops)));
@@ -1986,9 +2162,9 @@ function assumptionNote(ids,extra){
   return '<details class="result-assumptions"><summary><b>What this is based on</b><span>'+(prov?prov+' provisional answer'+(prov===1?'':'s'):'')+(prov&&(extra||[]).length?' · ':'')+((extra||[]).length?(extra||[]).length+' assumption'+((extra||[]).length===1?'':'s'):'')+'</span></summary><ul>'+items.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>'+(prov?'<button type="button" class="insight-edit" data-unknown-review>Review what’s not sure</button>':'')+'</details>';
 }
 function nextActions(a,P){
-  var checks=lsGet('checks',{}),items=[];tasks(a,P).forEach(function(g){g.items.forEach(function(it){if(!checks['task-'+it.k])items.push(it);});});
+  var checks=lsGet('checks',{}),items=[];tasks(a,P).forEach(function(g){g.items.forEach(function(it){if(!checks['task-'+it.k]||(state.rechecks||{})['task-'+it.k])items.push(it);});});
   items.sort(function(x,y){return Number(!!y.req)-Number(!!x.req);});
-  return '<div class="next-actions"><h3>Your next three steps</h3>'+(items.length?'<ol>'+items.slice(0,3).map(function(it){return '<li><b>'+it.title+'</b><p>'+it.sub+'</p><small>'+it.when+'</small></li>';}).join('')+'</ol>':'<p>All preparation tasks are checked. Review final organiser updates before the race.</p>')+'<div class="next-links"><button type="button" data-plan-go="openitems">Packing &amp; tasks</button><button type="button" data-plan-go="fuel">Fuel plan</button><button type="button" data-plan-go="pacing">Pacing</button></div></div>';
+  return '<div class="next-actions"><h3>Your next three steps</h3>'+(items.length?'<ol>'+items.slice(0,3).map(function(it){return '<li><button type="button" class="next-task-link" data-task-go="task-'+it.k+'">'+it.title+'</button><p>'+it.sub+'</p><small>'+it.when+'</small></li>';}).join('')+'</ol>':'<p>All preparation tasks are checked. Review final organiser updates before the race.</p>')+'<div class="next-links"><button type="button" data-plan-go="openitems">Packing &amp; tasks</button><button type="button" data-plan-go="fuel">Fuel plan</button><button type="button" data-plan-go="pacing">Pacing</button></div></div>';
 }
 
 function allQs(){ var o=[]; Object.keys(SURVEYS).forEach(function(k){ SURVEYS[k].steps.forEach(function(s){ s.qs.forEach(function(q){ o.push(q); }); }); }); return o; }
@@ -2020,7 +2196,7 @@ function compute(a){
   if(base.t2Out>COURSE.cutT2) P.warn.push(['flag','Your base bike reaches T2 after the 15:49 gravel cutoff at Celrà.']);
   else if(slow.t2Out>COURSE.cutT2) P.warn.push(['rec','A slow day puts you at T2 after the 15:49 gravel cutoff. Know your time checks at W1 and W2.']);
   if(base.fin>COURSE.cutFin2) P.warn.push(['flag','Your base finish is after the 17:59 overall limit.']);
-  else if(base.fin>COURSE.cutFin1) P.warn.push(['rec','Your base finish is after 16:59. Ask at check-in which finish limit applies.']);
+  else if(base.fin>COURSE.cutFin1) P.warn.push(['rec','Your base finish is after the 16:59 run limit. Revise the plan against that stricter limit; 17:59 is published separately as overall.']);
   if(base.sw+base.t1+base.bk*COURSE.fW1>COURSE.cutW1) P.warn.push(['flag','Your base plan reaches feed 1 (km 34.3) after its 13:00 cut-off.']);
   else if(base.sw+base.t1+base.bk*COURSE.fW2>COURSE.cutW2) P.warn.push(['flag','Your base plan reaches feed 2 (km 68) after its 15:00 cut-off.']);
   // check times at the water stops for the gravel cutoff
@@ -2044,7 +2220,9 @@ function compute(a){
   var nMixStart=useMix?Math.min(cages,Math.max(1,+a.mixbottles||1)):0;
   var nElecStart=elecOwn&&nMixStart<cages?1:0;
   var refill=(useMix||elecOwn)?(a.refill||'powder'):'water';
-  var stationG=Math.round(80*bml/1000); // assumption: ~80 g/L until the station drink is confirmed
+  P.stationConfirmed=!(a._unknown||{}).stationDetails&&present((a.stationDetails||{}).carbsPerLitre);
+  var stationConcentration=P.stationConfirmed?a.stationDetails.carbsPerLitre:80;
+  var stationG=Math.round(stationConcentration*bml/1000); // Unknown strength remains a visible provisional assumption.
   function startKind(c){ return c<nMixStart?'mix':(c<nMixStart+nElecStart?'elec':'water'); }
   function refillKind(c){ var k=startKind(c); if(k==='water'||refill==='water') return 'water'; if(refill==='station') return k==='mix'?'station':'water'; return k; }
   // W2 → T2 is short: fill only what the last leg needs, flavoured bottles first
@@ -2059,7 +2237,7 @@ function compute(a){
     var f=volumes[ci]>0?legFrac[li]:0;
     if(k==='mix'){ legDrinkG[li]+=mixg*f; P.naFromMix+=mixna*f; P.mixPortions++; if(li) P.powderMix++; }
     else if(k==='elec'){ P.naFromMix+=mixna*f; P.saltPortions++; if(li) P.powderElec++; }
-    else if(k==='station'){ legDrinkG[li]+=80*volumes[ci]/1000*f; P.stationBottles++; }
+    else if(k==='station'){ legDrinkG[li]+=stationConcentration*volumes[ci]/1000*f; P.stationBottles++; }
   }); });
   legDrinkG=legDrinkG.map(Math.round); P.naFromMix=Math.round(P.naFromMix); P.legFrac=legFrac;
   if(legFrac.some(function(f,li){ return f<0.8&&rows.some(function(r){ return r[li]==='mix'||r[li]==='station'; }); })) P.warn.push(['rec','At '+fr+' ml/h you will not finish every bottle before the next stop, so the plan only counts the share you drink. Fewer flavoured bottles, or a stronger mix you have trained with, gets the carbs in.']);
@@ -2072,7 +2250,7 @@ function compute(a){
   P.startText+=rows.some(function(r){ return r[0]&&r[0]!=='water'; })&&rows.some(function(r){ return r[0]==='water'; })?' · drink the flavoured bottle first':'';
   P.stopText=[1,2].map(function(li){ var pw=rows.some(function(r){ return r[li]==='mix'||r[li]==='elec'; })&&li>0; var st=rows.some(function(r){ return r[li]==='station'; });
     return fillText(li)+(pw?' · powder vial first, then water':'')+(st?' · station drink straight into the bottle':''); });
-  if(refill==='station') P.warn.push(['rec','The station drink is counted at ~'+stationG+' g per bottle. Confirm the product and strength at check-in — it is on your to-do list.']);
+  if(refill==='station'&&!P.stationConfirmed) P.warn.push(['rec','Station drink strength is unconfirmed. The provisional calculation assumes 80 g/L (~'+stationG+' g per bottle); confirm it before relying on these carbs.']);
 
   // ---- food: place a unit whenever the carbs owed (target minus what the bottles deliver) reach one portion ----
   var halves=a.barsplit!=='whole', barUnit=halves?barg/2:barg;
@@ -2146,15 +2324,19 @@ function compute(a){
   // caffeine
   var w=+a.weight||72; P.cafLo=Math.round(w*3); P.cafHi=Math.round(w*6);
   P.cafMg=+a.cafmg||75; P.cafPlan=(P.caf.length+(P.runCaf?1:0))*P.cafMg;
-  if(P.cafPlan>P.cafHi) P.warn.push(['flag','Planned caffeine ('+P.cafPlan+' mg) is above 6 mg/kg for your weight. Use fewer or smaller doses.']);
-  else if(P.cafPlan>P.cafLo) P.warn.push(['rec','Planned caffeine ('+P.cafPlan+' mg) is above 3 mg/kg for your weight. Only race on amounts you have trained with.']);
 
   // morning
-  P.breakfast=a.transport==='bus'?'05:00–05:30':'05:15–05:45';
-  P.preload=(a.sweat==='heavy'||a.salty==='yes'||has(a,'salt','mix'));
+  P.breakfast=a.prefood==='none'?'No food before the swim':a.prefood==='familiar'?((a.morning||{}).time||'Time not recorded'):'Pre-swim food not decided';
+  P.morningStart=a.prefood==='familiar'&&(a.morning||{}).time?a.morning.time:'07:30';
+  P.prestart=prestartPlan(a);
+  P.preload=P.prestart.explicit?P.prestart.entries.some(function(r){return r.carry==='carry';}):(a.sweat==='heavy'||a.salty==='yes'||has(a,'salt','mix'));
   var nmClean=function(v){ return String(v||'').trim(); };
   P.names={gel:nmClean(a.gelname),bar:nmClean(a.barname),mix:nmClean(a.mixname)};
   if(a.inventoryMode==='enter') applyInventory(a,P);
+  P.preCaffeine=present((a.morning||{}).caffeine)?a.morning.caffeine:0;
+  P.cafPlan+=P.preCaffeine;
+  if(P.cafPlan>P.cafHi)P.warn.push(['flag','Recorded caffeine ('+P.cafPlan+' mg, including entered pre-swim drinks) is above the existing 6 mg/kg reference. Review your practiced intake.']);
+  else if(P.cafPlan>P.cafLo)P.warn.push(['rec','Recorded caffeine ('+P.cafPlan+' mg) is above the existing 3 mg/kg reference. Only use amounts you have trained with.']);
   return P;
 }
 
@@ -2171,14 +2353,12 @@ function tubeSize(a){ return {'40':'700×35–43','45':'700×38–47','50':'700�
 
 // ---------------- rendering helpers ----------------
 function cb(k,label,extra){ return '<label><input type="checkbox" data-k="'+k+'"'+(extra||'')+'><span>'+label+'</span></label>'; }
-function stageCell(stage,v){ return v?'<td data-stage="'+stage+'">'+v+'</td>':'<td data-stage="'+stage+'" class="empty-stage"><i class="dash">—</i></td>'; }
 function kindName(k,a){ return {gel:'gel',bar:'½ bar',chew:'chews',mix:'drink mix'}[k]; }
 
 // ---------------- pack list ----------------
 function packRows(a,P){
   var R=[], ex=a.extras||[], clip=a.pedals==='clip', change=clip||a.shoes==='change';
-  var carryPlace=has(a,'storage','toptube')?'Top-tube bag':(has(a,'storage','pockets')?'Suit pocket':'Saddle bag');
-  var spares=has(a,'storage','saddle')?'Saddle bag':(has(a,'storage','toptube')?'Top-tube bag':'Suit pocket');
+  var carryPlace=foodPlace(a), spares=repairPlace(a);
   R.push({g:'Wear'});
   R.push({k:'suit',l:a.suit==='tri'?'Tri suit':'Bike kit',c:['Wear','Keep','Keep']});
   R.push({k:'wetsuit',l:'Wetsuit + goggles'+(a.wetsuit==='need'?' <small>to sort</small>':''),c:['Wear','Off → T1 bag',''],bag:{t1:'Wetsuit goes in after the swim'}});
@@ -2195,6 +2375,7 @@ function packRows(a,P){
   R.push({k:'bibs',nocb:true,l:'Bibs <small>from check-in</small>',c:['','Gravel bib under the saddle the day before · stem label on','Trail bib on the front · T2'],bag:{t2:'Trail bib'}});
 
   R.push({g:'Fuel'});
+  if(a.foodStorage==='saddle'||a.foodStorage==='toptube')R.push({k:'foodbag',l:foodPlace(a),c:['','On the bike','Leave at T2']});
   var tot=function(n,u){ return n+' × '+u; };
   var nmTag=function(k){ return P.names&&P.names[k]?' <small>'+esc(P.names[k])+'</small>':''; };
   if(!P.actualInventory){
@@ -2212,7 +2393,11 @@ function packRows(a,P){
       R.push({k:'inventory-'+leg+'-'+r.id,l:label,c:['',leg==='bike'?'Prepare before swim / carry on bike':'',leg==='run'?'Black T2 bag':''],bag:bag});});});
   }
   if(a.runcarry!=='none') R.push({k:'runcarry',l:{flask:'Soft flask',bottle:'Handheld bottle',belt:'Run belt or vest'}[a.runcarry],c:['','','T2 bag · fill with station water'],bag:{t2:{flask:'Soft flask',bottle:'Handheld bottle',belt:'Run belt or vest'}[a.runcarry]}});
-  if(P.preload) R.push({k:'preload',l:'500 ml bottle for a pre-start drink',c:['Cloakroom','',''],bag:{cl:'500 ml bottle + electrolyte'}});
+  if(P.prestart.explicit){
+   var carried=P.prestart.entries.filter(function(r){return r.carry==='carry';});
+   if(carried.length)R.push({k:'preload',l:'Pre-start drink container(s) · '+carried.map(function(r){return esc(r.product)+' '+(present(r.amount)?r.amount+' ml':'amount to confirm');}).join(' + '),c:['Cloakroom','',''],bag:{cl:carried.map(function(r){return esc(r.product)+' · '+(present(r.amount)?r.amount+' ml':'amount to confirm')+' · '+(r.time||'time to confirm');}).join('; ')}});
+  }else if(P.preload)R.push({k:'preload',l:'500 ml bottle for a pre-start drink · provisional',c:['Cloakroom','',''],bag:{cl:'Suggested 500 ml bottle + electrolyte · confirm pre-start drinks'}});
+
   R.push({k:'bottles',l:'Bike water · '+P.bottleDescription,c:['','On the bike','Leave at T2']});
 
   R.push({g:'Repair · on the bike'});
@@ -2225,35 +2410,47 @@ function packRows(a,P){
   }
   R.push({k:'levers',l:'2 tyre levers',c:['',spares,'']});
   R.push({k:'pump',l:'Mini-pump <small>CO2 as extra, not instead</small>',c:['','On the bike','']});
-  R.push({k:'boot',l:'Tyre boot',c:['',spares,'']});
+  R.push({k:'boot',l:'Tyre boot + patch kit',c:['',spares,'']});
   R.push({k:'tool',l:'Multitool + quick link',c:['',spares,'']});
+  if(a.repairStorage==='separate'||a.repairStorage==='saddle')R.push({k:'repairbag',l:repairPlace(a),c:['','On the bike','Leave at T2']});
 
   R.push({g:'Tech & papers'});
   if(a.nav==='unit') R.push({k:'unit',l:'Bike computer + mount + GPX loaded',c:['','On the bike','Stays with the bike']});
   if(a.nav==='phone') R.push({k:'phonemount',l:'Phone mount + GPX in the app',c:['','Phone on the bars','Into a pocket']});
-  R.push({k:'watch',l:'Watch · charged'+(a.nav==='watch'?' · GPX loaded':''),c:['Wear','Keep','Keep']});
+  R.push({k:'watch',l:'Watch · charged'+(a.nav==='watch'?' · GPX loaded':' · trail GPX if used for navigation'),c:['Wear','Keep','Keep']});
   R.push({k:'phone',l:'Phone + power bank',c:['Cloakroom or on you',a.nav==='phone'?'On the bars':'Pocket · GPX backup','Pocket']});
   R.push({k:'insproof',l:'Insurance proof',c:['Check-in','','']});
   R.push({k:'id',l:'ID',c:['Check-in','','']});
-  R.push({k:'regmail',l:'Registration e-mail',c:['Check-in','','']});
+  R.push({k:'regmail',l:'Registration / declaration confirmation',c:['Check-in · completed online or requested form','','']});
   R.push({k:'cash',l:'Cash for coffee',c:['Cloakroom','','']});
   return R;
 }
+function foodPlace(a){return {saddle:'Food-only saddle roll',toptube:'Top-tube bag',pockets:'Suit pockets'}[a.foodStorage]||'Food storage to confirm';}
+function repairPlace(a){return {separate:'Separate repair / accessory bag',saddle:'Repair saddle bag',pockets:'Suit pockets'}[a.repairStorage]||'Repair storage to confirm';}
 function renderPack(a,P){
-  var rows=packRows(a,P), h='';
+  var rows=packRows(a,P),h='',groupOpen=false;
   rows.forEach(function(r){
-    if(r.g){ h+='<tr class="grp"><th colspan="4">'+r.g+'</th></tr>'; return; }
-    var n=r.c.filter(Boolean).length;
-    h+='<tr data-stage-count="'+n+'"><th scope="row">'+(r.nocb?'<label><span class="nocb"></span><span>'+r.l+'</span></label>':cb('pk-'+r.k,r.l))+'</th>'+stageCell('Swim',r.c[0])+stageCell('Bike',r.c[1])+stageCell('Run',r.c[2])+'</tr>';
+    if(r.g){if(groupOpen)h+='</ul></section>';h+='<section class="pack-group"><h3>'+r.g+'<span class="pack-left" aria-live="polite"></span></h3><ul class="check">';groupOpen=true;return;}
+    // Stage instructions remain in bags and phases; the inventory has one job: packed or not.
+    if(r.nocb)return;
+    h+='<li>'+cb('pk-'+r.k,r.l)+'</li>';
   });
-  return {html:h, rows:rows};
+  if(groupOpen)h+='</ul></section>';
+  return {html:h,rows:rows};
 }
 function bagContents(rows,P,a){
   var b={t1:[],t2:[],cl:[]};
   rows.forEach(function(r){ if(r.bag) Object.keys(r.bag).forEach(function(k){ b[k].push(r.bag[k]); }); });
+  if(!P.actualInventory){
+   if(P.nGelBike)b.t1.push(P.nGelBike+' × gel'+(P.names.gel?' · '+esc(P.names.gel):'')+(P.caf.length-P.nCafOnly>0?' · '+(P.caf.length-P.nCafOnly)+' with caffeine':''));
+   if(P.nBar)b.t1.push(P.nBar+' × bar'+(P.names.bar?' · '+esc(P.names.bar):''));
+   if(P.nChew)b.t1.push(P.nChew+' × chews');
+   if(P.nCafOnly)b.t1.push(P.nCafOnly+' × caffeine dose · '+P.cafMg+' mg');
+  }
   if(!P.actualInventory&&P.caps) b.t1.push('Capsule vial · '+(P.caps+2));
   if(!P.actualInventory&&(P.powderMix||P.powderElec)) b.t1.push('Powder vials for the stops');
-  b.cl.push('Phone + wallet if not carried','Dry clothes for after');
+  b.cl.push('Phone + wallet if not carried','Dry clothes + towel for after');
+  b.t1.push('Food → '+foodPlace(a),'Gravel bib under saddle + stem label on before Sunday');
   return b;
 }
 
@@ -2266,7 +2463,7 @@ function renderBike(a,P){
   rows.push(['Gearing','<b>Lowest gear ≤ 1:1</b> (e.g. 40 × 42+ or 30 × 34) · ~12% pitches in km 0–25','rec','Check your lowest ratio']);
   rows.push(['Pedals',a.pedals==='flat'?'<b>Pinned flat pedals</b> · '+(a.shoes==='same'?'same shoes for the run':'run-shoe change at T2'):'<b>Clipless</b> · cleats tight, easy to walk steep pitches','rec',a.pedals==='flat'?'Long ride on them first':'Check cleat bolts']);
   rows.push(['Cages','<b>'+P.bottleDescription+'</b> · '+fmtNum(P.capacity)+' ml between stops',(+a.cages>=2)?'ok':'rec',(+a.cages>=2)?'—':'Add a cage if you can']);
-  rows.push(['Storage',(a.storage||[]).map(function(s){ return {saddle:'saddle bag',toptube:'top-tube bag',pockets:'suit pockets'}[s]; }).join(' · ')+' · food reachable while riding, spares separate','rec','Pack and ride it once']);
+  rows.push(['Storage',esc(foodPlace(a))+' · '+esc(repairPlace(a))+' · food reachable while riding','rec','Pack and ride it once']);
   rows.push(['Repair kit',a.tyres==='tubeless'?'Plugs, <b>1 tube '+tubeSize(a)+'</b>, valve tool, levers, boot, pump':'<b>2 tubes '+tubeSize(a)+'</b>, valves long enough for the rims, levers, boot, <b>a pump, not a lone CO2</b>','rec',rental?'Check at pickup':'Check contents']);
   rows.push(['Navigation',{unit:'Bike computer',watch:'Watch',phone:'Phone on the bars'}[a.nav]+' · <b>GPX loaded and following</b> · the gravel leg is unsigned','rec','Load the final GPX']);
   if(a.bike!=='rental') rows.push(['Service','Brake pads, chain, tyre wear · nothing new on race day','rec','Book it 10 days out']);
@@ -2280,9 +2477,10 @@ function tasks(a,P){
   var G=[{t:'Before travel · prepare and verify',items:[]},{t:'At check-in · confirm with the organiser',items:[]},{t:'Race weekend',items:[]}];
   function add(g,k,title,sub,when,done,ctx,req){ G[g].items.push({k:k,title:title,sub:sub,when:when,done:done,ctx:ctx,req:req}); }
   if(a.insurance!=='yes') add(0,'insurance','Medical insurance','Check that your insurance covers this event.','Before check-in','Coverage verified and proof on your phone.','<b>No insurance, no start.</b> It is the one item that stops you at check-in.',true);
+  if(a.paperwork!=='confirmed'||(a._unknown||{}).paperwork) add(0,'paperwork','Confirm check-in paperwork','Check registration and disclaimer / fitness declaration.','Before check-in','Paperwork completed online or the organiser’s requested form ready.','Keep confirmation with your ID and insurance proof. Published regulations §12.2 mention the declaration; check whether your online completion satisfies it.');
   add(0,'rehearse','Rehearse the fuel plan','Ride 3 h+ eating exactly what the plan says, at the times it says.','Before travel','Every product and the '+P.bikeRate+' g/h rate tried on one ride.','Nothing debuts on race day. If a product upsets you, change it in survey 02 and rehearse again.');
-  add(0,'gpx','Load the route','Load the GPX into your '+{unit:'bike computer',watch:'watch',phone:'phone'}[a.nav]+' and follow it on a ride.','When the organiser publishes the final GPX','Track shows, turn alerts work, battery lasts 6 h+.','The gravel leg is unsigned — course deviation is a DQ. The run is marked (red ribbons, blue arrows).');
-  if(a.openwater==='no') add(0,'ow','One open-water session','Swim 20–30 min in your wetsuit in open water.','Before travel','Wetsuit on, sighting practised, cold water no surprise.','Sea around 18.5 °C in mid-October. Sight every 6–8 strokes for the turns.');
+  add(0,'gpx','Load the route','Load the GPX into your '+{unit:'bike computer',watch:'watch',phone:'phone'}[a.nav]+' and follow it on a ride.','Final gravel GPX expected Thu 15 / Fri 16 Oct','Track shows, turn alerts work, battery lasts 6 h+.','The current downloads are provisional 13 Oct files. Rain may change the gravel route; replace the GPX on your navigation device and backup phone when the final file is released. The gravel leg is unsigned — course deviation is a DQ.');
+  if(a.openwater==='no') add(0,'ow','One open-water session','Swim 20–30 min in your wetsuit in open water.','Before travel','Wetsuit on, sighting practised, cold water no surprise.','Dossier snapshot 13 Oct: sea ~20 °C; re-check final conditions. Sight every 6–8 strokes for the turns.');
   if(a.flatfix==='no') add(0,'flat','Fix a flat on this bike','Change a tube'+(a.tyres==='tubeless'?' or plug a tyre':'')+' at home, timed, with the kit you will carry.','Before travel','Done once with race kit, under 10 min.','Cap de Creus is rocky and the first aid is at km 34.3.');
   if(a.gravel==='first') add(0,'gravel','Gravel skills ride','Ride rocky descents and loose climbs on the bike you will race.','Before travel','Comfortable at race pressure on rough ground.','First gravel race on 93% unpaved terrain. Conservative lines; walk what you would not ride at home.');
   if(a.pedals==='flat') add(0,'flatped','Long ride on flat pedals','3 h in the shoes you will race in.','Before travel','No hot spots; feet fine for the run.','Around 19,000 pedal revolutions, then 10.4 km on the same feet.');
@@ -2290,30 +2488,45 @@ function tasks(a,P){
   if(a.tyres==='unsure') add(0,'tyres','Tubeless or tubes?','Find out — it decides the repair kit and pressure.','Before travel','Setup known; repair kit matches.','');
   if(a.bike==='rental') add(0,'rental','Confirm the rental spec','Tyres, gearing, pedals, cages and repair kit.','Before travel','Spec in writing; pickup time fixed.','See the bike checks above for what to ask.');
   var miss=[['sleeves','arm sleeves'],['gloves','full-finger gloves'],['shell','a packable shell'],['socks','dry socks for T2']].filter(function(x){ return (a.extras||[]).indexOf(x[0])<0; }).map(function(x){ return x[1]; });
-  if(miss.length) add(0,'extras','Decide on '+miss.join(', '),'Buy, borrow or decide against, from the forecast.','Friday forecast','Decided and packed, or consciously left.','Climatology, not a forecast: ~14 °C at 09:00 in Cadaqués, 20 °C later, north wind on the plain, ~18% wet-day odds.');
-  add(0,'breakfast','Race breakfast written down','Write your familiar breakfast and time.','Before travel','Contents, quantities and time recorded ('+P.breakfast+').','Familiar food only. Nothing new within 48 h of the start.');
+  if(miss.length) add(0,'extras','Decide on '+miss.join(', '),'Buy, borrow or decide against, from the forecast.','Friday forecast','Decided and packed, or consciously left.','Dossier forecast snapshot 13 Oct: ~15 °C at the start, 12–17 °C on the bike, rain likely. Re-check Friday and choose layers from the updated forecast.');
+  if(a.prefood==='unknown'||!a.prefood||a.prefood==='familiar'&&(!(a.morning||{}).food||!(a.morning||{}).time)) add(0,'breakfast','Record your pre-swim food decision','Choose no food, or record familiar foods, quantities and time.','Before travel','Your usual routine is recorded.','No pre-swim food is a valid choice; drinks and bike feeds stay separate.');
+  if(!P.prestart.ready)add(0,'prestart-drinks','Record your pre-start drinks','Confirm product, prepared amount, time and where each drink comes from.','Before travel','An explicit drink plan is recorded.','This replaces the earlier suggestion and keeps bike drinks separate.');
+  if(a.foodStorage==='unknown'||a.repairStorage==='unknown'||!a.foodStorage||!a.repairStorage) add(0,'storage','Assign food and repair storage','Choose a food location and a separate repair / accessory location.','At bike pickup','Both packed and accessible on the bike.','A food-only saddle roll does not need to hold the repair kit as well.');
+  if(a.foodStorage==='saddle'&&a.repairStorage==='saddle') add(0,'storage-conflict','Check the two saddle bags fit','Food and repair kit are both assigned to saddle bags. Confirm these are separate compatible bags.','At bike pickup','Both bags fit without interference.','Do not assume one roll holds both loads.');
   if(P.powderMix||P.powderElec||P.caps) add(0,'portion','Portion the fuel','Powder into screw-top vials; capsules decanted into a pill vial.','Two days out','Every portion labelled by where it is used.','Powder first, water second. You open these with cold, wet or gloved hands.');
   add(1,'bags','Bag drop and collection','Drop Sat 13:00–17:30 at GEiEG; collect Sun 15:00–18:30 at GEiEG.','Before Saturday','Times and places noted.','Confirmed by the 2026 briefing and timetable. Black T2 bag + bike to GEiEG de Sant Ponç Saturday 13:00–17:30; white T1 bag into T1 at Cadaqués Sunday 08:00–08:45. T1 + T2 bags and bike are collected at GEiEG Sunday 15:00–18:30; the cloakroom bag at Plaça dels Jurats 15:00–18:00.');
-  add(1,'drink','Station drink','Ask which drink is at the stations, and at what strength.','At check-in','Product and concentration recorded.','It is your fallback if a bottle is lost — the carb maths depends on it.');
-  add(1,'refill','Water refills at W1 and W2','Ask whether refills are jugs or handed bottles.','At check-in','Refill method known.','Refills at km 34.3 and km 68 are mandatory stops. It decides how long they take.');
-  add(1,'cutoff','Which finish limit applies','Ask whether 16:59 or 17:59 binds at the finish.','At check-in','Binding limit recorded.','The timetable lists a 16:59 trail limit alongside the 17:59 overall. Your slow scenario: '+clock(P.scen[2].fin)+'.');
+  if((a._unknown||{}).stationDetails||!(a.stationDetails||{}).drink||!present((a.stationDetails||{}).carbsPerLitre)||!(a.stationDetails||{}).food) add(1,'drink','Confirm feed-zone stock and drink mix','Ask for the drink product, concentration and exact food, including gels / bars.','At check-in','Product, strength and food stock recorded in Station checks.','Briefing checked: MAURTEN is confirmed, model and strength are not. The course lists water and sweet/salty food; exact gels and bars remain unverified.');
+  if((a._unknown||{}).stationDetails||!(a.stationDetails||{}).refills||(a.stationDetails||{}).refills==='unknown'||(a.stationDetails||{}).refills==='other'&&!(a.stationDetails||{}).notes) add(1,'refill','Ask how water refills work at both bike stations','Ask whether refills are jugs or handed bottles.','At check-in','Refill method recorded in Station checks.','Briefing checked: it confirms feed-zone locations, but not the refill method. Stops at km 34.3 and km 68 are mandatory.');
   if(a.checkin==='sat') add(2,'satcheck','Check in early on Saturday','Check-in opens 12:00; the bike drop runs 13:00–17:30.','Saturday before 13:00','Checked in with bags and bibs in hand.','Check-in hands you the T2 bag and bibs you need for the bike drop. Leave margin.');
-  add(2,'bib','Gravel bib and stem label on the bike','Fit them the day before.','After check-in','Bib under the saddle, stem label on.','');
-  add(2,'drop','Drop the bike and black T2 bag','GEiEG de Sant Ponç, Girona.','Saturday 13:00–17:30','Bike racked, T2 bag handed in.','Nothing wet or pre-mixed in the T2 bag — it waits about 20 h.');
+  add(2,'bib','Gravel bib, stem label and personal-bag sticker','Fit the bike labels and collect the personal-bag sticker on Saturday.','After check-in / Saturday','Bib under the saddle, stem label on and numbered sticker on the personal bag.','The organiser hands out the personal-bag sticker on Saturday.');
+  add(2,'drop',a.bikeTransport==='own'?'Drop the black T2 bag':'Drop the bike and black T2 bag','GEiEG de Sant Ponç, Girona.','Saturday 13:00–17:30',a.bikeTransport==='own'?'T2 bag handed in; bike delivery to Cadaqués arranged.':'Bike racked, T2 bag handed in.','Nothing wet or pre-mixed in the T2 bag — it waits about 20 h.'+(a.bikeTransport==='booked'?' Organiser bike transport booked.':a.bikeTransport==='own'?' Bring your bike to T1 Sunday 08:00–08:45.':' Confirm the separate bike transport booking before handing over the bike.'));
   add(2,'packsun','Pack the white T1 bag and personal bag','Both travel with you on Sunday.','Saturday evening','Both packed; bottles ready to fill.','');
   if(a.transport==='bus') add(2,'bus','Take an early bus','La Copa, Girona · staggered buses 06:15–06:45.','Sunday 06:15','On the bus.','T1 preparation is 08:00–08:45 in Cadaqués.');
   else add(2,'drive','Plan the drive to Cadaqués','Parking and the route; T1 closes 08:45.','Before the weekend','Route and parking known.','Ask the organiser about parking and getting back from Girona.');
   planningActions(a).forEach(function(it){add(0,it.key,esc(it.title),esc(it.action),it.deadline,'Detail confirmed in your answers.','');});
   return G;
 }
-function renderTasks(G,checks){
+function taskQuestionIds(key,a){
+ var direct={insurance:['insurance'],paperwork:['paperwork'],drop:['bikeTransport'],rehearse:a.inventoryMode==='enter'?['inventory_bike','inventory_run']:['carbrate','sources'],gpx:['nav'],ow:['openwater'],flat:['flatfix'],gravel:['gravel'],flatped:['pedals','shoes'],wetsuit:['wetsuit'],tyres:['tyres','width'],rental:['bike','pickup'],extras:['extras'],breakfast:['prefood','morning'],'prestart-drinks':['prestartDrinkMode','prestartDrink'],storage:['foodStorage','repairStorage'],'storage-conflict':['foodStorage','repairStorage'],drink:['stationDetails'],refill:['stationDetails'],drive:['weekend'],portion:a.inventoryMode==='enter'?['inventory_bike']:['refill','mixg','mixna','capna']};
+ if(direct[key])return direct[key];
+ var id=key.replace(/^detail-/,'');
+ if(id.indexOf('unknown-')===0)return [id.slice(8)];
+ if(id.indexOf('confidence-')===0)return ['confidence'];
+ if(id.indexOf('gear-')===0)return ['equipment'];
+ var map={stay:'weekend',travel:'weekend','bus-booking':'busBooking','bike-transport':'bikeTransport',arrival:'weekend',departure:'weekend',pickup:'pickup',return:'rentalReturn',support:'support',stops:'allowances','run-refill':'waterPlan',water:'waterPlan',capacity:'capacity'};
+ id=map[id]||id;
+ return allQs().some(function(q){return q.id===id;})?[id]:[];
+}
+function renderTasks(G,checks,a){
+  a=a||answers();
   var h='', n=0, done=0;
   G.forEach(function(g){
     if(!g.items.length) return;
     h+='<details class="deadline-group" open><summary><span class="task-group">'+g.t+'</span><span class="remaining"></span></summary><ul class="check">';
     g.items.forEach(function(it){
-      n++; if(checks['task-'+it.k]) done++;
-      h+='<li'+(it.req?' class="req"':'')+'><input type="checkbox" data-k="task-'+it.k+'" aria-label="'+esc(it.title)+'"><div class="task-body"><b>'+it.title+(it.req?' <span class="reqtag">required</span>':'')+'</b><p>'+it.sub+'</p><details class="task-context"><summary>Details</summary><div><p class="task-sub-m">'+it.sub+'</p><p class="task-meta"><strong>When:</strong> '+it.when+'<br><strong>Done when:</strong> '+it.done+'</p>'+(it.ctx||'')+'</div></details></div></li>';
+      n++; if(checks['task-'+it.k]&&!(state.rechecks||{})['task-'+it.k])done++;
+      var targets=taskQuestionIds(it.k,a);
+      h+='<li'+(it.req?' class="req"':'')+'><input type="checkbox" id="check-task-'+it.k+'" data-k="task-'+it.k+'" aria-label="'+esc(it.title)+'"><div class="task-body"><label class="task-title" for="check-task-'+it.k+'"><b>'+it.title+(it.req?' <span class="reqtag">required</span>':'')+'</b></label><p>'+it.sub+'</p><details class="task-context"><summary>Details</summary><div><p class="task-sub-m">'+it.sub+'</p><p class="task-meta"><strong>When:</strong> '+it.when+'<br><strong>Done when:</strong> '+it.done+'</p>'+(it.ctx||'')+(targets.length?'<div class="task-edit">'+questionButton(targets,'Update answers')+'</div>':'')+'</div></details></div></li>';
     });
     h+='</ul></details>';
   });
@@ -2326,18 +2539,19 @@ function renderPhases(a,P,bags){
   var base=P.scen[1], clip=a.pedals==='clip', change=clip||a.shoes==='change';
   var out={};
   var bottlesFill = P.startText;
-  out.pre={pd:P.breakfast.split('–')[0]+' → 09:00 · Girona, then Cadaqués', brief:'Bottles filled and on the bike before the wetsuit goes on.',
-    html:'<div class="tl4"><span><b>'+P.breakfast+'</b>breakfast · familiar only</span>'+(a.transport==='bus'?'<span><b>06:15–06:45</b>bus · La Copa · take an early one</span>':'<span><b>by 07:45</b>arrive in Cadaqués</span>')+(P.preload?'<span><b>07:30</b>500 ml with electrolyte</span>':'<span><b>07:30</b>sip water to thirst</span>')+'<span><b>08:00</b>Cadaqués · Platja Gran</span></div>'+
-    '<div class="zone"><div class="zh">08:00–08:45 · in order</div><ol class="rail"><li>Rack the bike</li><li><b>'+bottlesFill+'</b></li><li>Food on the bike or in pockets as planned</li><li>Gravel bib — already under the saddle</li><li>White T1 bag → T1 area</li><li>Personal bag → cloakroom</li><li>Wetsuit on — in the changing tents</li></ol></div>'+
-    '<details class="prov notes"><summary>Notes</summary><p>Everything fiddly happens here, with warm dry hands and 45 minutes. Nothing new within 48 h of the start.</p></details>'};
-  out.swim={pd:'Platja Gran · rectangular, counterclockwise · ~18.5 °C', brief:'Keep the effort steady; save energy for the bike.',
-    note:'<p>Your pace puts you out at about <b>'+clock(base.sw)+'</b> ('+Math.round(base.sw)+' min). Cutoff 09:59 — '+(COURSE.cutSwim-base.sw>=10?Math.round(COURSE.cutSwim-base.sw)+' min to spare.':'<b>tight</b>: '+Math.round(COURSE.cutSwim-base.sw)+' min.')+'</p><p>Nothing is taken in the water. The first feed is on the bike at 0:20.</p>'};
+  out.pre={pd:P.morningStart+' → 09:00 · Girona, then Cadaqués', brief:'Bottles filled and on the bike before the wetsuit goes on.',
+    html:'<div class="tl4"><span><b>'+esc(P.breakfast)+'</b>'+esc(a.prefood==='familiar'?((a.morning||{}).food||'Foods and quantities to record'):'Your usual routine')+'</span>'+(a.transport==='bus'?'<span><b>06:15–06:45</b>bus · La Copa · take an early one</span>':'<span><b>by 07:45</b>arrive in Cadaqués</span>')+'<span><b>08:00</b>Cadaqués · Platja Gran</span></div>'+
+    '<div class="zone"><div class="zh">08:00–08:45 · in order</div><ol class="rail"><li>Timing chip on the ankle — keep it on until the finish</li><li>Rack the bike</li><li><b>'+bottlesFill+'</b></li><li>Food into '+esc(foodPlace(a))+'; repair kit in '+esc(repairPlace(a))+'</li><li>Gravel bib — already under the saddle</li><li>White T1 bag → T1 area</li><li>Personal bag → cloakroom · numbered sticker on</li><li>Wetsuit on — in the changing tents</li></ol></div>'+
+    '<div class="zone"><div class="zh">Pre-start drinks</div>'+renderPrestart(a,P)+'</div>'+'<details class="prov notes"><summary>Notes</summary><p>Everything fiddly happens here, with warm dry hands and 45 minutes. Nothing new within 48 h of the start.</p></details>'};
+  out.swim={pd:'Platja Gran · rectangular, counterclockwise · sea snapshot ~20 °C', brief:'Keep the effort steady; save energy for the bike.',
+    note:'<p>Your pace puts you out at about <b>'+clock(base.sw)+'</b> ('+Math.round(base.sw)+' min). Cutoff 09:59 — '+(COURSE.cutSwim-base.sw>=10?Math.round(COURSE.cutSwim-base.sw)+' min to spare.':'<b>tight</b>: '+Math.round(COURSE.cutSwim-base.sw)+' min.')+'</p><p>Nothing is taken in the water. Follow the bike feed clock for your food timing and prepared drinks.</p>'};
   var t1steps=['Changing tent: wetsuit off → white bag','Helmet'+((a.extras||[]).indexOf('glasses')>=0?', glasses':'')+((a.extras||[]).indexOf('gloves')>=0?', gloves':'')+((a.extras||[]).indexOf('sleeves')>=0?', sleeves':'')+' on',(clip?'Cycling shoes on':'Shoes on'),'White bag → deposit boxes',(P.caps?'At the bike: <b>1 capsule + a drink</b>':'At the bike: <b>a drink</b>'),'Run the bike out · <b>mount outside T1</b>'];
   out.t1={pd:'white bag · you place it 08:00–08:45 · the wetsuit goes back into it', brief:'Mount only outside T1.',
-    html:'<div class="zone"><div class="zh">On arrival · in order</div><ol class="rail"><li>Up the beach, past the aid station</li>'+t1steps.map(function(s,i){ return '<li>'+cb('tr-t1-'+i,s,' data-transition="1"')+'</li>'; }).join('')+'</ol></div><div class="zone"><div class="zh">In the white bag</div>'+chips(bags.t1)+'</div><details class="prov notes"><summary>Notes</summary><p>Riding inside T1 is +30 min. Target 6–8 min.</p></details>'};
+    html:'<div class="zone"><div class="zh">On arrival · in order</div><ol class="rail"><li>Up the beach, past the aid station</li>'+t1steps.map(function(s,i){ return '<li>'+cb('tr-t1-'+i,s,' data-transition="1"')+'</li>'; }).join('')+'</ol></div><div class="zone"><div class="zh">In the white bag</div>'+chips(bags.t1)+'</div><details class="prov notes"><summary>Notes</summary><p>Riding inside T1 is +30 min. Your transition allowance is '+base.t1+' min.</p></details>'};
   // bike
   var nmOf=function(k){ return P.names&&P.names[k]?' · '+esc(P.names[k]):''; };
-  var fl=P.feeds.map(function(f){ var lab=f.label?esc(f.label):f.cafOnly?'Caffeine · '+P.cafMg+' mg':({gel:(f.caf?'Gel · caffeine':'Gel')+nmOf('gel'),bar:(P.barHalves?'½ bar':'Bar')+nmOf('bar'),chew:'Chews'}[f.kind]); return '<li><time>'+hm(f.t)+'</time><span>'+lab+'</span><small>km '+Math.round(f.km)+' · '+Math.round(f.g)+' g</small></li>'; });
+  var bikeClock=P.scen[1].sw+P.scen[1].t1;
+  var fl=P.feeds.map(function(f){ var lab=f.label?esc(f.label):f.cafOnly?'Caffeine · '+P.cafMg+' mg':({gel:(f.caf?'Gel · caffeine':'Gel')+nmOf('gel'),bar:(P.barHalves?'½ bar':'Bar')+nmOf('bar'),chew:'Chews'}[f.kind]); return '<li><time>'+hm(f.t)+'<small>≈ '+clock(bikeClock+f.t)+'</small></time><span>'+lab+'</span><small>km '+Math.round(f.km)+' · '+Math.round(f.g)+' g</small></li>'; });
   var stops=[[hm(COURSE.fW1*P.B),'W1 · km 34.3 · <b>mandatory water</b> · '+P.stopText[0]],[hm(COURSE.fW2*P.B),'W2 · km 68 · <b>mandatory water</b> · '+P.stopText[1]]];
   var bottleLine=P.fillText(0)+(P.mixCarbs?' · '+P.mixCarbs+' g from bottles over the ride':'');
   out.bike={pd:P.bikeTotal+' g carbs over '+hm(P.B)+' · ≈'+P.bikeRate+' g/h', brief:'Eat on the clock, not on hunger; follow the GPS.',
@@ -2350,14 +2564,14 @@ function renderPhases(a,P,bags){
   var t2steps=['<b>Dismount before the entrance</b> · rack the bike','Collect the black bag'+(change?' · <b>run shoes on</b>':' · same shoes')];
   if(a.runcarry!=='none') t2steps.push({flask:'Soft flask',bottle:'Handheld bottle',belt:'Belt bottles'}[a.runcarry]+': fill with station water');
   t2steps.push('Trail bib on the front'+(P.runUnits?' · run food in a pocket':''));
-  t2steps.push('Black bag → deposit · helmet stays with the bike');
+  t2steps.push('Black bag → deposit · helmet and gloves stay with the bike; keep glasses if wearing them');
   out.t2={pd:'black bag · dropped in Girona Saturday 13:00–17:30', brief:'Dismount before entering.',
-    html:'<div class="zone"><div class="zh">On arrival · in order</div><ol class="rail">'+t2steps.map(function(s,i){ return '<li>'+cb('tr-t2-'+i,s,' data-transition="1"')+'</li>'; }).join('')+'</ol></div><div class="zone"><div class="zh">In the black bag</div>'+chips(bags.t2.length?bags.t2:['Trail bib'])+'</div><details class="prov notes"><summary>Notes</summary><p>Nothing wet and nothing pre-mixed — the bag leaves your hands about 20 h before you open it.</p><p>Aid here: Maurten, water, fruit, food, coffee. Riding into T2 is a penalty. Target 5–6 min.</p></details>'};
+    html:'<div class="zone"><div class="zh">On arrival · in order</div><ol class="rail">'+t2steps.map(function(s,i){ return '<li>'+cb('tr-t2-'+i,s,' data-transition="1"')+'</li>'; }).join('')+'</ol></div><div class="zone"><div class="zh">In the black bag</div>'+chips(bags.t2.length?bags.t2:['Trail bib'])+'</div><details class="prov notes"><summary>Notes</summary><p>Nothing wet and nothing pre-mixed — the bag leaves your hands about 20 h before you open it.</p><p>Aid here: Maurten, water, fruit, food, coffee. Riding into T2 is a penalty. Your transition allowance is '+base.t2+' min.</p></details>'};
   var runFood=P.runUnits+' × '+(P.runKind==='gel'?'gel':'chews')+' + '+P.runSpare+' spare'+(P.runCaf?' · 1 with caffeine ('+P.cafMg+' mg)':'');
   out.run={pd:runFood+' · ≈'+P.runCarbTarget+' g', brief:'There are climbs after the main descent.',
     html:'<div class="carry"><div class="zone"><div class="zh">Carry</div><ul class="plain"><li><b>'+runFood+'</b></li>'+(a.runcarry!=='none'?'<li>'+{flask:'Soft flask',bottle:'Handheld bottle',belt:'Belt bottles'}[a.runcarry]+' · refill at the castle aid, km 4.4</li>':'<li>Drink at T2, the castle aid at km 4.4 and the finish</li>')+(P.runCaps?'<li>'+P.runCaps+' capsule'+(P.runCaps>1?'s':'')+'</li>':'')+'</ul></div>'+
     '<div class="zone"><div class="zh">The course</div><ul class="plain"><li>250 m up in 4.4 km — hike the steep parts</li><li>Castle aid · km 4.4 · water, Maurten, fruit</li><li>3 km down to Font del Ferro, then a 50 m kicker</li><li>A 20 m sting 1 km out, then 20 finish steps</li></ul></div></div>'+
-    '<div class="sumbar"><span>Out of T2 ≈ <b>'+clock(base.runStart)+'</b></span><span>Finish ≈ <b>'+clock(base.fin)+'</b></span><span>'+(base.fin<=COURSE.cutFin1?Math.round(COURSE.cutFin1-base.fin)+' min to 16:59':Math.round(COURSE.cutFin2-base.fin)+' min to 17:59')+'</span></div>'};
+    '<div class="sumbar"><span>Out of T2 ≈ <b>'+clock(base.runStart)+'</b></span><span>Finish ≈ <b>'+clock(base.fin)+'</b></span><span>'+(base.fin<=COURSE.cutFin1?Math.round(COURSE.cutFin1-base.fin)+' min to 16:59':Math.round(base.fin-COURSE.cutFin1)+' min past the 16:59 run limit')+'</span></div>'};
   if(P.actualInventory){
     out.bike.html=inventoryTimeline(P.actualInventory.bike,'Bike')+'<p>Stop at W1 and W2. '+esc(P.stopText.join(' · '))+'</p>';
     out.bike.brief='Follow your entered product schedule; reserves stay separate.';
@@ -2372,18 +2586,18 @@ function renderPhases(a,P,bags){
 
 // ---------------- fuel totals, pacing, risks, feed chart ----------------
 function renderFuel(a,P){
-  if(P.actualInventory)return renderActualFuel(P);
+  if(P.actualInventory)return '<p><b>Pre-swim food:</b> '+esc(P.breakfast)+'</p>'+renderPrestart(a,P)+renderActualFuel(P);
   var runNa=P.runCaps*(+a.capna||250);
   return '<div class="fkv2"><ul class="fkv">'+
    '<li><span class="k">Carbs, bike</span><span class="v">'+P.bikeTotal+' g <small>≈'+P.bikeRate+' g/h over '+hm(P.B)+'</small></span></li>'+
    '<li><span class="k">Carbs, run</span><span class="v">≈'+P.runCarbTarget+' g <small>'+P.runUnits+' '+(P.runKind==='gel'?'gel':'chew pack')+(P.runUnits>1?'s':'')+' + 1 spare</small></span></li>'+
-   '<li><span class="k">Energy in</span><span class="v">≈'+fmtNum((P.bikeTotal+P.runCarbTarget)*4)+' kcal <small>carbs × 4 — a gut rate, not a balance target</small></span></li>'+
-   '<li><span class="k">Breakfast</span><span class="v">'+P.breakfast+' <small>familiar only</small></span></li>'+
+   
+   '<li><span class="k">Pre-swim food</span><span class="v">'+esc(P.breakfast)+'</span></li>'+
    '</ul><ul class="fkv">'+
    '<li><span class="k">Fluid</span><span class="v">'+fmtNum(P.capacity)+' ml on board · ≈'+P.fluidRate+' ml/h <small>refill at W1 and W2</small></span></li>'+
    '<li><span class="k">Sodium</span><span class="v">target ≈'+fmtNum(P.naRate)+' mg/h <small>planned '+fmtNum(P.naPlanned)+' mg on the bike'+(runNa?' · '+fmtNum(runNa)+' on the run':'')+'</small></span></li>'+
-   '<li><span class="k">Caffeine</span><span class="v">'+(P.cafPlan?'≈'+P.cafPlan+' mg planned <small>'+(P.caf.length+(P.runCaf?1:0))+' × '+P.cafMg+' mg</small>':'none')+' <small>reference range '+P.cafLo+'–'+P.cafHi+' mg · 3–6 mg/kg</small></span></li>'+
-   '<li><span class="k">Pre-start</span><span class="v">'+(P.preload?'500 ml with electrolyte at 07:30':'water to thirst')+'</span></li>'+
+   '<li><span class="k">Caffeine</span><span class="v">'+(P.cafPlan?'≈'+P.cafPlan+' mg planned <small>'+(P.caf.length+(P.runCaf?1:0))+' × '+P.cafMg+' mg'+(P.preCaffeine?' + '+P.preCaffeine+' mg before swim':'')+'</small>':'none')+'</span></li>'+
+   '<li><span class="k">Pre-start</span><span class="v">'+esc(P.prestart.text)+'</span></li>'+
    '</ul></div>';
 }
 function renderPacing(P){
@@ -2405,7 +2619,7 @@ function renderPacing(P){
   row('W1 · km 34.3',function(s){ return s.sw+s.t1+s.bk*COURSE.fW1; },'13:00',COURSE.cutW1);
   row('W2 · km 68',function(s){ return s.sw+s.t1+s.bk*COURSE.fW2; },'15:00',COURSE.cutW2);
   row('T2 · bike in',function(s){ return s.t2Out; },'15:49',COURSE.cutT2);
-  row('Finish',function(s){ return s.fin; },'16:59? / 17:59',COURSE.cutFin2);
+  row('Finish',function(s){ return s.fin; },'16:59 run / 17:59 overall',COURSE.cutFin2);
   c+='</table>';
   return {bars:h, splits:t, clock:c};
 }
@@ -2499,7 +2713,7 @@ function renderFeedKey(P){
   if(used.chew) k.push('<span><i class="chew"></i>chews</span>');
   if(used['b-mix']) k.push('<span><i class="b-mix"></i>drink mix bottle'+nm('mix')+'</span>');
   if(used['b-elec']) k.push('<span><i class="b-elec"></i>electrolyte bottle</span>');
-  if(used['b-station']) k.push('<span><i class="b-station"></i>station drink (~'+P.stationG+' g, unconfirmed)</span>');
+  if(used['b-station']) k.push('<span><i class="b-station"></i>station drink (~'+P.stationG+' g'+(P.stationConfirmed?', entered strength':', provisional strength')+')</span>');
   if(used['b-water']) k.push('<span><i class="b-water"></i>water</span>');
   if(P.capTimes&&P.capTimes.length) k.push('<span><i class="cap"></i>capsule</span>');
   k.push('<span><i class="stop"></i>mandatory water stop</span>');
@@ -2513,7 +2727,8 @@ function qHtml(q,a,sub){
   var unset=state.answers[q.id]===undefined, v=unset?(q.type==='multi'?[]:q.type==='choice'?null:(q.type==='number'||q.type==='select')?'':a[q.id]):a[q.id], id='q-'+q.id, h='<div class="q" data-q="'+q.id+'">';
   var lb=sub?id+'-l':'gate-title';
   if(sub) h+='<h3 class="q-sub" id="'+lb+'">'+q.label+'</h3>';
-  if(q.help) h+='<p class="qhelp" id="'+id+'-h">'+q.help+'</p>';
+  if(q.help)h+='<p class="qhelp" id="'+id+'-h">'+q.help+'</p>';
+  if(q.id==='prestartDrinkMode'&&(a.morning||{}).drink)h+='<p class="g-note"><b>Earlier saved note:</b> '+esc(a.morning.drink)+'. Record it in the drink rows to make it the working plan.</p>';
   var desc=q.help?' aria-describedby="'+id+'-h"':'';
   if(q.type==='fields'||q.type==='inventory'){
     h+='<div class="detail-fields">';
@@ -2557,6 +2772,8 @@ function renderSurveys(){
     return '<article class="survey'+(done?' done':'')+'" id="survey-'+key+'"><div class="sv-head"><span class="sv-n">'+S.n+'</span><div><h3>'+S.title+'</h3><p class="small">'+S.builds+'</p></div><button type="button" class="sv-go'+(done?'':' primary')+'" data-sv-open="'+key+'">'+(done?'Edit answers':state.pos?'Resume setup':'Start setup')+'</button></div>'+
       (done?'<div class="sv-sum">'+summaryLine(key,a).map(function(x){ return '<i>'+esc(x)+'</i>'; }).join('')+'</div>':'')+'</article>';
   }).join('');
+  var added=state.done.kit&&state.done.fuel?newQuestionQueue(state,a).length:0;
+  if(added)host.insertAdjacentHTML('afterbegin','<div class="new-question-card"><h3>Bring your saved plan up to date</h3><p>'+added+' added question'+(added===1?'':'s')+' to review. Your existing answers stay saved; optional details can be left for later.</p><button type="button" class="primary" data-new-questions>Review new questions</button></div>');
   var mq=state.done.kit&&state.done.fuel?moreQueue().length:0;
   if(mq) host.insertAdjacentHTML('beforeend','<p class="sv-more"><button type="button" class="insight-edit" data-add-details>Add the detailed parts</button> <span class="small">'+mq+' questions the essentials skipped: travel, readiness, recent training and your exact fuel.</span></p>');
   document.getElementById('plan-tools').hidden=false;
@@ -2572,16 +2789,16 @@ function gatePages(){
   keys.forEach(function(key,ki){
     if(gate.mode==='onboard' && ki>0) pages.push({id:'mid-'+key,kind:'mid',key:key});
     SURVEYS[key].steps.forEach(function(st){
-      var qs=visibleQs(st,a).filter(function(q){return gate.mode==='unknown'||gate.mode==='more'?gate.queue.indexOf(q.id)>=0:gate.mode!=='onboard'||(q.id!=='name'&&(state.setupMode==='full'||starterQuestion(q)));}), used={};
+      var qs=visibleQs(st,a).filter(function(q){return queuedMode(gate.mode)?gate.queue.indexOf(q.id)>=0:gate.mode!=='onboard'||(q.id!=='name'&&(state.setupMode==='full'||starterQuestion(q)));}), used={};
       qs.forEach(function(q){
         if(used[q.id])return;
-        var g=gate.mode==='unknown'?null:groupOf(q.id), members=g?qs.filter(function(x){return g.ids.indexOf(x.id)>=0;}):[q];
+        var g=queuedMode(gate.mode)&&gate.mode!=='more'?null:groupOf(q.id), members=g?qs.filter(function(x){return g.ids.indexOf(x.id)>=0;}):[q];
         members.forEach(function(m){used[m.id]=true;});
         pages.push({id:q.id,kind:'q',key:key,step:st,q:q,qs:members,group:g});
       });
     });
   });
-  if(gate.mode==='unknown')pages.sort(function(x,y){return gate.queue.indexOf(x.id)-gate.queue.indexOf(y.id);});
+  if(queuedMode(gate.mode)&&gate.mode!=='more')pages.sort(function(x,y){return gate.queue.indexOf(x.id)-gate.queue.indexOf(y.id);});
   pages.push({id:'end',kind:'end'});
   return pages;
 }
@@ -2591,10 +2808,13 @@ function pageCount(mode){ var saved={mode:gate.mode,help:gate.help,setup:state.s
 function setInert(on){ document.querySelectorAll('.wrap,dialog').forEach(function(el){ if(on) el.setAttribute('inert',''); else el.removeAttribute('inert'); }); }
 function openGate(mode,key){
   gate.opener=document.activeElement; gate.help=false; gate.reviewing=false; gate.mode=mode; gate.key=key||null;
+  var origin=gate.opener&&gate.opener.closest('li'),originCheck=origin&&origin.querySelector('input[data-k]');gate.returnTask=mode==='target'&&originCheck?originCheck.dataset.k:'';
   gate.resumed=false;
   if(mode==='onboard'){ gate.pos=state.pos||'intro'; if(!gatePages().some(function(p){return p.id===gate.pos||(p.qs&&p.qs.some(function(q){return q.id===gate.pos;}));}))gate.pos='intro'; gate.resumed=gate.pos!=='intro'; } else { gate.pos=mode==='import'?'import':'end'; }
   if(mode==='unknown'){gate.queue=pendingAnswers().map(function(q){return q.id;});gate.pos=gate.queue[0]||'end';}
   if(mode==='more'){gate.queue=moreQueue();gate.pos=gate.queue[0]||'end';}
+  if(mode==='updates'){gate.queue=newQuestionQueue(state,answers(),true);gate.pos=(gatePages().find(function(p){return p.kind==='q';})||{id:'end'}).id;}
+  if(mode==='target'){gate.queue=String(key||'').split(',').filter(function(id){return allQs().some(function(q){return q.id===id;});});gate.key=null;gate.pos=(gatePages().find(function(p){return p.kind==='q';})||{id:'end'}).id;}
   var g=document.getElementById('gate'); g.hidden=false; document.body.classList.add('gate-open');
   document.body.classList.toggle('gated',mode==='onboard');
   setInert(true); renderGate(true); updateSampleBar();
@@ -2639,7 +2859,7 @@ function renderGate(focus){
       (pend.length?'<p>'+pend.length+' detail'+(pend.length===1?'':'s')+' still use'+(pend.length===1?'s':'')+' an estimate. The plan works now; check these when you can.</p><ul class="pend-list">'+
         (flagged.length?'<li><b>'+flagged.length+' you marked as not sure</b><span>'+shortList(flagged)+'</span></li>':'')+
         (notAsked.length?'<li><b>'+notAsked.length+' not asked in '+(state.setupMode==='full'?'this setup':'the essentials')+'</b><span>Typical values for now: '+shortList(notAsked)+'</span></li>':'')+'</ul>'
-      :'<p>Every answer is confirmed.</p>')+
+      :'<p>No unresolved required survey answers. Check your preparation tasks for remaining practical confirmations.</p>')+
       (state.setupMode!=='full'&&moreQueue().length?'<p class="more-line"><button type="button" class="g-link" data-add-details>Add the detailed parts · '+moreQueue().length+' more questions</button> <span>travel, readiness, recent training, your exact fuel</span></p>':'')+
       '<label class="name-field" for="plan-name"><span>Put your name on the plan <small>optional</small></span><input id="plan-name" type="text" maxlength="40" autocomplete="given-name" value="'+esc(state.answers.name||'')+'"></label>'+
       nextActions(a,compute(a))+'<div class="g-nav g-nav-end"><button type="button"'+(reviewFirst?' data-g="close"':' data-unknown-review')+'>'+(reviewFirst?'View my plan':'Review what’s not sure')+'</button><button type="button" class="primary"'+(reviewFirst?' data-unknown-review':' data-g="close"')+'>'+(reviewFirst?'Review what’s not sure':'View my plan')+'</button></div>';
@@ -2660,9 +2880,11 @@ function renderGate(focus){
     var editing=gate.mode==='edit', scope=editing?(gate.key==='all'?'All answers':SURVEYS[gate.key].n+' · '+SURVEYS[gate.key].title):'Review your answers';
     if(gate.mode==='unknown')scope='Unknowns review · '+pendingAnswers().length+' still open';
     if(gate.mode==='more')scope='Detailed plan';
-    h='<p class="g-kicker">'+scope+'</p><h2 id="gate-title" tabindex="-1">'+(gate.mode==='unknown'?'Your unknowns review':gate.mode==='more'?'Details added':editing?'Edit your answers':'Your first plan is ready to review')+'</h2><p class="g-lede">'+(editing?'Tap <b>Change</b> on any answer. Your checklists, feed chart and pacing rebuild when you save.':'These are the answers you entered. Other details still use estimates: review them in Your plan before relying on the race-day schedule.')+'</p>'+
+    if(gate.mode==='updates')scope='Review new questions';
+    if(gate.mode==='target')scope='Task answers';
+    h='<p class="g-kicker">'+scope+'</p><h2 id="gate-title" tabindex="-1">'+(gate.mode==='unknown'?'Your unknowns review':gate.mode==='more'?'Details added':gate.mode==='updates'?'Review the added answers':gate.mode==='target'?'Review these answers':editing?'Edit your answers':'Your first plan is ready to review')+'</h2><p class="g-lede">'+(gate.mode==='updates'?'Only the added questions are shown. Your earlier answers stay saved.':gate.mode==='target'?'These changes update your task and affected packing requirements.':editing?'Tap <b>Change</b> on any answer. Your checklists, feed chart and pacing rebuild when you save.':'These are the answers you entered. Other details still use estimates: review them in Your plan before relying on the race-day schedule.')+'</p>'+
       (editing&&gate.key!=='all'?'<p class="g-note"><button type="button" class="g-link" data-edit-scope="all">Show all answers from both surveys</button></p>':'')+reviewHtml(pages,a)+
-      '<div class="g-nav">'+(editing?'<button type="button" data-g="close">Close</button>':'<button type="button" data-g="back">Back</button>')+'<button type="button" class="primary" data-g="finish">'+(gate.mode==='unknown'||gate.mode==='more'?'Update my plan':editing?'Save and update my plan':'Build my plan')+'</button></div>';
+      '<div class="g-nav">'+(editing?'<button type="button" data-g="close">Close</button>':'<button type="button" data-g="back">Back</button>')+'<button type="button" class="primary" data-g="finish">'+(queuedMode(gate.mode)?'Update my plan':editing?'Save and update my plan':'Build my plan')+'</button></div>';
   } else {
     var S=SURVEYS[pg.key], qs=pg.qs||[pg.q], q=qs[0], grp=pg.group, grouped=!!grp||qs.length>1;
     var title=grp?(typeof grp.title==='function'?grp.title(a):grp.title):q.label;
@@ -2671,7 +2893,7 @@ function renderGate(focus){
     var later=!askable?'':typical.length?'Not sure · use '+(qs.length===1?fmtDef(q):'typical values')+' for now and remind me':'I don’t know yet · add a reminder';
     var firstInStep=visibleQs(pg.step,a)[0];
     h=(gate.resumed?'<p class="resume-note">Welcome back. You’re on question '+(qi+1)+' of '+qPages.length+'. <button type="button" class="g-link" data-g="to-welcome">Go to the welcome screen</button></p>':'')+
-      '<p class="g-kicker">'+S.n+' · '+S.title+' · '+pg.step.title+'</p><h2 id="gate-title" tabindex="-1">'+title+'</h2>'+(pg.step.note&&qs.indexOf(firstInStep)>=0?'<p class="g-note">'+pg.step.note+'</p>':'')+
+      '<p class="g-kicker">'+(gate.mode==='updates'?'New questions · '+(qi+1)+' of '+qPages.length+' · ':'')+S.n+' · '+S.title+' · '+pg.step.title+'</p><h2 id="gate-title" tabindex="-1">'+title+'</h2>'+(pg.step.note&&qs.indexOf(firstInStep)>=0?'<p class="g-note">'+pg.step.note+'</p>':'')+
       '<form class="g-form" novalidate>'+(grp&&grp.preset?presetHtml(grp.preset,qs):'')+qs.map(function(x){return qHtml(x,a,grouped);}).join('')+(grp&&grp.kind==='times'?'<div class="times-sum" id="times-sum" aria-live="polite"></div>':'')+
       '<p id="q-error" class="g-error" role="alert" hidden></p><div class="g-nav">'+(i>0?'<button type="button" data-g="back">Back</button>':'')+'<button type="submit" class="primary">'+(gate.reviewing?'Save and return to review':'Continue')+'</button></div>'+(later?'<button type="button" class="g-link g-later" data-g="unknown">'+later+'</button>':'')+'</form>';
   }
@@ -2692,7 +2914,7 @@ function freshState(){ return !Object.keys(state.answers||{}).length&&!(state.do
 function defaultAnswers(){ var a={}; allQs().forEach(function(q){ a[q.id]=Array.isArray(q.def)?q.def.slice():q.def; }); a._unknown={}; return a; }
 function fmtDef(q){ if(q.type==='select'){ var o=q.options.find(function(o){return o[0]===String(q.def);}); return o?o[1]:String(q.def); } return q.def+(q.unit?' '+q.unit:''); }
 function shortList(qs){ var names=qs.map(function(q){ var g=groupOf(q.id); return (g&&g.kind==='times'?q.label.split(' · ')[0]:q.label).replace(/\?$/,'').replace(/ \(optional\)$/,''); }); return esc(names.slice(0,3).join(' · ')+(names.length>3?' · and '+(names.length-3)+' more':'')); }
-// Milestones from the organiser timetable (checked 26 September 2026).
+// Milestones reconciled with the 2026 briefing and timetable, 13 October.
 function countdown(){
   var now=new Date(), today=Date.UTC(now.getFullYear(),now.getMonth(),now.getDate()), race=Date.UTC(2026,9,18), days=Math.round((race-today)/864e5);
   if(days<1) return null;
@@ -2803,8 +3025,9 @@ function pauseGate(){
   if(gate.help){gate.help=false;renderGate(false);var helpButton=document.querySelector('[data-g="guide"]');if(helpButton)helpButton.focus();return;}
   if(gate.mode==='import')incoming=null;
   var f=document.querySelector('#gate-body form'); if(f) readQ(f,false);
-  var key=gate.key&&gate.key!=='all'?gate.key:'kit';
+  var key=gate.key&&gate.key!=='all'?gate.key:'kit',targeted=gate.mode==='target',returnTask=gate.returnTask;
   closeGate(); renderSurveys(); renderAll(); if(window.PLAN_AFTER) window.PLAN_AFTER();
+  if(targeted){returnToTask(returnTask);return;}
   var resume=document.querySelector('#survey-'+key+' button'); if(resume) resume.focus({preventScroll:true});
 }
 function bindGate(){
@@ -2844,11 +3067,14 @@ function bindGate(){
     else if(b.dataset.g==='back') gateMove(-1);
     else if(b.dataset.g==='finish'){
       var missing=null;
-      if(gate.mode!=='unknown'&&gate.mode!=='more') gatePages().some(function(p){ if(p.kind!=='q') return false; missing=(p.qs||[p.q]).find(function(x){return state.answers[x.id]===undefined&&x.type!=='text'&&x.type!=='multi'&&!x.optional&&!(state.unknown||{})[x.id];})||null; return !!missing; });
+      if(!queuedMode(gate.mode)) gatePages().some(function(p){ if(p.kind!=='q') return false; missing=(p.qs||[p.q]).find(function(x){return state.answers[x.id]===undefined&&x.type!=='text'&&x.type!=='multi'&&!x.optional&&!(state.unknown||{})[x.id];})||null; return !!missing; });
       if(missing){gate.pos=missing.id; gate.reviewing=true; renderGate(true); return;}
       if(gate.mode==='more') state.setupMode='full';
-      (gate.mode==='unknown'||gate.mode==='more'?[]:gate.mode==='edit'&&gate.key!=='all'?[gate.key]:['kit','fuel']).forEach(function(k){state.done[k]=true;});
-      delete state.pos; closeGate(); renderSurveys(); renderAll(); window.scrollTo(0,0);
+      (queuedMode(gate.mode)?[]:gate.mode==='edit'&&gate.key!=='all'?[gate.key]:['kit','fuel']).forEach(function(k){state.done[k]=true;});
+      var targeted=gate.mode==='target',returnTask=gate.returnTask;
+      if(!targeted)delete state.pos; closeGate(); renderSurveys(); renderAll();
+      if(targeted){if(window.PLAN_AFTER)window.PLAN_AFTER();returnToTask(returnTask);return;}
+      window.scrollTo(0,0);
       openGate('complete');
       if(window.PLAN_AFTER) window.PLAN_AFTER();
     } else if(b.dataset.g==='close') pauseGate();
@@ -2891,11 +3117,13 @@ function planningActions(a){
   });
   EQUIPMENT.forEach(function(e){var v=eq[e[0]];if(!v||v==='tested')return;add('gear-'+e[0],(v==='need'?'Arrange ':v==='booked'||v==='borrowed'?'Collect and test ':'Test ')+e[1].toLowerCase(),'Update readiness once the item is in hand and tested.');});
   if(w.stayStatus!=='booked'&&w.stayStatus!=='none')add('stay','Confirm accommodation','Record your accommodation area and booking status.');
-  if(w.transportStatus!=='booked')add('travel','Arrange start transport','Confirm your bus booking or own transport, including the return arrangements.');
+  if(a.transport==='bus'&&(a.busBooking!=='booked'||(a._unknown||{}).busBooking))add('bus-booking','Confirm your bus place','Confirm the athlete bus booking separately from bike transport.');
+  if((a.bikeTransport!=='booked'&&a.bikeTransport!=='own')||(a._unknown||{}).bikeTransport)add('bike-transport','Confirm bike transport','Book organiser bike transport or arrange your own delivery to T1 Sunday 08:00–08:45.');
+  if(a.transport==='own'&&w.transportStatus!=='booked')add('travel','Arrange start transport','Confirm your own travel to Cadaqués, including the return arrangements.');
   if(!w.day||!w.arrival)add('arrival','Record arrival time','Check travel timing against check-in and Saturday bike drop.');
   if(!Object.keys(eq).length)add('gear-status','Record equipment readiness','Check which items are in hand and tested before marking equipment confirmed.');
   if(!present(w.travel)||!present(w.buffer))add('departure','Check Sunday departure','Enter travel minutes and a departure buffer.');
-  if(a.bike==='rental'){var p=a.pickup||{};if(p.status!=='booked'||!p.place||!p.time||!p.day)add('pickup','Confirm bike collection','Record shop, date and confirmed collection time.');}
+  if(a.bike==='rental'){var p=a.pickup||{},rr=a.rentalReturn||{};if(p.status!=='booked'||!p.place||!p.time||!p.day)add('pickup','Confirm bike collection','Record shop, date and confirmed collection time.');if(!rr.when||rr.when==='unknown'||!rr.place||!rr.nearby||rr.nearby==='unknown'||rr.when==='later'&&!rr.deadline)add('return','Confirm rental return','Record the return shop, timing and travel from GEiEG bike collection.','Before bike pickup');}
   if(a.support==='unknown'||!a.support)add('support','Decide on weekend support','Choose solo or record your support handover plan.');
   if(a.timebasis==='unknown')add('timebasis','Check how race times were measured','Separate moving time, stops and transitions.');
   if(a.timebasis==='moving'&&(!present((a.allowances||{}).bikeStops)||!present((a.allowances||{}).runStops)))add('stops','Estimate stopped time','Moving-time estimates need separate bike and run stop allowances.');
@@ -2910,6 +3138,14 @@ function planningActions(a){
   allQs().filter(function(q){return (!q.when||q.when(a))&&(state.unknown||{})[q.id];}).forEach(function(q){add('unknown-'+q.id,'Decide: '+q.label,'Open this answer and replace the undecided status.');});
   return out;
 }
+function returnToTask(key){
+ var c=Array.from(document.querySelectorAll('#task-body [data-k]')).find(function(c){return c.dataset.k===key;});
+ var target=c?c.closest('li'):document.getElementById('open');
+ if(c){c.closest('.deadline-group').open=true;c.closest('li').querySelector('.task-context').open=true;}
+ setHTML('task-save-status','Answers saved. Your tasks and packing requirements are updated.');
+ target.scrollIntoView({block:'start',behavior:motionBehavior()});(c||target).setAttribute('tabindex',c?'0':'-1');(c||target).focus({preventScroll:true});
+}
+function questionButton(ids,label){return '<button type="button" class="insight-edit" data-question-go="'+ids.join(',')+'">'+esc(label||'Update answers')+'</button>';}
 function editDetail(id,label){return '<button type="button" class="insight-edit" data-detail-edit="'+id+'">'+esc(label||'Update details')+'</button>';}
 function renderInsights(a,P){
   var c=a.confidence||{}, statuses=[['equipment','Equipment'],['transport','Travel'],['timing','Race times'],['nutrition','Nutrition']];
@@ -2932,9 +3168,9 @@ function renderTimeEvidence(a,P){
     h+='<div><b>'+x[0]+' · '+dur(x[1])+' elapsed</b><span>'+(moving==null?'Moving / stopped split not entered':moving<0?'Check: stopped time exceeds elapsed time':dur(moving)+' moving + '+dur(stops)+' stopped')+'</span></div>';
   });
   h+='<div><b>Transitions · '+dur(base.t1+base.t2)+'</b><span>T1 '+dur(base.t1)+' + T2 '+dur(base.t2)+'</span></div></div><p class="small">'+(a.timebasis==='moving'?'Entered stops are added to your moving estimates. Missing stop allowances currently add 0 min and need checking.':'Your leg estimates are treated as elapsed time; entered stops are already included.')+'</p><h4>Your base case against each cut-off</h4><ul class="cut-ladder">';
-  [['Out of the water',base.sw,COURSE.cutSwim,''],['Off the bike · Celrà',base.t2Out,COURSE.cutT2,''],['Finish',base.fin,COURSE.cutFin1,'trail limit · unconfirmed'],['Finish',base.fin,COURSE.cutFin2,'overall limit']].forEach(function(x){var m=Math.round(x[2]-x[1]),cls=m<0?'late':m<15?'tight':'ok';
+  [['Out of the water',base.sw,COURSE.cutSwim,''],['Off the bike · Celrà',base.t2Out,COURSE.cutT2,''],['Finish',base.fin,COURSE.cutFin1,'run limit · working deadline'],['Finish',base.fin,COURSE.cutFin2,'overall limit']].forEach(function(x){var m=Math.round(x[2]-x[1]),cls=m<0?'late':m<15?'tight':'ok';
     h+='<li class="'+cls+'"><div class="cl-row"><span class="cl-name">'+x[0]+'</span><span class="cl-m">'+(m<0?(-m)+' min late':m+' min spare')+'</span></div><div class="cl-bar" aria-hidden="true"><i style="width:'+Math.max(3,Math.min(100,Math.abs(m)/120*100)).toFixed(0)+'%"></i></div><div class="cl-sub">You ≈ <b>'+clock(x[1])+'</b> · cut-off '+clock(x[2])+(x[3]?' ('+x[3]+')':'')+'</div></li>';});
-  h+='</ul><p class="small">Timetable checked 26 September 2026. The organiser still lists conflicting finish limits; confirm which applies.</p>'+editDetail('allowances','Edit time allowances')+'<h4>Recent sessions</h4>';
+  h+='</ul><p class="small">Reconciled 13 October 2026. The plan uses the 16:59 run limit; 17:59 is the separate overall limit.</p>'+editDetail('allowances','Edit time allowances')+'<h4>Recent sessions</h4>';
   if(!(a.sessions||[]).length)h+='<p class="small">No training references entered.</p>'+editDetail('sessions','Add a session');
   (a.sessions||[]).forEach(function(k){var v=a['session_'+k]||{},label={swim:'Open water',bike:'Gravel',run:'Trail'}[k];var rate=v.distance>0&&v.moving>0?v.moving/v.distance:null;var target={swim:1.5,bike:86.4,run:10.4}[k];
     h+='<article class="session-evidence"><b>'+label+(v.date?' · '+esc(v.date):'')+'</b><p>'+[present(v.distance)?v.distance+' km':'Distance unknown',present(v.ascent)?v.ascent+' m ascent':'Ascent unknown',present(v.moving)?dur(v.moving)+' moving':'Time unknown',present(v.stops)?dur(v.stops)+' stopped':'Stops unknown'].join(' · ')+'</p><span class="small">'+esc(v.effort||'Effort unknown')+' · '+(v.similar==='similar'?'Similar conditions':v.similar==='different'?'Different conditions':'Similarity unknown')+'</span>'+(rate?'<p>Same pace over the race distance: <b>'+dur(rate*target)+'</b> moving.</p><p class="small">Distance-only comparison; no adjustment for terrain, weather, fatigue or race effort.</p>':'<p class="small">Add distance and moving time to compare pace.</p>')+editDetail('session_'+k,'Edit session')+'</article>';
@@ -2954,7 +3190,7 @@ function renderWater(a,P){
 }
 function inventoryData(a,leg){
   var v=a['inventory_'+leg]||{},rows=[],totals={carb:0,sodium:0,caffeine:0},known={carb:true,sodium:true,caffeine:true},incomplete=false;
-  for(var i=1;i<=4;i++){
+  for(var i=1;i<=6;i++){
     if(!['name','qty','carb','sodium','caffeine','kind','reserve','first','every','water'].some(function(k){return present(v[k+i]);}))continue;
     var r={id:i,name:v['name'+i]||'Unnamed product',qty:v['qty'+i],kind:v['kind'+i],reserve:v['reserve'+i],first:v['first'+i],every:v['every'+i],water:v['water'+i]};
     if(!v['name'+i]||!present(r.qty))incomplete=true;
@@ -2988,6 +3224,7 @@ function applyInventory(a,P){
   var bike=inventorySchedule(a,'bike',P.B),run=inventorySchedule(a,'run',P.R);
   P.inventoryDraft={bike:bike,run:run};
   if(!bike.ready||!run.ready){P.warn.push(['warn','Your product schedule is incomplete. The suggested schedule is still displayed; complete both inventories to replace it.']);return;}
+  bike.clockStart=P.scen[1].sw+P.scen[1].t1;run.clockStart=P.scen[1].runStart;
   P.actualInventory={bike:bike,run:run};
   P.feeds=bike.events.map(function(e){return Object.assign({},e,{label:e.qty+' × '+e.name,km:kmAt(e.t,P.B)});});
   P.runUnits=run.rows.reduce(function(n,r){return n+r.consumed;},0);P.runSpare=run.rows.reduce(function(n,r){return n+r.reserve;},0);P.runCarbTarget=run.used.carb;P.runCaf=false;
@@ -3007,7 +3244,7 @@ function applyInventory(a,P){
 }
 function inventoryTimeline(d,label){
   var h='<div class="actual-clock"><h4>'+label+' · your product schedule</h4><p class="small">Elapsed time from the start of this leg. Drink intervals describe sipping, not a single dose. Timing comes from your answers.</p><ol class="fuel-sequence">';
-  d.events.forEach(function(e){h+='<li><b>'+hm(e.t)+(e.end>e.t?'–'+hm(e.end):'')+'</b><span>'+e.qty+' × '+esc(e.name)+' · '+fmtNum(e.g)+' g carbohydrate'+(e.caffeine?' · '+fmtNum(e.caffeine)+' mg caffeine':'')+(e.water?' · '+fmtNum(e.water)+' ml water':'')+'</span></li>';});
+  d.events.forEach(function(e){h+='<li><b>'+hm(e.t)+(e.end>e.t?'–'+hm(e.end):'')+(d.clockStart!=null?'<small>≈ '+clock(d.clockStart+e.t)+'</small>':'')+'</b><span>'+e.qty+' × '+esc(e.name)+' · '+fmtNum(e.g)+' g carbohydrate'+(e.caffeine?' · '+fmtNum(e.caffeine)+' mg caffeine':'')+(e.water?' · '+fmtNum(e.water)+' ml water':'')+'</span></li>';});
   if(!d.events.length)h+='<li>No servings scheduled. Any entered products are held in reserve.</li>';
   return h+'</ol><p class="small">Reserve servings kept separate: '+fmtNum(d.rows.reduce(function(n,r){return n+r.reserve;},0))+'. Water-only refills add no nutrients to these totals.</p></div>';
 }
@@ -3017,7 +3254,7 @@ function renderActualFuel(P){
     [['carb','Carbohydrate','g'],['sodium','Sodium','mg'],['caffeine','Caffeine','mg'],['water','Water in drink portions','ml']].forEach(function(x){h+='<div><b>'+fmtNum(d.used[x[0]])+' '+x[2]+'</b><span>'+x[1]+'</span></div>';});
     h+='</div><p class="small">'+Math.round(d.used.carb/(d.duration/60))+' g/h across '+dur(d.duration)+'. Water-only drinks are tracked separately in the capacity comparison.</p>';
   });
-  return h+'<p>Total scheduled caffeine across both legs: <b>'+fmtNum(P.cafPlan)+' mg</b>. This is a label total, not a recommended dose. Earlier food or drinks are not included.</p>'+inventoryTimeline(P.actualInventory.run,'Run');
+  return h+'<p>Recorded caffeine total: <b>'+fmtNum(P.cafPlan)+' mg</b>, including '+P.preCaffeine+' mg entered before the swim. This is a label total, not a recommended dose. Unrecorded drinks are excluded.</p>'+inventoryTimeline(P.actualInventory.run,'Run');
 }
 function renderInventory(a,P){
   var h='<details class="insight-panel"'+(a.inventoryMode==='enter'?' open':'')+'><summary>Fuel inventory · bike &amp; run bags</summary><div class="inner">';
@@ -3038,18 +3275,18 @@ function weekendEvents(a){
   if(w.day)add(day[w.day],localMinutes(w.arrival),'Arrive'+(w.stay?' · '+w.stay:''),'Accommodation: '+({booked:'booked',needed:'still to book',none:'not needed'}[w.stayStatus]||'not recorded'));
   add(a.checkin==='sat'?2:1,a.checkin==='sat'?720:1050,'Check-in · Girona','Published window: '+(a.checkin==='sat'?'12:00–17:00':'17:30–19:30')+'. Verify current organiser timings.');
   if(a.bike==='rental')add(day[p.day]==null?2:day[p.day],localMinutes(p.time),'Collect rental'+(p.place?' · '+p.place:''),(p.status==='booked'?'Confirmed':'Unconfirmed')+' · '+(present(p.setup)?p.setup+' min fitting / checks':'fitting time unknown')+' · '+(present(p.travel)?p.travel+' min to bike drop':'travel time unknown'));
-  add(2,780,'Bike + black bag drop','13:00–17:30 published drop window · GEiEG, Girona.');
+  add(2,780,a.bikeTransport==='own'?'Black bag drop':'Bike + black bag drop','13:00–17:30 published drop window · GEiEG, Girona. '+(a.bikeTransport==='booked'?'Bike transport booked.':a.bikeTransport==='own'?'Bring the bike to Cadaqués yourself Sunday 08:00–08:45.':'Bike transport booking still to confirm.')+' Collect the numbered personal-bag sticker on Saturday.');
   var target=a.transport==='bus'?375:480;
   if(present(w.travel)&&present(w.buffer))add(3,target-w.travel-w.buffer,'Leave accommodation',w.travel+' min travel + '+w.buffer+' min buffer. Destination: '+(a.transport==='bus'?'La Copa bus pickup':'T1, Cadaqués')+'.');
-  add(3,target,a.transport==='bus'?'First organiser bus · La Copa':'Arrive at T1 · Cadaqués',w.transportStatus==='booked'?'Transport arranged':'Transport needs confirmation');
+  add(3,target,a.transport==='bus'?'First organiser bus · La Copa':'Arrive at T1 · Cadaqués',a.transport==='bus'?(a.busBooking==='booked'&&!(a._unknown||{}).busBooking?'Athlete bus place booked':'Athlete bus booking needs confirmation'):(w.transportStatus==='booked'?'Own transport arranged':'Own transport needs confirmation'));
   add(3,540,'Race start','09:00 · organiser timetable');
   return events.sort(function(x,y){return x.day-y.day||(x.time==null?1440:x.time)-(y.time==null?1440:y.time);});
 }
 function renderWeekend(a){
-  var w=a.weekend||{},p=a.pickup||{},h='<details class="insight-panel" open><summary>Your weekend · Thursday to Sunday</summary><div class="inner"><p class="small">Local times. Timetable checked 26 September 2026; confirm bag arrangements and final timings at check-in.</p><ol class="weekend-line">';
+  var w=a.weekend||{},p=a.pickup||{},h='<details class="insight-panel" open><summary>Your weekend · Thursday to Sunday</summary><div class="inner"><p class="small">Local times. Timetable reconciled 13 October 2026. Review final organiser updates before the weekend.</p><ol class="weekend-line">';
   weekendEvents(a).forEach(function(e){var t=e.time;h+='<li><time>'+['Thu 15','Fri 16','Sat 17','Sun 18'][e.day]+'<b>'+(t==null?'Time TBD':t<0?hm(t+1440)+' previous day':hm(t))+'</b></time><div><b>'+esc(e.title)+'</b><p>'+esc(e.note)+'</p></div></li>';});h+='</ol>';
   var warnings=[],arr=localMinutes(w.arrival),pick=localMinutes(p.time);
-  if(w.day==='sun')warnings.push('Sunday arrival is after Saturday bike drop. Arrange delivery of your bike and bag or revise travel.');
+  if(w.day==='sun')warnings.push('Sunday arrival is after Saturday black-bag drop'+(a.bikeTransport==='own'?'. Arrange delivery of the T2 bag or revise travel.':' and bike drop. Arrange delivery of your bike and bag or revise travel.'));
   if(w.day==='sat'&&arr!=null&&arr>=1050)warnings.push('Arrival is at or after the 17:30 bike-drop deadline. Recheck your travel plan.');
   if(a.checkin==='fri'&&(w.day==='sat'||w.day==='sun'||w.day==='fri'&&arr!=null&&arr>1170))warnings.push('Your arrival does not fit Friday check-in. Revise arrival or check-in choice.');
   if(a.bike==='rental'&&p.day==='sat'&&pick!=null&&pick+(p.setup||0)+(p.travel||0)>=1050)warnings.push('Rental collection, fitting and travel reach or exceed the bike-drop deadline. Book an earlier collection.');
@@ -3058,10 +3295,73 @@ function renderWeekend(a){
   return h+editDetail('weekend','Edit weekend')+(a.bike==='rental'?' '+editDetail('pickup','Edit rental collection'):'')+'</div></details>';
 }
 
+function renderAfter(a){
+ var h='<ol class="finish-actions"><li><b>Return the timing chip</b> at the finish line.</li><li><b>Collect the cloakroom bag</b> at Plaça dels Jurats, 15:00–18:00. Change into dry clothes.</li><li><b>Finish aid</b>: Maurten, fruit, food and coffee.</li><li><b>Collect bike + T1/T2 bags</b> at GEiEG de Sant Ponç, 15:00–18:30. Count helmet, gloves, navigation device, bottles and bags.</li>';
+ if(a.bike==='rental'){var r=a.rentalReturn||{};h+='<li><b>Rental return</b>: '+(r.when==='immediate'?'return immediately after collecting the bike':r.when==='later'?'return by '+esc(r.deadline||'the deadline still to confirm'):'return timing still to confirm')+(r.place?' · '+esc(r.place):'')+(r.nearby==='yes'?' · shop next to GEiEG collection':r.nearby==='no'?' · allow travel from GEiEG':' · location / travel still to check')+'. Photograph the bike before handing it back. '+editDetail('rentalReturn','Edit return arrangement')+'</li>';}
+ return h+'<li><b>Awards</b> · 18:00, Plaça dels Jurats.</li></ol>';
+}
+function renderEnergy(a,P){
+ var carbs=P.bikeTotal+(P.actualInventory?P.actualInventory.run.used.carb:P.runCarbTarget),intake=Math.round(carbs*4),e=a.energyEstimate||{},known=present(e.kcal);
+ return '<details class="reference-details" id="energy-reference"><summary>Energy expenditure &amp; deficit · reference estimates</summary><div class="inner"><p>Scheduled bike/run carbohydrate energy: <b>'+fmtNum(intake)+' kcal</b> (carbohydrate × 4). Excludes reserves, pre-swim intake and other nutrients.</p><p>Estimated race expenditure: <b>'+(known?fmtNum(e.kcal)+' kcal':'not entered')+'</b>'+(e.basis?' · '+esc(e.basis):'')+'.</p>'+(known?'<p>Expenditure minus scheduled carbohydrate intake: <b>'+fmtNum(e.kcal-intake)+' kcal</b>. This reference difference is not an intake target or a complete energy balance.</p>':'<p>Add your own expenditure estimate to retain a deficit reference. No expenditure is inferred from your finish time.</p>')+'<p>Caffeine background reference: '+P.cafLo+'–'+P.cafHi+' mg (3–6 mg/kg), separate from your recorded intake.</p>'+editDetail('energyEstimate','Edit energy estimate')+'</div></details>';
+}
+function phaseSummary(id,a,P,o){
+  var first={pre:'Timing chip on; fill bottles and prepare bags before the wetsuit.',swim:'Settle, sight and keep the effort steady.',t1:'Wetsuit off; helmet on; run the bike out.',bike:'Follow the GPS; eat from your feed clock.',t2:'Dismount, rack, collect the black bag.',run:'Hike steep pitches; descend with control.'};
+ var kit={pre:esc(P.breakfast),swim:'Nothing taken in the water.',t1:'Bike food → '+esc(foodPlace(a))+'.',bike:P.bikeTotal+' g scheduled carbs · ≈'+P.bikeRate+' g/h.',t2:'Run products from your black bag.',run:P.actualInventory?fmtNum(P.actualInventory.run.used.carb)+' g scheduled carbs.':P.runUnits+' servings + '+P.runSpare+' spare.'};
+ var time={pre:P.morningStart+'–09:00',swim:'Swim cutoff 09:59',t1:P.scen[1].t1+' min planned',bike:'W1 13:00 · W2 15:00 · T2 15:49',t2:P.scen[1].t2+' min planned',run:'Run limit 16:59 · overall 17:59'};
+ return '<span><b>Do first</b> '+first[id]+'</span><span><b>'+(id==='bike'||id==='run'?'Fuel':'Kit')+'</b> '+kit[id]+'</span><span><b>Time</b> '+time[id]+'</span>';
+}
+
+// A tick is retained when requirements change, with a separate review flag.
+function fingerprint(value){
+ function ordered(v){if(Array.isArray(v))return v.map(ordered);if(v&&typeof v==='object'){var o={};Object.keys(v).sort().forEach(function(k){o[k]=ordered(v[k]);});return o;}return v;}
+ var text=JSON.stringify(ordered(value)),hash=2166136261;
+ for(var i=0;i<text.length;i++){hash^=text.charCodeAt(i);hash=Math.imul(hash,16777619);}
+ return (hash>>>0).toString(16).padStart(8,'0');
+}
+function checkRequirements(a,P){
+ var out={},rows=packRows(a,P),bags=bagContents(rows,P,a);
+ rows.forEach(function(r){if(r.k&&!r.nocb)out['pk-'+r.k]=fingerprint([r.l,r.c]);});
+ ['t1','t2','cl'].forEach(function(k){out['bag-'+k]=fingerprint(bags[k]);});
+ var fuelIds=['carbrate','sources','barsplit','caffeine','cafmg','sweat','salty','salt','mixbottles','refill','gelname','gelg','barname','barg','chewg','mixname','mixg','mixna','capna','biketime','runtime','timebasis','allowances','inventoryMode','inventory_bike','inventory_run','inventory_bike_none','inventory_run_none','waterPlan','capacity','capacityMode','cages','bottleml','stationDetails'];
+ var fuel={};fuelIds.forEach(function(k){fuel[k]=a[k];});out['task-rehearse']=fingerprint(fuel);
+ out['task-portion']=fingerprint([P.powderMix,P.powderElec,P.caps,a.mixname,a.mixg,a.mixna,a.capna,a.inventoryMode,a.inventory_bike]);
+ out['task-flat']=fingerprint([a.bike,a.tyres,a.width,a.repairStorage]);
+ out['task-rental']=fingerprint([a.bike,a.tyres,a.width,a.pedals,a.cages,a.pickup]);
+ out['task-drop']=fingerprint([a.bikeTransport,(a._unknown||{}).bikeTransport===true]);
+ return out;
+}
+function reconcileChecks(raw,a,P,checks){
+ var requirements=checkRequirements(a,P),changed=false;
+ raw.checkBasis=raw.checkBasis||{};raw.rechecks=raw.rechecks||{};
+ Object.keys(requirements).forEach(function(k){
+  if(checks[k]&&raw.checkBasis[k]&&raw.checkBasis[k]!==requirements[k]&&!raw.rechecks[k]){raw.rechecks[k]=true;changed=true;}
+  if(!checks[k]&&raw.rechecks[k]){delete raw.rechecks[k];changed=true;}
+  if(raw.checkBasis[k]!==requirements[k]){raw.checkBasis[k]=requirements[k];changed=true;}
+ });
+ return changed;
+}
+function needsRecheck(k){return !!(state.rechecks||{})[k];}
+function updateRecheckUI(){
+ var flagged=[];
+ document.querySelectorAll('input[data-k]').forEach(function(c){
+  var row=c.closest('li'),on=c.checked&&needsRecheck(c.dataset.k);if(!row)return;
+  row.classList.toggle('needs-recheck',on);
+  var mark=row.querySelector('.recheck-review');
+  if(on){
+   flagged.push(c);
+   if(!mark){mark=document.createElement('span');mark.className='recheck-review';mark.innerHTML='<span>Changed · recheck</span><button type="button">Rechecked</button>';mark.querySelector('button').dataset.recheck=c.dataset.k;(row.querySelector('.task-body')||row.querySelector('.bagflow')||row).appendChild(mark);}
+  }else if(mark)mark.remove();
+ });
+ var notice=document.getElementById('recheck-notice');notice.hidden=!flagged.length;
+ notice.querySelector('p').textContent=flagged.length+' checked item'+(flagged.length===1?' has':'s have')+' changed requirements. Check against the current plan, then mark Rechecked.';
+ notice.querySelector('button').dataset.recheckGo=flagged.length?flagged[0].dataset.k:'';
+}
+
 // ---------------- page render ----------------
 function setHTML(id,h){ var el=document.getElementById(id); if(el) el.innerHTML=h; }
 function renderAll(){
   var a=answers(), P=compute(a), checks=lsGet('checks',{});
+  if(reconcileChecks(state,a,P,checks))save();
   var k=state.done.kit, f=state.done.fuel;
   // header
   var who=(a.name||'').trim();
@@ -3081,17 +3381,20 @@ function renderAll(){
   setHTML('pack-assumptions',assumptionNote(['bike','tyres','pedals','runcarry'],[P.actualInventory?'Fuel quantities come from your inventory and include reserves.':'Fuel quantities are generated from the suggested consumption schedule, with its stated spares.']));
   var bags=bagContents(pk.rows,P,a);
   setHTML('bag-t1',chips(bags.t1)); setHTML('bag-t2',chips(bags.t2.length?bags.t2:['Trail bib'])); setHTML('bag-cl',chips(bags.cl));
+  setHTML('bag-t2-drop',a.bikeTransport==='own'?'GEiEG, Girona · black bag only; bike to Cadaqués Sunday':a.bikeTransport==='booked'?'GEiEG, Girona · with the bike; transport booked':'GEiEG, Girona · confirm the separate bike transport booking');
+  setHTML('bag-travel-note','Bags come from '+(a.checkin==='sat'?'Saturday':'Friday')+' check-in. Black T2 bag to GEiEG Saturday'+(a.bikeTransport==='own'?'; bring the bike to Cadaqués yourself Sunday.':'; bike travels with the organiser once its transport is booked.')+' White + personal bags travel with you Sunday. Collect the numbered personal-bag sticker on Saturday. Tick a bag once it is ready.');
   var bk=renderBike(a,P); setHTML('bike-body',bk.html); setHTML('bike-title',bk.title);
   setHTML('bike-assumptions',assumptionNote(['weight','tyres','width','cages','bottleml'],['Pressure is a rough starting estimate; it does not model rim width, tyre construction or total bike load.']));
-  var T=renderTasks(tasks(a,P),checks); setHTML('task-body',T.html+'<div class="insights">'+renderWeekend(a)+'</div>');
+  var T=renderTasks(tasks(a,P),checks,a); setHTML('task-body',T.html+'<div class="insights">'+renderWeekend(a)+'</div>');
   // phases
   var ph=renderPhases(a,P,bags);
   ['pre','swim','t1','bike','t2','run'].forEach(function(id){ var o=ph[id], root=document.getElementById('ph-'+id); if(!root) return;
-    root.querySelector('.pd').innerHTML=o.pd; root.querySelector('.phase-brief').innerHTML='<span><b>Watch for</b> '+o.brief+'</span>';
+    root.querySelector('.pd').innerHTML=o.pd; root.querySelector('.phase-brief').innerHTML=phaseSummary(id,a,P,o);
     var body=root.querySelector('.ph-body'); if(body&&o.html!=null) body.innerHTML=o.html;
     var note=root.querySelector('.ph-note'); if(note&&o.note) note.innerHTML=o.note; });
   var base=P.scen[1];
-  setHTML('strip-swim',Math.round(base.sw)+'′'); setHTML('strip-bike',hm(P.B)); setHTML('strip-run',hm(P.R)); setHTML('strip-pre',P.breakfast.split('–')[0]+'–09:00');
+  setHTML('strip-t1',base.t1+'′');setHTML('strip-t2',base.t2+'′');setHTML('strip-swim',Math.round(base.sw)+'′'); setHTML('strip-bike',hm(P.B)); setHTML('strip-run',hm(P.R)); setHTML('strip-pre',P.morningStart+'–09:00');
+  ['pre','swim','t1','bike','t2','run'].forEach(function(id){var source=document.querySelector('.phasestrip a[href="#ph-'+id+'"] span');setHTML('phone-time-'+id,source.textContent);});
   setHTML('ct-swim',Math.round(base.sw)+' min'); setHTML('ct-bike',hm(P.B)); setHTML('ct-run',hm(P.R));
   setHTML('feedchart',renderFeedChart(P)); setHTML('feedkey',renderFeedKey(P));
   var feedblock=document.getElementById('feedblock');feedblock.classList.toggle('actual-inventory',!!P.actualInventory);
@@ -3099,14 +3402,15 @@ function renderAll(){
   feedblock.querySelector('.pd').textContent=P.actualInventory?'your products · elapsed bike time':'graph · your feed times on the bike profile';
   feedblock.querySelector('.graph-cue').textContent=P.actualInventory?'Show schedule':'Show graph';
   setHTML('feed-explanation',P.actualInventory?'Times and portions come from your entries. Run timing appears under Fuel &amp; salt.':'Clock time is the instruction; the km is where that time is likely to fall at your pace.');
-  setHTML('fuel-body',assumptionNote(P.actualInventory?['sweat','capacity','bottleml','runcarry']:['carbrate','sweat','salty','sources','refill','gelg','barg','chewg','mixg','mixna','capna','caffeine','cafmg'],[P.actualInventory?'Nutrients use your product labels and scheduled servings. Reserve servings are excluded.':'Suggested product amounts use your entered or default label values. Station mix strength is unconfirmed.','Water capacity assumes the displayed refills; availability and actual drinking rate must be confirmed.'])+renderFuel(a,P)+'<div class="insights">'+renderWater(a,P)+renderInventory(a,P)+'</div>');
-  var pc=renderPacing(P); setHTML('pace-bars',assumptionNote(['swimpace','biketime','runtime','timebasis'],['T1: '+P.scen[1].t1+' min'+(!present((a.allowances||{}).t1)?' assumed':'' )+'; T2: '+P.scen[1].t2+' min'+(!present((a.allowances||{}).t2)?' assumed':'' )+'.','Scenario ranges are illustrative. The earlier finish cutoff remains unconfirmed.'])+pc.bars+'<div class="insights">'+renderTimeEvidence(a,P)+'</div>'); setHTML('pace-splits',pc.splits); setHTML('pace-clock',pc.clock);
+  setHTML('fuel-body',assumptionNote(P.actualInventory?['sweat','capacity','bottleml','runcarry']:['carbrate','sweat','salty','sources','refill','gelg','barg','chewg','mixg','mixna','capna','caffeine','cafmg'],[P.actualInventory?'Nutrients use your product labels and scheduled servings. Reserve servings are excluded.':'Suggested product amounts use your entered or default label values. Station mix strength is unconfirmed.','Water capacity assumes the displayed refills; availability and actual drinking rate must be confirmed.'])+renderFuel(a,P)+'<div class="insights">'+renderWater(a,P)+renderInventory(a,P)+'</div>'+renderEnergy(a,P));
+  var pc=renderPacing(P); setHTML('pace-bars',assumptionNote(['swimpace','biketime','runtime','timebasis'],['T1: '+P.scen[1].t1+' min'+(!present((a.allowances||{}).t1)?' assumed':'' )+'; T2: '+P.scen[1].t2+' min'+(!present((a.allowances||{}).t2)?' assumed':'' )+'.','Scenario ranges are illustrative. The working plan uses the stricter 16:59 run limit.'])+pc.bars+'<div class="insights">'+renderTimeEvidence(a,P)+'</div>'); setHTML('pace-splits',pc.splits); setHTML('pace-clock',pc.clock);
   setHTML('risk-body',renderRisks(a,P));
+  setHTML('after-body',renderAfter(a));
   // warnings
   var wh=P.warn.map(function(w){ return '<li class="w-'+w[0]+'">'+w[1]+'</li>'; }).join('');
   setHTML('plan-warn',wh?'<ul>'+wh+'</ul>':''); document.getElementById('plan-warn').hidden=!wh||!f;
   // station texts for the course profile
-  PLAN_ST.t1=['#5C6B72','T1 · PLATJA GRAN','Swim: anti-clockwise rectangle, ~18.5 °C, wetsuit on. T1: water, Maurten and food. Mount outside T1.'];
+  PLAN_ST.t1=['#5C6B72','T1 · PLATJA GRAN','Swim: anti-clockwise rectangle, sea snapshot ~20 °C, wetsuit on. T1: water, Maurten and food. Mount outside T1.'];
   PLAN_ST.w1=['var(--track)','KM 34.3 · CASTELLÓ — MANDATORY','Refill: '+P.stopText[0]+'. Be through by '+clock(base.sw+base.t1+P.w1Check)+' to make the 15:49 gravel cutoff.'];
   PLAN_ST.w2=['var(--track)','KM 68 · JAFRE — MANDATORY','Refill: '+P.stopText[1]+'. Be through by '+clock(base.sw+base.t1+P.w2Check)+' to make the 15:49 gravel cutoff.'];
   PLAN_ST.pk=['#8A5A2B','KM 13.5 · 419 M — HIGH POINT','~67% of the climbing is in km 0–25. Conservative lines; walk difficult pitches. Gels or drink only here — solids after km 25.'];
@@ -3121,7 +3425,7 @@ function bindChecks(checks){
   document.querySelectorAll('input[type=checkbox][data-k]').forEach(function(c){
     c.checked=!!checks[c.dataset.k];
     if(c.dataset.bound) return; c.dataset.bound='1';
-    c.addEventListener('change',function(){ var s=lsGet('checks',{}); s[c.dataset.k]=c.checked; lsSet('checks',s); updateStatus(); });
+    c.addEventListener('change',function(){ var s=lsGet('checks',{}); s[c.dataset.k]=c.checked;lsSet('checks',s);if(state.rechecks)delete state.rechecks[c.dataset.k];save();updateStatus(); });
   });
 }
 function updateStatus(){
@@ -3129,22 +3433,36 @@ function updateStatus(){
   var rec=document.getElementById('recover-plan'); if(rec) rec.hidden=!lsGet('recovery',null);
   var sp=document.getElementById('share-plan'); if(sp) sp.hidden=freshState();
   var boxes=Array.from(document.querySelectorAll('#task-body input[type=checkbox]'));
-  var n=boxes.length, d=boxes.filter(function(b){ return b.checked; }).length, left=n-d;
+  var n=boxes.length, d=boxes.filter(function(b){return b.checked&&!needsRecheck(b.dataset.k);}).length, left=n-d;
   var c=document.getElementById('prep-count'); if(c) c.textContent=left+' open task'+(left===1?'':'s');
   var p=document.getElementById('prep-progress'); if(p){ p.max=n||1; p.value=d; }
   var dn=document.getElementById('prep-done'); if(dn) dn.textContent=d+' of '+n+' completed';
-  document.querySelectorAll('#task-body .deadline-group').forEach(function(g){ var bs=g.querySelectorAll('input[type=checkbox]'), l=Array.from(bs).filter(function(b){ return !b.checked; }).length; g.querySelector('.remaining').textContent=l?l+' left':'done'; });
+  document.querySelectorAll('#task-body .deadline-group').forEach(function(g){ var bs=g.querySelectorAll('input[type=checkbox]'), l=Array.from(bs).filter(function(b){return !b.checked||needsRecheck(b.dataset.k);}).length; g.querySelector('.remaining').textContent=l?l+' left':'done'; });
   var ins=document.getElementById('insurance-alert'), a=answers();
   if(ins){ var insBox=document.querySelector('[data-k="task-insurance"]'); ins.hidden=a.insurance==='yes'||(insBox&&insBox.checked); }
   var hide=document.getElementById('hide-completed'); if(hide) document.getElementById('open').classList.toggle('hide-completed',hide.getAttribute('aria-pressed')==='true');
+  document.querySelectorAll('.pack-group').forEach(function(g){var count=Array.from(g.querySelectorAll('[data-k]')).filter(function(c){return !c.checked||needsRecheck(c.dataset.k);}).length;g.querySelector('.pack-left').textContent=count?count+' left':'packed';});
+  var next=document.getElementById('planner-next'),first=boxes.find(function(c){return !c.checked||needsRecheck(c.dataset.k);});next.disabled=!first;next.dataset.taskGo=first?first.dataset.k:'';next.textContent=first?'Next · '+first.getAttribute('aria-label'):'Preparation checklist complete';
+  updateRecheckUI();
+  var st=document.getElementById('phone-plan-status');st.textContent=(state.done.kit&&state.done.fuel?'Your saved plan':freshState()?'Sample plan':'Your draft plan')+' · '+(compute(a).actualInventory?'your entered fuel schedule':'suggested fuel schedule')+'.';
 }
 
 // ---------------- tools: share link, reset ----------------
 function bindTools(){
+  document.addEventListener('click',function(e){
+   var b=e.target.closest('[data-recheck]');if(b){delete state.rechecks[b.dataset.recheck];save();updateStatus();return;}
+   var go=e.target.closest('[data-recheck-go]');if(!go)return;
+   var c=Array.from(document.querySelectorAll('[data-k]')).find(function(c){return c.dataset.k===go.dataset.recheckGo;});
+   if(c){c.scrollIntoView({block:'center',behavior:motionBehavior()});c.focus({preventScroll:true});}
+  });
+  document.addEventListener('click',function(e){var b=e.target.closest('[data-task-go]');if(!b)return;if(gate.mode)closeGate();document.querySelector('[data-view="prepare"]').click();var c=Array.from(document.querySelectorAll('#task-body [data-k]')).find(function(c){return c.dataset.k===b.dataset.taskGo;});if(!c)return;c.closest('.deadline-group').open=true;var row=c.closest('li'),ctx=row.querySelector('.task-context');if(ctx)ctx.open=true;row.scrollIntoView({block:'start',behavior:motionBehavior()});c.focus({preventScroll:true});});
+  document.querySelectorAll('.bagname').forEach(function(b){b.setAttribute('tabindex','0');b.setAttribute('role','button');b.addEventListener('click',function(){b.closest('.bagrow').querySelector('input').click();});b.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();b.click();}});});
   var share=document.getElementById('share-plan'), status=document.getElementById('tool-status'), reset=document.getElementById('reset-plan'), armed=false;
   function isHosted(){return /^https?:$/.test(location.protocol)&&!/(^localhost$|^127\.|^\[?::1\]?$)/.test(location.hostname);}
   function copy(url,message){if(navigator.share&&matchMedia('(pointer:coarse)').matches){navigator.share({title:'SGRAIL 100 planner',url:url}).then(function(){status.textContent='Shared.';},function(){});return;}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(url).then(function(){status.textContent=message;},fallback);else fallback();function fallback(){status.innerHTML='Copy this link: <input aria-label="Link to copy" readonly value="'+esc(url)+'">';}}
   document.addEventListener('click',function(e){
+    var freshQuestions=e.target.closest('[data-new-questions]');if(freshQuestions){if(gate.mode)closeGate();openGate('updates');return;}
+    var target=e.target.closest('[data-question-go]');if(target){if(gate.mode)closeGate();openGate('target',target.dataset.questionGo);return;}
     var review=e.target.closest('[data-unknown-review]');if(review){if(state.done.kit&&state.done.fuel)openGate('unknown');else{if(gate.mode)closeGate();openGate('onboard');}return;}
     var more=e.target.closest('[data-add-details]');if(more){if(gate.mode)closeGate();openGate('more');return;}
     var go=e.target.closest('[data-plan-go]');if(!go)return;
@@ -3192,7 +3510,7 @@ function bindTools(){
 
 // Resume unfinished setup on reload; closing it reveals the clearly labelled draft plan.
 window.PLAN_INIT=function(){ renderSurveys(); bindGate(); bindSampleBar(); renderAll(); bindTools(); updateSampleBar(); if(incoming)openGate('import');else if(!(state.done.kit&&state.done.fuel))openGate('onboard');if(importError)document.getElementById('tool-status').textContent=importError; };
-window.PLAN_TEST={inventorySchedule:inventorySchedule,packRows:packRows,renderActualFuel:renderActualFuel,pendingQuestions:pendingQuestions,compute:compute,answers:answers,SURVEYS:SURVEYS,pressure:pressure,inventoryData:inventoryData,weekendEvents:weekendEvents,planningActions:planningActions,renderWater:renderWater,renderTimeEvidence:renderTimeEvidence,cleanState:cleanState,starterQuestion:starterQuestion,GROUPS:GROUPS,PRESETS:PRESETS};
+window.PLAN_TEST={inventorySchedule:inventorySchedule,packRows:packRows,renderActualFuel:renderActualFuel,pendingQuestions:pendingQuestions,compute:compute,answers:answers,SURVEYS:SURVEYS,pressure:pressure,inventoryData:inventoryData,weekendEvents:weekendEvents,planningActions:planningActions,renderWater:renderWater,renderTimeEvidence:renderTimeEvidence,cleanState:cleanState,starterQuestion:starterQuestion,GROUPS:GROUPS,PRESETS:PRESETS,renderPack:renderPack,renderPhases:renderPhases,renderAfter:renderAfter,renderEnergy:renderEnergy,tasks:tasks,newQuestionQueue:newQuestionQueue,prestartPlan:prestartPlan,checkRequirements:checkRequirements,reconcileChecks:reconcileChecks,taskQuestionIds:taskQuestionIds,fingerprint:fingerprint,gatePages:gatePages};
 window.PLAN_API={done:function(){return !!(state.done&&state.done.kit&&state.done.fuel);},answers:answers,compute:compute,kmAt:kmAt,timeAtKm:timeAtKm,COURSE:COURSE,clock:clock,dur:dur,esc:esc};
 })();
 
@@ -3262,14 +3580,12 @@ document.querySelectorAll('nav a[href^="#"]').forEach(function(a){
     b.textContent = on ? 'Race day · on' : 'Prepare · on';
     document.querySelectorAll('[data-view]').forEach(function(x){x.setAttribute('aria-pressed',String((x.dataset.view==='race')===on));});
     document.getElementById('view-description').textContent=on?'Race day: your plan, transitions and roadside actions.':'Prepare: your surveys, checklists and logistics.';
-    try{ localStorage.setItem('sgplan26.race', on?'1':'0'); }catch(e){}
+    if(!/[?&]now=2026-10-18/.test(location.search)){try{localStorage.setItem('sgplan26.race',on?'1':'0');}catch(e){}}
   }
   var raceEve=Date.now()>=new Date("2026-10-17T20:00:00+02:00").getTime()||/[?&]now=2026-10-18/.test(location.search);
   var saved=null; try{ saved=localStorage.getItem('sgplan26.race'); }catch(e){}
-  // Race eve and race morning open in Race day once, even if Prepare was chosen earlier; after that the person's choice wins.
-  var preview=/[?&]now=2026-10-18/.test(location.search), autoDone=null; try{ autoDone=localStorage.getItem('sgplan26.raceAuto'); }catch(e){}
-  if(raceEve&&(preview||autoDone!=='1')){ set(true); if(!preview){ try{ localStorage.setItem('sgplan26.raceAuto','1'); }catch(e){} } }
-  else set(saved==='1' || (saved===null && raceEve));
+  var preview=/[?&]now=2026-10-18/.test(location.search);
+  set(preview||saved==='1'||saved===null&&raceEve);
   b.addEventListener('click',function(){ set(!document.body.classList.contains('race')); });
   document.querySelectorAll('[data-view]').forEach(function(x){x.addEventListener('click',function(){if((x.dataset.view==='race')!==document.body.classList.contains('race'))b.click();});});
 })();
@@ -3310,7 +3626,8 @@ document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener
 (function(){
   var strip=document.querySelector('#course .phasestrip'); if(!strip) return;
   var tiles=Array.from(strip.querySelectorAll('a.ph'));
-  var blocks=Array.from(document.querySelectorAll('#course details.planblock'));
+  var blocks=Array.from(document.querySelectorAll('#course details.planblock[id^="ph-"]')); 
+  function syncPhaseButtons(){var active=document.getElementById('course').dataset.phase;document.querySelectorAll('[data-phase]').forEach(function(b){b.setAttribute('aria-pressed',String(active===(b.dataset.phase==='bike'?'bike':'ph-'+b.dataset.phase)));});}
   function clearTabs(){ tiles.forEach(function(t){ t.removeAttribute('aria-current'); }); }
   tiles.forEach(function(t){
     t.addEventListener('click',function(e){
@@ -3323,19 +3640,27 @@ document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener
       blocks.forEach(function(d){ d.open = want.indexOf(d)>=0; });
       clearTabs(); t.setAttribute('aria-current','true');
       document.getElementById('course').classList.add('tabbed');
-      strip.scrollIntoView({behavior:motionBehavior(), block:'start'});
+      try{localStorage.setItem('sgplan26.phase',id);}catch(e){}
+      if(!document.getElementById('course').dataset.restoring)want[0].scrollIntoView({behavior:motionBehavior(),block:'start'});
+      syncPhaseButtons();
     });
   });
   document.querySelectorAll('#course .phasectl button').forEach(function(b){
     b.addEventListener('click',function(){
       var on=b.dataset.ph==='open';
       blocks.forEach(function(d){ d.open=on; });
-      clearTabs(); document.getElementById('course').dataset.phase=''; document.getElementById('course').classList.remove('tabbed');
+      clearTabs(); document.getElementById('course').dataset.phase=''; document.getElementById('course').classList.remove('tabbed');try{localStorage.removeItem('sgplan26.phase');}catch(e){}syncPhaseButtons();
     });
   });
+  document.querySelectorAll('[data-phase]').forEach(function(b){b.addEventListener('click',function(){var tile=tiles.find(function(t){return t.hash==='#ph-'+b.dataset.phase;});if(tile)tile.click();});});
+  function resume(scroll){var id='';try{id=localStorage.getItem('sgplan26.phase')||'';}catch(e){}var tile=tiles.find(function(t){return t.hash==='#'+id;});if(!tile)return;var course=document.getElementById('course');course.dataset.restoring='1';tile.click();delete course.dataset.restoring;if(scroll)document.getElementById(id).scrollIntoView({block:'start',behavior:'auto'});}
+  var explicit=tiles.find(function(t){return t.hash===location.hash;});
+  if(explicit){if(!document.body.classList.contains('race'))document.getElementById('rmbtn').click();explicit.click();}
+  else if(!location.hash)resume(document.body.classList.contains('race'));
+  document.getElementById('rmbtn').addEventListener('click',function(){if(document.body.classList.contains('race'))resume(true);});
   // folding the shown phase by hand leaves tab mode, so nothing can vanish
   blocks.forEach(function(d){ d.addEventListener('toggle',function(){
-    if(!blocks.some(function(x){ return x.open; })){ clearTabs(); document.getElementById('course').dataset.phase=''; document.getElementById('course').classList.remove('tabbed'); }
+    if(!blocks.some(function(x){ return x.open; })){ clearTabs(); document.getElementById('course').dataset.phase=''; document.getElementById('course').classList.remove('tabbed');try{localStorage.removeItem('sgplan26.phase');}catch(e){}syncPhaseButtons(); }
   }); });
 })();
 
@@ -3408,10 +3733,10 @@ document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener
   prevB.addEventListener('click',function(){goTo(idx-1);}); nextB.addEventListener('click',function(){goTo(idx+1);});
   list.addEventListener('click',function(e){ var a=e.target.closest('a'); if(!a) return; e.preventDefault(); setOpen(false); var el=document.getElementById(a.hash.slice(1)); if(el) el.scrollIntoView({block:'start',behavior:motionBehavior()}); });
   document.addEventListener('click',function(e){ if(document.body.classList.contains('sheet-open')&&!sheet.contains(e.target)&&!dock.contains(e.target)) setOpen(false); });
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&document.body.classList.contains('sheet-open')) setOpen(false); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&document.body.classList.contains('sheet-open')){setOpen(false);var more=document.querySelector('#tabbar [data-tab="more"]');if(more)more.focus();} });
   // tools mirror the sidebar buttons
   var th=document.getElementById('thbtn'),rm=document.getElementById('rmbtn'),shT=document.getElementById('sh-theme'),shR=document.getElementById('sh-race');
-  function syncTools(){ shT.textContent=th.textContent; shR.textContent=rm.textContent; shR.classList.toggle('on',rm.classList.contains('on')); }
+  function syncTools(){shT.textContent=th.textContent;shR.textContent=document.body.classList.contains('race')?'Switch to Prepare':'Switch to Race day';shR.classList.toggle('on',rm.classList.contains('on'));}
   shT.addEventListener('click',function(){ th.click(); syncTools(); });
   shR.addEventListener('click',function(){ rm.click(); syncTools(); setTimeout(build,50); setOpen(false); });
   sheet.querySelectorAll('[data-prog],[data-open]').forEach(function(b){ b.addEventListener('click',function(){ setOpen(false); }); });
@@ -3436,6 +3761,7 @@ document.querySelectorAll('[data-open]').forEach(function(b){ b.addEventListener
     var mode=isRace()?'race':'prepare', active=null;
     tabs.forEach(function(t){ if(t.dataset.mode!==mode) return; var el=document.getElementById(t.dataset.tab); if(el&&el.getClientRects().length&&el.getBoundingClientRect().top<=140) active=t; });
     if(!active) active=tabs.find(function(t){return t.dataset.mode===mode;});
+    document.body.dataset.activeTab=active?active.dataset.tab:'';
     tabs.forEach(function(t){ var on=t===active; t.classList.toggle('on',on); if(t.dataset.mode) t.setAttribute('aria-current',on?'page':'false'); });
   }
   function go(t){
@@ -3526,10 +3852,24 @@ var APP={deferred:null};
   document.addEventListener('visibilitychange',sync); var rm=document.getElementById('rmbtn'); if(rm) rm.addEventListener('click',function(){setTimeout(sync,40);}); sync();
 })();
 
-window.PLAN_AFTER=function(){ if(window.DOCK_BUILD) window.DOCK_BUILD(); window.dispatchEvent(new Event('scroll')); window.dispatchEvent(new Event('resize')); };
+(function(){var previous=window.PLAN_AFTER;window.PLAN_AFTER=function(){if(previous)previous();if(window.DOCK_BUILD)window.DOCK_BUILD();window.dispatchEvent(new Event('scroll'));window.dispatchEvent(new Event('resize'));};})();
 // Race-day graphs stay open on every screen size; the swipe cue fades once a chart has been scrolled.
 document.querySelectorAll('.swipe-cue').forEach(function(c){ var sc=c.parentNode.querySelector('.prof-scroll,.clock-scroll'); if(!sc) return; sc.insertAdjacentElement('afterend',c);
   sc.addEventListener('scroll',function(){ if(sc.scrollLeft>24) c.classList.add('seen'); },{passive:true}); });
+</script>
+<script>
+// October phone helpers: overview, optional charts and measured floating clearance.
+(function(){
+ var overview=true;try{overview=localStorage.getItem('sgplan26.overview')!=='0';}catch(e){}
+ var toggle=document.getElementById('planner-overview');
+ function showOverview(){document.body.classList.toggle('overview-compact',!overview);toggle.setAttribute('aria-expanded',String(overview));toggle.textContent=overview?'Hide full overview':'Show full overview';}
+ toggle.addEventListener('click',function(){overview=!overview;showOverview();try{localStorage.setItem('sgplan26.overview',overview?'1':'0');}catch(e){}});showOverview();
+ if(matchMedia('(max-width:600px)').matches)document.querySelectorAll('[data-mobile-chart]').forEach(function(d){d.open=false;});
+ var bar=document.getElementById('tabbar'),phases=document.querySelector('.phone-phases'),sample=document.getElementById('sample-bar'),sheet=document.getElementById('dock-sheet'),more=bar.querySelector('[data-tab="more"]');
+ function measure(){var tab=bar.getBoundingClientRect().height,phase=phases.getBoundingClientRect().height;document.body.style.setProperty('--tabbar-height',tab+'px');document.body.style.setProperty('--bottom-ui-height',(tab+phase)+'px');document.body.style.setProperty('--sample-height',sample.getBoundingClientRect().height+'px');}
+ if(typeof ResizeObserver==='function'){var observer=new ResizeObserver(measure);[bar,phases,sample].forEach(function(el){observer.observe(el);});}else{addEventListener('resize',measure);addEventListener('scroll',measure,{passive:true});}measure();
+ new MutationObserver(function(){more.setAttribute('aria-expanded',String(!sheet.hidden));}).observe(sheet,{attributes:true,attributeFilter:['hidden']});
+})();
 </script>
 </body>
 </html>

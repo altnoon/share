@@ -1,6 +1,6 @@
 // SGRAIL 100 planner: offline copy for race morning.
 // Only the planner and its icons are handled; every other page under /sgrail100/ (e.g. /planning) passes straight through.
-const CACHE = 'sgrail100-plan-v1';
+const CACHE = 'sgrail100-plan-v4-20261015';
 const PAGE = '/sgrail100/plan';
 const ASSETS = [PAGE, '/sgrail100/plan.webmanifest', '/sgrail100/icons/icon-192.png', '/sgrail100/icons/icon-512.png', '/sgrail100/icons/apple-touch-icon.png'];
 const OWN = new Set([PAGE, '/sgrail100/plan.html', ...ASSETS]);
