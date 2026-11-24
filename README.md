@@ -7,6 +7,7 @@ Client-facing pages for alternoon, served at share.alternoon.com. Static, one fo
 | `/alt/ai-offer` | The AI Prescription offer |
 | `/aishopper-app` | AI Shopper · grocery concierge prototype (Des) |
 | `/aishopper-home` | AI Shopper · landing (Des) |
+| `/denis` | Denis Engine Services & Parts · website redesign preview, EN/NL/FR (Des) |
 | `/sgrail100/planning` | SGRAIL 100 · 2026 race dossier (Des) |
 
 Every page is a self-contained HTML file. Pages are `noindex` by header.
