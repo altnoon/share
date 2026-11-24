@@ -1074,6 +1074,17 @@
         box-shadow: 0 0 12px rgba(255, 200, 87, 0.7);
       }
 
+      /* Same logo as the home: the white wordmark image, no dot. */
+      .logo::before {
+        display: none;
+      }
+
+      .logo img {
+        display: block;
+        height: 24px;
+        width: auto;
+      }
+
       .lang {
         border-color: var(--edge);
         background: transparent;
@@ -1587,7 +1598,7 @@
   <body>
     <header class="site-header">
       <div class="container topbar">
-        <a class="logo" href="https://alternoon.webflow.io/home-ai-v4">alternoon</a>
+        <a class="logo" href="https://alternoon.webflow.io/home-ai-v4" aria-label="alternoon, home"><img src="/alt/ai-offer/logo.png" alt="alternoon" width="124" height="24"></a>
         <div class="lang" role="group" aria-label="Language / Idioma">
           <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
           <button type="button" data-lang="es" aria-pressed="false" lang="es">ES</button>
