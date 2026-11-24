@@ -600,3 +600,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   .feat h3 { font-size: 1.12rem; align-self: center; }
   .feat p { font-size: .93rem; }
 }
+
+/* Maker credit in the footer's bottom row */
+.foot-base .credit { color: rgba(255,255,255,.55); }
+.foot-base .credit a { color: rgba(255,255,255,.8); text-decoration: underline; text-decoration-color: rgba(255,255,255,.3); text-underline-offset: 3px; }
+.foot-base .credit a:hover { color: #fff; text-decoration-color: currentColor; }
