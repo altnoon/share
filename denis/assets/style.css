@@ -605,3 +605,6 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .foot-base .credit { color: rgba(255,255,255,.55); }
 .foot-base .credit a { color: rgba(255,255,255,.8); text-decoration: underline; text-decoration-color: rgba(255,255,255,.3); text-underline-offset: 3px; }
 .foot-base .credit a:hover { color: #fff; text-decoration-color: currentColor; }
+
+/* Quick-links strip scrolls away with the page: as a sticky bar it covered content on wide screens */
+.ticker { position: relative; top: auto; z-index: 1; background: var(--surface); backdrop-filter: none; -webkit-backdrop-filter: none; }
